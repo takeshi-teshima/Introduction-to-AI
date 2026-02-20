@@ -1,0 +1,40 @@
+[tools]
+python = "3.11"
+uv = "latest"
+
+[env]
+# Intel Mac (Homebrew standard path) 用のパス設定
+PHONEMIZER_ESPEAK_LIBRARY = "/usr/local/lib/libespeak-ng.dylib"
+DYLD_LIBRARY_PATH = "/usr/local/lib"
+
+[tasks.setup]
+description = "システム依存とPythonライブラリ（日本語フルセット）をセットアップ"
+run = """
+# 1. システム依存のインストール
+if ! command -v espeak-ng &> /dev/null; then brew install espeak-ng; fi
+if ! command -v cmake &> /dev/null; then brew install cmake; fi
+
+# 2. 仮想環境の再構築
+rm -rf .venv
+uv venv
+
+# 3. 日本語音声合成に必要なライブラリを網羅（これでもうエラーは出さないはずです！）
+uv pip install kokoro soundfile torch \
+    unidic-lite \
+    pyopenjtalk \
+    fugashi \
+    jaconv \
+    mojimoji
+"""
+
+[tasks.gen]
+description = "音声生成を実行"
+run = "uv run python generate_ja.py"
+
+[tasks.gen2]
+# lecture.smd を読み込んで音声を作るタスク
+run = "uv run python smd_to_speech.py"
+
+[tasks.gen_parallel]
+description = "M4 全コアで並列音声生成（PyTorch版）"
+run = "uv run python smd_to_speech_parallel_pytorch.py"
