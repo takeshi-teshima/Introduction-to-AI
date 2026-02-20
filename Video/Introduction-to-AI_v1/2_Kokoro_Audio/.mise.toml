@@ -6,6 +6,8 @@ uv = "latest"
 # Intel Mac (Homebrew standard path) 用のパス設定
 PHONEMIZER_ESPEAK_LIBRARY = "/usr/local/lib/libespeak-ng.dylib"
 DYLD_LIBRARY_PATH = "/usr/local/lib"
+# 環境変数でデフォルトの間隔を設定しておくことも可能です
+SMD_SECTION_GAP = "1"
 
 [tasks.setup]
 description = "システム依存とPythonライブラリ（日本語フルセット）をセットアップ"
@@ -24,7 +26,8 @@ uv pip install kokoro soundfile torch \
     pyopenjtalk \
     fugashi \
     jaconv \
-    mojimoji
+    mojimoji \
+    click
 """
 
 [tasks.gen]
@@ -38,3 +41,15 @@ run = "uv run python smd_to_speech.py"
 [tasks.gen_parallel]
 description = "M4 全コアで並列音声生成（PyTorch版）"
 run = "uv run python smd_to_speech_parallel_pytorch.py"
+
+[tasks.speech]
+description = "M4並列処理: Speech Markdownから音声を生成 (キャッシュ対応)"
+# 変数を書かなければ、mise run speech lecture.smd --speed 1.2 と打った時
+# 自動的に末尾に引数が追加されて実行されます
+# ここで環境変数を定義することで、Python内部での競合を防ぎます
+env = { HF_HUB_OFFLINE = "1", PYTHONWARNINGS = "ignore", TF_CPP_MIN_LOG_LEVEL = "3" }
+run = "uv run python smd_processor.py"
+
+[tasks.speech_clean]
+description = "キャッシュをクリアして再生成"
+run = "rm -rf ./lecture/cache && uv run python smd_processor.py lecture.smd"
