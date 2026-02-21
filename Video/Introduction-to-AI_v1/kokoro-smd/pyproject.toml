@@ -1,0 +1,24 @@
+[project]
+name = "kokoro-smd"
+version = "0.1.0"
+description = "Speech Markdown (SMD) to audio processor using Kokoro TTS"
+requires-python = ">=3.11"
+dependencies = [
+    "click>=8.0",
+    "numpy",
+    "soundfile",
+    "kokoro",
+    "torch",
+    "unidic-lite",
+    "pyopenjtalk",
+    "fugashi",
+    "jaconv",
+    "mojimoji",
+]
+
+[project.scripts]
+kokoro-smd = "kokoro_smd.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
