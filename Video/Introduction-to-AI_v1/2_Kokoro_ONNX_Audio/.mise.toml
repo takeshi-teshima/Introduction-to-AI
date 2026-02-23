@@ -1,0 +1,45 @@
+[tools]
+python = "3.11"
+uv = "latest"
+
+[env]
+# M4ネイティブ(arm64)のプロセスから読み込めるパスに変更します
+# /usr/local/lib (Intel用) を指定すると、アーキテクチャ不整合でクラッシュするためです
+PHONEMIZER_ESPEAK_LIBRARY = "/opt/homebrew/lib/libespeak-ng.dylib"
+DYLD_LIBRARY_PATH = "/opt/homebrew/lib"
+
+[tasks.setup]
+description = "既存のPyTorch環境を維持しつつ、M4ネイティブのONNX環境を追加"
+run = """
+# 1. M4ネイティブ(arm64)の espeak-ng をインストール
+if [ ! -f "/opt/homebrew/lib/libespeak-ng.dylib" ]; then
+    echo "M4ネイティブなライブラリが見つかりません。インストールします..."
+    /opt/homebrew/bin/brew install espeak-ng
+fi
+
+# 2. 仮想環境の維持（削除せず不足分のみ追加）
+if [ ! -d ".venv" ]; then uv venv; fi
+uv pip install kokoro kokoro-onnx onnxruntime soundfile \
+    unidic-lite pyopenjtalk fugashi jaconv mojimoji
+
+# 3. ONNXモデルの実体チェックとダウンロード
+# (9バイトのポインタファイル問題を回避するためのサイズチェック付)
+for file in "kokoro-v1.0.onnx" "voices-v1.0.bin"; do
+    if [ ! -f "$file" ] || [ $(wc -c < "$file") -lt 1000000 ]; then
+        echo "Downloading $file (M4 optimized binary)..."
+        curl -L -o "$file" "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/$file"
+    fi
+done
+"""
+
+[tasks.gen]
+description = "PyTorch版（従来の生成）"
+run = "uv run python generate_ja.py"
+
+[tasks.gen2]
+description = "PyTorch版（Speech Markdownから生成）"
+run = "uv run python smd_to_speech.py"
+
+[tasks.gen_onnx]
+description = "ONNX版（M4チップで爆速生成）"
+run = "uv run python smd_to_speech_onnx.py"

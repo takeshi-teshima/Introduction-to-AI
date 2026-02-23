@@ -13,9 +13,9 @@ import click
 import numpy as np
 import soundfile as sf
 
-from kokoro_smd import __version__
-from kokoro_smd.parser import SmdDocument, Section, parse_smd
-from kokoro_smd.text import clean_smd_text
+from text_to_multimedia import __version__
+from text_to_multimedia.parser import SmdDocument, Section, parse_smd
+from text_to_multimedia.text import clean_smd_text
 
 SAMPLE_RATE = 24000
 

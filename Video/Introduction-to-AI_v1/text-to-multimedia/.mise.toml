@@ -1,0 +1,42 @@
+[tools]
+python = "3.11"
+uv = "latest"
+
+[env]
+# Intel Mac (Homebrew standard path) 用のパス設定
+PHONEMIZER_ESPEAK_LIBRARY = "/usr/local/lib/libespeak-ng.dylib"
+DYLD_LIBRARY_PATH = "/usr/local/lib"
+# デフォルトのスライド間ギャップ秒数
+SMD_SECTION_GAP = "1"
+
+[tasks.setup]
+description = "セットアップ: システム依存インストール & venv作成 & パッケージインストール (editable)"
+run = """
+# 1. システム依存のインストール
+if ! command -v espeak-ng &> /dev/null; then brew install espeak-ng; fi
+if ! command -v cmake &> /dev/null; then brew install cmake; fi
+if ! command -v pdftoppm &> /dev/null; then brew install poppler; fi
+if ! command -v ffmpeg &> /dev/null; then brew install ffmpeg; fi
+
+# 2. 仮想環境の再構築
+rm -rf .venv
+uv venv
+
+# 3. editable install (開発モード)
+uv pip install -e .
+"""
+
+[tasks.speech]
+description = "単一ファイルの音声生成"
+env = { HF_HUB_OFFLINE = "1", PYTHONWARNINGS = "ignore", TF_CPP_MIN_LOG_LEVEL = "3" }
+run = "uv run text-to-multimedia process"
+
+[tasks.batch]
+description = "ディレクトリ内のsmdファイルを一括処理"
+env = { HF_HUB_OFFLINE = "1", PYTHONWARNINGS = "ignore", TF_CPP_MIN_LOG_LEVEL = "3" }
+run = "uv run text-to-multimedia batch"
+
+[tasks.video]
+description = "PDFスライド＋音声＋manifest.json → MP4動画生成"
+env = { PYTHONWARNINGS = "ignore" }
+run = "uv run text-to-multimedia make-video"

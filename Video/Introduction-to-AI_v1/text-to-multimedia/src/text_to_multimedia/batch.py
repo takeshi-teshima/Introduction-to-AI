@@ -6,7 +6,7 @@ from pathlib import Path
 
 import click
 
-from kokoro_smd.engine import process_file
+from text_to_multimedia.engine import process_file
 
 
 def discover_smd_files(source_dir: Path) -> list[Path]:
