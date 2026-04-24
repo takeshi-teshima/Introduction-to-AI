@@ -1,0 +1,82 @@
+[
+  {
+    "slide": "学習の障壁②次元の呪い",
+    "start": 0.0,
+    "duration": 43.45
+  },
+  {
+    "slide": "次元の呪いとは",
+    "start": 44.45,
+    "duration": 69.8
+  },
+  {
+    "slide": "高次元空間の直観",
+    "start": 115.25,
+    "duration": 76.55
+  },
+  {
+    "slide": "球と球面の定義",
+    "start": 192.8,
+    "duration": 51.925
+  },
+  {
+    "slide": "球面集中現象",
+    "start": 245.725,
+    "duration": 66.125
+  },
+  {
+    "slide": "データの集中現象",
+    "start": 312.85,
+    "duration": 66.625
+  },
+  {
+    "slide": "距離の均質化",
+    "start": 380.475,
+    "duration": 69.125
+  },
+  {
+    "slide": "方向性の直交化",
+    "start": 450.6,
+    "duration": 84.4
+  },
+  {
+    "slide": "学習への悪影響",
+    "start": 536.0,
+    "duration": 56.075
+  },
+  {
+    "slide": "データ量と次元の関係",
+    "start": 593.075,
+    "duration": 80.525
+  },
+  {
+    "slide": "対策の方向性",
+    "start": 674.6,
+    "duration": 54.275
+  },
+  {
+    "slide": "表現学習の目的",
+    "start": 729.875,
+    "duration": 57.375
+  },
+  {
+    "slide": "例：画像データの場合",
+    "start": 788.25,
+    "duration": 82.2
+  },
+  {
+    "slide": "次元削減の実例",
+    "start": 871.45,
+    "duration": 60.575
+  },
+  {
+    "slide": "本質的情報の抽出",
+    "start": 933.025,
+    "duration": 70.6
+  },
+  {
+    "slide": "まとめ：次元の呪いと表現学習",
+    "start": 1004.625,
+    "duration": 69.65
+  }
+]

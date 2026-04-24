@@ -1,0 +1,97 @@
+[
+  {
+    "slide": "類似度と予測",
+    "start": 0.0,
+    "duration": 57.025
+  },
+  {
+    "slide": "予測で最も参考になるものは近くのデータ",
+    "start": 58.025,
+    "duration": 92.95
+  },
+  {
+    "slide": "k-最近傍法（k-NN）",
+    "start": 151.975,
+    "duration": 50.375
+  },
+  {
+    "slide": "k-最近傍法＞分類",
+    "start": 203.35,
+    "duration": 19.6
+  },
+  {
+    "slide": "k-最近傍法＞回帰",
+    "start": 223.95,
+    "duration": 49.125
+  },
+  {
+    "slide": "k-最近傍法＞ボロノイ図",
+    "start": 274.075,
+    "duration": 47.925
+  },
+  {
+    "slide": "決定領域と決定境界",
+    "start": 323.0,
+    "duration": 74.1
+  },
+  {
+    "slide": "k-最近傍法の特徴",
+    "start": 398.1,
+    "duration": 42.65
+  },
+  {
+    "slide": "ノンパラメトリックモデル",
+    "start": 441.75,
+    "duration": 76.275
+  },
+  {
+    "slide": "k-NNのハイパーパラメーター",
+    "start": 519.025,
+    "duration": 72.45
+  },
+  {
+    "slide": "Kの選択の影響",
+    "start": 592.475,
+    "duration": 82.9
+  },
+  {
+    "slide": "Kの選択の影響（続き）",
+    "start": 676.375,
+    "duration": 59.45
+  },
+  {
+    "slide": "距離関数",
+    "start": 736.825,
+    "duration": 45.625
+  },
+  {
+    "slide": "ユークリッド距離とマンハッタン距離",
+    "start": 783.45,
+    "duration": 68.4
+  },
+  {
+    "slide": "マハラノビス距離",
+    "start": 852.85,
+    "duration": 32.225
+  },
+  {
+    "slide": "類似度関数",
+    "start": 886.075,
+    "duration": 57.7
+  },
+  {
+    "slide": "ベクトルの内積とコサイン類似度",
+    "start": 944.775,
+    "duration": 53.05
+  },
+  {
+    "slide": "実験例",
+    "start": 998.825,
+    "duration": 75.175
+  },
+  {
+    "slide": "実験結果とまとめ",
+    "start": 1075.0,
+    "duration": 179.35
+  }
+]

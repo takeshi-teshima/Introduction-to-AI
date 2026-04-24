@@ -37,6 +37,16 @@ env = { HF_HUB_OFFLINE = "1", PYTHONWARNINGS = "ignore", TF_CPP_MIN_LOG_LEVEL = 
 run = "uv run text-to-multimedia batch"
 
 [tasks.video]
-description = "PDFスライド＋音声＋manifest.json → MP4動画生成"
+description = "PDFスライド＋音声＋manifest.json → MP4動画生成（単体）"
 env = { PYTHONWARNINGS = "ignore" }
 run = "uv run text-to-multimedia make-video"
+
+[tasks.init-project]
+description = "音声出力ディレクトリとPDFディレクトリからYAMLプロジェクトファイルを自動生成"
+env = { PYTHONWARNINGS = "ignore" }
+run = "uv run text-to-multimedia init-project"
+
+[tasks.video-batch]
+description = "YAMLプロジェクトファイルからMP4動画を一括生成"
+env = { PYTHONWARNINGS = "ignore" }
+run = "uv run text-to-multimedia video-batch"

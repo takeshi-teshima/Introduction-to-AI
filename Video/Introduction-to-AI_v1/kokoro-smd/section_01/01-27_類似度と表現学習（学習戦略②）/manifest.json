@@ -1,0 +1,67 @@
+[
+  {
+    "slide": "学習戦略①：分類タスクの再利用",
+    "start": 0.0,
+    "duration": 61.825
+  },
+  {
+    "slide": "分類器の中間表現の活用例",
+    "start": 62.825,
+    "duration": 100.5
+  },
+  {
+    "slide": "分類タスク利用の問題点",
+    "start": 164.325,
+    "duration": 76.225
+  },
+  {
+    "slide": "学習戦略②③：対比学習と自己教師付き学習",
+    "start": 241.55,
+    "duration": 70.65
+  },
+  {
+    "slide": "自己教師付き学習の基本的考え方",
+    "start": 313.2,
+    "duration": 49.4
+  },
+  {
+    "slide": "対比学習（Contrastive Learning）の概要",
+    "start": 363.6,
+    "duration": 39.85
+  },
+  {
+    "slide": "データ拡張（Data Augmentation）による疑似ラベル作成",
+    "start": 404.45,
+    "duration": 62.8
+  },
+  {
+    "slide": "負例の構成と全体の学習フレーム",
+    "start": 468.25,
+    "duration": 87.525
+  },
+  {
+    "slide": "多クラス分類としての学習",
+    "start": 556.775,
+    "duration": 55.25
+  },
+  {
+    "slide": "損失関数と最尤法ベースの学習",
+    "start": 613.025,
+    "duration": 82.875
+  },
+  {
+    "slide": "温度パラメータ（Temperature Parameter）の工夫",
+    "start": 696.9,
+    "duration": 247.9
+  },
+  {
+    "slide": "学習戦略②③のまとめ",
+    "start": 945.8,
+    "duration": 52.5
+  },
+  {
+    "slide": "まとめと発展的なトピック",
+    "start": 999.3,
+    "duration": 76.975
+  }
+]

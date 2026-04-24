@@ -1,0 +1,88 @@
+%% begin commment
+\iffalse
+基本的な例です．
+本文で用いるコマンド，環境はjbook.clsに準拠してください．
+A5判の場合
+
+\documentclass[a5/13Q]{kbdbook6}
+
+B5判の場合
+\documentclass[b5/13Q]{kbdbook6}
+uplatexを使う場合は，それぞれのoptionに[uplatex]を追記します．
+\documentclass[a5/13Q,uplatex]{kbdbook6}
+
+\usepackage[dvipdfmx]{graphicx}  %% 図版処理にはdvipdfmxを使用します．
+                                %% 現在では最終成果物DVIファイルではなくPDF形式が標準となっております．
+\usepackage[TS1,OT1,T1]{fontenc} %% 使用するエンコーディングはT1をデフォルト
+\usepackage{textcomp}%% LaTeXで使える記号類を拡張
+\usepackage{amsmath,amssymb}%% 数式でamsmath使う場合．
+\usepackage{makeidx}
+\makeindex
+
+各文書は章ごとにファイルを分割して\includeで読み込む形で執筆されることをお薦めいたします．
+\includeonlyコマンドは各ファイルの読み込みを制御して，コンパイル時間を短縮できます．
+全文書などコンパイルが必要が無い場合は，該当する章をコメントアウトします．
+その場合でも，目次や章番号，章を跨いだ相互参照などの情報は確保します．
+
+\includeonly{%%
+	preface,% まえがき
+	chap01,	%1章
+	chap02,	%2章
+	chap03,	%3章
+	chap04, %4章
+	chap05,	%5章
+}
+chap02のみ処理したい場合
+\includeonly{%%
+%	preface,% まえがき
+	chap01,	%1章
+%	chap02,	%2章
+%	chap03,	%3章
+%	chap04, %4章
+%	chap05,	%5章
+}
+
+\includeonly{%%
+	preface,% まえがき
+	chap01,	%1章
+	chap02,	%2章
+	chap03,	%3章
+	chap04, %4章
+	chap05,	%5章
+}
+\fi
+%% end commment
+
+
+%LaTeX sample start
+\documentclass[b5/13Q]{kbdbook6}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage[TS1,OT1,T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{amsmath,amssymb}
+\usepackage{makeidx}
+\makeindex
+
+\includeonly{%%
+	preface,% まえがき
+	chap01,	%1章
+%	chap02,	%2章
+%	chap03,	%3章
+%	chap04, %4章
+%	chap05,	%5章
+}
+
+\begin{document}
+\frontmatter%% 前付の指定
+\include{preface}%% まえがきを記述したTeXファイル
+\tableofcontents
+\mainmatter%% 本文開始指定
+%% 本文の記述はjbook準拠としてください．
+\include{chap01}%% 1章を記述したTeXファイル（以下同）
+\include{chap02}
+\include{chap03}
+\include{chap04}
+\include{chap05}
+\backmatter
+\printindex
+\end{document}

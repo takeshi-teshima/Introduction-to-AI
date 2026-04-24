@@ -1,0 +1,117 @@
+[
+  {
+    "slide": "モデル選択（ハイパーパラメーター選択）",
+    "start": 0.0,
+    "duration": 37.825
+  },
+  {
+    "slide": "正則化係数の選び方",
+    "start": 38.825,
+    "duration": 50.25
+  },
+  {
+    "slide": "用語＞ハイパーパラメーター（Hyperparameters）",
+    "start": 90.075,
+    "duration": 69.9
+  },
+  {
+    "slide": "モデル選択（ハイパーパラメーター選択）",
+    "start": 160.975,
+    "duration": 34.125
+  },
+  {
+    "slide": "モデル選択基準＞検証データの取り置き法",
+    "start": 196.1,
+    "duration": 54.0
+  },
+  {
+    "slide": "モデル選択基準＞検証データの取り置き法",
+    "start": 251.1,
+    "duration": 40.05
+  },
+  {
+    "slide": "モデル選択基準＞K分割交差検証法",
+    "start": 292.15,
+    "duration": 92.45
+  },
+  {
+    "slide": "モデル選択基準＞1つ抜き交差検証法",
+    "start": 385.6,
+    "duration": 49.7
+  },
+  {
+    "slide": "モデル選択基準＞その他の検証・交差検証法",
+    "start": 436.3,
+    "duration": 45.1
+  },
+  {
+    "slide": "モデル選択基準＞その他のモデル選択基準",
+    "start": 482.4,
+    "duration": 80.475
+  },
+  {
+    "slide": "モデル選択基準",
+    "start": 563.875,
+    "duration": 65.65
+  },
+  {
+    "slide": "ハイパーパラメーター選択",
+    "start": 630.525,
+    "duration": 66.325
+  },
+  {
+    "slide": "モデル選択＞検証曲線（Validation Curve）",
+    "start": 697.85,
+    "duration": 29.65
+  },
+  {
+    "slide": "モデル選択＞検証曲線（Validation Curve）",
+    "start": 728.5,
+    "duration": 61.225
+  },
+  {
+    "slide": "モデル選択＞検証曲線（Validation Curve）",
+    "start": 790.725,
+    "duration": 47.075
+  },
+  {
+    "slide": "モデル選択＞複数ハイパーパラメーターの最適化",
+    "start": 838.8,
+    "duration": 35.6
+  },
+  {
+    "slide": "モデル選択＞グリッドサーチ",
+    "start": 875.4,
+    "duration": 63.075
+  },
+  {
+    "slide": "モデル選択＞ランダムサーチ",
+    "start": 939.475,
+    "duration": 57.425
+  },
+  {
+    "slide": "モデル選択＞ベイズ最適化",
+    "start": 997.9,
+    "duration": 33.15
+  },
+  {
+    "slide": "モデル選択＞ハイパーパラメーター探索の実験",
+    "start": 1032.05,
+    "duration": 32.875
+  },
+  {
+    "slide": "モデル選択＞実験結果",
+    "start": 1065.925,
+    "duration": 82.35
+  },
+  {
+    "slide": "モデル選択基準 まとめ",
+    "start": 1149.275,
+    "duration": 52.8
+  },
+  {
+    "slide": "モデル選択 まとめ",
+    "start": 1203.075,
+    "duration": 65.525
+  }
+]

@@ -1,0 +1,87 @@
+[
+  {
+    "slide": "導入と今回の目標",
+    "start": 0.0,
+    "duration": 37.95
+  },
+  {
+    "slide": "確率論的分類アプローチの目標",
+    "start": 38.95,
+    "duration": 33.4
+  },
+  {
+    "slide": "確率論的分類の基本的な見方",
+    "start": 73.35,
+    "duration": 47.75
+  },
+  {
+    "slide": "問題の設定",
+    "start": 122.1,
+    "duration": 58.95
+  },
+  {
+    "slide": "確率値と確率値ベクトル",
+    "start": 182.05,
+    "duration": 37.4
+  },
+  {
+    "slide": "2クラスの場合の確率値",
+    "start": 220.45,
+    "duration": 36.7
+  },
+  {
+    "slide": "用語の整理",
+    "start": 258.15,
+    "duration": 16.975
+  },
+  {
+    "slide": "条件付き確率を推定するモデル",
+    "start": 276.125,
+    "duration": 43.3
+  },
+  {
+    "slide": "モデルの具体形と学習方法",
+    "start": 320.425,
+    "duration": 34.725
+  },
+  {
+    "slide": "学習方法の基本方針",
+    "start": 356.15,
+    "duration": 42.575
+  },
+  {
+    "slide": "交差エントロピー損失",
+    "start": 399.725,
+    "duration": 51.05
+  },
+  {
+    "slide": "注意と定義の確認",
+    "start": 451.775,
+    "duration": 26.7
+  },
+  {
+    "slide": "最尤法による学習",
+    "start": 479.475,
+    "duration": 49.725
+  },
+  {
+    "slide": "KLダイバージェンスとの関係",
+    "start": 530.2,
+    "duration": 46.7
+  },
+  {
+    "slide": "KLダイバージェンスの性質",
+    "start": 577.9,
+    "duration": 56.225
+  },
+  {
+    "slide": "他の分布距離と可能性",
+    "start": 635.125,
+    "duration": 52.075
+  },
+  {
+    "slide": "まとめ",
+    "start": 688.2,
+    "duration": 104.95
+  }
+]

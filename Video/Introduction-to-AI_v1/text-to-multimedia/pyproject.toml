@@ -15,6 +15,7 @@ dependencies = [
     "jaconv",
     "mojimoji",
     "pdf2image",
+    "pyyaml",
 ]
 
 [project.scripts]

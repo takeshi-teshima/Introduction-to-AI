@@ -1,0 +1,102 @@
+[
+  {
+    "slide": "セクション導入",
+    "start": 0.0,
+    "duration": 14.325
+  },
+  {
+    "slide": "データの大分類",
+    "start": 15.325,
+    "duration": 14.325
+  },
+  {
+    "slide": "構造化データとは",
+    "start": 30.65,
+    "duration": 10.375
+  },
+  {
+    "slide": "表形式データの特徴",
+    "start": 42.025,
+    "duration": 12.9
+  },
+  {
+    "slide": "表形式データの構造",
+    "start": 55.925,
+    "duration": 22.35
+  },
+  {
+    "slide": "カラムの意味づけ",
+    "start": 79.275,
+    "duration": 24.65
+  },
+  {
+    "slide": "構造化データの定義",
+    "start": 104.925,
+    "duration": 17.4
+  },
+  {
+    "slide": "構造化データの利点",
+    "start": 123.325,
+    "duration": 23.4
+  },
+  {
+    "slide": "非構造化データの導入",
+    "start": 147.725,
+    "duration": 10.45
+  },
+  {
+    "slide": "画像の基本単位",
+    "start": 159.175,
+    "duration": 20.475
+  },
+  {
+    "slide": "ピクセルと数値表現",
+    "start": 180.65,
+    "duration": 11.6
+  },
+  {
+    "slide": "画像データの本質",
+    "start": 193.25,
+    "duration": 17.425
+  },
+  {
+    "slide": "RGB色空間",
+    "start": 211.675,
+    "duration": 25.275
+  },
+  {
+    "slide": "テンソル表現",
+    "start": 237.95,
+    "duration": 9.025
+  },
+  {
+    "slide": "具体的なサイズ",
+    "start": 247.975,
+    "duration": 19.575
+  },
+  {
+    "slide": "テキストデータの表現",
+    "start": 268.55,
+    "duration": 24.7
+  },
+  {
+    "slide": "文字コードの構造",
+    "start": 294.25,
+    "duration": 21.475
+  },
+  {
+    "slide": "テキストの本質",
+    "start": 316.725,
+    "duration": 18.5
+  },
+  {
+    "slide": "構造化と非構造化の本質的な違い",
+    "start": 336.225,
+    "duration": 41.325
+  },
+  {
+    "slide": "非構造化データの定義と特徴",
+    "start": 378.55,
+    "duration": 53.75
+  }
+]
