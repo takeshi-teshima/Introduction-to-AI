@@ -41,6 +41,12 @@ def clean_smd_text(text):
     
     return text.strip()
 
+def sanitize_filename(name):
+    """
+    ファイル名に使用できない文字を置換
+    """
+    return re.sub(r'[\\/*?:"<>|:]', '_', name)
+
 def generate_section_audio(task):
     """
     改行ポーズ(0.5s)を挿入しつつ、標準SMD記法を処理する
@@ -119,7 +125,8 @@ def main(input_file, gap, threads):
         elif part.strip():
             # キャッシュ判定用のハッシュ計算にもクリーンアップ後のテキストを使用
             h = hashlib.sha256((current_heading + clean_smd_text(part)).encode('utf-8')).hexdigest()[:12]
-            sec_info = {'heading': current_heading, 'filename': f"{current_heading}_{h}.wav", 'text': part}
+            safe_heading = sanitize_filename(current_heading)
+            sec_info = {'heading': current_heading, 'filename': f"{safe_heading}_{h}.wav", 'text': part}
             sections.append(sec_info)
             out_path = cache_dir / sec_info['filename']
             final_sequence.append(out_path)
@@ -137,6 +144,8 @@ def main(input_file, gap, threads):
                 idx, success, label, info = future.result()
                 if success:
                     click.echo(f"      -> Finished: {label:<25} (RTF: {info:.4f})")
+                else:
+                    click.secho(f"      -> FAILED  : {label:<25} Error: {info}", fg='red', bold=True)
 
     combined_audio, manifest, current_time = [], [], 0.0
     gap_samples = np.zeros(int(SAMPLE_RATE * gap))
