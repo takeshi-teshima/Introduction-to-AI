@@ -65,27 +65,40 @@ for row in data:
 def calc_metrics(rows):
     n = len(rows)
     if n > 0:
-        mse = sum(r['SqError'] for r in rows) / n
+        sq_errors = [r['SqError'] for r in rows]
+        mse = sum(sq_errors) / n
         rmse = math.sqrt(mse)
-        return n, mse, rmse
-    return 0, float('nan'), float('nan')
+        
+        # Standard Error of the MSE (SE of the mean of squared errors)
+        if n > 1:
+            variance_sq_err = sum((x - mse) ** 2 for x in sq_errors) / (n - 1)
+            se_mse = math.sqrt(variance_sq_err) / math.sqrt(n)
+            # Delta method approximation for SE of RMSE (sqrt of MSE)
+            # SE(sqrt(MSE)) approx SE(MSE) / (2 * sqrt(MSE))
+            se_rmse = se_mse / (2 * rmse)
+        else:
+            se_mse = float('nan')
+            se_rmse = float('nan')
+            
+        return n, mse, rmse, se_mse, se_rmse
+    return 0, float('nan'), float('nan'), float('nan'), float('nan')
 
-n_recalc, mse_recalc, rmse_recalc = calc_metrics(recalc_rows)
-n_report, mse_report, rmse_report = calc_metrics(reported_rows)
-n_hybrid, mse_hybrid, rmse_hybrid = calc_metrics(hybrid_rows)
+n_recalc, mse_recalc, rmse_recalc, se_mse_recalc, se_rmse_recalc = calc_metrics(recalc_rows)
+n_report, mse_report, rmse_report, se_mse_report, se_rmse_report = calc_metrics(reported_rows)
+n_hybrid, mse_hybrid, rmse_hybrid, se_mse_hybrid, se_rmse_hybrid = calc_metrics(hybrid_rows)
 
 offline_mse = 53.8358
 offline_rmse = 7.3373
 
 print("\n--- Evaluation Results (Online) ---")
-print(f"{'Method':<30} | {'N':<3} | {'MSE':<10} | {'RMSE':<10}")
-print("-" * 60)
-print(f"{'Recalculated from Raw':<30} | {n_recalc:<3} | {mse_recalc:<10.4f} | {rmse_recalc:<10.4f}")
-print(f"{'Based on Reported Errors':<30} | {n_report:<3} | {mse_report:<10.4f} | {rmse_report:<10.4f}")
-print(f"{'Hybrid (Recalc + Fallback)':<30} | {n_hybrid:<3} | {mse_hybrid:<10.4f} | {rmse_hybrid:<10.4f}")
+print(f"{'Method':<30} | {'N':<3} | {'MSE':<10} | {'RMSE':<10} | {'SE(RMSE)':<10}")
+print("-" * 75)
+print(f"{'Recalculated from Raw':<30} | {n_recalc:<3} | {mse_recalc:<10.4f} | {rmse_recalc:<10.4f} | {se_rmse_recalc:<10.4f}")
+print(f"{'Based on Reported Errors':<30} | {n_report:<3} | {mse_report:<10.4f} | {rmse_report:<10.4f} | {se_rmse_report:<10.4f}")
+print(f"{'Hybrid (Recalc + Fallback)':<30} | {n_hybrid:<3} | {mse_hybrid:<10.4f} | {rmse_hybrid:<10.4f} | {se_rmse_hybrid:<10.4f}")
 
 print("\n--- Offline Evaluation (Reference) ---")
-print(f"{'Offline':<30} | {'-':<3} | {offline_mse:<10.4f} | {offline_rmse:<10.4f}")
+print(f"{'Offline':<30} | {'-':<3} | {offline_mse:<10.4f} | {offline_rmse:<10.4f} | {'-':<10}")
 
 print("\n--- Detailed Hybrid Data ---")
 print(f"{'No':<5} | {'SqErr':<10} | {'Method':<20}")
