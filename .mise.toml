@@ -1,0 +1,48 @@
+[tasks."exercises:build-set1"]
+description = "Build Set1 machine learning math exercises PDF"
+dir = "Exercises/Set1"
+run = """
+pandoc machine_learning_math_exercises.md \
+  -o machine_learning_math_exercises.pdf \
+  --pdf-engine=lualatex \
+  -V documentclass=bxjsarticle \
+  -V classoption=pandoc
+"""
+
+[tasks."exercises:build-set2"]
+description = "Build Set2 machine learning math exercises PDF"
+dir = "Exercises/Set2"
+run = """
+pandoc math_exercises_complete.md \
+  -o math_exercises_complete.pdf \
+  --pdf-engine=lualatex \
+  -V documentclass=bxjsarticle \
+  -V classoption=pandoc
+"""
+
+[tasks."exercises:build"]
+description = "Build exercises PDF for a specified Set (e.g. Set1, Set2)"
+run = """
+#!/usr/bin/env bash
+set -euo pipefail
+SET_NAME="${1:-Set1}"
+TARGET_DIR="Exercises/${SET_NAME}"
+if [ ! -d "$TARGET_DIR" ]; then
+  echo "Error: Directory $TARGET_DIR does not exist." >&2
+  exit 1
+fi
+cd "$TARGET_DIR"
+MD_FILE=$(find . -maxdepth 1 -name "*.md" | head -n 1)
+if [ -z "$MD_FILE" ]; then
+  echo "Error: No markdown file found in $TARGET_DIR" >&2
+  exit 1
+fi
+PDF_FILE="${MD_FILE%.md}.pdf"
+echo "Building $PDF_FILE from $MD_FILE in $TARGET_DIR..."
+pandoc "$MD_FILE" \
+  -o "$PDF_FILE" \
+  --pdf-engine=lualatex \
+  -V documentclass=bxjsarticle \
+  -V classoption=pandoc
+echo "Successfully built $PDF_FILE"
+"""

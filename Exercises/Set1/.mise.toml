@@ -1,0 +1,9 @@
+[tasks.build]
+description = "Build machine learning math exercises PDF using pandoc and lualatex"
+run = """
+pandoc machine_learning_math_exercises.md \
+  -o machine_learning_math_exercises.pdf \
+  --pdf-engine=lualatex \
+  -V documentclass=bxjsarticle \
+  -V classoption=pandoc
+"""
