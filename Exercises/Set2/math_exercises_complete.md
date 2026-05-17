@@ -4,13 +4,20 @@ subtitle: "第1回〜第5回 講義内容完全準拠・論理展開追体験セ
 author: "特殊講義1 補助資料"
 date: "2026年5月17日（最終更新）"
 geometry: margin=20mm
+numbersections: true
 header-includes: |
   ```{=latex}
   \usepackage{amsmath,amssymb}
   \usepackage[most]{tcolorbox}
+  \usepackage{tikz}
+  \usetikzlibrary{arrows.meta, positioning}
   \newcounter{question}
   \newtcolorbox[use counter=question]{questionbox}[2][]{enhanced, breakable, colback=red!2!gray!3!white, colframe=red!50!gray, fonttitle=\bfseries, title={問\arabic{question}\ #2}, #1}
   \newtcolorbox{answerbox}[2][]{enhanced, breakable, colback=green!2!gray!3!white, colframe=green!45!gray, fonttitle=\bfseries, title={問\ref{#2}の解答・解説}, #1}
+  \usepackage{titlesec}
+  \titleformat{\section}[block]{\normalfont\Large\bfseries}{【第\thesection 回】}{0.5em}{}
+  \titleformat{\subsection}[block]{\normalfont\large\bfseries}{\thesection-\arabic{subsection}.}{0.5em}{}
+  \newcommand{\ind}{\mathbf{1}}
   ```
 ---
 
@@ -18,7 +25,7 @@ header-includes: |
 \textbf{最終更新日：2026年5月17日 (v1.0)}
 \end{flushright}
 
-# 本演習問題集の進め方と活用法
+# 本演習問題集の進め方と活用法 {.unnumbered}
 
 本問題集は、講義スライドに登場する数式の「行間（省略された計算や証明）」を学生自身の手で動かして埋め、ブラックボックスを解消することを目的に設計されています。各セクションには講義スライドとの対応関係である**【該当内容】**と、その演習を行う目的である**【ねらい】**が記載されています。
 
@@ -30,166 +37,315 @@ header-includes: |
 
 ---
 
-# 【第1回】確率の基礎とリスク関数・ERM
+# 確率の基礎とリスク関数・ERM
 
-## 1-1. 確率の基礎と期待値・分散の計算
+## 確率の基礎と期待値・分散の計算
 
-\begin{questionbox}[label=q:1-1-1]{離散型確率分布での期待値・分散計算 \hfill \normalfont \small 難易度：★0}
+
+### 離散型確率分布での期待値・分散計算 {#q:1-1-1 .questionbox level="★0"}
 ある離散確率変数 $X$ は、確率 $0.2$ で $0$、確率 $0.5$ で $1$、確率 $0.3$ で $2$ をとる。
-\begin{enumerate}
-  \item 期待値 $\mathbb{E}[X]$ を求めよ。
-  \item $f(x) = x^2$ とするとき、その期待値 $\mathbb{E}[f(X)]$ を求めよ。
-  \item 公式 $\mathbb{V}[f(X)] = \mathbb{E}[(f(X))^2] - (\mathbb{E}[f(X)])^2$ を用いて、分散 $\mathbb{V}[f(X)]$ を計算せよ。
-\end{enumerate}
 
-\hfill \hyperref[a:1-1-1]{\footnotesize [解答・解説へ]}
-\end{questionbox}
+1. 期待値 $\mathbb{E}[X]$ を求めよ。
+2. $f(x) = x^2$ とするとき、期待値 $\mathbb{E}[f(X)]$ を求めよ。
+3. 分散 $\mathbb{V}[f(X)]$ を計算せよ。
 
-\begin{questionbox}[label=q:1-1-2]{連続型確率分布での期待値・分散計算 \hfill \normalfont \small 難易度：★1}
-連続確率変数 $X$ の確率密度関数が以下で与えられている（それ以外の範囲では $0$）。
-\[
-p(x) = 2x \quad (0 \le x \le 1)
-\]
-\begin{enumerate}
-  \item $\int_0^1 p(x) dx = 1$ （全確率が1）が満たされていることを示せ。
-  \item 期待値 $\mathbb{E}[X] = \int_0^1 x p(x) dx$ を計算せよ。
-  \item $\mathbb{E}[X^2] = \int_0^1 x^2 p(x) dx$ を計算し、分散 $\mathbb{V}[X]$ を求めよ。
-\end{enumerate}
 
-\hfill \hyperref[a:1-1-2]{\footnotesize [解答・解説へ]}
-\end{questionbox}
 
-\begin{questionbox}[label=q:1-1-3]{共分散（Covariance）の2次形式的振る舞い \hfill \normalfont \small 難易度：★1}
+::: {.right}
+[（解答・解説へ）](#a:1-1-1)
+:::
+
+
+
+### 指示関数（Indicator function）の理解 {#q:1-1-2 .questionbox level="★0"}
+機械学習の理論（特に損失関数や分類問題の評価など）では、ある条件が満たされているか否かを表す**指示関数（定義関数）** $\ind$ が頻出する。条件（または事象） $A$ に対して、指示関数 $\ind_A$ または $\ind\{A\}$ は以下のように定義される。
+$$
+\ind\{A\} = \begin{cases}
+1 & (\text{条件 } A \text{ が真のとき}) \\
+0 & (\text{条件 } A \text{ が偽のとき})
+\end{cases}
+$$
+
+1. 確率変数 $X$ が次の値をとるときの指示関数 $\ind\{X \ge 1\}$ の値をそれぞれ求めよ。
+   (a) $X = 0$
+   (b) $X = 2$
+2. 確率変数 $Y = \ind\{X \ge 1\}$ がとり得る値と、それぞれの値をとる確率（確率分布）を求めよ。
+3. 指示関数の期待値 $\mathbb{E}[\ind\{X \in A\}]$ は、事象 $\{X \in A\}$ が発生する確率 $\mathbb{P}(X \in A)$ と等しくなること、すなわち
+   $$
+   \mathbb{E}[\ind\{X \in A\}] = \mathbb{P}(X \in A)
+   $$
+   が常に成り立つことを示せ。
+
+
+
+::: {.right}
+[（解答・解説へ）](#a:1-1-2)
+:::
+
+
+
+### 連続型確率分布での期待値・分散計算 {#q:1-1-3 .questionbox level="★1"}
+連続確率変数 $X$ の確率密度関数 $p(x)$ が、指示関数 $\ind$ を用いて実数全体 $\mathbb{R}$ 上で以下のように定義されている。
+$$
+p(x) = 2x \cdot \ind\{0 \le x \le 1\}
+$$
+
+1. $\int_{-\infty}^\infty p(x) dx = 1$ （全確率が1）が満たされていることを示せ。
+2. 期待値 $\mathbb{E}[X] = \int_{-\infty}^\infty x p(x) dx$ を計算せよ。
+3. $\mathbb{E}[X^2] = \int_{-\infty}^\infty x^2 p(x) dx$ を計算し、分散 $\mathbb{V}[X]$ を求めよ。
+
+---
+
+**ヒント：** $\int_{-\infty}^\infty 2x \cdot \ind\{0 \le x \le 1\} dx = \int_0^1 2x dx$ である。
+
+
+
+::: {.right}
+[（解答・解説へ）](#a:1-1-3)
+:::
+
+
+
+
+### 【復習とヒント】期待値・分散・共分散の性質 {.tcolorbox option="enhanced, colback=blue!2!white, colframe=blue!60!black, fonttitle=\bfseries, drop shadow"}
+* \textbf{線形性}: $\mathbb{E}[aX + bY] = a\mathbb{E}[X] + b\mathbb{E}[Y]$
+* \textbf{分散の定義}: $\mathbb{V}[X] = \mathbb{E}[(X - \mathbb{E}[X])^2] = \mathbb{E}[X^2] - (\mathbb{E}[X])^2$
+* \textbf{共分散の定義}: $Cov(X,Y) = \mathbb{E}[(X - \mathbb{E}[X])(Y - \mathbb{E}[Y])]$
+* \textbf{分散と共分散の関係}: $\mathbb{V}[X] = Cov(X,X)$
+* \textbf{共分散の双線形性}: $Cov(aX+bY, Z) = aCov(X,Z) + bCov(Y,Z)$
+
+
+
+### 共分散（Covariance）の2次形式的振る舞い {#q:1-1-4 .questionbox level="★1"}
 確率変数 $X, Y, Z$ と定数 $a, b$ について、共分散の性質（双線形性・対称性）
 \begin{align*}
 Cov(aX+bY, Z) &= a Cov(X,Z) + b Cov(Y,Z) \\
 Cov(X,Y) &= Cov(Y,X)
 \end{align*}
 を用いて、次の式を展開せよ。
-\begin{enumerate}
-  \item $Cov(X, X+Y)$
-  \item $\mathbb{V}[aX + bY]$ （ヒント：$\mathbb{V}[Z] = Cov(Z,Z)$ であることを利用せよ）
-\end{enumerate}
 
-\hfill \hyperref[a:1-1-3]{\footnotesize [解答・解説へ]}
-\end{questionbox}
+1. $Cov(X, X+Y)$
+2. $\mathbb{V}[aX + bY]$ （ヒント：$\mathbb{V}[Z] = Cov(Z,Z)$ であることを利用せよ）
 
-### 1-1. の解答・解説
+
+
+::: {.right}
+[（解答・解説へ）](#a:1-1-4)
+:::
+
+
+### 解答・解説
 **【該当内容】** 第1回スライド34〜38「基本知識＞確率分布、期待値」
 **【ねらい】** 期待値 $\mathbb{E}[\cdot]$ や分散 $\mathbb{V}[\cdot]$ の計算規則を、離散型・連続型の両面から手計算で確かめ、のちに登場する「リスク関数」の数学的実態を掴む。
 
-\begin{answerbox}[label=a:1-1-1]{q:1-1-1}
-\begin{enumerate}
-  \item $\mathbb{E}[X] = 0 \times 0.2 + 1 \times 0.5 + 2 \times 0.3 = 0 + 0.5 + 0.6 = 1.1$
-  \item $\mathbb{E}[f(X)] = \mathbb{E}[X^2] = 0^2 \times 0.2 + 1^2 \times 0.5 + 2^2 \times 0.3 = 0 + 0.5 + 1.2 = 1.7$
-  \item まず $\mathbb{E}[(f(X))^2] = \mathbb{E}[X^4]$ を計算する。
-        \[
-        \mathbb{E}[X^4] = 0^4 \times 0.2 + 1^4 \times 0.5 + 2^4 \times 0.3 = 0 + 0.5 + 16 \times 0.3 = 5.3
-        \]
-        これと (2) の結果 $\mathbb{E}[f(X)] = 1.7$ を公式に代入する。
-        \[
-        \mathbb{V}[f(X)] = 5.3 - (1.7)^2 = 5.3 - 2.89 = 2.41
-        \]
-\end{enumerate}
 
-\hfill \hyperref[q:1-1-1]{\footnotesize [問題へ戻る]}
-\end{answerbox}
+### 問1-1-1 の解答・解説 {#a:1-1-1 .answerbox ref="q:1-1-1"}
+1. $\mathbb{E}[X] = 0 \times 0.2 + 1 \times 0.5 + 2 \times 0.3 = 0 + 0.5 + 0.6 = 1.1$
+2. $\mathbb{E}[f(X)] = \mathbb{E}[X^2] = 0^2 \times 0.2 + 1^2 \times 0.5 + 2^2 \times 0.3 = 0 + 0.5 + 1.2 = 1.7$
+3. 分散 $\mathbb{V}[f(X)]$ の計算方法には、定義から計算する方法と、公式を用いる方法の2通りがあります。
 
-\begin{answerbox}[label=a:1-1-2]{q:1-1-2}
-\begin{enumerate}
-  \item \[\int_0^1 2x dx = \left[ x^2 \right]_0^1 = 1^2 - 0^2 = 1 \quad \text{（証明終）}\]
-  \item \[\mathbb{E}[X] = \int_0^1 x(2x) dx = \int_0^1 2x^2 dx = \left[ \frac{2}{3}x^3 \right]_0^1 = \frac{2}{3}\]
-  \item $\mathbb{E}[X^2]$ の計算：
-        \[\mathbb{E}[X^2] = \int_0^1 x^2(2x) dx = \int_0^1 2x^3 dx = \left[ \frac{1}{2}x^4 \right]_0^1 = \frac{1}{2}\]
-        よって分散 $\mathbb{V}[X]$ は、
-        \[\mathbb{V}[X] = \frac{1}{2} - \left(\frac{2}{3}\right)^2 = \frac{1}{2} - \frac{4}{9} = \frac{1}{18}\]
-\end{enumerate}
+    **方法1：定義から直接計算する方法**
+    分散の定義 $\mathbb{V}[Y] = \mathbb{E}[(Y - \mathbb{E}[Y])^2]$ において、$Y = f(X)$ と置くと、
+    $$
+    \mathbb{V}[f(X)] = \mathbb{E}\left[ (f(X) - \mathbb{E}[f(X)])^2 \right]
+    $$
+    となります。(2) より $\mathbb{E}[f(X)] = 1.7$ であるため、各 $X$ の値における $f(X)$ の値から期待値 $1.7$ を引き、その2乗の期待値をとります。
+    \begin{align*}
+    \mathbb{V}[f(X)] &= (f(0) - 1.7)^2 \times 0.2 + (f(1) - 1.7)^2 \times 0.5 + (f(2) - 1.7)^2 \times 0.3 \\
+    &= (0^2 - 1.7)^2 \times 0.2 + (1^2 - 1.7)^2 \times 0.5 + (2^2 - 1.7)^2 \times 0.3 \\
+    &= (-1.7)^2 \times 0.2 + (-0.7)^2 \times 0.5 + (2.3)^2 \times 0.3 \\
+    &= 2.89 \times 0.2 + 0.49 \times 0.5 + 5.29 \times 0.3 \\
+    &= 0.578 + 0.245 + 1.587 \\
+    &= 2.41
+    \end{align*}
 
-\hfill \hyperref[q:1-1-2]{\footnotesize [問題へ戻る]}
-\end{answerbox}
+    **方法2：公式 $\mathbb{V}[f(X)] = \mathbb{E}[(f(X))^2] - (\mathbb{E}[f(X)])^2$ を用いる方法**
+    まず、$\mathbb{E}[(f(X))^2] = \mathbb{E}[X^4]$ を計算します。
+    $$
+    \mathbb{E}[X^4] = 0^4 \times 0.2 + 1^4 \times 0.5 + 2^4 \times 0.3 = 0 + 0.5 + 16 \times 0.3 = 5.3
+    $$
+    これと (2) の結果 $\mathbb{E}[f(X)] = 1.7$ を公式に代入します。
+    $$
+    \mathbb{V}[f(X)] = 5.3 - (1.7)^2 = 5.3 - 2.89 = 2.41
+    $$
 
-\begin{answerbox}[label=a:1-1-3]{q:1-1-3}
-\begin{enumerate}
-  \item \[Cov(X, X+Y) = Cov(X,X) + Cov(X,Y) = \mathbb{V}[X] + Cov(X,Y)\]
-  \item \begin{align*}
+
+
+::: {.right}
+[（問題へ戻る）](#q:1-1-1)
+:::
+
+
+
+### 問1-1-2 の解答・解説 {#a:1-1-2 .answerbox ref="q:1-1-2"}
+1. 指示関数の定義「条件が真なら $1$、偽なら $0$」に基づいて計算します。
+   * (a) $X = 0$ のとき：条件 $X \ge 1$ は偽（不成立）となるため、$\ind\{0 \ge 1\} = 0$ です。
+   * (b) $X = 2$ のとき：条件 $X \ge 1$ は真（成立）となるため、$\ind\{2 \ge 1\} = 1$ です。
+
+2. $Y = \ind\{X \ge 1\}$ がとり得る値は、定義より $0$ または $1$ です。
+   * $Y = 0$ となるのは、条件 $X \ge 1$ が偽のとき、すなわち $X = 0$ のときです。
+     したがって、$\mathbb{P}(Y = 0) = \mathbb{P}(X = 0) = 0.2$ となります。
+   * $Y = 1$ となるのは、条件 $X \ge 1$ が真のとき、すなわち $X = 1$ または $X = 2$ のときです。
+     したがって、$\mathbb{P}(Y = 1) = \mathbb{P}(X = 1) + \mathbb{P}(X = 2) = 0.5 + 0.3 = 0.8$ となります。
+   
+   まとめると、確率分布は以下の通りです：
+   $$
+   Y = \begin{cases}
+   1 & (\text{確率 } 0.8) \\
+   0 & (\text{確率 } 0.2)
+   \end{cases}
+   $$
+
+3. 確率変数 $Y = \ind\{X \in A\}$ は、$X \in A$ のときに $1$ をとり、$X \notin A$ のときに $0$ をとる確率変数（ベルヌーイ分布に従う確率変数）です。
+   それぞれの値をとる確率は以下の通りです：
+   * $\mathbb{P}(Y = 1) = \mathbb{P}(X \in A)$
+   * $\mathbb{P}(Y = 0) = 1 - \mathbb{P}(X \in A)$
+   
+   したがって、離散型確率変数の期待値の定義に従って $\mathbb{E}[Y]$ を計算すると：
+   \begin{align*}
+   \mathbb{E}[\ind\{X \in A\}] = \mathbb{E}[Y] &= 1 \cdot \mathbb{P}(Y = 1) + 0 \cdot \mathbb{P}(Y = 0) \\
+   &= 1 \cdot \mathbb{P}(X \in A) + 0 \cdot (1 - \mathbb{P}(X \in A)) \\
+   &= \mathbb{P}(X \in A)
+   \end{align*}
+   となり、指示関数の期待値は事象の発生確率と完全に等しくなることが示されました。（証明終）
+
+
+
+::: {.right}
+[（問題へ戻る）](#q:1-1-2)
+:::
+
+
+
+### 問1-1-3 の解答・解説 {#a:1-1-3 .answerbox ref="q:1-1-3"}
+1. 指示関数の定義より、$\ind\{0 \le x \le 1\}$ は $0 \le x \le 1$ のとき $1$、それ以外の範囲では $0$ となります。したがって、実数全体 $(-\infty, \infty)$ の積分を $[0, 1]$ の範囲に絞ることができます。
+    $$
+    \int_{-\infty}^\infty p(x) dx = \int_{-\infty}^\infty 2x \cdot \ind\{0 \le x \le 1\} dx = \int_0^1 2x dx = \left[ x^2 \right]_0^1 = 1^2 - 0^2 = 1 \quad \text{（証明終）}
+    $$
+2. 期待値 $\mathbb{E}[X]$ も同様に指示関数を用いて積分範囲を絞って計算します。
+    $$
+    \mathbb{E}[X] = \int_{-\infty}^\infty x \cdot p(x) dx = \int_{-\infty}^\infty x \cdot 2x \cdot \ind\{0 \le x \le 1\} dx = \int_0^1 2x^2 dx = \left[ \frac{2}{3}x^3 \right]_0^1 = \frac{2}{3}
+    $$
+3. $\mathbb{E}[X^2]$ の計算：
+    $$
+    \mathbb{E}[X^2] = \int_{-\infty}^\infty x^2 \cdot p(x) dx = \int_{-\infty}^\infty x^2 \cdot 2x \cdot \ind\{0 \le x \le 1\} dx = \int_0^1 2x^3 dx = \left[ \frac{1}{2}x^4 \right]_0^1 = \frac{1}{2}
+    $$
+    よって分散 $\mathbb{V}[X]$ は、
+    $$
+    \mathbb{V}[X] = \mathbb{E}[X^2] - (\mathbb{E}[X])^2 = \frac{1}{2} - \left(\frac{2}{3}\right)^2 = \frac{1}{2} - \frac{4}{9} = \frac{1}{18}
+    $$
+
+
+
+::: {.right}
+[（問題へ戻る）](#q:1-1-3)
+:::
+
+
+
+### 問1-1-4 の解答・解説 {#a:1-1-4 .answerbox ref="q:1-1-4"}
+1. $$Cov(X, X+Y) = Cov(X,X) + Cov(X,Y) = \mathbb{V}[X] + Cov(X,Y)$$
+2. \begin{align*}
         \mathbb{V}[aX+bY] &= Cov(aX+bY, aX+bY) \\
         &= a^2 Cov(X,X) + ab Cov(X,Y) + ba Cov(Y,X) + b^2 Cov(Y,Y) \\
         &= a^2 \mathbb{V}[X] + 2ab Cov(X,Y) + b^2 \mathbb{V}[Y] \quad \text{（対称性より）}
         \end{align*}
         この展開の構造は、のちに行列やベクトルの内積（2次形式）を展開する際の論理構造と全く同じである。
-\end{enumerate}
 
-\hfill \hyperref[q:1-1-3]{\footnotesize [問題へ戻る]}
-\end{answerbox}
+
+
+::: {.right}
+[（問題へ戻る）](#q:1-1-4)
+:::
+
 
 ---
 
-## 1-2. リスク関数 and 経験リスク
+## リスク関数 and 経験リスク
 
-\begin{questionbox}[label=q:1-2-1]{分布が既知の場合の真のリスク関数 \hfill \normalfont \small 難易度：★1}
+
+### 分布が既知の場合の真のリスク関数 {#q:1-2-1 .questionbox level="★1"}
 あるデータ生成分布において、入力 $X$ は常に $1$ で固定されており、ラベル $Y$ は確率 $0.6$ で $y=3$、確率 $0.4$ で $y=8$ をとるとする。予測器を定数 $c$ を出力するモデル $f(x)=c$ とし、損失関数を二乗誤差 $l(y, c) = (y-c)^2$ とする。
-\begin{enumerate}
-  \item このときの真のリスク関数 $R(c) = \mathbb{E}[l(Y, c)]$ の式を $c$ の関数として書き下せ。
-  \item $c = 5$ のときの真のリスクの値を求めよ。
-\end{enumerate}
 
-\hfill \hyperref[a:1-2-1]{\footnotesize [解答・解説へ]}
-\end{questionbox}
+1. このときの真のリスク関数 $R(c) = \mathbb{E}[l(Y, c)]$ の式を $c$ の関数として書き下せ。
+2. $c = 5$ のときの真のリスクの値を求めよ。
 
-\begin{questionbox}[label=q:1-2-2]{経験リスクの計算と予測値の代入 \hfill \normalfont \small 難易度：★0}
+
+
+::: {.right}
+[（解答・解説へ）](#a:1-2-1)
+:::
+
+
+
+### 経験リスクの計算と予測値の代入 {#q:1-2-2 .questionbox level="★0"}
 上記のデータ生成分布から、現実世界でランダムに $n=3$ 個のサンプルを収集したところ、偶然にも全て $y_1=3, y_2=3, y_3=3$ であったとする。
-\begin{enumerate}
-  \item この手元の標本に対する経験リスク $\hat{R}(c)$ の式を書き下せ。
-  \item $c=5$ のときの経験リスクの値を計算し、問1の真のリスク値との違いを考察せよ。
-\end{enumerate}
 
-\hfill \hyperref[a:1-2-2]{\footnotesize [解答・解説へ]}
-\end{questionbox}
+1. この手元の標本に対する経験リスク $\hat{R}(c)$ の式を書き下せ。
+2. $c=5$ のときの経験リスクの値を計算し、問1の真のリスク値との違いを考察せよ。
 
-### 1-2. の解答・解説
+
+
+::: {.right}
+[（解答・解説へ）](#a:1-2-2)
+:::
+
+
+### 解答・解説
 **【該当内容】** 第1回スライド78〜86「予測系タスクの学習＞リスク関数、リスクの標本近似」
 **【ねない】** 未来のあらゆるデータを考慮した「真のリスク（期待値）」と、手元にあるデータから計算する「経験リスク（標本平均）」の関係を具体的に数値で比較し、そのギャップを理解する。
 
-\begin{answerbox}[label=a:1-2-1]{q:1-2-1}
-\begin{enumerate}
-  \item \[R(c) = 0.6 \times (3 - c)^2 + 0.4 \times (8 - c)^2\]
-  \item $c=5$ を代入すると、
-        \[R(5) = 0.6 \times (3 - 5)^2 + 0.4 \times (8 - 5)^2 = 0.6 \times 4 + 0.4 \times 9 = 2.4 + 3.6 = 6.0\]
-\end{enumerate}
 
-\hfill \hyperref[q:1-2-1]{\footnotesize [問題へ戻る]}
-\end{answerbox}
+### 問1-2-1 の解答・解説 {#a:1-2-1 .answerbox ref="q:1-2-1"}
+1. $$R(c) = 0.6 \times (3 - c)^2 + 0.4 \times (8 - c)^2$$
+2. $c=5$ を代入すると、
+        $$R(5) = 0.6 \times (3 - 5)^2 + 0.4 \times (8 - 5)^2 = 0.6 \times 4 + 0.4 \times 9 = 2.4 + 3.6 = 6.0$$
 
-\begin{answerbox}[label=a:1-2-2]{q:1-2-2}
-\begin{enumerate}
-  \item \[\hat{R}(c) = \frac{1}{3} \sum_{i=1}^3 (y_i - c)^2 = \frac{1}{3} \left[ (3-c)^2 + (3-c)^2 + (3-c)^2 \right] = (3-c)^2\]
-  \item $c=5$ を代入すると、
-        \[\hat{R}(5) = (3-5)^2 = 4.0\]
+
+
+::: {.right}
+[（問題へ戻る）](#q:1-2-1)
+:::
+
+
+
+### 問1-2-2 の解答・解説 {#a:1-2-2 .answerbox ref="q:1-2-2"}
+1. $$\hat{R}(c) = \frac{1}{3} \sum_{i=1}^3 (y_i - c)^2 = \frac{1}{3} \left[ (3-c)^2 + (3-c)^2 + (3-c)^2 \right] = (3-c)^2$$
+2. $c=5$ を代入すると、
+        $$\hat{R}(5) = (3-5)^2 = 4.0$$
         \textbf{【考察】} 真のリスク $R(5)=6.0$ に対し、経験リスクは $\hat{R}(5)=4.0$ となり大きく乖離している。これはデータ生成分布 $p(y)$ が未知で、手元のサンプリング（標本）に偏りがあるために生じる。機械学習では真のリスクが計算できないため、この経験リスクを代わりに最小化する（ERM）。
-\end{enumerate}
 
-\hfill \hyperref[q:1-2-2]{\footnotesize [問題へ戻る]}
-\end{answerbox}
+
+
+::: {.right}
+[（問題へ戻る）](#q:1-2-2)
+:::
+
 
 ---
 
-## 1-3. ERM（経験リスク最小化）
+## ERM（経験リスク最小化）
 
-\begin{questionbox}[label=q:1-3-1]{目的関数のパラメータ関数化 \hfill \normalfont \small 難易度：★0}
+
+### 目的関数のパラメータ関数化 {#q:1-3-1 .questionbox level="★0"}
 データポイント $(x_1, y_1) = (1, 2)$ および $(x_2, y_2) = (3, 4)$ がある。予測モデルを原点を通る直線 $f_\theta(x) = \theta x$ とし、損失関数を二乗誤差とする。このとき、経験リスク
-\[
+$$
 \hat{R}(f_\theta) = \frac{1}{2} \sum_{i=1}^2 (y_i - f_\theta(x_i))^2
-\]
+$$
 に具体的な数値を代入し、$\theta$ の2次関数 $A\theta^2 + B\theta + C$ の形に展開・整理せよ。
 
-\hfill \hyperref[a:1-3-1]{\footnotesize [解答・解説へ]}
-\end{questionbox}
 
-### 1-3. の解答・解説
+::: {.right}
+[（解答・解説へ）](#a:1-3-1)
+:::
+
+
+### 解答・解説
 **【該当内容】** 第1回スライド86〜87「予測系タスクの学習＞経験リスク最小化（ERM）」
 **【ねらい】** 経験リスクの式に具体的なモデル式を代入し、目的関数が「入力 $x$ の関数」から「最適化すべきパラメータ $\theta$ の関数」へと変貌する様子を確認する。
 
-\begin{answerbox}[label=a:1-3-1]{q:1-3-1}
+
+### 問1-3-1 の解答・解説 {#a:1-3-1 .answerbox ref="q:1-3-1"}
 与えられた数値を代入して整理する。
 \begin{align*}
 \hat{R}(\theta) &= \frac{1}{2} \left[ (2 - \theta \cdot 1)^2 + (4 - \theta \cdot 3)^2 \right] \\
@@ -199,173 +355,250 @@ Cov(X,Y) &= Cov(Y,X)
 \end{align*}
 これによって、最適化（微分して最小値を求める）対象がパラメータ $\theta$ だけの関数になったことが示される。
 
-\hfill \hyperref[q:1-3-1]{\footnotesize [問題へ戻る]}
-\end{answerbox}
+
+::: {.right}
+[（問題へ戻る）](#q:1-3-1)
+:::
+
 
 ---
 
-# 【第2回】最適化と最小二乗法・偏微分
+# 最適化と最小二乗法・偏微分
 
-## 2-1. 経験リスクの数式化（シグマを用いた書き下し）
+## 経験リスクの数式化（シグマを用いた書き下し）
 
-\begin{questionbox}[label=q:2-1-1]{経験リスクの立式 \hfill \normalfont \small 難易度：★0}
+
+### 経験リスクの立式 {#q:2-1-1 .questionbox level="★0"}
 $n$ 個の訓練データ $\{(x_i, y_i)\}_{i=1}^n$ が与えられている。モデルクラスとして1次関数 $f_{(w,b)}(x) = wx + b$ を採用し、損失関数を二乗誤差 $l(y, \hat{y}) = (y - \hat{y})^2$ とするとき、目的関数 $L(w,b)$ を $\sum_{i=1}^n$ を用いて書き下せ。
 
-\hfill \hyperref[a:2-1-1]{\footnotesize [解答・解説へ]}
-\end{questionbox}
 
-\begin{questionbox}[label=q:2-1-2]{最適化問題の定式化：穴埋め \hfill \normalfont \small 難易度：★0}
+::: {.right}
+[（解答・解説へ）](#a:2-1-1)
+:::
+
+
+
+### 最適化問題の定式化：穴埋め {#q:2-1-2 .questionbox level="★0"}
 以下の最適化問題の定式化について、空欄 $[\text{A}]$ 〜 $[\text{D}]$ に入る適切な数式や記号を答えよ。
-\begin{enumerate}
-  \item \textbf{【制約なし】} パラメータ $\theta$ を調整して、目的関数 $L(\theta)$ を最小にする「最適なパラメータ $\hat{\theta}$」を求める問題：
-        \[
+
+1. \textbf{【制約なし】} パラメータ $\theta$ を調整して、目的関数 $L(\theta)$ を最小にする「最適なパラメータ $\hat{\theta}$」を求める問題：
+        $$
         \hat{\theta} = \mathop{\mathrm{arg\,min}}_{[\text{A}]} [\text{B}]
-        \]
-  \item \textbf{【制約あり】} パラメータの大きさ（L2ノルム） $\|\theta\|$ が定数 $C$ を超えないという制約のもとで、目的関数 $L(\theta)$ の最小値を求める問題：
-        \[
+        $$
+2. \textbf{【制約あり】} パラメータの大きさ（L2ノルム） $\|\theta\|$ が定数 $C$ を超えないという制約のもとで、目的関数 $L(\theta)$ の最小値を求める問題：
+        $$
         \mathop{\mathrm{Min}}_{[\text{C}]} L(\theta) \quad \text{subject to} \quad [\text{D}]
-        \]
-\end{enumerate}
+        $$
 
-\hfill \hyperref[a:2-1-2]{\footnotesize [解答・解説へ]}
-\end{questionbox}
 
-### 2-1. の解答・解説
+
+::: {.right}
+[（解答・解説へ）](#a:2-1-2)
+:::
+
+
+### 解答・解説
 **【該当内容】** 第2回スライド27〜37「予測系タスクの具体例＞線型単回帰、最小二乗法」
 **【ねらい】** $n$ 個の一般的なデータ表記に対して、二乗損失を用いた経験リスクの正確な数式をシグマ $\sum$ を用いて構築できるようにする。
 
-\begin{answerbox}[label=a:2-1-2]{q:2-1-2}
-\begin{enumerate}
-  \item $[\text{A}] = \theta$, \quad $[\text{B}] = L(\theta)$ \\
+
+### 問2-1-2 の解答・解説 {#a:2-1-2 .answerbox ref="q:2-1-2"}
+1. $[\text{A}] = \theta$, \quad $[\text{B}] = L(\theta)$ \\
         よって全体の式は $\hat{\theta} = \mathop{\mathrm{arg\,min}}_{\theta} L(\theta)$ となる。最適化の目標（最小値）ではなく、最小値を与える「パラメータそのもの」を求めたい場合には $\mathrm{arg\,min}$ を用いる。
-  \item $[\text{C}] = \theta$, \quad $[\text{D}] = \|\theta\| \le C$ \\
+2. $[\text{C}] = \theta$, \quad $[\text{D}] = \|\theta\| \le C$ \\
         よって全体の式は $\mathop{\mathrm{Min}}_{\theta} L(\theta) \quad \text{subject to} \quad \|\theta\| \le C$ となる。制約条件は $\text{subject to}$ (s.t.) の右側に記述する。
-\end{enumerate}
 
-\hfill \hyperref[q:2-1-2]{\footnotesize [問題へ戻る]}
-\end{answerbox}
 
-\begin{answerbox}[label=a:2-1-1]{q:2-1-1}
+
+::: {.right}
+[（問題へ戻る）](#q:2-1-2)
+:::
+
+
+
+### 問2-1-1 の解答・解説 {#a:2-1-1 .answerbox ref="q:2-1-1"}
 モデルの出力 $\hat{y}_i = wx_i + b$ を損失関数に代入し、その標本平均をとる。
-\[
+$$
 L(w,b) = \frac{1}{n} \sum_{i=1}^n (y_i - (wx_i + b))^2
-\]
+$$
 
-\hfill \hyperref[q:2-1-1]{\footnotesize [問題へ戻る]}
-\end{answerbox}
+
+::: {.right}
+[（問題へ戻る）](#q:2-1-1)
+:::
+
 
 ---
 
-## 2-2. 最小二乗法の真髄：偏微分から一階の条件へ
+## 最小二乗法の真髄：偏微分から一階の条件へ
 
-\begin{questionbox}[label=q:2-2-1]{偏微分と勾配ベクトルの書き下し \hfill \normalfont \small 難易度：★1}
+
+### 偏微分と勾配ベクトルの書き下し {#q:2-2-1 .questionbox level="★1"}
 目的関数 $L(w,b) = \frac{1}{n} \sum_{i=1}^n (y_i - wx_i - b)^2$ とする。
-\begin{enumerate}
-  \item $L(w,b)$ を $w$ について偏微分した式 $\frac{\partial L}{\partial w}$ を求めよ。（合成関数の微分に注意せよ）
-  \item $L(w,b)$ を $b$ について偏微分した式 $\frac{\partial L}{\partial b}$ を求めよ。
-  \item 勾配ベクトル $\nabla L(w,b)$ の定義に従い、(1)(2)の結果を並べた列ベクトルを表記せよ。
-\end{enumerate}
 
-\hfill \hyperref[a:2-2-1]{\footnotesize [解答・解説へ]}
-\end{questionbox}
+1. $L(w,b)$ を $w$ について偏微分した式 $\frac{\partial L}{\partial w}$ を求めよ。（合成関数の微分に注意せよ）
+2. $L(w,b)$ を $b$ について偏微分した式 $\frac{\partial L}{\partial b}$ を求めよ。
+3. 勾配ベクトル $\nabla L(w,b)$ の定義に従い、(1)(2)の結果を並べた列ベクトルを表記せよ。
 
-\begin{questionbox}[label=q:2-2-2]{一階の条件からの式変形 \hfill \normalfont \small 難易度：★2}
+
+
+::: {.right}
+[（解答・解説へ）](#a:2-2-1)
+:::
+
+
+
+### 一階の条件からの式変形 {#q:2-2-2 .questionbox level="★2"}
 最適解において勾配ベクトルがゼロになるという一階の条件 $\nabla L(w,b) = \mathbf{0}$ のうち、$\frac{\partial L}{\partial b} = 0$ の式を変形し、最適な切片 $\hat{b}$ が、サンプルの平均値 $\bar{x} = \frac{1}{n}\sum_{i=1}^n x_i$, $\bar{y} = \frac{1}{n}\sum_{i=1}^n y_i$ を用いて
-\[
+$$
 \hat{b} = \bar{y} - w\bar{x}
-\]
+$$
 と表せることを証明せよ。
 
-\hfill \hyperref[a:2-2-2]{\footnotesize [解答・解説へ]}
-\end{questionbox}
 
-\begin{questionbox}[label=q:2-2-3]{学習済みパラメータによる新規データの予測 \hfill \normalfont \small 難易度：★0}
+::: {.right}
+[（解答・解説へ）](#a:2-2-2)
+:::
+
+
+
+### 学習済みパラメータによる新規データの予測 {#q:2-2-3 .questionbox level="★0"}
 あるデータセットに対して最小二乗法を適用したところ、学習済みパラメータが $\hat{w} = 2.5, \hat{b} = 1.0$ と求まった。このとき、新規に観測された特徴量 $x_{\text{new}} = 6$ に対する予測値 $\hat{y}_{\text{new}}$ を計算せよ。
 
-\hfill \hyperref[a:2-2-3]{\footnotesize [解答・解説へ]}
-\end{questionbox}
 
-### 2-2. の解答・解説
+::: {.right}
+[（解答・解説へ）](#a:2-2-3)
+:::
+
+
+### 解答・解説
 **【該当内容】** 第2回スライド38〜45「一階の条件、偏微分・勾配」
 **【ねらい】** スライドで省略されている目的関数 $L(w,b)$ の偏微分から勾配ベクトルの構築、一階の条件による正規方程式のスカラ版の導出を完全に追体験する。
 
-\begin{answerbox}[label=a:2-2-1]{q:2-2-1}
-\begin{enumerate}
-  \item 合成関数の微分（チェインルール）を用いる。カッコの中身を $w$ で微分した $-x_i$ が外に出る。
-        \[
+
+### 問2-2-1 の解答・解説 {#a:2-2-1 .answerbox ref="q:2-2-1"}
+1. 合成関数の微分（チェインルール）を用いる。カッコの中身を $w$ で微分した $-x_i$ が外に出る。
+        $$
         \frac{\partial L}{\partial w} = \frac{1}{n} \sum_{i=1}^n 2(y_i - wx_i - b) \cdot (-x_i) = -\frac{2}{n} \sum_{i=1}^n (y_i - wx_i - b)x_i
-        \]
-  \item 同様に、中身を $b$ で微分した $-1$ が外に出る。
-        \[
+        $$
+2. 同様に、中身を $b$ で微分した $-1$ が外に出る。
+        $$
         \frac{\partial L}{\partial b} = \frac{1}{n} \sum_{i=1}^n 2(y_i - wx_i - b) \cdot (-1) = -\frac{2}{n} \sum_{i=1}^n (y_i - wx_i - b)
-        \]
-  \item 勾配ベクトルは偏微分を縦に並べたものである。
-        \[
+        $$
+3. 勾配ベクトルは偏微分を縦に並べたものである。
+        $$
         \nabla L(w,b) = \begin{pmatrix} \frac{\partial L}{\partial w} \\ \frac{\partial L}{\partial b} \end{pmatrix} = \begin{pmatrix} -\frac{2}{n} \sum_{i=1}^n (y_i - wx_i - b)x_i \\ -\frac{2}{n} \sum_{i=1}^n (y_i - wx_i - b) \end{pmatrix}
-        \]
-\end{enumerate}
+        $$
 
-\hfill \hyperref[q:2-2-1]{\footnotesize [問題へ戻る]}
-\end{answerbox}
 
-\begin{answerbox}[label=a:2-2-2]{q:2-2-2}
+
+::: {.right}
+[（問題へ戻る）](#q:2-2-1)
+:::
+
+
+
+### 問2-2-2 の解答・解説 {#a:2-2-2 .answerbox ref="q:2-2-2"}
 一階の条件 $\frac{\partial L}{\partial b} = 0$ より、
-\[
+$$
 -\frac{2}{n} \sum_{i=1}^n (y_i - wx_i - b) = 0
-\]
+$$
 両辺を $-\frac{2}{n}$ で割り、和を分割する。
-\[
+$$
 \sum_{i=1}^n y_i - w \sum_{i=1}^n x_i - \sum_{i=1}^n b = 0
-\]
+$$
 定数 $b$ を $n$ 回足すと $nb$ になるので、
-\[
+$$
 \sum_{i=1}^n y_i - w \sum_{i=1}^n x_i - nb = 0
-\]
+$$
 両辺を $n$ で割ると、
-\[
+$$
 \frac{1}{n}\sum_{i=1}^n y_i - w \left( \frac{1}{n}\sum_{i=1}^n x_i \right) - b = 0
-\]
+$$
 平均値の定義 $\bar{x}, \bar{y}$ を代入すると、
-\[
+$$
 \bar{y} - w\bar{x} - b = 0 \quad \Rightarrow \quad \hat{b} = \bar{y} - w\bar{x}
-\]
+$$
 が導かれる。（証明終）
 
-\hfill \hyperref[q:2-2-2]{\footnotesize [問題へ戻る]}
-\end{answerbox}
 
-\begin{answerbox}[label=a:2-2-3]{q:2-2-3}
+::: {.right}
+[（問題へ戻る）](#q:2-2-2)
+:::
+
+
+
+### 問2-2-3 の解答・解説 {#a:2-2-3 .answerbox ref="q:2-2-3"}
 学習済みモデル $f(x) = \hat{w}x + \hat{b}$ に数値を代入する。
-\[
+$$
 \hat{y}_{\text{new}} = 2.5 \times 6 + 1.0 = 15.0 + 1.0 = 16.0
-\]
+$$
 
-\hfill \hyperref[q:2-2-3]{\footnotesize [問題へ戻る]}
-\end{answerbox}
+
+::: {.right}
+[（問題へ戻る）](#q:2-2-3)
+:::
+
 
 ---
 
-# 【第3回】線型モデルの行列表現と正則化・モデル選択
+# 線型モデルの行列表現と正則化・モデル選択
 
-## 3-1. ベクトルの内積と性質
+## ベクトルの内積と性質
 
-\begin{questionbox}[label=q:3-1-1]{内積の計算と幾何的解釈 \hfill \normalfont \small 難易度：★0}
+
+
+### 【復習とヒント】ベクトルの内積と射影 {.tcolorbox option="enhanced, colback=blue!2!white, colframe=blue!60!black, fonttitle=\bfseries, drop shadow"}
+内積 $\mathbf{a}^\top \mathbf{b}$ は、一方のベクトルを他方に「射影」したときの長さと、元のベクトルの長さの積として幾何学的に解釈できます。
+
+\begin{center}
+\begin{tikzpicture}[>=stealth, thick, scale=1.2]
+  % ベクトルb
+  \draw[->, blue!80!black, line width=1.2pt] (0,0) -- (4,0) node[below] {$\mathbf{b}$};
+  % ベクトルa
+  \draw[->, red!80!black, line width=1.2pt] (0,0) -- (2.5,2) node[above left] {$\mathbf{a}$};
+  % 垂線
+  \draw[dashed, gray] (2.5,2) -- (2.5,0);
+  % 直角マーク
+  \draw (2.3,0) -- (2.3,0.2) -- (2.5,0.2);
+  % 角度
+  \draw (0.6,0) arc (0:38.66:0.6);
+  \node at (0.8, 0.3) {$\theta$};
+  % 射影ベクトル
+  \draw[->, orange, line width=1.5pt] (0,-0.05) -- (2.5,-0.05) node[midway, below] {$\mathbf{a}$ の $\mathbf{b}$ への射影};
+\end{tikzpicture}
+\end{center}
+
+* \textbf{幾何学的定義}: $\mathbf{a}^\top \mathbf{b} = \|\mathbf{a}\| \|\mathbf{b}\| \cos \theta$
+* \textbf{直交性}: 内積が $0$ ならば、$\cos \theta = 0$ となり、2つのベクトルは直交する（$\theta = 90^\circ$）。
+
+
+
+### 内積の計算と幾何的解釈 {#q:3-1-1 .questionbox level="★0"}
 2つのベクトル $\mathbf{a} = (2, 3)^\top$, $\mathbf{b} = (-6, 4)^\top$ がある。
-\begin{enumerate}
-  \item 内積 $\mathbf{a}^\top \mathbf{b}$ を計算せよ。
-  \item この2つのベクトルの幾何学的な位置関係（同じ方向、逆方向、直交のいずれか）を特定せよ。
-\end{enumerate}
 
-\hfill \hyperref[a:3-1-1]{\footnotesize [解答・解説へ]}
-\end{questionbox}
+1. 内積 $\mathbf{a}^\top \mathbf{b}$ を計算せよ。
+2. この2つのベクトルの幾何学的な位置関係（同じ方向、逆方向、直交のいずれか）を特定せよ。
 
-\begin{questionbox}[label=q:3-1-2]{射影成分の計算 \hfill \normalfont \small 難易度：★1}
+
+
+::: {.right}
+[（解答・解説へ）](#a:3-1-1)
+:::
+
+
+
+### 射影成分の計算 {#q:3-1-2 .questionbox level="★1"}
 大きさ（ノルム）が $1$ である方向ベクトル $\mathbf{u} = (1, 0)^\top$ がある。任意のベクトル $\mathbf{x} = (5, -3)^\top$ を $\mathbf{u}$ 方向の成分に射影したときの係数（射影の長さ）を内積を用いて計算せよ。
 
-\hfill \hyperref[a:3-1-2]{\footnotesize [解答・解説へ]}
-\end{questionbox}
 
-\begin{questionbox}[label=q:3-1-3]{内積の線形性と対称性の証明 \hfill \normalfont \small 難易度：★1}
+::: {.right}
+[（解答・解説へ）](#a:3-1-2)
+:::
+
+
+
+### 内積の線形性と対称性の証明 {#q:3-1-3 .questionbox level="★1"}
 任意の次元のベクトル $\mathbf{x}, \mathbf{y}$ およびスカラー $c$ について、
 \begin{align*}
 \mathbf{x}^\top \mathbf{y} &= \mathbf{y}^\top \mathbf{x} \quad \text{（対称性）} \\
@@ -373,451 +606,570 @@ L(w,b) = \frac{1}{n} \sum_{i=1}^n (y_i - (wx_i + b))^2
 \end{align*}
 が成り立つことを、各成分を明示して確かめよ。
 
-\hfill \hyperref[a:3-1-3]{\footnotesize [解答・解説へ]}
-\end{questionbox}
 
-### 3-1. の解答・解説
+::: {.right}
+[（解答・解説へ）](#a:3-1-3)
+:::
+
+
+### 解答・解説
 **【該当内容】** 第3回スライド22〜26「線型モデルの幾何学的解釈、内積の性質」
 **【ねらい】** 機械学習における予測の基本演算である「内積」について、重み付き和、幾何的な向きの検出、射影という3つの側面を手計算を通じて習得する。
 
-\begin{answerbox}[label=a:3-1-1]{q:3-1-1}
-\begin{enumerate}
-  \item \[\mathbf{a}^\top \mathbf{b} = 2 \times (-6) + 3 \times 4 = -12 + 12 = 0\]
-  \item 内積が $0$ であるため、2つのベクトルは\textbf{直交している}。
-\end{enumerate}
 
-\hfill \hyperref[q:3-1-1]{\footnotesize [問題へ戻る]}
-\end{answerbox}
+### 問3-1-1 の解答・解説 {#a:3-1-1 .answerbox ref="q:3-1-1"}
+1. $$\mathbf{a}^\top \mathbf{b} = 2 \times (-6) + 3 \times 4 = -12 + 12 = 0$$
+2. 内積が $0$ であるため、2つのベクトルは\textbf{直交している}。
 
-\begin{answerbox}[label=a:3-1-2]{q:3-1-2}
+
+
+::: {.right}
+[（問題へ戻る）](#q:3-1-1)
+:::
+
+
+
+### 問3-1-2 の解答・解説 {#a:3-1-2 .answerbox ref="q:3-1-2"}
 求める射影の長さは内積 $\mathbf{x}^\top \mathbf{u}$ で与えられる。
-\[
+$$
 \mathbf{x}^\top \mathbf{u} = 5 \times 1 + (-3) \times 0 = 5
-\]
+$$
 よって $\mathbf{u}$ 方向への射影の長さは $5$ である。
 
-\hfill \hyperref[q:3-1-2]{\footnotesize [問題へ戻る]}
-\end{answerbox}
 
-\begin{answerbox}[label=a:3-1-3]{q:3-1-3}
+::: {.right}
+[（問題へ戻る）](#q:3-1-2)
+:::
+
+
+
+### 問3-1-3 の解答・解説 {#a:3-1-3 .answerbox ref="q:3-1-3"}
 $\mathbf{x} = (x_1, \dots, x_d)^\top$, $\mathbf{y} = (y_1, \dots, y_d)^\top$ とおく。
-\begin{enumerate}
-  \item 内積の定義より $\mathbf{x}^\top \mathbf{y} = \sum_{i=1}^d x_i y_i$ である。
-        実数の積は可換（$x_i y_i = y_i x_i$）なので、
-        \[
-        \mathbf{x}^\top \mathbf{y} = \sum_{i=1}^d y_i x_i = \mathbf{y}^\top \mathbf{x}
-        \]
-        となり、対称性が成立する。
-  \item ベクトルのスカラー倍の定義より $c\mathbf{x} = (cx_1, \dots, cx_d)^\top$ である。
-        \[
-        (c\mathbf{x})^\top \mathbf{y} = \sum_{i=1}^d (cx_i)y_i = c \sum_{i=1}^d x_i y_i = c(\mathbf{x}^\top \mathbf{y})
-        \]
-        となり、線形性（スカラー倍の同伴性）が成立する。（証明終）
-\end{enumerate}
 
-\hfill \hyperref[q:3-1-3]{\footnotesize [問題へ戻る]}
-\end{answerbox}
+1. 内積の定義より $\mathbf{x}^\top \mathbf{y} = \sum_{i=1}^d x_i y_i$ である。
+        実数の積は可換（$x_i y_i = y_i x_i$）なので、
+        $$
+        \mathbf{x}^\top \mathbf{y} = \sum_{i=1}^d y_i x_i = \mathbf{y}^\top \mathbf{x}
+        $$
+        となり、対称性が成立する。
+2. ベクトルのスカラー倍の定義より $c\mathbf{x} = (cx_1, \dots, cx_d)^\top$ である。
+        $$
+        (c\mathbf{x})^\top \mathbf{y} = \sum_{i=1}^d (cx_i)y_i = c \sum_{i=1}^d x_i y_i = c(\mathbf{x}^\top \mathbf{y})
+        $$
+        となり、線形性（スカラー倍の同伴性）が成立する。（証明終）
+
+
+
+::: {.right}
+[（問題へ戻る）](#q:3-1-3)
+:::
+
 
 ---
 
-## 3-2. パラメータ線型モデルの表現（特徴写像）
+## パラメータ線型モデルの表現（特徴写像）
 
-\begin{questionbox}[label=q:3-2-1]{多項式特徴写像による線型表現 \hfill \normalfont \small 難易度：★1}
+
+### 多項式特徴写像による線型表現 {#q:3-2-1 .questionbox level="★1"}
 1次元の入力 $x$ に対し、特徴写像を $\boldsymbol{\phi}(x) = (1, x, x^2)^\top$ と定義する。
 パラメータベクトルを $\boldsymbol{\theta} = (\theta_0, \theta_1, \theta_2)^\top$ とする。
-\begin{enumerate}
-  \item 内積によるモデル表現 $f(x) = \boldsymbol{\theta}^\top \boldsymbol{\phi}(x)$ を書き下せ。
-  \item このモデルは、パラメータ $\boldsymbol{\theta}$ に着目すると何次式か。また、入力 $x$ に着目すると何次式か答えよ。
-\end{enumerate}
 
-\hfill \hyperref[a:3-2-1]{\footnotesize [解答・解説へ]}
-\end{questionbox}
+1. 内積によるモデル表現 $f(x) = \boldsymbol{\theta}^\top \boldsymbol{\phi}(x)$ を書き下せ。
+2. このモデルは、パラメータ $\boldsymbol{\theta}$ に着目すると何次式か。また、入力 $x$ に着目すると何次式か答えよ。
 
-\begin{questionbox}[label=q:3-2-2]{テキストデータへの適用（Bag-of-Words） \hfill \normalfont \small 難易度：★0}
+
+
+::: {.right}
+[（解答・解説へ）](#a:3-2-1)
+:::
+
+
+
+### テキストデータへの適用（Bag-of-Words） {#q:3-2-2 .questionbox level="★0"}
 語彙として「AI」「経営」「データ」の3語のみを考える。ある文書から抽出した頻度ベクトル（特徴写像）が $\boldsymbol{\phi} = (2, 0, 3)^\top$ であり、モデルの重みパラメータが $\boldsymbol{\theta} = (5, -2, 4)^\top$ のとき、この文書に対するスコア（内積）を計算せよ。
 
-\hfill \hyperref[a:3-2-2]{\footnotesize [解答・解説へ]}
-\end{questionbox}
 
-### 3-2. の解答・解説
+::: {.right}
+[（解答・解説へ）](#a:3-2-2)
+:::
+
+
+### 解答・解説
 **【該当内容】** 第3回スライド27〜37「一般の線型モデル、特徴写像」
 **【ねらい】** 「パラメータには線型（1次式）だが、入力データに対しては非線型」という機械学習モデルの柔軟性を、多項式写像やBag-of-Wordsなどの具体例を通じて体感する。
 
-\begin{answerbox}[label=a:3-2-1]{q:3-2-1}
-\begin{enumerate}
-  \item \[f(x) = \theta_0 \cdot 1 + \theta_1 \cdot x + \theta_2 \cdot x^2 = \theta_0 + \theta_1 x + \theta_2 x^2\]
-  \item パラメータ $\boldsymbol{\theta}$ に対しては\textbf{1次式（線型）}、入力 $x$ に対しては\textbf{2次式（非線型）}である。
-\end{enumerate}
 
-\hfill \hyperref[q:3-2-1]{\footnotesize [問題へ戻る]}
-\end{answerbox}
+### 問3-2-1 の解答・解説 {#a:3-2-1 .answerbox ref="q:3-2-1"}
+1. $$f(x) = \theta_0 \cdot 1 + \theta_1 \cdot x + \theta_2 \cdot x^2 = \theta_0 + \theta_1 x + \theta_2 x^2$$
+2. パラメータ $\boldsymbol{\theta}$ に対しては\textbf{1次式（線型）}、入力 $x$ に対しては\textbf{2次式（非線型）}である。
 
-\begin{answerbox}[label=a:3-2-2]{q:3-2-2}
+
+
+::: {.right}
+[（問題へ戻る）](#q:3-2-1)
+:::
+
+
+
+### 問3-2-2 の解答・解説 {#a:3-2-2 .answerbox ref="q:3-2-2"}
 スコアは内積 $\boldsymbol{\theta}^\top \boldsymbol{\phi}$ で計算される。
-\[
+$$
 \boldsymbol{\theta}^\top \boldsymbol{\phi} = 5 \times 2 + (-2) \times 0 + 4 \times 3 = 10 + 0 + 12 = 22
-\]
+$$
 
-\hfill \hyperref[q:3-2-2]{\footnotesize [問題へ戻る]}
-\end{answerbox}
+
+::: {.right}
+[（問題へ戻る）](#q:3-2-2)
+:::
+
 
 ---
 
-## 3-3. 最小二乗法の行列表記と一階の条件（最重要）
+## 最小二乗法の行列表記と一階の条件（最重要）
 
-\begin{questionbox}[label=q:3-3-1]{行列とベクトルによる目的関数の書き直し \hfill \normalfont \small 難易度：★1}
+
+### 行列とベクトルによる目的関数の書き直し {#q:3-3-1 .questionbox level="★1"}
 $n=2$ 個のデータがあり、それぞれの特徴ベクトルと正解ラベルが、
-\[
+$$
 \boldsymbol{\phi}(x_1) = \begin{pmatrix} 1 \\ 2 \end{pmatrix}, y_1 = 4, \quad \boldsymbol{\phi}(x_2) = \begin{pmatrix} 1 \\ 5 \end{pmatrix}, y_2 = 7
-\]
+$$
 である。デザイン行列 $\Phi = \begin{pmatrix} \boldsymbol{\phi}(x_1)^\top \\ \boldsymbol{\phi}(x_2)^\top \end{pmatrix}$ およびラベルベクトル $\mathbf{y} = (y_1, y_2)^\top$ を具体的に数字で書き下し、目的関数
-\[
+$$
 L(\boldsymbol{\theta}) = \frac{1}{2} \|\Phi\boldsymbol{\theta} - \mathbf{y}\|^2
-\]
+$$
 が個別の二乗誤差の和 $\frac{1}{2}\sum_{i=1}^2 (y_i - \boldsymbol{\theta}^\top \boldsymbol{\phi}(x_i))^2$ と完全に等しいことを展開して確かめよ。
 
-\hfill \hyperref[a:3-3-1]{\footnotesize [解答・解説へ]}
-\end{questionbox}
 
-\begin{questionbox}[label=q:3-3-2]{一階の条件の行列導出 \hfill \normalfont \small 難易度：★2}
+::: {.right}
+[（解答・解説へ）](#a:3-3-1)
+:::
+
+
+
+
+### 【復習とヒント】行列・ベクトルの転置と微分公式 {.tcolorbox option="enhanced, colback=blue!2!white, colframe=blue!60!black, fonttitle=\bfseries, drop shadow"}
+* \textbf{転置の積の法則}: $(\mathbf{A}\mathbf{B})^\top = \mathbf{B}^\top \mathbf{A}^\top$
+* \textbf{スカラーの転置}: 内積はスカラー（$1 \times 1$行列）なので、転置しても値は変わらない。 \\
+          $(\mathbf{x}^\top \mathbf{y})^\top = \mathbf{y}^\top \mathbf{x} = \mathbf{x}^\top \mathbf{y}$
+* \textbf{L2ノルムの2乗}: $\|\mathbf{x}\|^2 = \mathbf{x}^\top \mathbf{x}$
+* \textbf{線形項の勾配}: $\nabla_{\mathbf{x}} (\mathbf{a}^\top \mathbf{x}) = \nabla_{\mathbf{x}} (\mathbf{x}^\top \mathbf{a}) = \mathbf{a}$
+* \textbf{2次形式の勾配}: $\nabla_{\mathbf{x}} (\mathbf{x}^\top \mathbf{A} \mathbf{x}) = 2\mathbf{A}\mathbf{x}$ \quad （$\mathbf{A}$ が対称行列のとき）
+
+
+
+### 一階の条件の行列導出 {#q:3-3-2 .questionbox level="★2"}
 行列微分の公式
 \begin{align*}
 \nabla_{\boldsymbol{\theta}} (\mathbf{a}^\top \boldsymbol{\theta}) &= \mathbf{a} \\
 \nabla_{\boldsymbol{\theta}} (\boldsymbol{\theta}^\top \mathbf{A} \boldsymbol{\theta}) &= 2\mathbf{A}\boldsymbol{\theta} \quad \text{（$\mathbf{A}$は対称行列）}
 \end{align*}
 を用いて、目的関数 $L(\boldsymbol{\theta}) = \frac{1}{2}(\Phi\boldsymbol{\theta} - \mathbf{y})^\top (\Phi\boldsymbol{\theta} - \mathbf{y})$ の勾配 $\nabla_{\boldsymbol{\theta}} L(\boldsymbol{\theta})$ を求め、一階の条件 $\nabla_{\boldsymbol{\theta}} L(\boldsymbol{\theta}) = \mathbf{0}$ から正規方程式
-\[
+$$
 \Phi^\top \Phi \boldsymbol{\theta} = \Phi^\top \mathbf{y}
-\]
+$$
 を導出せよ。
 
-\hfill \hyperref[a:3-3-2]{\footnotesize [解答・解説へ]}
-\end{questionbox}
 
-### 3-3. の解答・解説
+::: {.right}
+[（解答・解説へ）](#a:3-3-2)
+:::
+
+
+### 解答・解説
 **【該当内容】** 第3回スライド38〜44「線型モデルの最小二乗法、行列による表記」
 **【ねらい】** データの羅列をデザイン行列 $\Phi$ とラベルベクトル $\mathbf{y}$ にまとめ、目的関数をベクトルのノルムとしてスッキリ表現するテクニックと、その微分プロセスを完全にマスターする。
 
-\begin{answerbox}[label=a:3-3-1]{q:3-3-1}
+
+### 問3-3-1 の解答・解説 {#a:3-3-1 .answerbox ref="q:3-3-1"}
 デザイン行列 $\Phi$ とラベルベクトル $\mathbf{y}$ は以下のようになる。
-\[
+$$
 \Phi = \begin{pmatrix} 1 & 2 \\ 1 & 5 \end{pmatrix}, \quad \mathbf{y} = \begin{pmatrix} 4 \\ 7 \end{pmatrix}
-\]
+$$
 パラメータを $\boldsymbol{\theta} = (\theta_0, \theta_1)^\top$ とすると、
-\[
+$$
 \Phi\boldsymbol{\theta} - \mathbf{y} = \begin{pmatrix} 1 & 2 \\ 1 & 5 \end{pmatrix} \begin{pmatrix} \theta_0 \\ \theta_1 \end{pmatrix} - \begin{pmatrix} 4 \\ 7 \end{pmatrix} = \begin{pmatrix} \theta_0 + 2\theta_1 - 4 \\ \theta_0 + 5\theta_1 - 7 \end{pmatrix}
-\]
+$$
 ベクトルのL2ノルムの2乗は各成分の2乗和なので、
-\[
+$$
 \frac{1}{2}\|\Phi\boldsymbol{\theta} - \mathbf{y}\|^2 = \frac{1}{2} \left[ (\theta_0 + 2\theta_1 - 4)^2 + (\theta_0 + 5\theta_1 - 7)^2 \right]
-\]
+$$
 これは各データの誤差二乗和 $\frac{1}{2} \sum_{i=1}^2 (\boldsymbol{\theta}^\top \boldsymbol{\phi}(x_i) - y_i)^2$ と完全に一致する。（証明終）
 
-\hfill \hyperref[q:3-3-1]{\footnotesize [問題へ戻る]}
-\end{answerbox}
 
-\begin{answerbox}[label=a:3-3-2]{q:3-3-2}
+::: {.right}
+[（問題へ戻る）](#q:3-3-1)
+:::
+
+
+
+### 問3-3-2 の解答・解説 {#a:3-3-2 .answerbox ref="q:3-3-2"}
 目的関数 $L(\boldsymbol{\theta})$ を展開する。内積はスカラーであり転置しても値が変わらないため、$\mathbf{y}^\top \Phi \boldsymbol{\theta} = (\mathbf{y}^\top \Phi \boldsymbol{\theta})^\top = \boldsymbol{\theta}^\top \Phi^\top \mathbf{y}$ が成り立ち、中央の項がまとめられる。
-\[
+$$
 L(\boldsymbol{\theta}) = \frac{1}{2} \left[ \boldsymbol{\theta}^\top \Phi^\top \Phi \boldsymbol{\theta} - 2 (\Phi^\top \mathbf{y})^\top \boldsymbol{\theta} + \mathbf{y}^\top \mathbf{y} \right]
-\]
+$$
 ここで、$\mathbf{A} = \Phi^\top \Phi$ とおくと、これは対称行列である。行列微分の公式を適用して $\boldsymbol{\theta}$ で勾配を計算する。
-\[
+$$
 \nabla_{\boldsymbol{\theta}} L(\boldsymbol{\theta}) = \frac{1}{2} \left[ 2 \Phi^\top \Phi \boldsymbol{\theta} - 2 \Phi^\top \mathbf{y} \right] = \Phi^\top \Phi \boldsymbol{\theta} - \Phi^\top \mathbf{y}
-\]
+$$
 一階の条件 $\nabla_{\boldsymbol{\theta}} L(\boldsymbol{\theta}) = \mathbf{0}$ より、
-\[
+$$
 \Phi^\top \Phi \boldsymbol{\theta} - \Phi^\top \mathbf{y} = \mathbf{0} \quad \Rightarrow \quad \Phi^\top \Phi \boldsymbol{\theta} = \Phi^\top \mathbf{y}
-\]
+$$
 が導出された。（証明終）
 
-\hfill \hyperref[q:3-3-2]{\footnotesize [問題へ戻る]}
-\end{answerbox}
+
+::: {.right}
+[（問題へ戻る）](#q:3-3-2)
+:::
+
 
 ---
 
-## 3-4. 正則化（Regularization）
+## 正則化（Regularization）
 
-\begin{questionbox}[label=q:3-4-1]{L2ノルムの性質 \hfill \normalfont \small 難易度：★0}
+
+### L2ノルムの性質 {#q:3-4-1 .questionbox level="★0"}
 ベクトル $\mathbf{w} = (3, -4)^\top$ のL2ノルム $\|\mathbf{w}\|$ を計算し、それが自身との内積の平方根 $\sqrt{\mathbf{w}^\top \mathbf{w}}$ と等しいことを示せ。
 
-\hfill \hyperref[a:3-4-1]{\footnotesize [解答・解説へ]}
-\end{questionbox}
 
-\begin{questionbox}[label=q:3-4-2]{L2正則化付き目的関数の書き下し \hfill \normalfont \small 難易度：★1}
+::: {.right}
+[（解答・解説へ）](#a:3-4-1)
+:::
+
+
+
+### L2正則化付き目的関数の書き下し {#q:3-4-2 .questionbox level="★1"}
 損失関数を二乗誤差、正則化項をL2ノルムの2乗とし、正則化係数を $\lambda = 0.01$ とする。 $n$ 個のデータに対するL2正則化付き経験リスク最小化の目的関数 $L_{\text{reg}}(\boldsymbol{\theta})$ の式をシグマ表記で書き下せ。
 
-\hfill \hyperref[a:3-4-2]{\footnotesize [解答・解説へ]}
-\end{questionbox}
 
-\begin{questionbox}[label=q:3-4-3]{行列による書き直しと一階の条件 \hfill \normalfont \small 難易度：★2}
+::: {.right}
+[（解答・解説へ）](#a:3-4-2)
+:::
+
+
+
+### 行列による書き直しと一階の条件 {#q:3-4-3 .questionbox level="★2"}
 目的関数を $L_{\text{reg}}(\boldsymbol{\theta}) = \frac{1}{2}\|\Phi\boldsymbol{\theta} - \mathbf{y}\|^2 + \frac{\lambda}{2}\|\boldsymbol{\theta}\|^2$ とする。全体の勾配を $\mathbf{0}$ と置く一階の条件から、最適解
-\[
+$$
 \hat{\boldsymbol{\theta}} = (\Phi^\top \Phi + \lambda \mathbf{I})^{-1}\Phi^\top \mathbf{y}
-\]
+$$
 を導出せよ。なぜ単位行列 $\mathbf{I}$ が必要なのか説明せよ（ただし逆行列は存在すると仮定する）。
 
-\hfill \hyperref[a:3-4-3]{\footnotesize [解答・解説へ]}
-\end{questionbox}
 
-### 3-4. の解答・解説
+::: {.right}
+[（解答・解説へ）](#a:3-4-3)
+:::
+
+
+### 解答・解説
 **【該当内容】** 第3回スライド45〜50「過適合の対策＞正則化、L2正則化」
 **【ねらい】** 過学習を防ぐL2正則化（Ridge）の目的関数について、代数表現と行列表現の一致を確かめ、単位行列 $I$ が出現する理由を数式変形で完全に理解する。
 
-\begin{answerbox}[label=a:3-4-1]{q:3-4-1}
+
+### 問3-4-1 の解答・解説 {#a:3-4-1 .answerbox ref="q:3-4-1"}
 L2ノルムの計算：
-\[
+$$
 \|\mathbf{w}\| = \sqrt{3^2 + (-4)^2} = \sqrt{9 + 16} = \sqrt{25} = 5
-\]
+$$
 内積の平方根の計算：
-\[
+$$
 \mathbf{w}^\top \mathbf{w} = 3 \times 3 + (-4) \times (-4) = 9 + 16 = 25 \quad \Rightarrow \quad \sqrt{\mathbf{w}^\top \mathbf{w}} = 5
-\]
+$$
 よって $\|\mathbf{w}\| = \sqrt{\mathbf{w}^\top \mathbf{w}} = 5$ となり、一致する。
 
-\hfill \hyperref[q:3-4-1]{\footnotesize [問題へ戻る]}
-\end{answerbox}
 
-\begin{answerbox}[label=a:3-4-2]{q:3-4-2}
+::: {.right}
+[（問題へ戻る）](#q:3-4-1)
+:::
+
+
+
+### 問3-4-2 の解答・解説 {#a:3-4-2 .answerbox ref="q:3-4-2"}
 経験誤差の平均と、パラメータのL2ノルム平方に正則化係数を掛けたものを合算する。
-\[
+$$
 L_{\text{reg}}(\boldsymbol{\theta}) = \frac{1}{n} \sum_{i=1}^n (y_i - \boldsymbol{\theta}^\top \boldsymbol{\phi}(x_i))^2 + 0.01 \|\boldsymbol{\theta}\|^2
-\]
+$$
 
-\hfill \hyperref[q:3-4-2]{\footnotesize [問題へ戻る]}
-\end{answerbox}
 
-\begin{answerbox}[label=a:3-4-3]{q:3-4-3}
+::: {.right}
+[（問題へ戻る）](#q:3-4-2)
+:::
+
+
+
+### 問3-4-3 の解答・解説 {#a:3-4-3 .answerbox ref="q:3-4-3"}
 $\|\boldsymbol{\theta}\|^2 = \boldsymbol{\theta}^\top \boldsymbol{\theta}$ より、第2項の勾配は $\nabla_{\boldsymbol{\theta}} \left( \frac{\lambda}{2} \boldsymbol{\theta}^\top \boldsymbol{\theta} \right) = \lambda \boldsymbol{\theta}$ である。
 これと二乗誤差項の勾配を合わせ、全体の勾配を一階の条件に従って $\mathbf{0}$ と置く。
-\[
+$$
 \nabla_{\boldsymbol{\theta}} L_{\text{reg}} = \Phi^\top \Phi \boldsymbol{\theta} - \Phi^\top \mathbf{y} + \lambda \boldsymbol{\theta} = \mathbf{0}
-\]
+$$
 ここで $\boldsymbol{\theta}$ でまとめる際、行列 $\Phi^\top \Phi$ とスカラー $\lambda$ は直接足し算できない。そのため、$\lambda \boldsymbol{\theta} = \lambda \mathbf{I} \boldsymbol{\theta}$（$\mathbf{I}$は単位行列）と変形する。
-\[
+$$
 (\Phi^\top \Phi + \lambda \mathbf{I})\boldsymbol{\theta} = \Phi^\top \mathbf{y}
-\]
+$$
 両辺に左から逆行列を掛けることで、最適解が得られる。
-\[
+$$
 \hat{\boldsymbol{\theta}} = (\Phi^\top \Phi + \lambda \mathbf{I})^{-1}\Phi^\top \mathbf{y}
-\]
+$$
 \textbf{【単位行列 $\mathbf{I}$ の必要性】}
 行列（サイズ $d \times d$）とスカラー（単なる数値）は代数的に直接加算できないため、同じサイズで対角線上にスカラーを配置する単位行列 $\mathbf{I}$ を仲介させることで、正則化項を行列演算に統合している。
 
-\hfill \hyperref[q:3-4-3]{\footnotesize [問題へ戻る]}
-\end{answerbox}
+
+::: {.right}
+[（問題へ戻る）](#q:3-4-3)
+:::
+
 
 ---
 
-## 3-5. モデル選択（交差検証）
+## モデル選択（交差検証）
 
-\begin{questionbox}[label=q:3-5-1]{K-foldとLOOCVのインデックス計算 \hfill \normalfont \small 難易度：★0}
-\begin{enumerate}
-  \item $n=6$ 個のデータを $K=3$ 個のフォルダ
-        \[
+
+### K-foldとLOOCVのインデックス計算 {#q:3-5-1 .questionbox level="★0"}
+1. $n=6$ 個のデータを $K=3$ 個のフォルダ
+        $$
         D_1 = \{1, 2\}, \quad D_2 = \{3, 4\}, \quad D_3 = \{5, 6\}
-        \]
+        $$
         に分割する。第2イテレーション（$D_2$ が検証用）において、訓練に使用されるデータのインデックスをすべて答えよ。
-  \item サンプルサイズが $n=100$ のデータにLOOCV（一箇抜き交差検証）を行う場合、モデルの学習は合計で何回実行されるか。
-\end{enumerate}
+2. サンプルサイズが $n=100$ のデータにLOOCV（一箇抜き交差検証）を行う場合、モデルの学習は合計で何回実行されるか。
 
-\hfill \hyperref[a:3-5-1]{\footnotesize [解答・解説へ]}
-\end{questionbox}
 
-### 3-5. の解答・解説
+
+::: {.right}
+[（解答・解説へ）](#a:3-5-1)
+:::
+
+
+### 解答・解説
 **【該当内容】** 第3回スライド51〜70「モデル選択、交差検証」
 **【ねらい】** ハイパーパラメータ選択の手続きを、インデックス操作を通じて厳密に理解する。
 
-\begin{answerbox}[label=a:3-5-1]{q:3-5-1}
-\begin{enumerate}
-  \item 全体のデータ $\{1,2,3,4,5,6\}$ から検証用の $D_2 = \{3,4\}$ を除外した、\textbf{$\{1, 2, 5, 6\}$} が訓練用データとなる。
-  \item LOOCVはデータから1点だけを検証用として抜き出し、残りの $n-1$ 点で訓練する作業をデータの個数分だけ繰り返す。したがって、実行回数は合計で\textbf{100回}である。
-\end{enumerate}
 
-\hfill \hyperref[q:3-5-1]{\footnotesize [問題へ戻る]}
-\end{answerbox}
+### 問3-5-1 の解答・解説 {#a:3-5-1 .answerbox ref="q:3-5-1"}
+1. 全体のデータ $\{1,2,3,4,5,6\}$ から検証用の $D_2 = \{3,4\}$ を除外した、\textbf{$\{1, 2, 5, 6\}$} が訓練用データとなる。
+2. LOOCVはデータから1点だけを検証用として抜き出し、残りの $n-1$ 点で訓練する作業をデータの個数分だけ繰り返す。したがって、実行回数は合計で\textbf{100回}である。
+
+
+
+::: {.right}
+[（問題へ戻る）](#q:3-5-1)
+:::
+
 
 ---
 
-# 【第4回】確率モデルと分位点回帰
+# 確率モデルと分位点回帰
 
-## 4-1. 同時分布・条件付き分布・条件付き期待値
+## 同時分布・条件付き分布・条件付き期待値
 
-\begin{questionbox}[label=q:4-1-1]{同時確率表からの条件付き分布と期待値 \hfill \normalfont \small 難易度：★1}
+
+### 同時確率表からの条件付き分布と期待値 {#q:4-1-1 .questionbox level="★1"}
 離散確率変数 $X \in \{0,1\}$ と $Y \in \{1,2,3\}$ の同時確率 $P(X, Y)$ について、 $X=0$ のとき、$Y=1, 2, 3$ となる確率はそれぞれ $0.1, 0.2, 0.1$ である。
-\begin{enumerate}
-  \item $X=0$ となる周辺確率（正規化定数） $P(X=0)$ を求めよ。
-  \item $X=0$ という条件のもとでの $Y$ の条件付き確率分布 $P(Y=y \mid X=0)$ を求めよ。
-  \item 上記の分布を用いて、条件付き期待値 $\mathbb{E}[Y \mid X=0]$ を計算せよ。
-\end{enumerate}
 
-\hfill \hyperref[a:4-1-1]{\footnotesize [解答・解説へ]}
-\end{questionbox}
+1. $X=0$ となる周辺確率（正規化定数） $P(X=0)$ を求めよ。
+2. $X=0$ という条件のもとでの $Y$ の条件付き確率分布 $P(Y=y \mid X=0)$ を求めよ。
+3. 上記の分布を用いて、条件付き期待値 $\mathbb{E}[Y \mid X=0]$ を計算せよ。
 
-### 4-1. の解答・解説
+
+
+::: {.right}
+[（解答・解説へ）](#a:4-1-1)
+:::
+
+
+### 解答・解説
 **【該当内容】** 第4回スライド5〜18「基本知識＞同時確率分布、条件付き確率」
 **【ねらい】** 条件付き確率・条件付き期待値を、クロス集計表の計算から完全に理解する。
 
-\begin{answerbox}[label=a:4-1-1]{q:4-1-1}
-\begin{enumerate}
-  \item 周辺確率は、与えられた $X=0$ における $Y$ のすべての確率の和である。
-        \[
+
+### 問4-1-1 の解答・解説 {#a:4-1-1 .answerbox ref="q:4-1-1"}
+1. 周辺確率は、与えられた $X=0$ における $Y$ のすべての確率の和である。
+        $$
         P(X=0) = P(X=0, Y=1) + P(X=0, Y=2) + P(X=0, Y=3) = 0.1 + 0.2 + 0.1 = 0.4
-        \]
-  \item 条件付き確率の定義 $P(Y=y \mid X=0) = \frac{P(X=0, Y=y)}{P(X=0)}$ より、
+        $$
+2. 条件付き確率の定義 $P(Y=y \mid X=0) = \frac{P(X=0, Y=y)}{P(X=0)}$ より、
         \begin{align*}
         P(Y=1 \mid X=0) &= \frac{0.1}{0.4} = 0.25 \\
         P(Y=2 \mid X=0) &= \frac{0.2}{0.4} = 0.50 \\
         P(Y=3 \mid X=0) &= \frac{0.1}{0.4} = 0.25
         \end{align*}
-  \item 条件付き期待値は、求めた条件付き確率を用いた期待値計算である。
+3. 条件付き期待値は、求めた条件付き確率を用いた期待値計算である。
         \begin{align*}
         \mathbb{E}[Y \mid X=0] &= 1 \times P(Y=1 \mid X=0) + 2 \times P(Y=2 \mid X=0) + 3 \times P(Y=3 \mid X=0) \\
         &= 1 \times 0.25 + 2 \times 0.50 + 3 \times 0.25 \\
         &= 0.25 + 1.0 + 0.75 = 2.0
         \end{align*}
-\end{enumerate}
 
-\hfill \hyperref[q:4-1-1]{\footnotesize [問題へ戻る]}
-\end{answerbox}
+
+
+::: {.right}
+[（問題へ戻る）](#q:4-1-1)
+:::
+
 
 ---
 
-## 4-2. 分位点（Quantile）と外れ値の影響
+## 分位点（Quantile）と外れ値の影響
 
-\begin{questionbox}[label=q:4-2-1]{飛びのある分布の分位点とロバスト性 \hfill \normalfont \small 難易度：★1}
-\begin{enumerate}
-  \item データセット $\{2, 3, 5, 7, 100\}$ の平均値と中央値を求めよ。
-  \item 外れ値の $100$ が $1000$ に化けたとする。このとき平均値と中央値はどう変化するか計算し、ピンボール損失（中央値の場合は絶対値損失）が外れ値に対して持つ優位性を説明せよ。
-\end{enumerate}
 
-\hfill \hyperref[a:4-2-1]{\footnotesize [解答・解説へ]}
-\end{questionbox}
+### 飛びのある分布の分位点とロバスト性 {#q:4-2-1 .questionbox level="★1"}
+1. データセット $\{2, 3, 5, 7, 100\}$ の平均値と中央値を求めよ。
+2. 外れ値の $100$ が $1000$ に化けたとする。このとき平均値と中央値はどう変化するか計算し、ピンボール損失（中央値の場合は絶対値損失）が外れ値に対して持つ優位性を説明せよ。
 
-\begin{questionbox}[label=q:4-2-2]{ピンボール損失のグラフ描写の理解 \hfill \normalfont \small 難易度：★1}
+
+
+::: {.right}
+[（解答・解説へ）](#a:4-2-1)
+:::
+
+
+
+### ピンボール損失のグラフ描写の理解 {#q:4-2-2 .questionbox level="★1"}
 ピンボール損失関数
-\[
+$$
 l_\alpha(y, y') = 
 \begin{cases}
 (\alpha - 1)(y - y') & (y - y' < 0) \\
 \alpha(y - y') & (y - y' \ge 0)
 \end{cases}
-\]
+$$
 において、$\alpha = 0.3$ とする。誤差 $e = y - y'$ が $e = -2$ のときと $e = 4$ のときの損失の値をそれぞれ計算し、グラフの形状を説明せよ。
 
-\hfill \hyperref[a:4-2-2]{\footnotesize [解答・解説へ]}
-\end{questionbox}
 
-### 4-2. の解答・解説
+::: {.right}
+[（解答・解説へ）](#a:4-2-2)
+:::
+
+
+### 解答・解説
 **【該当内容】** 第4回スライド19〜35「分位点回帰、ピンボール損失」
 **【ねらい】** 平均値が外れ値に引っ張られやすいのに対し、分位点（中央値など）が頑健（ロバスト）である理由を、実際のデータ操作を通じて数式ベースで理解する。
 
-\begin{answerbox}[label=a:4-2-1]{q:4-2-1}
-\begin{enumerate}
-  \item 平均値の計算：
-        \[
+
+### 問4-2-1 の解答・解説 {#a:4-2-1 .answerbox ref="q:4-2-1"}
+1. 平均値の計算：
+        $$
         \frac{2 + 3 + 5 + 7 + 100}{5} = \frac{117}{5} = 23.4
-        \]
+        $$
         中央値の計算：データを昇順に並べた中央の値なので、\textbf{5}。
-  \item 外れ値が $1000$ になった場合の計算：
-        \[
+2. 外れ値が $1000$ になった場合の計算：
+        $$
         \text{新平均値} = \frac{2 + 3 + 5 + 7 + 1000}{5} = \frac{1017}{5} = 203.4
-        \]
+        $$
         新中央値：順序関係は変わらないため、依然として\textbf{5}。
         
         \textbf{【絶対値損失の優位性】}
         二乗誤差に基づく「平均値」は外れ値の極端な大きさ（距離の2乗）に引っ張られるが、絶対値損失に基づく「中央値」は、各データ点が「自分より大きいか小さいか（符号のみ）」しか評価しないため、どれほど巨大な外れ値に対しても結果が変化せず極めて頑健（ロバスト）である。
-\end{enumerate}
 
-\hfill \hyperref[q:4-2-1]{\footnotesize [問題へ戻る]}
-\end{answerbox}
 
-\begin{answerbox}[label=a:4-2-2]{q:4-2-2}
+
+::: {.right}
+[（問題へ戻る）](#q:4-2-1)
+:::
+
+
+
+### 問4-2-2 の解答・解説 {#a:4-2-2 .answerbox ref="q:4-2-2"}
 誤差 $e = y - y'$ を用いてそれぞれの場合を計算する。
-\begin{enumerate}
-  \item $e = -2 < 0$ のとき：
-        \[
+
+1. $e = -2 < 0$ のとき：
+        $$
         l_{0.3} = (0.3 - 1) \times (-2) = (-0.7) \times (-2) = 1.4
-        \]
-  \item $e = 4 \ge 0$ のとき：
-        \[
+        $$
+2. $e = 4 \ge 0$ のとき：
+        $$
         l_{0.3} = 0.3 \times 4 = 1.2
-        \]
-\end{enumerate}
+        $$
+
 \textbf{【グラフの形状】}
 誤差 $e=0$ （予測値と正解ラベルが一致している点）を最下点（損失 $0$）とし、負の領域（予測過剰）では傾き $-0.7$ の急な直線、正の領域（予測不足）では傾き $0.3$ の緩やかな直線となる、非対称なV字型の形状をとる。
 
-\hfill \hyperref[q:4-2-2]{\footnotesize [問題へ戻る]}
-\end{answerbox}
+
+::: {.right}
+[（問題へ戻る）](#q:4-2-2)
+:::
+
 
 ---
 
-# 【第5回】確率論的二値分類と非線型最適化
+# 確率論的二値分類と非線型最適化
 
-## 5-1. ロジスティック関数の微分と交差エントロピー
+## ロジスティック関数の微分と交差エントロピー
 
-\begin{questionbox}[label=q:5-1-1]{シグモイド関数の微分証明 \hfill \normalfont \small 難易度：★2}
+
+### シグモイド関数の微分証明 {#q:5-1-1 .questionbox level="★2"}
 ロジスティック関数（シグモイド関数） $\sigma(z) = \frac{1}{1 + e^{-z}}$ について、
-\begin{enumerate}
-  \item 商の微分公式を用いて $\sigma'(z) = \sigma(z)(1 - \sigma(z))$ になることを証明せよ。
-  \item 合成関数の微分則を用いて $\frac{d}{dz} \log \sigma(z) = 1 - \sigma(z)$ が成り立つことを示せ。
-\end{enumerate}
 
-\hfill \hyperref[a:5-1-1]{\footnotesize [解答・解説へ]}
-\end{questionbox}
+1. 商の微分公式を用いて $\sigma'(z) = \sigma(z)(1 - \sigma(z))$ になることを証明せよ。
+2. 合成関数の微分則を用いて $\frac{d}{dz} \log \sigma(z) = 1 - \sigma(z)$ が成り立つことを示せ。
 
-\begin{questionbox}[label=q:5-1-2]{交差エントロピーとチェインルールによる勾配導出 \hfill \normalfont \small 難易度：★2}
+
+
+::: {.right}
+[（解答・解説へ）](#a:5-1-1)
+:::
+
+
+
+### 交差エントロピーとチェインルールによる勾配導出 {#q:5-1-2 .questionbox level="★2"}
 交差エントロピー損失
-\[
+$$
 l = -y \log \sigma(z) - (1-y) \log(1 - \sigma(z)) \quad (\text{ただし } z = \boldsymbol{\theta}^\top \boldsymbol{\phi}(x))
-\]
+$$
 について、チェインルール $\nabla_{\boldsymbol{\theta}} l = \frac{\partial l}{\partial z} \cdot \nabla_{\boldsymbol{\theta}} z$ を用いて、勾配ベクトルが
-\[
+$$
 \nabla_{\boldsymbol{\theta}} l = (\sigma(z) - y)\boldsymbol{\phi}(x)
-\]
+$$
 となることを導出せよ。
 
-\hfill \hyperref[a:5-1-2]{\footnotesize [解答・解説へ]}
-\end{questionbox}
 
-### 5-1. の解答・解説
+::: {.right}
+[（解答・解説へ）](#a:5-1-2)
+:::
+
+
+### 解答・解説
 **【該当内容】** 第5回スライド50〜89「確率論的二値分類、交差エントロピー、勾配の導出」
 **【ねらい】** 天下り的に与えられるシグモイド関数の微分公式を自力で完全に導出し、交差エントロピー損失のパラメータ微分（チェインルール）を実行して、アルゴリズムの動作を数式で裏付ける。
 
-\begin{answerbox}[label=a:5-1-1]{q:5-1-1}
-\begin{enumerate}
-  \item 商の微分公式 $\left( \frac{1}{g(z)} \right)' = -\frac{g'(z)}{(g(z))^2}$ を用いる。$g(z) = 1 + e^{-z}$ とおくと、$g'(z) = -e^{-z}$ である。
-        \[
+
+### 問5-1-1 の解答・解説 {#a:5-1-1 .answerbox ref="q:5-1-1"}
+1. 商の微分公式 $\left( \frac{1}{g(z)} \right)' = -\frac{g'(z)}{(g(z))^2}$ を用いる。$g(z) = 1 + e^{-z}$ とおくと、$g'(z) = -e^{-z}$ である。
+        $$
         \sigma'(z) = - \frac{-e^{-z}}{(1 + e^{-z})^2} = \frac{e^{-z}}{(1 + e^{-z})^2} = \left( \frac{1}{1 + e^{-z}} \right) \left( \frac{e^{-z}}{1 + e^{-z}} \right)
-        \]
+        $$
         ここで、右側の項の分子に $1 - 1$ を補う。
-        \[
+        $$
         \frac{e^{-z}}{1 + e^{-z}} = \frac{1 + e^{-z} - 1}{1 + e^{-z}} = \frac{1 + e^{-z}}{1 + e^{-z}} - \frac{1}{1 + e^{-z}} = 1 - \sigma(z)
-        \]
+        $$
         よって、
-        \[
+        $$
         \sigma'(z) = \sigma(z)(1 - \sigma(z))
-        \]
+        $$
         となる。（証明終）
-  \item 合成関数の微分公式 $(\log f(z))' = \frac{f'(z)}{f(z)}$ と、(1)の証明結果を用いる。
-        \[
+2. 合成関数の微分公式 $(\log f(z))' = \frac{f'(z)}{f(z)}$ と、(1)の証明結果を用いる。
+        $$
         \frac{d}{dz} \log \sigma(z) = \frac{\sigma'(z)}{\sigma(z)} = \frac{\sigma(z)(1 - \sigma(z))}{\sigma(z)} = 1 - \sigma(z)
-        \]
+        $$
         となり、成立する。（証明終）
-\end{enumerate}
 
-\hfill \hyperref[q:5-1-1]{\footnotesize [問題へ戻る]}
-\end{answerbox}
 
-\begin{answerbox}[label=a:5-1-2]{q:5-1-2}
+
+::: {.right}
+[（問題へ戻る）](#q:5-1-1)
+:::
+
+
+
+### 問5-1-2 の解答・解説 {#a:5-1-2 .answerbox ref="q:5-1-2"}
 対数尤度損失 $l$ を $z$ について偏微分する。
-\[
+$$
 \frac{\partial l}{\partial z} = -y \frac{d}{dz}(\log \sigma(z)) - (1-y) \frac{d}{dz}(\log(1 - \sigma(z)))
-\]
+$$
 第1項 of 微分は問9の(2)より $1 - \sigma(z)$。第2項 of 微分は同様に、
-\[
+$$
 \frac{d}{dz} \log(1 - \sigma(z)) = \frac{-\sigma'(z)}{1 - \sigma(z)} = \frac{-\sigma(z)(1 - \sigma(z))}{1 - \sigma(z)} = -\sigma(z)
-\]
+$$
 これらを代入して整理する。
 \begin{align*}
 \frac{\partial l}{\partial z} &= -y(1 - \sigma(z)) - (1-y)(-\sigma(z)) \\
@@ -825,14 +1177,17 @@ l = -y \log \sigma(z) - (1-y) \log(1 - \sigma(z)) \quad (\text{ただし } z = \
 &= \sigma(z) - y
 \end{align*}
 次に、勾配 $\nabla_{\boldsymbol{\theta}} z$ を計算する。$z = \boldsymbol{\theta}^\top \boldsymbol{\phi}(x)$ はパラメータ $\boldsymbol{\theta}$ について線型であるため、
-\[
+$$
 \nabla_{\boldsymbol{\theta}} z = \boldsymbol{\phi}(x)
-\]
+$$
 チェインルールを適用して両者を掛け合わせる。
-\[
+$$
 \nabla_{\boldsymbol{\theta}} l = \frac{\partial l}{\partial z} \cdot \nabla_{\boldsymbol{\theta}} z = (\sigma(z) - y)\boldsymbol{\phi}(x)
-\]
+$$
 なり、導出された。（証明終）
 
-\hfill \hyperref[q:5-1-2]{\footnotesize [問題へ戻る]}
-\end{answerbox}
+
+::: {.right}
+[（問題へ戻る）](#q:5-1-2)
+:::
+

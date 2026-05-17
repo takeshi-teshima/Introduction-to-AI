@@ -4,16 +4,8 @@ run = """
 pandoc math_exercises_complete.md \
   -o math_exercises_complete.pdf \
   --pdf-engine=lualatex \
+  --lua-filter=filters/custom-boxes.lua \
   -V documentclass=bxjsarticle \
   -V classoption=pandoc
 """
 
-[tasks.build-tikz]
-description = "Build Set2 math exercises PDF using pandoc and lualatex"
-run = """
-pandoc math_exercises_complete_tikz.md \
-  -o math_exercises_complete_tikz.pdf \
-  --pdf-engine=lualatex \
-  -V documentclass=bxjsarticle \
-  -V classoption=pandoc
-"""
