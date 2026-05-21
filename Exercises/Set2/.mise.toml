@@ -1,11 +1,15 @@
 [tasks.build]
 description = "Build Set2 math exercises PDF using pandoc and lualatex"
 run = """
+mkdir -p temp outputs
 pandoc math_exercises_complete.md \
-  -o math_exercises_complete.pdf \
-  --pdf-engine=lualatex \
+  -s \
+  -o temp/math_exercises_complete.tex \
   --lua-filter=filters/custom-boxes.lua \
   -V documentclass=bxjsarticle \
   -V classoption=pandoc
+lualatex -interaction=nonstopmode -output-directory=temp temp/math_exercises_complete.tex
+lualatex -interaction=nonstopmode -output-directory=temp temp/math_exercises_complete.tex
+cp temp/math_exercises_complete.pdf outputs/math_exercises_complete.pdf
 """
 
