@@ -293,19 +293,6 @@ $$
 **【該当内容】** 第2回スライド27〜37「予測系タスクの具体例＞線型単回帰、最小二乗法」
 **【ねらい】** $n$ 個の一般的なデータ表記に対して、二乗損失を用いた経験リスクの正確な数式をシグマ $\sum$ を用いて構築できるようにする。
 
-### 問2-optimization-formulation-blank の解答・解説 {#a:2-optimization-formulation-blank .answerbox ref="q:2-optimization-formulation-blank"}
-
-* **(ア)** $\boldsymbol{\theta} \in \mathbb{R}^d$
-* **(イ)** $L(\boldsymbol{\theta})$
-        よって全体の式は $\mathop{\mathrm{Min}}_{\boldsymbol{\theta} \in \mathbb{R}^d} L(\boldsymbol{\theta})$ となる。最適化を行う範囲（定義域）を $\mathrm{Min}$ の下に記述する。
-* **(ウ)** $\boldsymbol{\theta} \in \{\boldsymbol{\theta} \in \mathbb{R}^d : \|\boldsymbol{\theta}\| \le C\}$ （または $\boldsymbol{\theta} \in \mathbb{R}^d \text{ s.t. } \|\boldsymbol{\theta}\| \le C$）
-* **(エ)** $L(\boldsymbol{\theta})$
-        よって全体の式は $\mathop{\mathrm{Min}}_{\boldsymbol{\theta} \in \{\boldsymbol{\theta} \in \mathbb{R}^d : \|\boldsymbol{\theta}\| \le C\}} L(\boldsymbol{\theta})$ となる。制約条件は変数が属する集合（定義域）として $\mathrm{Min}$ の下に記述することができる。
-
-::: {.right}
-[（問題へ戻る）](#q:2-optimization-formulation-blank)
-:::
-
 ### 問2-empirical-risk-formulation の解答・解説 {#a:2-empirical-risk-formulation .answerbox ref="q:2-empirical-risk-formulation"}
 
 モデルの出力 $\hat{y}_i = wx_i + b$ を損失関数に代入し、その標本平均をとる。
@@ -330,6 +317,19 @@ $$
 
 ::: {.right}
 [（問題へ戻る）](#q:2-erm-parameter-function)
+:::
+
+### 問2-optimization-formulation-blank の解答・解説 {#a:2-optimization-formulation-blank .answerbox ref="q:2-optimization-formulation-blank"}
+
+* **(ア)** $\boldsymbol{\theta} \in \mathbb{R}^d$
+* **(イ)** $L(\boldsymbol{\theta})$
+        よって全体の式は $\mathop{\mathrm{Min}}_{\boldsymbol{\theta} \in \mathbb{R}^d} L(\boldsymbol{\theta})$ となる。最適化を行う範囲（定義域）を $\mathrm{Min}$ の下に記述する。
+* **(ウ)** $\boldsymbol{\theta} \in \{\boldsymbol{\theta} \in \mathbb{R}^d : \|\boldsymbol{\theta}\| \le C\}$ （または $\boldsymbol{\theta} \in \mathbb{R}^d \text{ s.t. } \|\boldsymbol{\theta}\| \le C$）
+* **(エ)** $L(\boldsymbol{\theta})$
+        よって全体の式は $\mathop{\mathrm{Min}}_{\boldsymbol{\theta} \in \{\boldsymbol{\theta} \in \mathbb{R}^d : \|\boldsymbol{\theta}\| \le C\}} L(\boldsymbol{\theta})$ となる。制約条件は変数が属する集合（定義域）として $\mathrm{Min}$ の下に記述することができる。
+
+::: {.right}
+[（問題へ戻る）](#q:2-optimization-formulation-blank)
 :::
 
 ---
@@ -556,6 +556,7 @@ $\mathbf{x} = (x_1, \dots, x_d)^\top$, $\mathbf{y} = (y_1, \dots, y_d)^\top$ と
 
 1. 内積によるモデル表現 $f(x) = \boldsymbol{\theta}^\top \boldsymbol{\phi}(x)$ を書き下せ。
 2. このモデルは、パラメータ $\boldsymbol{\theta}$ に着目すると何次式か。また、入力 $x$ に着目すると何次式か答えよ。
+   （ただし，多変数多項式の次数は，最大の単項式の次数のことである．）
 
 ::: {.right}
 [（解答・解説へ）](#a:3-polynomial-feature-mapping)
@@ -565,25 +566,39 @@ $\mathbf{x} = (x_1, \dots, x_d)^\top$, $\mathbf{y} = (y_1, \dots, y_d)^\top$ と
 
 テキストの文書分類や数値予測を行う際、文書中の単語の出現頻度をもとに特徴ベクトルを作る手法を**Bag-of-Words**と呼びます。
 
-今、以下の4つのテキスト（文書）と、それぞれの正解ラベル（感情スコアなど）の表が与えられているとします。
+今、以下の4つのテキスト（文書）と、それぞれの正解ラベル（重要度スコアなど）の表が与えられているとします。
 
-| 文書番号 ($i$) | 文書の内容 ($x_i$) | 正解ラベル ($y_i$) |
-| :-----------: | :-------------------------------------------------------- | :-----------: |
-| 1 | 最近は多くの分野で AI の活用が進んでいます。手元のデータを用いてモデルを構築しましょう。 | 5 |
-| 2 | 収集したデータをどのように解析すべきでしょうか。ビジネスの現場では意思決定が重要です。 | 10 |
-| 3 | AI 技術はビジネスに大きな影響を与えます。成功のためにはビジネスの仕組みを理解することが大切です。 | 15 |
-| 4 | 私は犬派なので、犬の行動に関する新しいビジネスプランを企画しています。 | 20 |
+```{=latex}
+\smallskip
+\begin{center}
+\begin{tabular}{|c|p{9cm}|c|}
+\hline
+文書番号 ($i$) & \multicolumn{1}{c|}{文書の内容 ($x_i$)} & 正解ラベル ($y_i$) \\
+\hline
+1 & 最新の AI 技術は急速に発展しています。多くの研究者が新しい AI モデルを開発しています。 & 5 \\
+2 & 今朝の人気ニュース番組で、有名な俳優の最新映画が紹介されました。多くのファンが劇場に詰めかけています。 & 0 \\
+3 & AI の活用はビジネスに変革をもたらします。企業経営において AI を導入するビジネス戦略が不可欠です。 & 10 \\
+4 & ペット関連のビジネスが盛んです。特に犬向けのサービスは市場規模が拡大しています。 & 15 \\
+\hline
+\end{tabular}
+\end{center}
+\smallskip
+```
 
-語彙となる名詞のリストを $V = \{\text{「AI」}, \text{「データ」}, \text{「ビジネス」}, \text{「犬」}\}$ とし、特徴ベクトル $\boldsymbol{\phi}(x)$ を以下のように定義します。
+語彙となる名詞のリストを $V = \{\text{「AI」}, \text{「ビジネス」}, \text{「犬」}\}$ とし、特徴ベクトル $\boldsymbol{\phi}(x)$ を以下のように定義します。
 $$
-\boldsymbol{\phi}(x) = \begin{pmatrix} \text{「AI」の出現回数} \\ \text{「データ」の出現回数} \\ \text{「ビジネス」の出現回数} \\ \text{「犬」の出現回数} \end{pmatrix}
+\boldsymbol{\phi}(x) = \begin{pmatrix} \text{「AI」の出現回数} \\ \text{「ビジネス」の出現回数} \\ \text{「犬」の出現回数} \end{pmatrix}
 $$
 
-この特徴ベクトルを用いた線型モデル $f(x) = \boldsymbol{\theta}^\top \boldsymbol{\phi}(x)$ （ただし $\boldsymbol{\theta} = (\theta_1, \theta_2, \theta_3, \theta_4)^\top$）について、以下の問いに答えよ。
+この特徴ベクトルを用いた線型モデル $f(x) = \boldsymbol{\theta}^\top \boldsymbol{\phi}(x)$ （ただし $\boldsymbol{\theta} = (\theta_1, \theta_2, \theta_3)^\top$）について、以下の問いに答えよ。
 
 1. 各文書 $x_1, x_2, x_3, x_4$ に対する特徴ベクトル $\boldsymbol{\phi}(x_1), \boldsymbol{\phi}(x_2), \boldsymbol{\phi}(x_3), \boldsymbol{\phi}(x_4)$ をそれぞれ具体的に求めよ。
-2. 全体のデータに対するデザイン行列 $\Phi \in \mathbb{R}^{4 \times 4}$ と、ラベルベクトル $\mathbf{y} \in \mathbb{R}^4$ を具体的に数値で書き下せ。
-3. このモデルに対して、最小二乗誤差の意味で最適なパラメータ $\hat{\boldsymbol{\theta}}$ を求める一般式を、デザイン行列 $\Phi$ とラベルベクトル $\mathbf{y}$ （および逆行列の記号）を用いて書き下せ（具体的な逆行列の数値計算を行う必要はない）。
+2. 全体のデータに対するデザイン行列 $\Phi \in \mathbb{R}^{4 \times 3}$ と、ラベルベクトル $\mathbf{y} \in \mathbb{R}^4$ を具体的に数値で書き下せ。
+   ここで，
+   $$\Phi = \begin{pmatrix} \boldsymbol{\phi}(x_1)^\top \\ \boldsymbol{\phi}(x_2)^\top \\ \boldsymbol{\phi}(x_3)^\top \\ \boldsymbol{\phi}(x_4)^\top \end{pmatrix}$$
+   である．
+3. このモデルに対して、最小二乗誤差の意味で最適なパラメータ $\hat{\boldsymbol{\theta}}$ を求める一般式を、デザイン行列 $\Phi$ とラベルベクトル $\mathbf{y}$ を用いて（逆行列の記号を用いて）書き下せ。
+   （ただし，この設定において $\Phi^\top \Phi$ の逆行列が存在することは認めてよい．）
 
 ::: {.right}
 [（解答・解説へ）](#a:3-bag-of-words-representation)
@@ -599,32 +614,51 @@ $$
 1. $$f(x) = \theta_0 \cdot 1 + \theta_1 \cdot x + \theta_2 \cdot x^2 = \theta_0 + \theta_1 x + \theta_2 x^2$$
 2. パラメータ $\boldsymbol{\theta}$ に対しては\textbf{1次式（線型）}、入力 $x$ に対しては\textbf{2次式（非線型）}である。
 
+   **【補足：多変数多項式の次数】** 一般に，複数の変数を含む多項式の次数は，各単項式の次数の最大値で定義される．単項式の次数は各変数の指数の和である（例：$x_1^2 x_2$ は $2+1=3$ 次の単項式）．
+   本問の $f(x) = \theta_0 + \theta_1 x + \theta_2 x^2$ において，
+   * $\boldsymbol{\theta}$ に着目すると：各項は $\theta_0$（1次），$\theta_1 x$（$\theta_1$ について1次），$\theta_2 x^2$（$\theta_2$ について1次）であり，最大次数は**1次**（線型）。
+   * $x$ に着目すると：各項は定数項（0次），$x$（1次），$x^2$（2次）であり，最大次数は**2次**（非線型）。
+
 ::: {.right}
 [（問題へ戻る）](#q:3-polynomial-feature-mapping)
 :::
 
 ### 問3-bag-of-words-representation の解答・解説 {#a:3-bag-of-words-representation .answerbox ref="q:3-bag-of-words-representation"}
 
-1. 各文書に含まれる名詞 $V = \{\text{「AI」}, \text{「データ」}, \text{「ビジネス」}, \text{「犬」}\}$ の出現回数をカウントします。
-   * $x_1$ $\rightarrow$ 「AI」が1回、「データ」が1回出現します。
-     $$\boldsymbol{\phi}(x_1) = \begin{pmatrix} 1 \\ 1 \\ 0 \\ 0 \end{pmatrix}$$
-   * $x_2$ $\rightarrow$ 「データ」が1回、「ビジネス」が1回出現します。
-     $$\boldsymbol{\phi}(x_2) = \begin{pmatrix} 0 \\ 1 \\ 1 \\ 0 \end{pmatrix}$$
-   * $x_3$ $\rightarrow$ 「AI」が1回、「ビジネス」が2回出現します。
-     $$\boldsymbol{\phi}(x_3) = \begin{pmatrix} 1 \\ 0 \\ 2 \\ 0 \end{pmatrix}$$
-   * $x_4$ $\rightarrow$ 「ビジネス」が1回、「犬」が2回出現します。
-     $$\boldsymbol{\phi}(x_4) = \begin{pmatrix} 0 \\ 0 \\ 1 \\ 2 \end{pmatrix}$$
+1. 各文書に含まれる名詞 $V = \{\text{「AI」}, \text{「ビジネス」}, \text{「犬」}\}$ の出現回数をカウントします。
+   * $x_1$ (AIの技術ニュース) $\rightarrow$ 「AI」が2回出現します。
+     $$\boldsymbol{\phi}(x_1) = \begin{pmatrix} 2 \\ 0 \\ 0 \end{pmatrix}$$
+   * $x_2$ (芸能ニュース) $\rightarrow$ 指定された名詞 $V$ はいずれも出現しません。
+     $$\boldsymbol{\phi}(x_2) = \begin{pmatrix} 0 \\ 0 \\ 0 \end{pmatrix}$$
+   * $x_3$ (AIとビジネスのニュース) $\rightarrow$ 「AI」が2回、「ビジネス」が2回出現します。
+     $$\boldsymbol{\phi}(x_3) = \begin{pmatrix} 2 \\ 2 \\ 0 \end{pmatrix}$$
+   * $x_4$ (犬のビジネスニュース) $\rightarrow$ 「ビジネス」が1回、「犬」が2回出現します。
+     $$\boldsymbol{\phi}(x_4) = \begin{pmatrix} 0 \\ 1 \\ 2 \end{pmatrix}$$
 
-2. デザイン行列 $\Phi$ は、各データの特徴ベクトルを転置して行として並べた行列です。ラベルベクトル $\mathbf{y}$ は正解ラベルを縦に並べたベクトルです。
-   $$\Phi = \begin{pmatrix} \boldsymbol{\phi}(x_1)^\top \\ \boldsymbol{\phi}(x_2)^\top \\ \boldsymbol{\phi}(x_3)^\top \\ \boldsymbol{\phi}(x_4)^\top \end{pmatrix} = \begin{pmatrix} 1 & 1 & 0 & 0 \\ 0 & 1 & 1 & 0 \\ 1 & 0 & 2 & 0 \\ 0 & 0 & 1 & 2 \end{pmatrix}, \quad \mathbf{y} = \begin{pmatrix} 5 \\ 10 \\ 15 \\ 20 \end{pmatrix}$$
+2. デザイン行列 $\Phi$ は各データの特徴ベクトルを転置して行として並べた行列、ラベルベクトル $\mathbf{y}$ は正解ラベルを縦に並べたベクトルです。
+   $$\Phi = \begin{pmatrix} \boldsymbol{\phi}(x_1)^\top \\ \boldsymbol{\phi}(x_2)^\top \\ \boldsymbol{\phi}(x_3)^\top \\ \boldsymbol{\phi}(x_4)^\top \end{pmatrix} = \begin{pmatrix} 2 & 0 & 0 \\ 0 & 0 & 0 \\ 2 & 2 & 0 \\ 0 & 1 & 2 \end{pmatrix}, \quad \mathbf{y} = \begin{pmatrix} 5 \\ 0 \\ 10 \\ 15 \end{pmatrix}$$
 
-3. 最小二乗回帰における目的関数 $L(\boldsymbol{\theta}) = \frac{1}{2} \|\Phi \boldsymbol{\theta} - \mathbf{y}\|^2$ を最小化する一階の条件 $\Phi^\top \Phi \boldsymbol{\theta} = \Phi^\top \mathbf{y}$ （正規方程式）より、$\Phi^\top \Phi$ の逆行列が存在すると仮定すると、最適なパラメータ $\hat{\boldsymbol{\theta}}$ は以下のように表されます。
+3. **【最適なパラメータの一般式】**
+   最小二乗回帰における正規方程式 $\Phi^\top \Phi \boldsymbol{\theta} = \Phi^\top \mathbf{y}$ より、（$\Phi^\top \Phi$ の逆行列が存在すれば）最適なパラメータ $\hat{\boldsymbol{\theta}}$ は以下のように表されます。
    $$\hat{\boldsymbol{\theta}} = (\Phi^\top \Phi)^{-1} \Phi^\top \mathbf{y}$$
 
-   **【コラム：デザイン行列の正則性と不良設定問題】**
-   本問題設定では、サンプル数 $n=4$ と特徴量次元 $d=4$ が一致しており、各行（特徴ベクトル）が互いに線形独立であるため、デザイン行列 $\Phi$ の行列式は $\det(\Phi) = 2 \times 3 = 6 \neq 0$ となり正則（可逆）です。したがって、$\Phi^\top \Phi$ も正則となり、パラメータ $\hat{\boldsymbol{\theta}}$ は一意に定まります（良設定問題）。
-   
-   もし、サンプル数が特徴量次元より少ない場合（$n < d$）や、特定の単語（例：以前の設定のように「犬」がどの文書にも一度も登場しない場合など）は、$\Phi^\top \Phi$ が正則ではなくなり（逆行列が存在しなくなり）、パラメータが一意に定まらない**不良設定問題（Ill-posed problem）**となります。このような実世界のデータ分析における問題を解決するために、第3節で学ぶ **L2正則化（Ridge）** や擬似逆行列が用いられます。
+   この設定において $\Phi^\top \Phi$ の逆行列が存在すること（正則であること）は、例えば行列式の計算や列ベクトルの独立性などを用いて確かめられる．
+
+   * **アプローチ1：列ベクトルの線形独立性による説明**
+     デザイン行列 $\Phi$ の3つの列ベクトルを $\mathbf{a}_1 = (2, 0, 2, 0)^\top$, $\mathbf{a}_2 = (0, 0, 2, 1)^\top$, $\mathbf{a}_3 = (0, 0, 0, 2)^\top$ とします。
+     線形結合 $c_1 \mathbf{a}_1 + c_2 \mathbf{a}_2 + c_3 \mathbf{a}_3 = \mathbf{0}$ とおくと、
+     * 第1成分（行1）より $2 c_1 = 0 \Rightarrow c_1 = 0$
+     * 第3成分（行3）より $2 c_1 + 2 c_2 = 0$。$c_1=0$ なので $2 c_2 = 0 \Rightarrow c_2 = 0$
+     * 第4成分（行4）より $c_2 + 2 c_3 = 0$。$c_2=0$ なので $2 c_3 = 0 \Rightarrow c_3 = 0$
+     したがって $c_1 = c_2 = c_3 = 0$ のみが成り立ち、3つの列ベクトルは互いに線形独立（一次独立）です。
+     $\Phi$ （$4 \times 3$ 行列）の列ベクトルが線形独立である（列フルランクである）とき、正方行列 $\Phi^\top \Phi$ （$3 \times 3$ 行列）は正則行列となり、**逆行列が必ず存在します**。
+
+   * **アプローチ2：行列式の直接計算による説明**
+     $\Phi^\top \Phi$ を計算すると以下のようになります。
+     $$\Phi^\top \Phi = \begin{pmatrix} 2 & 0 & 2 & 0 \\ 0 & 0 & 2 & 1 \\ 0 & 0 & 0 & 2 \end{pmatrix} \begin{pmatrix} 2 & 0 & 0 \\ 0 & 0 & 0 \\ 2 & 2 & 0 \\ 0 & 1 & 2 \end{pmatrix} = \begin{pmatrix} 8 & 4 & 0 \\ 4 & 5 & 2 \\ 0 & 2 & 4 \end{pmatrix}$$
+     この $3 \times 3$ 行列の行列式 $\det(\Phi^\top \Phi)$ をサラスの公式等を用いて計算します。
+     $$\det(\Phi^\top \Phi) = 8 \times (5 \times 4 - 2 \times 2) - 4 \times (4 \times 4 - 2 \times 0) + 0 = 8 \times 16 - 4 \times 16 = 64 \neq 0$$
+     行列式が 0 でないため、$\Phi^\top \Phi$ は正則であり、**逆行列が存在します**。
 
 ::: {.right}
 [（問題へ戻る）](#q:3-bag-of-words-representation)
@@ -1004,9 +1038,6 @@ $$
         $$
         新中央値：順序関係は変わらないため、依然として\textbf{5}。
 
-        \textbf{【絶対値損失の優位性】}
-        二乗誤差に基づく「平均値」は外れ値の極端な大きさ（距離の2乗）に引っ張られるが、絶対値損失に基づく「中央値」は、各データ点が「自分より大きいか小さいか（符号のみ）」しか評価しないため、どれほど巨大な外れ値に対しても結果が変化せず極めて頑健（ロバスト）である。
-
 ::: {.right}
 [（問題へ戻る）](#q:4-absolute-loss-mae)
 :::
@@ -1094,6 +1125,9 @@ $$
 \end{align*}
 よって、常に $\mathbb{E}[\ind\{X \in A\}] = \mathbb{P}(X \in A)$ が成り立つ。（証明終）
 
+\smallskip
+\noindent\textit{（測度論的確率論を学んだことのある読者へ：測度論的確率論では，確率測度 $\mathbb{P}$ に関する積分として期待値が $\mathbb{E}[Y] = \int Y \, d\mathbb{P}$ と定義されるため，$\mathbb{E}[\mathbf{1}_A] = \int \mathbf{1}_A \, d\mathbb{P} = \mathbb{P}(A)$ は証明するまでもなく期待値の定義から直ちに従う．）}
+
 ::: {.right}
 [（問題へ戻る）](#q:5-indicator-expectation)
 :::
@@ -1172,21 +1206,17 @@ $$
 と定義する。このとき、以下の問いに答えよ。
 
 1. 損失関数のパラメータ $\boldsymbol{\theta}$ に対する勾配が、以下のように表されることを示せ。
-
-$$
-\nabla_{\boldsymbol{\theta}} \ell((\mathbf{x}, y), g_{\boldsymbol{\theta}}) = -\nabla_{\boldsymbol{\theta}} s_{\boldsymbol{\theta}}(\mathbf{x})[y] + \sum_{k=1}^K g_{\boldsymbol{\theta}}(\mathbf{x})[k] \cdot \nabla_{\boldsymbol{\theta}} s_{\boldsymbol{\theta}}(\mathbf{x})[k]
-$$
-   **ヒント：** 対数の性質を用いて $\log g_{\boldsymbol{\theta}}(\mathbf{x})[y]$ を分子と分母に分解し、それぞれの項に対して勾配をとるとよい。
-
-1. 多クラスロジスティック回帰（ソフトマックス回帰）モデルにおいて、クラス $k$ のスコアが、クラス固有のパラメータベクトル $\boldsymbol{\theta}_k$ と特徴量 $\boldsymbol{\phi}(\mathbf{x})$ の内積
-
-$$
-s_{\boldsymbol{\theta}}(\mathbf{x})[k] = \boldsymbol{\theta}_k^\top \boldsymbol{\phi}(\mathbf{x})
-$$
+   $$
+   \nabla_{\boldsymbol{\theta}} \ell((\mathbf{x}, y), g_{\boldsymbol{\theta}}) = -\nabla_{\boldsymbol{\theta}} s_{\boldsymbol{\theta}}(\mathbf{x})[y] + \sum_{k=1}^K g_{\boldsymbol{\theta}}(\mathbf{x})[k] \cdot \nabla_{\boldsymbol{\theta}} s_{\boldsymbol{\theta}}(\mathbf{x})[k]
+   $$
+2. 多クラスロジスティック回帰（ソフトマックス回帰）モデルにおいて、クラス $k$ のスコアが、クラス固有のパラメータベクトル $\boldsymbol{\theta}_k$ と特徴量 $\boldsymbol{\phi}(\mathbf{x})$ の内積
+   $$
+   s_{\boldsymbol{\theta}}(\mathbf{x})[k] = \boldsymbol{\theta}_k^\top \boldsymbol{\phi}(\mathbf{x})
+   $$
    で与えられるとする。このとき、損失関数のパラメータ $\boldsymbol{\theta}_k$ に対する勾配 $\nabla_{\boldsymbol{\theta}_k} \ell((\mathbf{x}, y), g_{\boldsymbol{\theta}})$ が
-$$
-\nabla_{\boldsymbol{\theta}_k} \ell((\mathbf{x}, y), g_{\boldsymbol{\theta}}) = \left( g_{\boldsymbol{\theta}}(\mathbf{x})[k] - \mathbf{1}\{k = y\} \right) \boldsymbol{\phi}(\mathbf{x})
-$$
+   $$
+   \nabla_{\boldsymbol{\theta}_k} \ell((\mathbf{x}, y), g_{\boldsymbol{\theta}}) = \left( g_{\boldsymbol{\theta}}(\mathbf{x})[k] - \mathbf{1}\{k = y\} \right) \boldsymbol{\phi}(\mathbf{x})
+   $$
    となることを示せ。ただし、$\mathbf{1}\{\cdot\}$ は指示関数であり、条件が真のとき $1$、偽のとき $0$ をとる。
 
 ::: {.right}
