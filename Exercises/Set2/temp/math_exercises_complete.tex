@@ -155,12 +155,6 @@
 \item
   確率変数 \(Y = \ind\{X \ge 1\}\)
   がとり得る値と、それぞれの値をとる確率（確率分布）を求めよ。
-\item
-  指示関数の期待値 \(\mathbb{E}[\ind\{X \in A\}]\) は、事象
-  \(\{X \in A\}\) が発生する確率 \(\mathbb{P}(X \in A)\)
-  と等しくなること、すなわち \[
-  \mathbb{E}[\ind\{X \in A\}] = \mathbb{P}(X \in A)
-  \] が常に成り立つことを示せ。
 \end{enumerate}
 
 \hfill 
@@ -169,7 +163,7 @@
 
 \end{questionbox}
 
-\begin{questionbox}[label=q:1-continuous-expectation-variance]{連続型確率分布での期待値・分散計算 \hfill \normalfont \small 難易度：★1}
+\begin{questionbox}[label=q:1-continuous-expectation-variance]{連続型確率分布での期待値・分散計算 \hfill \normalfont \small 難易度：★0}
 
 連続確率変数 \(X\) の確率密度関数 \(p(x)\) が、指示関数 \(\ind\)
 を用いて実数全体 \(\mathbb{R}\) 上で以下のように定義されている。 \[
@@ -302,6 +296,7 @@ Cov(X,Y) &= Cov(Y,X)
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
+\tightlist
 \item
   指示関数の定義「条件が真なら \(1\)、偽なら
   \(0\)」に基づいて計算します。
@@ -349,33 +344,9 @@ Cov(X,Y) &= Cov(Y,X)
   1 & (\text{確率 } 0.8) \\
   0 & (\text{確率 } 0.2)
   \end{cases}
-  \]
-\item
-  確率変数 \(Y = \ind\{X \in A\}\) は、\(X \in A\) のときに \(1\)
-  をとり、\(X \notin A\) のときに \(0\)
-  をとる確率変数（ベルヌーイ分布に従う確率変数）です。
-  それぞれの値をとる確率は以下の通りです：
-
-  \begin{itemize}
-  \tightlist
-  \item
-    \(\mathbb{P}(Y = 1) = \mathbb{P}(X \in A)\)
-  \item
-    \(\mathbb{P}(Y = 0) = 1 - \mathbb{P}(X \in A)\)
-  \end{itemize}
-
-  したがって、離散型確率変数の期待値の定義に従って \(\mathbb{E}[Y]\)
-  を計算すると： \begin{align*}
-  \mathbb{E}[\ind\{X \in A\}] = \mathbb{E}[Y] &= 1 \cdot \mathbb{P}(Y = 1) + 0 \cdot \mathbb{P}(Y = 0) \\
-  &= 1 \cdot \mathbb{P}(X \in A) + 0 \cdot (1 - \mathbb{P}(X \in A)) \\
-  &= \mathbb{P}(X \in A)
-  \end{align*}
-  となり、指示関数の期待値は事象の発生確率と完全に等しくなることが示されました。（証明終）
+  \] ::: \{.right\} \hyperref[q:1-indicator-function]{（問題へ戻る）}
+  :::
 \end{enumerate}
-
-\hfill 
-
-\hyperref[q:1-indicator-function]{（問題へ戻る）}
 
 \end{answerbox}
 
@@ -438,7 +409,7 @@ Cov(X,Y) &= Cov(Y,X)
 
 \subsection{経験リスクの数式化（シグマを用いた書き下し）}\label{ux7d4cux9a13ux30eaux30b9ux30afux306eux6570ux5f0fux5316ux30b7ux30b0ux30deux3092ux7528ux3044ux305fux66f8ux304dux4e0bux3057}
 
-\begin{questionbox}[label=q:2-empirical-risk-formulation]{経験リスクの立式 \hfill \normalfont \small 難易度：★0}
+\begin{questionbox}[label=q:2-empirical-risk-formulation]{経験リスクの立式 \hfill \normalfont \small 難易度：★1}
 
 \(n\) 個の訓練データ \(\{(x_i, y_i)\}_{i=1}^n\)
 が与えられている。モデルクラスとして1次関数 \(f_{(w,b)}(x) = wx + b\)
@@ -588,7 +559,7 @@ L(w,b) = \frac{1}{n} \sum_{i=1}^n (y_i - (wx_i + b))^2
 
 \end{questionbox}
 
-\begin{questionbox}[label=q:2-first-order-conditions-scalar]{一階の条件からの式変形 \hfill \normalfont \small 難易度：★2}
+\begin{questionbox}[label=q:2-first-order-conditions-scalar]{一階の条件からの式変形 \hfill \normalfont \small 難易度：★1}
 
 最適解において勾配ベクトルがゼロになるという一階の条件
 \(\nabla L(w,b) = \mathbf{0}\)
@@ -867,7 +838,7 @@ L(w,b) = \frac{1}{n} \sum_{i=1}^n (y_i - (wx_i + b))^2
 
 \end{questionbox}
 
-\begin{questionbox}[label=q:3-bag-of-words-representation]{テキストデータへの適用（Bag-of-Words）と最小二乗法 \hfill \normalfont \small 難易度：★1}
+\begin{questionbox}[label=q:3-bag-of-words-representation]{テキストデータへの適用（Bag-of-Words）と最小二乗法 \hfill \normalfont \small 難易度：★0}
 
 テキストの文書分類や数値予測を行う際、文書中の単語の出現頻度をもとに特徴ベクトルを作る手法を\textbf{Bag-of-Words}と呼びます。
 
@@ -1141,7 +1112,7 @@ L(\boldsymbol{\theta}) = \frac{1}{2} \|\Phi\boldsymbol{\theta} - \mathbf{y}\|^2
 
 \end{tcolorbox}
 
-\begin{questionbox}[label=q:3-matrix-derivative-first-order]{一階の条件の行列導出 \hfill \normalfont \small 難易度：★2}
+\begin{questionbox}[label=q:3-matrix-derivative-first-order]{一階の条件の行列導出 \hfill \normalfont \small 難易度：★1}
 
 行列微分の公式 \begin{align*}
 \nabla_{\boldsymbol{\theta}} (\mathbf{a}^\top \boldsymbol{\theta}) &= \mathbf{a} \\
@@ -1301,7 +1272,7 @@ L(\boldsymbol{\theta}) = \frac{1}{2} \left[ \boldsymbol{\theta}^\top \Phi^\top \
 
 \end{questionbox}
 
-\begin{questionbox}[label=q:3-l2-regularization-gradient]{行列による書き直しと一階の条件 \hfill \normalfont \small 難易度：★2}
+\begin{questionbox}[label=q:3-l2-regularization-gradient]{行列による書き直しと一階の条件 \hfill \normalfont \small 難易度：★1}
 
 目的関数を
 \(L_{\text{reg}}(\boldsymbol{\theta}) = \frac{1}{2}\|\Phi\boldsymbol{\theta} - \mathbf{y}\|^2 + \frac{\lambda}{2}\|\boldsymbol{\theta}\|^2\)
@@ -1519,7 +1490,7 @@ L_{\text{reg}}(\boldsymbol{\theta}) = \frac{1}{n} \sum_{i=1}^n (y_i - \boldsymbo
 
 \end{questionbox}
 
-\begin{questionbox}[label=q:4-pinball-loss-calculation]{ピンボール損失のグラフ描写の理解 \hfill \normalfont \small 難易度：★1}
+\begin{questionbox}[label=q:4-pinball-loss-calculation]{ピンボール損失のグラフ描写の理解 \hfill \normalfont \small 難易度：★0}
 
 ピンボール損失関数 \[
 l_\alpha(y, y') =
@@ -1745,7 +1716,7 @@ l = -y \log \sigma(z) - (1-y) \log(1 - \sigma(z)) \quad (\text{ただし } z = \
 
 \subsection{ソフトマックス関数と多クラス交差エントロピー}\label{ux30bdux30d5ux30c8ux30deux30c3ux30afux30b9ux95a2ux6570ux3068ux591aux30afux30e9ux30b9ux4ea4ux5deeux30a8ux30f3ux30c8ux30edux30d4ux30fc}
 
-\begin{questionbox}[label=q:6-softmax-gradient-derivation]{ソフトマックス損失の勾配公式の導出 \hfill \normalfont \small 難易度：★2}
+\begin{questionbox}[label=q:6-softmax-gradient-derivation]{ソフトマックス損失の勾配公式の導出 \hfill \normalfont \small 難易度：★1}
 
 多クラス分類問題において、入力 \(\mathbf{x}\) に対するスコアベクトルを
 \(s_{\boldsymbol{\theta}}(\mathbf{x}) \in \mathbb{R}^K\) とし、モデル

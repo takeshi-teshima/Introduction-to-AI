@@ -67,17 +67,12 @@ $$
    (a) $X = 0$
    (b) $X = 2$
 2. 確率変数 $Y = \ind\{X \ge 1\}$ がとり得る値と、それぞれの値をとる確率（確率分布）を求めよ。
-3. 指示関数の期待値 $\mathbb{E}[\ind\{X \in A\}]$ は、事象 $\{X \in A\}$ が発生する確率 $\mathbb{P}(X \in A)$ と等しくなること、すなわち
-   $$
-   \mathbb{E}[\ind\{X \in A\}] = \mathbb{P}(X \in A)
-   $$
-   が常に成り立つことを示せ。
 
 ::: {.right}
 [（解答・解説へ）](#a:1-indicator-function)
 :::
 
-### 連続型確率分布での期待値・分散計算 {#q:1-continuous-expectation-variance .questionbox difficulty="★1"}
+### 連続型確率分布での期待値・分散計算 {#q:1-continuous-expectation-variance .questionbox difficulty="★0"}
 
 連続確率変数 $X$ の確率密度関数 $p(x)$ が、指示関数 $\ind$ を用いて実数全体 $\mathbb{R}$ 上で以下のように定義されている。
 $$
@@ -179,21 +174,7 @@ Cov(X,Y) &= Cov(Y,X)
    0 & (\text{確率 } 0.2)
    \end{cases}
    $$
-
-3. 確率変数 $Y = \ind\{X \in A\}$ は、$X \in A$ のときに $1$ をとり、$X \notin A$ のときに $0$ をとる確率変数（ベルヌーイ分布に従う確率変数）です。
-   それぞれの値をとる確率は以下の通りです：
-   * $\mathbb{P}(Y = 1) = \mathbb{P}(X \in A)$
-   * $\mathbb{P}(Y = 0) = 1 - \mathbb{P}(X \in A)$
-
-   したがって、離散型確率変数の期待値の定義に従って $\mathbb{E}[Y]$ を計算すると：
-   \begin{align*}
-   \mathbb{E}[\ind\{X \in A\}] = \mathbb{E}[Y] &= 1 \cdot \mathbb{P}(Y = 1) + 0 \cdot \mathbb{P}(Y = 0) \\
-   &= 1 \cdot \mathbb{P}(X \in A) + 0 \cdot (1 - \mathbb{P}(X \in A)) \\
-   &= \mathbb{P}(X \in A)
-   \end{align*}
-   となり、指示関数の期待値は事象の発生確率と完全に等しくなることが示されました。（証明終）
-
-::: {.right}
+ ::: {.right}
 [（問題へ戻る）](#q:1-indicator-function)
 :::
 
@@ -240,7 +221,7 @@ Cov(X,Y) &= Cov(Y,X)
 
 ## 経験リスクの数式化（シグマを用いた書き下し）
 
-### 経験リスクの立式 {#q:2-empirical-risk-formulation .questionbox difficulty="★0"}
+### 経験リスクの立式 {#q:2-empirical-risk-formulation .questionbox difficulty="★1"}
 
 $n$ 個の訓練データ $\{(x_i, y_i)\}_{i=1}^n$ が与えられている。モデルクラスとして1次関数 $f_{(w,b)}(x) = wx + b$ を採用し、損失関数を二乗誤差 $l(y, \hat{y}) = (y - \hat{y})^2$ とするとき、目的関数 $L(w,b)$ を $\sum_{i=1}^n$ を用いて書き下せ。
 
@@ -344,7 +325,7 @@ $$
 [（解答・解説へ）](#a:2-partial-derivative-gradient)
 :::
 
-### 一階の条件からの式変形 {#q:2-first-order-conditions-scalar .questionbox difficulty="★2"}
+### 一階の条件からの式変形 {#q:2-first-order-conditions-scalar .questionbox difficulty="★1"}
 
 最適解において勾配ベクトルがゼロになるという一階の条件 $\nabla L(w,b) = \mathbf{0}$ のうち、$\frac{\partial L}{\partial b} = 0$ の式を変形し、最適な切片 $\hat{b}$ が、サンプルの平均値 $\bar{x} = \frac{1}{n}\sum_{i=1}^n x_i$, $\bar{y} = \frac{1}{n}\sum_{i=1}^n y_i$ を用いて
 $$
@@ -562,7 +543,7 @@ $\mathbf{x} = (x_1, \dots, x_d)^\top$, $\mathbf{y} = (y_1, \dots, y_d)^\top$ と
 [（解答・解説へ）](#a:3-polynomial-feature-mapping)
 :::
 
-### テキストデータへの適用（Bag-of-Words）と最小二乗法 {#q:3-bag-of-words-representation .questionbox difficulty="★1"}
+### テキストデータへの適用（Bag-of-Words）と最小二乗法 {#q:3-bag-of-words-representation .questionbox difficulty="★0"}
 
 テキストの文書分類や数値予測を行う際、文書中の単語の出現頻度をもとに特徴ベクトルを作る手法を**Bag-of-Words**と呼びます。
 
@@ -721,7 +702,7 @@ $$
 * \textbf{線形項の勾配}: $\nabla_{\mathbf{x}} (\mathbf{a}^\top \mathbf{x}) = \nabla_{\mathbf{x}} (\mathbf{x}^\top \mathbf{a}) = \mathbf{a}$
 * \textbf{2次形式の勾配}: $\nabla_{\mathbf{x}} (\mathbf{x}^\top \mathbf{A} \mathbf{x}) = 2\mathbf{A}\mathbf{x}$ \quad （$\mathbf{A}$ が対称行列のとき）
 
-### 一階の条件の行列導出 {#q:3-matrix-derivative-first-order .questionbox difficulty="★2"}
+### 一階の条件の行列導出 {#q:3-matrix-derivative-first-order .questionbox difficulty="★1"}
 
 行列微分の公式
 \begin{align*}
@@ -848,7 +829,7 @@ $$
 [（解答・解説へ）](#a:3-l2-regularization-objective)
 :::
 
-### 行列による書き直しと一階の条件 {#q:3-l2-regularization-gradient .questionbox difficulty="★2"}
+### 行列による書き直しと一階の条件 {#q:3-l2-regularization-gradient .questionbox difficulty="★1"}
 
 目的関数を $L_{\text{reg}}(\boldsymbol{\theta}) = \frac{1}{2}\|\Phi\boldsymbol{\theta} - \mathbf{y}\|^2 + \frac{\lambda}{2}\|\boldsymbol{\theta}\|^2$ とする。全体の勾配を $\mathbf{0}$ と置く一階の条件から、最適解
 $$
@@ -1004,7 +985,7 @@ $$
 [（解答・解説へ）](#a:4-absolute-loss-mae)
 :::
 
-### ピンボール損失のグラフ描写の理解 {#q:4-pinball-loss-calculation .questionbox difficulty="★1"}
+### ピンボール損失のグラフ描写の理解 {#q:4-pinball-loss-calculation .questionbox difficulty="★0"}
 
 ピンボール損失関数
 $$
@@ -1193,7 +1174,7 @@ $$
 
 ## ソフトマックス関数と多クラス交差エントロピー
 
-### ソフトマックス損失の勾配公式の導出 {#q:6-softmax-gradient-derivation .questionbox difficulty="★2"}
+### ソフトマックス損失の勾配公式の導出 {#q:6-softmax-gradient-derivation .questionbox difficulty="★1"}
 
 多クラス分類問題において、入力 $\mathbf{x}$ に対するスコアベクトルを $s_{\boldsymbol{\theta}}(\mathbf{x}) \in \mathbb{R}^K$ とし、モデル $g_{\boldsymbol{\theta}}(\mathbf{x}) = \text{Softmax}(s_{\boldsymbol{\theta}}(\mathbf{x}))$ を考える。ここで、モデルの出力ベクトルの第 $k$ 成分 $g_{\boldsymbol{\theta}}(\mathbf{x})[k]$ は以下のように定義される。
 $$
