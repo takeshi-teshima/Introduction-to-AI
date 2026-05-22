@@ -478,9 +478,9 @@ $$
 2. **【行列 $\times$ 縦ベクトル $\to$ 縦ベクトル】**
    行列 $B \in \mathbb{R}^{m \times d}$ を、横ベクトルを縦に並べたブロック行列、および縦ベクトルを横に並べたブロック行列としてそれぞれ解釈する。つまり、
    $$
-   B = \begin{pmatrix} B_{11} & \dots & B_{1d} \\ \vdots & \ddots & \vdots \\ B_{m1} & \dots & B_{md} \end{pmatrix} 
-   = \begin{pmatrix} \quad \mathbf{b}_1^\top \quad \\ \vdots \\ \quad \mathbf{b}_m^\top \quad \end{pmatrix} 
-   = \begin{pmatrix} \boldsymbol{\beta}_1 & \dots & \boldsymbol{\beta}_d \end{pmatrix}
+   B = \begin{pmatrix} B_{11} & \dots & B_{1d} \\ \vdots & \ddots & \vdots \\ B_{m1} & \dots & B_{md} \end{pmatrix}
+   = \begin{pmatrix} \quad \mathbf{b}_1^\top \quad \\ \vdots \\ \quad \mathbf{b}_m^\top \quad \end{pmatrix}
+   = \begin{pmatrix} \boldsymbol{\beta}_1 & \cdots & \boldsymbol{\beta}_d \end{pmatrix}
    $$
    と捉えるとき、縦ベクトル $\mathbf{v} \in \mathbb{R}^d$ との積 $B\mathbf{v}$ について次の等式がそれぞれ成り立つことを成分計算により確認せよ。
 
@@ -494,9 +494,9 @@ $$
    - **縦ベクトルが横に並んでいるとみなす場合（列ベクトルの重み付き和）：**
      $$
      B\mathbf{v} =
-     \begin{pmatrix} \boldsymbol{\beta}_1 & \dots & \boldsymbol{\beta}_d \end{pmatrix}
+     \begin{pmatrix} \boldsymbol{\beta}_1 & \cdots & \boldsymbol{\beta}_d \end{pmatrix}
      \begin{pmatrix} v_1 \\ \vdots \\ v_d \end{pmatrix}
-     = v_1 \boldsymbol{\beta}_1 + \dots + v_d \boldsymbol{\beta}_d
+     = v_1 \boldsymbol{\beta}_1 + \cdots + v_d \boldsymbol{\beta}_d
      $$
 
 3. **【複数データの予測値の行列表現（計画行列）】**
@@ -687,7 +687,7 @@ $\mathbf{x} = (x_1, \dots, x_d)^\top$, $\mathbf{y} = (y_1, \dots, y_d)^\top$ と
 1次元の入力 $x$ に対し、特徴写像を $\boldsymbol{\phi}(x) = (1, x, x^2)^\top$ と定義する。
 パラメータベクトルを $\boldsymbol{\theta} = (\theta_0, \theta_1, \theta_2)^\top$ とする。
 
-1. 内積によるモデル表現 $f(x) = \boldsymbol{\theta}^\top \boldsymbol{\phi}(x)$ を書き下せ。
+1. 線型モデル $f(x) = \boldsymbol{\theta}^\top \boldsymbol{\phi}(x)$ を書き下せ。
 2. このモデルは、パラメータ $\boldsymbol{\theta}$ に着目すると何次式か。また、入力 $x$ に着目すると何次式か答えよ。
    （ただし，多変数多項式の次数は，最大の単項式の次数のことである．）
 
@@ -695,7 +695,7 @@ $\mathbf{x} = (x_1, \dots, x_d)^\top$, $\mathbf{y} = (y_1, \dots, y_d)^\top$ と
 [（解答・解説へ）](#a:3-polynomial-feature-mapping)
 :::
 
-### テキストデータへの適用（Bag-of-Words）と最小二乗法 {#q:3-bag-of-words-representation .questionbox difficulty="★0"}
+### テキストデータへの適用（Bag-of-Words）と最小二乗法 {#q:3-bag-of-words-representation .questionbox difficulty="★2"}
 
 テキストの文書分類や数値予測を行う際、文書中の単語の出現頻度をもとに特徴ベクトルを作る手法を**Bag-of-Words**と呼びます。
 
@@ -717,20 +717,20 @@ $\mathbf{x} = (x_1, \dots, x_d)^\top$, $\mathbf{y} = (y_1, \dots, y_d)^\top$ と
 \end{center}
 \smallskip
 ```
-
-語彙となる名詞のリストを $V = \{\text{「AI」}, \text{「ビジネス」}, \text{「犬」}\}$ とし、特徴ベクトル $\boldsymbol{\phi}(x)$ を以下のように定義します。
+<!-- 語彙となる名詞のリストを $V = \{\text{「AI」}, \text{「ビジネス」}, \text{「犬」}\}$ とし、 -->
+特徴ベクトル $\boldsymbol{\phi}(x)$ を以下のように定義します。
 $$
 \boldsymbol{\phi}(x) = \begin{pmatrix} \text{「AI」の出現回数} \\ \text{「ビジネス」の出現回数} \\ \text{「犬」の出現回数} \end{pmatrix}
 $$
 
 この特徴ベクトルを用いた線型モデル $f(x) = \boldsymbol{\theta}^\top \boldsymbol{\phi}(x)$ （ただし $\boldsymbol{\theta} = (\theta_1, \theta_2, \theta_3)^\top$）について、以下の問いに答えよ。
 
-1. 各文書 $x_1, x_2, x_3, x_4$ に対する特徴ベクトル $\boldsymbol{\phi}(x_1), \boldsymbol{\phi}(x_2), \boldsymbol{\phi}(x_3), \boldsymbol{\phi}(x_4)$ をそれぞれ具体的に求めよ。
-2. 全体のデータに対するデザイン行列 $\Phi \in \mathbb{R}^{4 \times 3}$ と、ラベルベクトル $\mathbf{y} \in \mathbb{R}^4$ を具体的に数値で書き下せ。
-   ここで，
+1. 各文書 $x_1, x_2, x_3, x_4$ に対応する特徴ベクトル $\boldsymbol{\phi}(x_1), \boldsymbol{\phi}(x_2), \boldsymbol{\phi}(x_3), \boldsymbol{\phi}(x_4)$ をそれぞれ具体的に求めよ。
+2. 計画行列 $\Phi \in \mathbb{R}^{4 \times 3}$ と、ラベルベクトル $\mathbf{y} \in \mathbb{R}^4$ をそれぞれ具体的に数値で書き下せ。
+   なお，計画行列とは，ここでは，
    $$\Phi = \begin{pmatrix} \boldsymbol{\phi}(x_1)^\top \\ \boldsymbol{\phi}(x_2)^\top \\ \boldsymbol{\phi}(x_3)^\top \\ \boldsymbol{\phi}(x_4)^\top \end{pmatrix}$$
-   である．
-3. このモデルに対して、最小二乗誤差の意味で最適なパラメータ $\hat{\boldsymbol{\theta}}$ を求める一般式を、デザイン行列 $\Phi$ とラベルベクトル $\mathbf{y}$ を用いて（逆行列の記号を用いて）書き下せ。
+   のことである．
+3. このモデルに対して、最小二乗誤差の意味で最適なパラメータ $\hat{\boldsymbol{\theta}}$ を求める一般式を、計画行列 $\Phi$ とラベルベクトル $\mathbf{y}$ を用いて（逆行列の記号を用いて）書き下せ。
    （ただし，この設定において $\Phi^\top \Phi$ の逆行列が存在することは認めてよい．）
 
 ::: {.right}
@@ -814,17 +814,21 @@ $$
 
 ## 最小二乗法の行列表記と一階の条件（最重要）
 
-### 行列とベクトルによる目的関数の書き直し {#q:3-matrix-empirical-risk .questionbox difficulty="★1"}
+### 行列とベクトルによる目的関数の書き直し {#q:3-matrix-empirical-risk .questionbox difficulty="★2"}
 
-$n=2$ 個のデータがあり、それぞれの特徴ベクトルと正解ラベルが、
+$n$ 個のデータ $(x_1, y_1), \dots, (x_n, y_n)$ に対して、計画行列 $\Phi \in \mathbb{R}^{n \times d}$ とラベルベクトル $\mathbf{y} \in \mathbb{R}^n$ を次のように定義する。
 $$
-\boldsymbol{\phi}(x_1) = \begin{pmatrix} 1 \\ 2 \end{pmatrix}, y_1 = 4, \quad \boldsymbol{\phi}(x_2) = \begin{pmatrix} 1 \\ 5 \end{pmatrix}, y_2 = 7
+\Phi = \begin{pmatrix} \quad \boldsymbol{\phi}(x_1)^\top \quad \\ \vdots \\ \quad \boldsymbol{\phi}(x_n)^\top \quad \end{pmatrix}, \quad \mathbf{y} = \begin{pmatrix} y_1 \\ \vdots \\ y_n \end{pmatrix}
 $$
-である。デザイン行列 $\Phi = \begin{pmatrix} \boldsymbol{\phi}(x_1)^\top \\ \boldsymbol{\phi}(x_2)^\top \end{pmatrix}$ およびラベルベクトル $\mathbf{y} = (y_1, y_2)^\top$ を具体的に数字で書き下し、目的関数
+線型モデル $f_{\boldsymbol{\theta}}(x) = \boldsymbol{\theta}^\top \boldsymbol{\phi}(x)$ に対する平均二乗誤差
 $$
-L(\boldsymbol{\theta}) = \frac{1}{2} \|\Phi\boldsymbol{\theta} - \mathbf{y}\|^2
+\hat{R}(f_{\boldsymbol{\theta}}) = \frac{1}{n} \sum_{i=1}^n (f_{\boldsymbol{\theta}}(x_i) - y_i)^2
 $$
-が個別の二乗誤差の和 $\frac{1}{2}\sum_{i=1}^2 (y_i - \boldsymbol{\theta}^\top \boldsymbol{\phi}(x_i))^2$ と完全に等しいことを展開して確かめよ。
+が、行列とベクトルの積およびノルムを用いて
+$$
+\hat{R}(f_{\boldsymbol{\theta}}) = \frac{1}{n} \|\Phi \boldsymbol{\theta} - \mathbf{y}\|^2
+$$
+と書き直せることを、計画行列の性質およびベクトルのノルムの定義 $\left(\|\mathbf{v}\|^2 = \sum_{i=1}^n v_i^2\right)$ を用いて確認せよ。
 
 ::: {.right}
 [（解答・解説へ）](#a:3-matrix-empirical-risk)
@@ -882,19 +886,27 @@ $$
 
 ### 問3-matrix-empirical-risk の解答・解説 {#a:3-matrix-empirical-risk .answerbox ref="q:3-matrix-empirical-risk"}
 
-デザイン行列 $\Phi$ とラベルベクトル $\mathbf{y}$ は以下のようになる。
+各データに対する予測値 $f_{\boldsymbol{\theta}}(x_i) = \boldsymbol{\theta}^\top \boldsymbol{\phi}(x_i) = \boldsymbol{\phi}(x_i)^\top \boldsymbol{\theta}$ を縦に並べたベクトルは、計画行列の性質（横ベクトルが縦に並んでいるブロック行列と縦ベクトルの積）から次のように書ける。
 $$
-\Phi = \begin{pmatrix} 1 & 2 \\ 1 & 5 \end{pmatrix}, \quad \mathbf{y} = \begin{pmatrix} 4 \\ 7 \end{pmatrix}
+\begin{pmatrix} f_{\boldsymbol{\theta}}(x_1) \\ \vdots \\ f_{\boldsymbol{\theta}}(x_n) \end{pmatrix}
+= \begin{pmatrix} \boldsymbol{\phi}(x_1)^\top \boldsymbol{\theta} \\ \vdots \\ \boldsymbol{\phi}(x_n)^\top \boldsymbol{\theta} \end{pmatrix}
+= \begin{pmatrix} \quad \boldsymbol{\phi}(x_1)^\top \quad \\ \vdots \\ \quad \boldsymbol{\phi}(x_n)^\top \quad \end{pmatrix} \boldsymbol{\theta}
+= \Phi \boldsymbol{\theta}
 $$
-パラメータを $\boldsymbol{\theta} = (\theta_0, \theta_1)^\top$ とすると、
+したがって、予測値と正解ラベルの差を並べたベクトルは
 $$
-\Phi\boldsymbol{\theta} - \mathbf{y} = \begin{pmatrix} 1 & 2 \\ 1 & 5 \end{pmatrix} \begin{pmatrix} \theta_0 \\ \theta_1 \end{pmatrix} - \begin{pmatrix} 4 \\ 7 \end{pmatrix} = \begin{pmatrix} \theta_0 + 2\theta_1 - 4 \\ \theta_0 + 5\theta_1 - 7 \end{pmatrix}
+\Phi \boldsymbol{\theta} - \mathbf{y} = \begin{pmatrix} f_{\boldsymbol{\theta}}(x_1) - y_1 \\ \vdots \\ f_{\boldsymbol{\theta}}(x_n) - y_n \end{pmatrix}
 $$
-ベクトルのL2ノルムの2乗は各成分の2乗和なので、
+となる。
+ベクトルのL2ノルムの2乗は各成分の2乗和なので、このベクトルのノルムの2乗を計算すると
 $$
-\frac{1}{2}\|\Phi\boldsymbol{\theta} - \mathbf{y}\|^2 = \frac{1}{2} \left[ (\theta_0 + 2\theta_1 - 4)^2 + (\theta_0 + 5\theta_1 - 7)^2 \right]
+\|\Phi\boldsymbol{\theta} - \mathbf{y}\|^2 = \sum_{i=1}^n (f_{\boldsymbol{\theta}}(x_i) - y_i)^2
 $$
-これは各データの誤差二乗和 $\frac{1}{2} \sum_{i=1}^2 (\boldsymbol{\theta}^\top \boldsymbol{\phi}(x_i) - y_i)^2$ と完全に一致する。（証明終）
+となる。両辺を $n$ で割ることで、
+$$
+\frac{1}{n}\|\Phi\boldsymbol{\theta} - \mathbf{y}\|^2 = \frac{1}{n} \sum_{i=1}^n (f_{\boldsymbol{\theta}}(x_i) - y_i)^2 = \hat{R}(f_{\boldsymbol{\theta}})
+$$
+が導かれ、式が一致することが確認された。（証明終）
 
 ::: {.right}
 [（問題へ戻る）](#q:3-matrix-empirical-risk)
