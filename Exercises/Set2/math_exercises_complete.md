@@ -15,7 +15,7 @@ header-includes: |
   \newtcolorbox[use counter=question]{questionbox}[2][]{enhanced, breakable, colback=red!2!gray!3!white, colframe=red!50!gray, fonttitle=\bfseries, title={問\arabic{question}\ #2}, #1}
   \newtcolorbox{answerbox}[2][]{enhanced, breakable, colback=green!2!gray!3!white, colframe=green!45!gray, fonttitle=\bfseries, title={問\ref{#2}の解答・解説}, #1}
   \usepackage{titlesec}
-  \titleformat{\section}[block]{\normalfont\Large\bfseries}{【第\thesection 回】}{0.5em}{}
+  \titleformat{\section}[display]{\normalfont\Large\bfseries}{【第\thesection 回】}{0.2em}{}
   \titleformat{\subsection}[block]{\normalfont\large\bfseries}{\thesection-\arabic{subsection}.}{0.5em}{}
   \newcommand{\ind}{\mathbf{1}}
   ```
