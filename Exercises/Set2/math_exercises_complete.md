@@ -464,18 +464,55 @@ $$
 
 ### ベクトル・行列の積の頻出パターンと成分表示 {#q:3-matrix-vector-patterns .questionbox difficulty="★2"}
 
-行列・ベクトルの積について、以下の性質が成り立つことを成分表示を用いて確認せよ。
+講義スライドで登場した行列・ベクトルの積に関する視覚的なパターンの意味を、成分表示を用いて確認せよ。
 
-1. $d$ 次元縦ベクトル $\mathbf{a} = (a_1, \dots, a_d)^\top$, $\mathbf{b} = (b_1, \dots, b_d)^\top$ に対し、横ベクトル $\mathbf{a}^\top$ と縦ベクトル $\mathbf{b}$ の積 $\mathbf{a}^\top \mathbf{b}$ が内積の定義式 $\langle \mathbf{a}, \mathbf{b} \rangle = a_1b_1 + \dots + a_db_d$ と一致することを示せ。
-2. 上記のベクトル $\mathbf{w}, \mathbf{x} \in \mathbb{R}^d$ において、内積の順序を入れ替えても値が変わらないこと、すなわち $\mathbf{w}^\top \mathbf{x} = \mathbf{x}^\top \mathbf{w}$ となることを示せ。
-3. 行列 $B \in \mathbb{R}^{m \times d}$ と縦ベクトル $\mathbf{v} \in \mathbb{R}^d$ の積 $B\mathbf{v}$ について以下を示せ。
-   - $B$ を $m$ 個の横ベクトル $\mathbf{b}_1^\top, \dots, \mathbf{b}_m^\top$ が縦に並んだものとみなした場合、$B\mathbf{v}$ は各 $\mathbf{b}_i^\top \mathbf{v}$ という内積を縦に並べたベクトルになること。
-   - $B$ を $d$ 個の縦ベクトル $\boldsymbol{\beta}_1, \dots, \boldsymbol{\beta}_d$ が横に並んだものとみなした場合、$B\mathbf{v}$ は $\sum_{j=1}^d v_j \boldsymbol{\beta}_j$ という列ベクトルの線形結合（重み付き和）になること。
-4. 線型モデルの各データ $\mathbf{x}_i$ に対する予測値は $\hat{y}_i = \boldsymbol{\theta}^\top \boldsymbol{\phi}(\mathbf{x}_i)$ であるが、これをスカラーの性質より $\boldsymbol{\theta}^\top \boldsymbol{\phi}(\mathbf{x}_i) = \boldsymbol{\phi}(\mathbf{x}_i)^\top \boldsymbol{\theta}$ とみなす。$n$ 個のデータに対する予測値を縦に並べたベクトル $\hat{\mathbf{y}} = (\hat{y}_1, \dots, \hat{y}_n)^\top$ を計算する際、
+1. **【横ベクトル $\times$ 縦ベクトル $\to$ スカラー】**
+   $d$ 次元縦ベクトル $\mathbf{a}, \mathbf{b}$ について、横ベクトル $\mathbf{a}^\top$ と縦ベクトル $\mathbf{b}$ を掛けるとスカラーになる。
    $$
-   \hat{\mathbf{y}} = \begin{pmatrix} \boldsymbol{\phi}(\mathbf{x}_1)^\top \\ \vdots \\ \boldsymbol{\phi}(\mathbf{x}_n)^\top \end{pmatrix} \boldsymbol{\theta} = \Phi \boldsymbol{\theta}
+   \mathbf{a}^\top \mathbf{b} = 
+   \begin{pmatrix} a_1 & a_2 & \dots & a_d \end{pmatrix}
+   \begin{pmatrix} b_1 \\ b_2 \\ \vdots \\ b_d \end{pmatrix}
+   = c
    $$
-   と表すことができる。このとき、計画行列 $\Phi \in \mathbb{R}^{n \times d}$ はどのような行列として定義されるか。個々の特徴ベクトル $\boldsymbol{\phi}(\mathbf{x}_i)$ を横ベクトルとして並べた形になり、各要素の特徴が列ではなく行に対応するように「転置」された構造になることを確認せよ。
+   この結果 $c$ が内積の定義式 $\langle \mathbf{a}, \mathbf{b} \rangle = a_1b_1 + \dots + a_db_d$ と一致することを、行と列の積の定義から確認せよ。
+   
+2. **【内積の順序の入れ替え】**
+   上記と同様に、2つのベクトル $\mathbf{w}, \mathbf{x} \in \mathbb{R}^d$ において、
+   $$
+   \mathbf{w}^\top \mathbf{x} = \mathbf{x}^\top \mathbf{w}
+   $$
+   となることを、成分ごとの計算式を用いて示せ。
+
+3. **【行列 $\times$ 縦ベクトルの2つの見方】**
+   行列 $B \in \mathbb{R}^{m \times d}$ と縦ベクトル $\mathbf{v} \in \mathbb{R}^d$ の積 $B\mathbf{v}$ について、以下の2つの視点から成分計算を行い、図式の意味が正しいことを示せ。
+
+   - **横ベクトルが縦に並んでいるとみなす場合（内積の縦並び）：**
+     $$
+     B\mathbf{v} = 
+     \begin{pmatrix} \mathbf{b}_1^\top \\ \mathbf{b}_2^\top \\ \vdots \\ \mathbf{b}_m^\top \end{pmatrix} \mathbf{v}
+     = \begin{pmatrix} \mathbf{b}_1^\top \mathbf{v} \\ \mathbf{b}_2^\top \mathbf{v} \\ \vdots \\ \mathbf{b}_m^\top \mathbf{v} \end{pmatrix}
+     $$
+     行列の各行が、それぞれ $\mathbf{v}$ との内積として計算されることを確かめよ。
+
+   - **縦ベクトルが横に並んでいるとみなす場合（列ベクトルの重み付き和）：**
+     $$
+     B\mathbf{v} = 
+     \begin{pmatrix} \boldsymbol{\beta}_1 & \boldsymbol{\beta}_2 & \dots & \boldsymbol{\beta}_d \end{pmatrix}
+     \begin{pmatrix} v_1 \\ v_2 \\ \vdots \\ v_d \end{pmatrix}
+     = v_1 \boldsymbol{\beta}_1 + v_2 \boldsymbol{\beta}_2 + \dots + v_d \boldsymbol{\beta}_d
+     $$
+     計算結果が各列ベクトル $\boldsymbol{\beta}_j$ の線形結合（重み $v_j$ での和）になることを確かめよ。
+
+4. **【複数データをまとめて扱う文字列表現（計画行列）】**
+   線型モデルの各データ $\mathbf{x}_i$ に対する予測値は $\hat{y}_i = \boldsymbol{\theta}^\top \boldsymbol{\phi}(\mathbf{x}_i)$ であるが、性質2より $\boldsymbol{\theta}^\top \boldsymbol{\phi}(\mathbf{x}_i) = \boldsymbol{\phi}(\mathbf{x}_i)^\top \boldsymbol{\theta}$ とみなす。
+   $n$ 個のデータに対する予測値を縦に並べたベクトル $\hat{\mathbf{y}}$ を計算する際、
+   $$
+   \hat{\mathbf{y}} = \begin{pmatrix} \hat{y}_1 \\ \hat{y}_2 \\ \vdots \\ \hat{y}_n \end{pmatrix} 
+   = \begin{pmatrix} \boldsymbol{\phi}(\mathbf{x}_1)^\top \\ \boldsymbol{\phi}(\mathbf{x}_2)^\top \\ \vdots \\ \boldsymbol{\phi}(\mathbf{x}_n)^\top \end{pmatrix} \boldsymbol{\theta} 
+   = \Phi \boldsymbol{\theta}
+   $$
+   と表す。
+   このとき、計画行列 $\Phi \in \mathbb{R}^{n \times d}$ が、個々の特徴ベクトル $\boldsymbol{\phi}(\mathbf{x}_i)$ を横ベクトルに「転置」して縦に並べた構造（各要素の特徴が列ではなく行に対応する）として定義されることを成分を用いて確認せよ。
 
 ::: {.right}
 [（解答・解説へ）](#a:3-matrix-vector-patterns)
