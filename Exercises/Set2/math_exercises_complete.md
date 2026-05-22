@@ -317,111 +317,169 @@ $$
 
 ## 最小二乗法の真髄：偏微分から一階の条件へ
 
-### 偏微分と勾配ベクトルの書き下し {#q:2-partial-derivative-gradient .questionbox difficulty="★1"}
+### 偏微分と勾配 {#q:3-multivariate-gradient .questionbox difficulty="★2"}
 
-目的関数 $L(w,b) = \frac{1}{n} \sum_{i=1}^n (y_i - wx_i - b)^2$ とする。この目的関数について、勾配ベクトル $\nabla_{(w,b)} L(w,b)$ を求めよ。
+ベクトル $\mathbf{w} = (w_1, w_2, w_3)^\top \in \mathbb{R}^3$ に対する以下の関数 $g(\mathbf{w})$ について、勾配 $\nabla g(\mathbf{w})$ を求めよ。
+$$
+g(\mathbf{w}) = w_1^2 + 2w_2^2 + 3w_3^2 - 4w_1w_2 - 6w_2w_3
+$$
+
+::: {.right}
+[（解答・解説へ）](#a:3-multivariate-gradient)
+:::
+
+### 線型単回帰モデルの最適パラメータ導出 {#q:2-partial-derivative-gradient .questionbox difficulty="★2"}
+
+1次元の入力 $x$ に対する線型単回帰モデル $f_{w,b}(x) = wx + b$ を考える。$n$ 個の訓練データ $\{(x_i, y_i)\}_{i=1}^n$ に対する目的関数（経験リスク）を二乗誤差を用いて
+$$
+L(w,b) = \frac{1}{n} \sum_{i=1}^n (y_i - (wx_i + b))^2
+$$
+と定義する。この目的関数を最小化する最適なパラメータ $(\hat{w}, \hat{b})$ を、以下の誘導に従って導出せよ。
+
+1. 目的関数 $L(w,b)$ を $w$ および $b$ について偏微分し、勾配 $\nabla L(w,b) = \begin{pmatrix} \frac{\partial L}{\partial w} \\ \frac{\partial L}{\partial b} \end{pmatrix}$ を求めよ。
+2. 一階の条件 $\nabla L(w,b) = \mathbf{0}$ を用いて、パラメータ $w, b$ に関する連立方程式を導き、それを行列とベクトルを用いた以下の形に整理せよ。
+   $$
+   \begin{pmatrix} ? & ? \\ ? & ? \end{pmatrix} \begin{pmatrix} w \\ b \end{pmatrix} = \begin{pmatrix} ? \\ ? \end{pmatrix}
+   $$
+3. 上記の行列方程式を解くことで、最適なパラメータ $(\hat{w}, \hat{b})$ を求める式が
+   $$
+   \begin{pmatrix} \hat{w} \\ \hat{b} \end{pmatrix} = \begin{pmatrix} \sum_{i=1}^n x_i^2 & \sum_{i=1}^n x_i \\ \sum_{i=1}^n x_i & n \end{pmatrix}^{-1} \begin{pmatrix} \sum_{i=1}^n x_i y_i \\ \sum_{i=1}^n y_i \end{pmatrix}
+   $$
+   となることを示せ。
 
 ::: {.right}
 [（解答・解説へ）](#a:2-partial-derivative-gradient)
 :::
 
-### 一階の条件からの式変形 {#q:2-first-order-conditions-scalar .questionbox difficulty="★1"}
-
-最適解において勾配ベクトルがゼロになるという一階の条件 $\nabla L(w,b) = \mathbf{0}$ のうち、$\frac{\partial L}{\partial b} = 0$ の式を変形し、最適な切片 $\hat{b}$ が、サンプルの平均値 $\bar{x} = \frac{1}{n}\sum_{i=1}^n x_i$, $\bar{y} = \frac{1}{n}\sum_{i=1}^n y_i$ を用いて
-$$
-\hat{b} = \bar{y} - w\bar{x}
-$$
-と表せることを証明せよ。
-
-::: {.right}
-[（解答・解説へ）](#a:2-first-order-conditions-scalar)
-:::
-
-### 学習済みパラメータによる新規データの予測 {#q:2-prediction-with-learned-parameters .questionbox difficulty="★0"}
-
-あるデータセットに対して最小二乗法を適用したところ、学習済みパラメータが $\hat{w} = 2.5, \hat{b} = 1.0$ と求まった。このとき、新規に観測された特徴量 $x_{\text{new}} = 6$ に対する予測値 $\hat{y}_{\text{new}}$ を計算せよ。
-
-::: {.right}
-[（解答・解説へ）](#a:2-prediction-with-learned-parameters)
-:::
-
 ### 解答・解説
 
 **【該当内容】** 第2回スライド38〜45「一階の条件、偏微分・勾配」
-**【ねらい】** スライドで省略されている目的関数 $L(w,b)$ の偏微分から勾配ベクトルの構築、一階の条件による正規方程式のスカラ版の導出を完全に追体験する。
+**【ねらい】** スライドで省略されている目的関数 $L(w,b)$ の偏微分から勾配の構築、一階の条件による正規方程式のスカラ版の導出を完全に追体験する。
+
+### 問3-multivariate-gradient の解答・解説 {#a:3-multivariate-gradient .answerbox ref="q:3-multivariate-gradient"}
+
+各変数 $\mathit{w}_1, \mathit{w}_2, \mathit{w}_3$ について偏微分を行います。
+
+* $w_1$ についての偏微分：
+  $$
+  \frac{\partial g}{\partial w_1} = 2w_1 - 4w_2
+  $$
+* $w_2$ についての偏微分：
+  $$
+  \frac{\partial g}{\partial w_2} = 4w_2 - 4w_1 - 6w_3
+  $$
+* $w_3$ についての偏微分：
+  $$
+  \frac{\partial g}{\partial w_3} = 6w_3 - 6w_2
+  $$
+
+これらをベクトルとしてまとめると、求める勾配は以下のようになります：
+$$
+\nabla g(\mathbf{w}) = \begin{pmatrix} 2w_1 - 4w_2 \\ -4w_1 + 4w_2 - 6w_3 \\ -6w_2 + 6w_3 \end{pmatrix}
+$$
+（証明終）
+
+::: {.right}
+[（問題へ戻る）](#q:3-multivariate-gradient)
+:::
 
 ### 問2-partial-derivative-gradient の解答・解説 {#a:2-partial-derivative-gradient .answerbox ref="q:2-partial-derivative-gradient"}
 
-勾配ベクトル $\nabla_{(w,b)} L(w,b)$ は、各変数に対する偏微分を縦に並べたものである：
-$$
-\nabla_{(w,b)} L(w,b) = \begin{pmatrix} \frac{\partial L}{\partial w} \\ \frac{\partial L}{\partial b} \end{pmatrix}
-$$
-それぞれの偏微分を計算する。
-
-1. **$w$ についての偏微分：**
-   合成関数の微分（チェインルール）を用いる。カッコの中身を $w$ で微分した $-x_i$ が外に出る。
+1. **偏微分と勾配の計算：**
+   合成関数の微分（チェインルール）を用いて、それぞれ $w$ と $b$ について偏微分を行う。
         $$
         \frac{\partial L}{\partial w} = \frac{1}{n} \sum_{i=1}^n 2(y_i - wx_i - b) \cdot (-x_i) = -\frac{2}{n} \sum_{i=1}^n (y_i - wx_i - b)x_i
         $$
-2. **$b$ についての偏微分：**
-   同様に、中身を $b$ で微分した $-1$ が外に出る。
         $$
         \frac{\partial L}{\partial b} = \frac{1}{n} \sum_{i=1}^n 2(y_i - wx_i - b) \cdot (-1) = -\frac{2}{n} \sum_{i=1}^n (y_i - wx_i - b)
         $$
+   これらを縦に並べたものが勾配である。
+        $$
+        \nabla L(w,b) = \begin{pmatrix} -\frac{2}{n} \sum_{i=1}^n (y_i - wx_i - b)x_i \\ -\frac{2}{n} \sum_{i=1}^n (y_i - wx_i - b) \end{pmatrix}
+        $$
 
-これらを縦に並べることで、求める勾配ベクトルは以下のようになる：
-$$
-\nabla_{(w,b)} L(w,b) = \begin{pmatrix} -\frac{2}{n} \sum_{i=1}^n (y_i - wx_i - b)x_i \\ -\frac{2}{n} \sum_{i=1}^n (y_i - wx_i - b) \end{pmatrix}
-$$
+2. **一階の条件からの連立方程式の導出：**
+   一階の条件 $\nabla L(w,b) = \mathbf{0}$ より、各成分が $0$ となる。
+        $$
+        \begin{cases}
+        -\frac{2}{n} \sum_{i=1}^n (y_i - wx_i - b)x_i = 0 \\
+        -\frac{2}{n} \sum_{i=1}^n (y_i - wx_i - b) = 0
+        \end{cases}
+        $$
+   両辺に $-\frac{n}{2}$ を掛けて整理し、$w, b$ を含む項を左辺に、含まない項を右辺にまとめる。
+        $$
+        \begin{cases}
+        w \sum_{i=1}^n x_i^2 + b \sum_{i=1}^n x_i = \sum_{i=1}^n x_i y_i \\
+        w \sum_{i=1}^n x_i + b \sum_{i=1}^n 1 = \sum_{i=1}^n y_i
+        \end{cases}
+        $$
+   ここで $\sum_{i=1}^n 1 = n$ であることに注意し、これを行列とベクトルを用いた形に書き直すと以下のようになる。
+        $$
+        \begin{pmatrix} \sum_{i=1}^n x_i^2 & \sum_{i=1}^n x_i \\ \sum_{i=1}^n x_i & n \end{pmatrix} \begin{pmatrix} w \\ b \end{pmatrix} = \begin{pmatrix} \sum_{i=1}^n x_i y_i \\ \sum_{i=1}^n y_i \end{pmatrix}
+        $$
+
+3. **最適なパラメータの導出：**
+   求めた行列方程式の両辺の左から、係数行列の逆行列を掛けることで、目的の式が導かれる。
+        $$
+        \begin{pmatrix} \hat{w} \\ \hat{b} \end{pmatrix} = \begin{pmatrix} \sum_{i=1}^n x_i^2 & \sum_{i=1}^n x_i \\ \sum_{i=1}^n x_i & n \end{pmatrix}^{-1} \begin{pmatrix} \sum_{i=1}^n x_i y_i \\ \sum_{i=1}^n y_i \end{pmatrix}
+        $$
+   （証明終）
 
 ::: {.right}
 [（問題へ戻る）](#q:2-partial-derivative-gradient)
 :::
 
-### 問2-first-order-conditions-scalar の解答・解説 {#a:2-first-order-conditions-scalar .answerbox ref="q:2-first-order-conditions-scalar"}
-
-一階の条件 $\frac{\partial L}{\partial b} = 0$ より、
-$$
--\frac{2}{n} \sum_{i=1}^n (y_i - wx_i - b) = 0
-$$
-両辺を $-\frac{2}{n}$ で割り、和を分割する。
-$$
-\sum_{i=1}^n y_i - w \sum_{i=1}^n x_i - \sum_{i=1}^n b = 0
-$$
-定数 $b$ を $n$ 回足すと $nb$ になるので、
-$$
-\sum_{i=1}^n y_i - w \sum_{i=1}^n x_i - nb = 0
-$$
-両辺を $n$ で割ると、
-$$
-\frac{1}{n}\sum_{i=1}^n y_i - w \left( \frac{1}{n}\sum_{i=1}^n x_i \right) - b = 0
-$$
-平均値の定義 $\bar{x}, \bar{y}$ を代入すると、
-$$
-\bar{y} - w\bar{x} - b = 0 \quad \Rightarrow \quad \hat{b} = \bar{y} - w\bar{x}
-$$
-が導かれる。（証明終）
-
-::: {.right}
-[（問題へ戻る）](#q:2-first-order-conditions-scalar)
-:::
-
-### 問2-prediction-with-learned-parameters の解答・解説 {#a:2-prediction-with-learned-parameters .answerbox ref="q:2-prediction-with-learned-parameters"}
-
-学習済みモデル $f(x) = \hat{w}x + \hat{b}$ に数値を代入する。
-$$
-\hat{y}_{\text{new}} = 2.5 \times 6 + 1.0 = 15.0 + 1.0 = 16.0
-$$
-
-::: {.right}
-[（問題へ戻る）](#q:2-prediction-with-learned-parameters)
-:::
-
----
-
 # 線型モデルの行列表現と正則化・モデル選択
 
 ## ベクトルの内積と性質
+
+### 行列・ベクトルの積の計算練習 {#q:3-matrix-vector-multiplication-practice .questionbox difficulty="★0"}
+
+以下の行列・ベクトルの積を計算せよ。
+
+1. **【行列 $\times$ 行列】**
+   $$
+   \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix} \begin{pmatrix} 2 & 0 & 1 \\ 1 & 3 & -1 \end{pmatrix}
+   $$
+2. **【行列 $\times$ 縦ベクトル】**
+   $$
+   \begin{pmatrix} 1 & -1 & 2 \\ 0 & 3 & 1 \end{pmatrix} \begin{pmatrix} 2 \\ 1 \\ -1 \end{pmatrix}
+   $$
+3. **【横ベクトル $\times$ 行列 $\times$ 縦ベクトル（二次形式）】**
+   $$
+   \begin{pmatrix} 1 & 2 \end{pmatrix} \begin{pmatrix} 2 & 0 \\ 0 & 3 \end{pmatrix} \begin{pmatrix} 1 \\ 2 \end{pmatrix}
+   $$
+4. **【横ベクトル $\times$ 縦ベクトル（内積）】**
+   $$
+   \begin{pmatrix} 1 & 3 & -2 \end{pmatrix} \begin{pmatrix} 4 \\ -1 \\ 2 \end{pmatrix}
+   $$
+5. **【縦ベクトル $\times$ 横ベクトル】**
+   $$
+   \begin{pmatrix} 2 \\ -1 \\ 3 \end{pmatrix} \begin{pmatrix} 1 & 4 \end{pmatrix}
+   $$
+
+::: {.right}
+[（解答・解説へ）](#a:3-matrix-vector-multiplication-practice)
+:::
+
+### ベクトル・行列の積の頻出パターンと成分表示 {#q:3-matrix-vector-patterns .questionbox difficulty="★2"}
+
+行列・ベクトルの積について、以下の性質が成り立つことを成分表示を用いて確認せよ。
+
+1. $d$ 次元縦ベクトル $\mathbf{a} = (a_1, \dots, a_d)^\top$, $\mathbf{b} = (b_1, \dots, b_d)^\top$ に対し、横ベクトル $\mathbf{a}^\top$ と縦ベクトル $\mathbf{b}$ の積 $\mathbf{a}^\top \mathbf{b}$ が内積の定義式 $\langle \mathbf{a}, \mathbf{b} \rangle = a_1b_1 + \dots + a_db_d$ と一致することを示せ。
+2. 上記のベクトル $\mathbf{w}, \mathbf{x} \in \mathbb{R}^d$ において、内積の順序を入れ替えても値が変わらないこと、すなわち $\mathbf{w}^\top \mathbf{x} = \mathbf{x}^\top \mathbf{w}$ となることを示せ。
+3. 行列 $B \in \mathbb{R}^{m \times d}$ と縦ベクトル $\mathbf{v} \in \mathbb{R}^d$ の積 $B\mathbf{v}$ について以下を示せ。
+   - $B$ を $m$ 個の横ベクトル $\mathbf{b}_1^\top, \dots, \mathbf{b}_m^\top$ が縦に並んだものとみなした場合、$B\mathbf{v}$ は各 $\mathbf{b}_i^\top \mathbf{v}$ という内積を縦に並べたベクトルになること。
+   - $B$ を $d$ 個の縦ベクトル $\boldsymbol{\beta}_1, \dots, \boldsymbol{\beta}_d$ が横に並んだものとみなした場合、$B\mathbf{v}$ は $\sum_{j=1}^d v_j \boldsymbol{\beta}_j$ という列ベクトルの線形結合（重み付き和）になること。
+4. 線型モデルの各データ $\mathbf{x}_i$ に対する予測値は $\hat{y}_i = \boldsymbol{\theta}^\top \boldsymbol{\phi}(\mathbf{x}_i)$ であるが、これをスカラーの性質より $\boldsymbol{\theta}^\top \boldsymbol{\phi}(\mathbf{x}_i) = \boldsymbol{\phi}(\mathbf{x}_i)^\top \boldsymbol{\theta}$ とみなす。$n$ 個のデータに対する予測値を縦に並べたベクトル $\hat{\mathbf{y}} = (\hat{y}_1, \dots, \hat{y}_n)^\top$ を計算する際、
+   $$
+   \hat{\mathbf{y}} = \begin{pmatrix} \boldsymbol{\phi}(\mathbf{x}_1)^\top \\ \vdots \\ \boldsymbol{\phi}(\mathbf{x}_n)^\top \end{pmatrix} \boldsymbol{\theta} = \Phi \boldsymbol{\theta}
+   $$
+   と表すことができる。このとき、計画行列 $\Phi \in \mathbb{R}^{n \times d}$ はどのような行列として定義されるか。個々の特徴ベクトル $\boldsymbol{\phi}(\mathbf{x}_i)$ を横ベクトルとして並べた形になり、各要素の特徴が列ではなく行に対応するように「転置」された構造になることを確認せよ。
+
+::: {.right}
+[（解答・解説へ）](#a:3-matrix-vector-patterns)
+:::
 
 ### 【復習とヒント】ベクトルの内積と射影 {.tcolorbox option="enhanced, colback=blue!2!white, colframe=blue!60!black, fonttitle=\bfseries, drop shadow"}
 
@@ -467,7 +525,7 @@ $$
 [（解答・解説へ）](#a:3-projection-component)
 :::
 
-### 内積の線形性と対称性の証明 {#q:3-inner-product-properties .questionbox difficulty="★1"}
+### 内積の線形性と対称性の証明 {#q:3-inner-product-properties .questionbox difficulty="★3"}
 
 任意の次元のベクトル $\mathbf{x}, \mathbf{y}$ およびスカラー $c$ について、
 \begin{align*}
@@ -484,6 +542,77 @@ $$
 
 **【該当内容】** 第3回スライド22〜26「線型モデルの幾何学的解釈、内積の性質」
 **【ねらい】** 機械学習における予測の基本演算である「内積」について、重み付き和、幾何的な向きの検出、射影という3つの側面を手計算を通じて習得する。
+
+### 問3-matrix-vector-multiplication-practice の解答・解説 {#a:3-matrix-vector-multiplication-practice .answerbox ref="q:3-matrix-vector-multiplication-practice"}
+
+1. **【行列 $\times$ 行列】**
+   $$
+   \begin{pmatrix} 1 \cdot 2 + 2 \cdot 1 & 1 \cdot 0 + 2 \cdot 3 & 1 \cdot 1 + 2 \cdot (-1) \\ 3 \cdot 2 + 4 \cdot 1 & 3 \cdot 0 + 4 \cdot 3 & 3 \cdot 1 + 4 \cdot (-1) \end{pmatrix} = \begin{pmatrix} 4 & 6 & -1 \\ 10 & 12 & -1 \end{pmatrix}
+   $$
+2. **【行列 $\times$ 縦ベクトル】**
+   $$
+   \begin{pmatrix} 1 \cdot 2 + (-1) \cdot 1 + 2 \cdot (-1) \\ 0 \cdot 2 + 3 \cdot 1 + 1 \cdot (-1) \end{pmatrix} = \begin{pmatrix} -1 \\ 2 \end{pmatrix}
+   $$
+3. **【横ベクトル $\times$ 行列 $\times$ 縦ベクトル（二次形式）】**
+   先に後ろの「行列 $\times$ 縦ベクトル」を計算すると、
+   $$
+   \begin{pmatrix} 2 & 0 \\ 0 & 3 \end{pmatrix} \begin{pmatrix} 1 \\ 2 \end{pmatrix} = \begin{pmatrix} 2 \\ 6 \end{pmatrix}
+   $$
+   これに横ベクトルを掛けるとスカラーになる。
+   $$
+   \begin{pmatrix} 1 & 2 \end{pmatrix} \begin{pmatrix} 2 \\ 6 \end{pmatrix} = 1 \cdot 2 + 2 \cdot 6 = 14
+   $$
+4. **【横ベクトル $\times$ 縦ベクトル（内積）】**
+   $$
+   1 \cdot 4 + 3 \cdot (-1) + (-2) \cdot 2 = 4 - 3 - 4 = -3
+   $$
+5. **【縦ベクトル $\times$ 横ベクトル】**
+   $3 \times 1$ 行列と $1 \times 2$ 行列の積となり、$3 \times 2$ の行列が生成される。
+   $$
+   \begin{pmatrix} 2 \cdot 1 & 2 \cdot 4 \\ -1 \cdot 1 & -1 \cdot 4 \\ 3 \cdot 1 & 3 \cdot 4 \end{pmatrix} = \begin{pmatrix} 2 & 8 \\ -1 & -4 \\ 3 & 12 \end{pmatrix}
+   $$
+
+::: {.right}
+[（問題へ戻る）](#q:3-matrix-vector-multiplication-practice)
+:::
+
+### 問3-matrix-vector-patterns の解答・解説 {#a:3-matrix-vector-patterns .answerbox ref="q:3-matrix-vector-patterns"}
+
+1. $\mathbf{a}^\top = \begin{pmatrix} a_1 & \dots & a_d \end{pmatrix}$ は $1 \times d$ 行列、$\mathbf{b}$ は $d \times 1$ 行列である。行列の積の定義より、これらを掛けるとスカラー（$1 \times 1$ 行列）となる。
+   $$
+   \mathbf{a}^\top \mathbf{b} = a_1 b_1 + a_2 b_2 + \dots + a_d b_d = \sum_{i=1}^d a_i b_i
+   $$
+   これは内積 $\langle \mathbf{a}, \mathbf{b} \rangle$ の定義そのものである。
+2. 上記1の結果より、$\mathbf{w}^\top \mathbf{x} = \sum_{i=1}^d w_i x_i$ であり、また $\mathbf{x}^\top \mathbf{w} = \sum_{i=1}^d x_i w_i$ である。実数の掛け算は順序を入れ替えても値が変わらない（$w_i x_i = x_i w_i$）ため、$\mathbf{w}^\top \mathbf{x} = \mathbf{x}^\top \mathbf{w}$ となる。（※スカラーの転置は自分自身であることからも $( \mathbf{w}^\top \mathbf{x} )^\top = \mathbf{x}^\top \mathbf{w}$ として導ける）
+3. 
+   - **横ベクトルが縦に並んでいるとみなす場合：**
+     $B = \begin{pmatrix} \mathbf{b}_1^\top \\ \vdots \\ \mathbf{b}_m^\top \end{pmatrix}$ とおく。$B\mathbf{v}$ を計算すると、行列の積の定義より、各行 $\mathbf{b}_i^\top$ と列ベクトル $\mathbf{v}$ を掛けたものになるため、
+     $$
+     B\mathbf{v} = \begin{pmatrix} \mathbf{b}_1^\top \mathbf{v} \\ \vdots \\ \mathbf{b}_m^\top \mathbf{v} \end{pmatrix}
+     $$
+     となり、各成分が内積 $\mathbf{b}_i^\top \mathbf{v}$ として計算されることがわかる。
+   - **縦ベクトルが横に並んでいるとみなす場合：**
+     $B = \begin{pmatrix} \boldsymbol{\beta}_1 & \dots & \boldsymbol{\beta}_d \end{pmatrix}$ とおく。$\mathbf{v} = (v_1, \dots, v_d)^\top$ と掛けるとき、列ベクトルごとの重み付き和として展開される。
+     $$
+     B\mathbf{v} = \begin{pmatrix} \boldsymbol{\beta}_1 & \dots & \boldsymbol{\beta}_d \end{pmatrix} \begin{pmatrix} v_1 \\ \vdots \\ v_d \end{pmatrix} = v_1 \boldsymbol{\beta}_1 + v_2 \boldsymbol{\beta}_2 + \dots + v_d \boldsymbol{\beta}_d = \sum_{j=1}^d v_j \boldsymbol{\beta}_j
+     $$
+4. 予測値のベクトル $\hat{\mathbf{y}}$ は次のように書ける。
+   $$
+   \hat{\mathbf{y}} = \begin{pmatrix} \hat{y}_1 \\ \vdots \\ \hat{y}_n \end{pmatrix} = \begin{pmatrix} \boldsymbol{\phi}(\mathbf{x}_1)^\top \boldsymbol{\theta} \\ \vdots \\ \boldsymbol{\phi}(\mathbf{x}_n)^\top \boldsymbol{\theta} \end{pmatrix}
+   $$
+   これを「行列 $\times$ ベクトル」の形に分解すると、3の性質（横ベクトルが縦に並んでいるパターン）より、
+   $$
+   \hat{\mathbf{y}} = \begin{pmatrix} \boldsymbol{\phi}(\mathbf{x}_1)^\top \\ \vdots \\ \boldsymbol{\phi}(\mathbf{x}_n)^\top \end{pmatrix} \boldsymbol{\theta}
+   $$
+   となる。したがって、計画行列 $\Phi$ は、各データポイント $\mathbf{x}_i$ の特徴ベクトル $\boldsymbol{\phi}(\mathbf{x}_i)$ を「横ベクトルに転置して縦に並べた」以下の行列として定義される。
+   $$
+   \Phi = \begin{pmatrix} \phi_1(\mathbf{x}_1) & \phi_2(\mathbf{x}_1) & \dots & \phi_d(\mathbf{x}_1) \\ \phi_1(\mathbf{x}_2) & \phi_2(\mathbf{x}_2) & \dots & \phi_d(\mathbf{x}_2) \\ \vdots & \vdots & \ddots & \vdots \\ \phi_1(\mathbf{x}_n) & \phi_2(\mathbf{x}_n) & \dots & \phi_d(\mathbf{x}_n) \end{pmatrix}
+   $$
+   本来の列ベクトル $\boldsymbol{\phi}(\mathbf{x}_i)$ が行に対応するように配置されるため、形状を合わせるための工夫として機能していることがわかる。
+
+::: {.right}
+[（問題へ戻る）](#q:3-matrix-vector-patterns)
+:::
 
 ### 問3-inner-product-geometry の解答・解説 {#a:3-inner-product-geometry .answerbox ref="q:3-inner-product-geometry"}
 
@@ -525,8 +654,6 @@ $\mathbf{x} = (x_1, \dots, x_d)^\top$, $\mathbf{y} = (y_1, \dots, y_d)^\top$ と
 ::: {.right}
 [（問題へ戻る）](#q:3-inner-product-properties)
 :::
-
----
 
 ## パラメータ線型モデルの表現（特徴写像）
 
@@ -645,9 +772,7 @@ $$
 [（問題へ戻る）](#q:3-bag-of-words-representation)
 :::
 
----
-
-## 多変数関数の経験リスクと勾配ベクトル
+## 多変数関数の経験リスクと勾配
 
 ### 3変数パラメータの経験リスク {#q:3-multivariate-empirical-risk .questionbox difficulty="★1"}
 
@@ -661,19 +786,6 @@ $$
 ::: {.right}
 [（解答・解説へ）](#a:3-multivariate-empirical-risk)
 :::
-
-### 3変数関数の勾配ベクトル {#q:3-multivariate-gradient .questionbox difficulty="★1"}
-
-実数上の3変数ベクトル $\mathbf{w} = (w_1, w_2, w_3)^\top \in \mathbb{R}^3$ に対する以下の関数 $g(\mathbf{w})$ について、それぞれの変数で偏微分し、勾配ベクトル $\nabla g(\mathbf{w})$ を求めよ。
-$$
-g(\mathbf{w}) = w_1^2 + 2w_2^2 + 3w_3^2 - 4w_1w_2 - 6w_2w_3
-$$
-
-::: {.right}
-[（解答・解説へ）](#a:3-multivariate-gradient)
-:::
-
----
 
 ## 最小二乗法の行列表記と一階の条件（最重要）
 
@@ -742,32 +854,6 @@ $$
 [（問題へ戻る）](#q:3-multivariate-empirical-risk)
 :::
 
-### 問3-multivariate-gradient の解答・解説 {#a:3-multivariate-gradient .answerbox ref="q:3-multivariate-gradient"}
-
-各変数 $\mathit{w}_1, \mathit{w}_2, \mathit{w}_3$ について偏微分を行います。
-
-* $w_1$ についての偏微分：
-  $$
-  \frac{\partial g}{\partial w_1} = 2w_1 - 4w_2
-  $$
-* $w_2$ についての偏微分：
-  $$
-  \frac{\partial g}{\partial w_2} = 4w_2 - 4w_1 - 6w_3
-  $$
-* $w_3$ についての偏微分：
-  $$
-  \frac{\partial g}{\partial w_3} = 6w_3 - 6w_2
-  $$
-
-これらをベクトルとしてまとめると、求める勾配ベクトルは以下のようになります：
-$$
-\nabla g(\mathbf{w}) = \begin{pmatrix} 2w_1 - 4w_2 \\ -4w_1 + 4w_2 - 6w_3 \\ -6w_2 + 6w_3 \end{pmatrix}
-$$
-（証明終）
-
-::: {.right}
-[（問題へ戻る）](#q:3-multivariate-gradient)
-:::
 
 ### 問3-matrix-empirical-risk の解答・解説 {#a:3-matrix-empirical-risk .answerbox ref="q:3-matrix-empirical-risk"}
 
@@ -808,8 +894,6 @@ $$
 ::: {.right}
 [（問題へ戻る）](#q:3-matrix-derivative-first-order)
 :::
-
----
 
 ## 正則化（Regularization）
 
@@ -895,8 +979,6 @@ $$
 [（問題へ戻る）](#q:3-l2-regularization-gradient)
 :::
 
----
-
 ## モデル選択（交差検証）
 
 ### K-foldとLOOCVのインデックス計算 {#q:3-cross-validation-indices .questionbox difficulty="★0"}
@@ -925,8 +1007,6 @@ $$
 ::: {.right}
 [（問題へ戻る）](#q:3-cross-validation-indices)
 :::
-
----
 
 # 確率モデルと分位点回帰
 
@@ -971,8 +1051,6 @@ $$
 ::: {.right}
 [（問題へ戻る）](#q:4-conditional-probability-table)
 :::
-
----
 
 ## 分位点（Quantile）と外れ値の影響
 
@@ -1043,8 +1121,6 @@ $$
 [（問題へ戻る）](#q:4-pinball-loss-calculation)
 :::
 
----
-
 # 確率論的二値分類と非線型最適化
 
 ## ロジスティック回帰の基礎と非線型目的関数の勾配
@@ -1080,7 +1156,7 @@ $$
 $$
 l = -y \log \sigma(z) - (1-y) \log(1 - \sigma(z)) \quad (\text{ただし } z = \boldsymbol{\theta}^\top \boldsymbol{\phi}(x))
 $$
-について、チェインルール $\nabla_{\boldsymbol{\theta}} l = \frac{\partial l}{\partial z} \cdot \nabla_{\boldsymbol{\theta}} z$ を用いて、勾配ベクトルが
+について、チェインルール $\nabla_{\boldsymbol{\theta}} l = \frac{\partial l}{\partial z} \cdot \nabla_{\boldsymbol{\theta}} z$ を用いて、勾配が
 $$
 \nabla_{\boldsymbol{\theta}} l = (\sigma(z) - y)\boldsymbol{\phi}(x)
 $$
@@ -1167,8 +1243,6 @@ $$
 ::: {.right}
 [（問題へ戻る）](#q:5-cross-entropy-gradient)
 :::
-
----
 
 # 確率論的多値分類とソフトマックス回帰
 

@@ -50,3 +50,68 @@
 ::: {.right}
 [（問題へ戻る）](#q:1-2-2)
 :::
+
+# 第2回: 最適化と最小二乗法・偏微分
+
+## 最小二乗法の真髄：偏微分から一階の条件へ
+
+### 一階の条件からの式変形 {#q:2-first-order-conditions-scalar .questionbox difficulty="★1"}
+
+最適解において勾配ベクトルがゼロになるという一階の条件 $\nabla L(w,b) = \mathbf{0}$ のうち、$\frac{\partial L}{\partial b} = 0$ の式を変形し、最適な切片 $\hat{b}$ が、サンプルの平均値 $\bar{x} = \frac{1}{n}\sum_{i=1}^n x_i$, $\bar{y} = \frac{1}{n}\sum_{i=1}^n y_i$ を用いて
+$$
+\hat{b} = \bar{y} - w\bar{x}
+$$
+と表せることを証明せよ。
+
+::: {.right}
+[（解答・解説へ）](#a:2-first-order-conditions-scalar)
+:::
+
+### 学習済みパラメータによる新規データの予測 {#q:2-prediction-with-learned-parameters .questionbox difficulty="★0"}
+
+あるデータセットに対して最小二乗法を適用したところ、学習済みパラメータが $\hat{w} = 2.5, \hat{b} = 1.0$ と求まった。このとき、新規に観測された特徴量 $x_{\text{new}} = 6$ に対する予測値 $\hat{y}_{\text{new}}$ を計算せよ。
+
+::: {.right}
+[（解答・解説へ）](#a:2-prediction-with-learned-parameters)
+:::
+
+### 解答・解説
+
+### 問2-first-order-conditions-scalar の解答・解説 {#a:2-first-order-conditions-scalar .answerbox ref="q:2-first-order-conditions-scalar"}
+
+一階の条件 $\frac{\partial L}{\partial b} = 0$ より、
+$$
+-\frac{2}{n} \sum_{i=1}^n (y_i - wx_i - b) = 0
+$$
+両辺を $-\frac{2}{n}$ で割り、和を分割する。
+$$
+\sum_{i=1}^n y_i - w \sum_{i=1}^n x_i - \sum_{i=1}^n b = 0
+$$
+定数 $b$ を $n$ 回足すと $nb$ になるので、
+$$
+\sum_{i=1}^n y_i - w \sum_{i=1}^n x_i - nb = 0
+$$
+両辺を $n$ で割ると、
+$$
+\frac{1}{n}\sum_{i=1}^n y_i - w \left( \frac{1}{n}\sum_{i=1}^n x_i \right) - b = 0
+$$
+平均値の定義 $\bar{x}, \bar{y}$ を代入すると、
+$$
+\bar{y} - w\bar{x} - b = 0 \quad \Rightarrow \quad \hat{b} = \bar{y} - w\bar{x}
+$$
+が導かれる。（証明終）
+
+::: {.right}
+[（問題へ戻る）](#q:2-first-order-conditions-scalar)
+:::
+
+### 問2-prediction-with-learned-parameters の解答・解説 {#a:2-prediction-with-learned-parameters .answerbox ref="q:2-prediction-with-learned-parameters"}
+
+学習済みモデル $f(x) = \hat{w}x + \hat{b}$ に数値を代入する。
+$$
+\hat{y}_{\text{new}} = 2.5 \times 6 + 1.0 = 15.0 + 1.0 = 16.0
+$$
+
+::: {.right}
+[（問題へ戻る）](#q:2-prediction-with-learned-parameters)
+:::
