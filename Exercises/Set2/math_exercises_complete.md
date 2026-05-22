@@ -473,21 +473,9 @@ $$
    \begin{pmatrix} b_1 \\ b_2 \\ \vdots \\ b_d \end{pmatrix}
    = c
    $$
-   この結果 $c$ が内積 $\langle \mathbf{a}, \mathbf{b} \rangle = a_1b_1 + \dots + a_db_d$ と一致することを、成分計算により確認せよ。
+   この結果 $c$ が内積 $\langle \mathbf{a}, \mathbf{b} \rangle = a_1b_1 + \dots + a_db_d$ と一致することを、成分計算により確認せよ。また、同様にして $\mathbf{a}^\top \mathbf{b} = \mathbf{b}^\top \mathbf{a}$ となること（内積の順序の入れ替え可能性）も確認せよ。ただし、$1\times 1$行列はスカラーと同一視してよい。
 
-2. **【内積の順序の入れ替え】**
-   $$
-   \mathbf{w}^\top \mathbf{x} =
-   \begin{pmatrix} w_1 & w_2 & \dots & w_d \end{pmatrix}
-   \begin{pmatrix} x_1 \\ x_2 \\ \vdots \\ x_d \end{pmatrix}
-   \quad \text{と} \quad
-   \mathbf{x}^\top \mathbf{w} =
-   \begin{pmatrix} x_1 & x_2 & \dots & x_d \end{pmatrix}
-   \begin{pmatrix} w_1 \\ w_2 \\ \vdots \\ w_d \end{pmatrix}
-   $$
-   について、成分計算から $\mathbf{w}^\top \mathbf{x} = \mathbf{x}^\top \mathbf{w}$ となることを確認せよ。
-
-3. **【行列 $\times$ 縦ベクトル $\to$ 縦ベクトル】**
+2. **【行列 $\times$ 縦ベクトル $\to$ 縦ベクトル】**
    行列 $B \in \mathbb{R}^{m \times d}$ と縦ベクトル $\mathbf{v} \in \mathbb{R}^d$ の積 $B\mathbf{v}$ について、以下の2つのブロック表示が成り立つことを成分計算により確認せよ。
 
    - **横ベクトルが縦に並んでいるとみなす場合（内積の縦並び）：**
@@ -507,8 +495,8 @@ $$
      = v_1 \boldsymbol{\beta}_1 + v_2 \boldsymbol{\beta}_2 + \dots + v_d \boldsymbol{\beta}_d
      $$
 
-4. **【複数データの予測値の行列表現（計画行列）】**
-   線型モデルの各データに対する予測値を $\hat{y}_i = \boldsymbol{\phi}(\mathbf{x}_i)^\top \boldsymbol{\theta}$ と性質2を用いて表すとき、
+3. **【複数データの予測値の行列表現（計画行列）】**
+   線型モデルの各データに対する予測値を $\hat{y}_i = \boldsymbol{\phi}(\mathbf{x}_i)^\top \boldsymbol{\theta}$ と性質1を用いて表すとき、
    $$
    \hat{\mathbf{y}} = \begin{pmatrix} \hat{y}_1 \\ \hat{y}_2 \\ \vdots \\ \hat{y}_n \end{pmatrix}
    = \begin{pmatrix} \quad \boldsymbol{\phi}(\mathbf{x}_1)^\top \quad \\ \quad \boldsymbol{\phi}(\mathbf{x}_2)^\top \quad \\ \vdots \\ \quad \boldsymbol{\phi}(\mathbf{x}_n)^\top \quad \end{pmatrix} \boldsymbol{\theta}
@@ -621,9 +609,8 @@ $$
    $$
    \mathbf{a}^\top \mathbf{b} = a_1 b_1 + a_2 b_2 + \dots + a_d b_d = \sum_{i=1}^d a_i b_i
    $$
-   これは内積 $\langle \mathbf{a}, \mathbf{b} \rangle$ の定義そのものである。
-2. 上記1の結果より、$\mathbf{w}^\top \mathbf{x} = \sum_{i=1}^d w_i x_i$ であり、また $\mathbf{x}^\top \mathbf{w} = \sum_{i=1}^d x_i w_i$ である。実数の掛け算は順序を入れ替えても値が変わらない（$w_i x_i = x_i w_i$）ため、$\mathbf{w}^\top \mathbf{x} = \mathbf{x}^\top \mathbf{w}$ となる。（※スカラーの転置は自分自身であることからも $( \mathbf{w}^\top \mathbf{x} )^\top = \mathbf{x}^\top \mathbf{w}$ として導ける）
-3.
+   これは内積 $\langle \mathbf{a}, \mathbf{b} \rangle$ の定義そのものである。また、同様に計算すると $\mathbf{b}^\top \mathbf{a} = \sum_{i=1}^d b_i a_i$ であり、実数の積は順序を入れ替えても値が変わらない（$a_i b_i = b_i a_i$）ため、$\mathbf{a}^\top \mathbf{b} = \mathbf{b}^\top \mathbf{a}$ となる。
+2.
    - **横ベクトルが縦に並んでいるとみなす場合：**
      $B = \begin{pmatrix} \quad \mathbf{b}_1^\top \quad \\ \vdots \\ \quad \mathbf{b}_m^\top \quad \end{pmatrix}$ とおく。$B\mathbf{v}$ を計算すると、行列の積の定義より、各行 $\mathbf{b}_i^\top$ と列ベクトル $\mathbf{v}$ を掛けたものになるため、
      $$
@@ -635,11 +622,11 @@ $$
      $$
      B\mathbf{v} = \begin{pmatrix} \boldsymbol{\beta}_1 & \dots & \boldsymbol{\beta}_d \end{pmatrix} \begin{pmatrix} v_1 \\ \vdots \\ v_d \end{pmatrix} = v_1 \boldsymbol{\beta}_1 + v_2 \boldsymbol{\beta}_2 + \dots + v_d \boldsymbol{\beta}_d = \sum_{j=1}^d v_j \boldsymbol{\beta}_j
      $$
-4. 予測値のベクトル $\hat{\mathbf{y}}$ は次のように書ける。
+3. 予測値のベクトル $\hat{\mathbf{y}}$ は次のように書ける。
    $$
    \hat{\mathbf{y}} = \begin{pmatrix} \hat{y}_1 \\ \vdots \\ \hat{y}_n \end{pmatrix} = \begin{pmatrix} \boldsymbol{\phi}(\mathbf{x}_1)^\top \boldsymbol{\theta} \\ \vdots \\ \boldsymbol{\phi}(\mathbf{x}_n)^\top \boldsymbol{\theta} \end{pmatrix}
    $$
-   これを「行列 $\times$ ベクトル」の形に分解すると、3の性質（横ベクトルが縦に並んでいるパターン）より、
+   これを「行列 $\times$ ベクトル」の形に分解すると、2の性質（横ベクトルが縦に並んでいるパターン）より、
    $$
    \hat{\mathbf{y}} = \begin{pmatrix} \quad \boldsymbol{\phi}(\mathbf{x}_1)^\top \quad \\ \vdots \\ \quad \boldsymbol{\phi}(\mathbf{x}_n)^\top \quad \end{pmatrix} \boldsymbol{\theta}
    $$
