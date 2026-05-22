@@ -31,15 +31,40 @@ header-includes: |
 
 また、各設問には以下の難易度が設定されています。
 
-* **難易度：★0 (Basic)** ：スライドの定義そのものの確認や、直感的な代入問題。
-* **難易度：★1 (Standard)** ：講義の数式展開を再現する標準的な手計算。
-* **難易度：★2 (Advanced)** ：行列の微分や文字式による一般的な証明など、一歩進んだ数学的体力を要する問題。
+* **難易度：★0 (不要)** ：解き方が分かるなら解かなくてもいい。
+* **難易度：★1 (確認)** ：スライドの定義そのものの確認や、簡単な代入問題。
+* **難易度：★2 (基礎)** ：必須。講義の論理展開の行間を埋める標準的な問題。
+* **難易度：★3 (発展)** ：余裕があれば解くとよい。
 
 ---
 
 # 確率の基礎とリスク関数・ERM
 
 ## 確率の基礎と期待値・分散の計算
+
+### 指示関数（Indicator function）の理解 {#q:1-indicator-function .questionbox difficulty="★1"}
+
+機械学習の理論（特に損失関数や分類問題の評価など）では、ある条件が満たされているか否かを表す**指示関数（定義関数）** $\ind$ が頻出する。条件（または事象） $A$ に対して、指示関数 $\ind\{A\}$ は以下のように定義される。
+$$
+\ind\{A\} = \begin{cases}
+1 & (\text{条件 } A \text{ が真のとき}) \\
+0 & (\text{条件 } A \text{ が偽のとき})
+\end{cases}
+$$
+
+1. $x$ が次の値のとき、指示関数 $\ind\{x \ge 1\}$ の値をそれぞれ求めよ。
+   (a) $x = 0$
+   (b) $x = 2$
+2. 確率変数 $Y := \ind\{X \ge 1\}$ の確率分布表（とり得る値と、それぞれの値をとる確率の表）の空欄（ア）〜（エ）を埋めよ。
+
+| $y$ | $\mathbb{P}(Y=y)$ |
+| :---: | :---: |
+| （ア） | （ウ） |
+| （イ） | （エ） |
+
+::: {.right}
+[（解答・解説へ）](#a:1-indicator-function)
+:::
 
 ### 離散型確率分布での期待値・分散計算 {#q:1-discrete-expectation-variance .questionbox difficulty="★0"}
 
@@ -51,25 +76,6 @@ header-includes: |
 
 ::: {.right}
 [（解答・解説へ）](#a:1-discrete-expectation-variance)
-:::
-
-### 指示関数（Indicator function）の理解 {#q:1-indicator-function .questionbox difficulty="★0"}
-
-機械学習の理論（特に損失関数や分類問題の評価など）では、ある条件が満たされているか否かを表す**指示関数（定義関数）** $\ind$ が頻出する。条件（または事象） $A$ に対して、指示関数 $\ind_A$ または $\ind\{A\}$ は以下のように定義される。
-$$
-\ind\{A\} = \begin{cases}
-1 & (\text{条件 } A \text{ が真のとき}) \\
-0 & (\text{条件 } A \text{ が偽のとき})
-\end{cases}
-$$
-
-1. 確率変数 $X$ が次の値をとるときの指示関数 $\ind\{X \ge 1\}$ の値をそれぞれ求めよ。
-   (a) $X = 0$
-   (b) $X = 2$
-2. 確率変数 $Y = \ind\{X \ge 1\}$ がとり得る値と、それぞれの値をとる確率（確率分布）を求めよ。
-
-::: {.right}
-[（解答・解説へ）](#a:1-indicator-function)
 :::
 
 ### 連続型確率分布での期待値・分散計算 {#q:1-continuous-expectation-variance .questionbox difficulty="★0"}
@@ -99,7 +105,7 @@ $$
 * \textbf{分散と共分散の関係}: $\mathbb{V}[X] = Cov(X,X)$
 * \textbf{共分散の双線形性}: $Cov(aX+bY, Z) = aCov(X,Z) + bCov(Y,Z)$
 
-### 共分散（Covariance）の2次形式的振る舞い {#q:1-variance-formula-proof .questionbox difficulty="★1"}
+### 共分散（Covariance）の2次形式的振る舞い {#q:1-variance-formula-proof .questionbox difficulty="★3"}
 
 確率変数 $X, Y, Z$ と定数 $a, b$ について、共分散の性質（双線形性・対称性）
 \begin{align*}
@@ -167,14 +173,13 @@ Cov(X,Y) &= Cov(Y,X)
    * $Y = 1$ となるのは、条件 $X \ge 1$ が真のとき、すなわち $X = 1$ または $X = 2$ のときです。
      したがって、$\mathbb{P}(Y = 1) = \mathbb{P}(X = 1) + \mathbb{P}(X = 2) = 0.5 + 0.3 = 0.8$ となります。
 
-   まとめると、確率分布は以下の通りです：
-   $$
-   Y = \begin{cases}
-   1 & (\text{確率 } 0.8) \\
-   0 & (\text{確率 } 0.2)
-   \end{cases}
-   $$
- ::: {.right}
+   まとめると、確率分布の空欄に入る値は以下の通りです：
+   * （ア） $0$
+   * （イ） $1$
+   * （ウ） $0.2$
+   * （エ） $0.8$
+
+::: {.right}
 [（問題へ戻る）](#q:1-indicator-function)
 :::
 
@@ -215,43 +220,20 @@ Cov(X,Y) &= Cov(Y,X)
 [（問題へ戻る）](#q:1-variance-formula-proof)
 :::
 
----
-
 # 最適化と最小二乗法・偏微分
 
 ## 経験リスクの数式化（シグマを用いた書き下し）
 
-### 経験リスクの立式 {#q:2-empirical-risk-formulation .questionbox difficulty="★1"}
+### 経験リスクの立式 {#q:2-empirical-risk-formulation .questionbox difficulty="★2"}
 
-$n$ 個の訓練データ $\{(x_i, y_i)\}_{i=1}^n$ が与えられている。モデルクラスとして1次関数 $f_{(w,b)}(x) = wx + b$ を採用し、損失関数を二乗誤差 $l(y, \hat{y}) = (y - \hat{y})^2$ とするとき、目的関数 $L(w,b)$ を $\sum_{i=1}^n$ を用いて書き下せ。
+$n$ 個の訓練データ $\{(x_i, y_i)\}_{i=1}^n$ が与えられている。モデルクラスとして1次関数 $f_{(w,b)}(x) = wx + b$ を採用し、損失関数を二乗誤差 $l(y, \hat{y}) = (y - \hat{y})^2$ とするとき、経験リスク $\hat{R}(f_{(w,b)})$ を書き下せ。
+<!-- $\sum_{i=1}^n$ を用いて -->
 
 ::: {.right}
 [（解答・解説へ）](#a:2-empirical-risk-formulation)
 :::
 
-### 目的関数のパラメータ関数化 {#q:2-erm-parameter-function .questionbox difficulty="★0"}
-
-以下の2つのデータポイントが与えられている。
-
-\begin{center}
-\begin{tabular}{cc}
-$x$ & $y$ \\ \hline
-$1$ & $2$ \\
-$3$ & $4$
-\end{tabular}
-\end{center}
-
-予測モデルを原点を通る直線 $f_\theta(x) = \theta x$ とし、損失関数を二乗誤差とする。このとき、経験リスク
-$$
-\hat{R}(f_\theta) = \frac{1}{2} \sum_{i=1}^2 (y_i - f_\theta(x_i))^2
-$$
-に具体的な数値を代入し、$\theta$ の2次関数 $A\theta^2 + B\theta + C$ の形に展開・整理せよ。
-
-::: {.right}
-[（解答・解説へ）](#a:2-erm-parameter-function)
-:::
-
-### 最適化問題の定式化：穴埋め {#q:2-optimization-formulation-blank .questionbox difficulty="★0"}
+### 最適化問題の定式化：穴埋め {#q:2-optimization-formulation-blank .questionbox difficulty="★2"}
 
 以下の最適化問題の定式化について、空欄 (ア) 〜 (エ) に入る適切な数式や記号を答えよ。
 
@@ -267,6 +249,26 @@ $$
 
 ::: {.right}
 [（解答・解説へ）](#a:2-optimization-formulation-blank)
+:::
+
+
+### 目的関数のパラメータ関数化 {#q:2-erm-parameter-function .questionbox difficulty="★0"}
+
+以下の2つのデータポイントが与えられている。
+
+| $x$ | $y$ |
+| :---: | :---: |
+| $1$ | $2$ |
+| $3$ | $4$ |
+
+予測モデルを原点を通る直線 $f_\theta(x) = \theta x$ とし、損失関数を二乗誤差とする。このとき、経験リスク
+$$
+\hat{R}(f_\theta) = \frac{1}{2} \sum_{i=1}^2 (y_i - f_\theta(x_i))^2
+$$
+に具体的な数値を代入し、$\theta$ の2次関数 $A\theta^2 + B\theta + C$ の形に展開・整理せよ。
+
+::: {.right}
+[（解答・解説へ）](#a:2-erm-parameter-function)
 :::
 
 ### 解答・解説
@@ -312,8 +314,6 @@ $$
 ::: {.right}
 [（問題へ戻る）](#q:2-optimization-formulation-blank)
 :::
-
----
 
 ## 最小二乗法の真髄：偏微分から一階の条件へ
 

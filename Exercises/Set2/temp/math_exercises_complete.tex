@@ -88,14 +88,14 @@
 \begin{itemize}
 \tightlist
 \item
-  \textbf{難易度：★0 (Basic)}
+  \textbf{難易度：★0 (不要)} ：解き方が分かるなら解かなくてもいい。
+\item
+  \textbf{難易度：★1 (確認)}
   ：スライドの定義そのものの確認や、直感的な代入問題。
 \item
-  \textbf{難易度：★1 (Standard)}
-  ：講義の数式展開を再現する標準的な手計算。
+  \textbf{難易度：★2 (基礎)} ：講義の数式展開を再現する標準的な手計算。
 \item
-  \textbf{難易度：★2 (Advanced)}
-  ：行列の微分や文字式による一般的な証明など、一歩進んだ数学的体力を要する問題。
+  \textbf{難易度：★3 (発展)} ：一歩進んだ証明問題など。
 \end{itemize}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
@@ -103,6 +103,51 @@
 \section{確率の基礎とリスク関数・ERM}\label{ux78baux7387ux306eux57faux790eux3068ux30eaux30b9ux30afux95a2ux6570erm}
 
 \subsection{確率の基礎と期待値・分散の計算}\label{ux78baux7387ux306eux57faux790eux3068ux671fux5f85ux5024ux5206ux6563ux306eux8a08ux7b97}
+
+\begin{questionbox}[label=q:1-indicator-function]{指示関数（Indicator function）の理解 \hfill \normalfont \small 難易度：★1}
+
+機械学習の理論（特に損失関数や分類問題の評価など）では、ある条件が満たされているか否かを表す\textbf{指示関数（定義関数）}
+\(\ind\) が頻出する。条件（または事象） \(A\) に対して、指示関数
+\(\ind\{A\}\) は以下のように定義される。 \[
+\ind\{A\} = \begin{cases}
+1 & (\text{条件 } A \text{ が真のとき}) \\
+0 & (\text{条件 } A \text{ が偽のとき})
+\end{cases}
+\]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \(x\) が次の値のとき、指示関数 \(\ind\{x \ge 1\}\)
+  の値をそれぞれ求めよ。
+
+  \begin{enumerate}
+  \def\labelenumii{(\alph{enumii})}
+  \tightlist
+  \item
+    \(x = 0\)
+  \item
+    \(x = 2\)
+  \end{enumerate}
+\item
+  確率変数 \(Y := \ind\{X \ge 1\}\)
+  の確率分布表（とり得る値と、それぞれの値をとる確率の表）の空欄（ア）〜（エ）を埋めよ。
+\end{enumerate}
+
+\begin{center}
+\begin{tabular}{cc}
+\(y\) & \(\mathbb{P}(Y=y)\) \\ \hline
+（ア） & （ウ） \\
+（イ） & （エ） \\
+\end{tabular}
+\end{center}
+
+\hfill 
+
+\hyperref[a:1-indicator-function]{（解答・解説へ）}
+
+\end{questionbox}
 
 \begin{questionbox}[label=q:1-discrete-expectation-variance]{離散型確率分布での期待値・分散計算 \hfill \normalfont \small 難易度：★0}
 
@@ -123,43 +168,6 @@
 \hfill 
 
 \hyperref[a:1-discrete-expectation-variance]{（解答・解説へ）}
-
-\end{questionbox}
-
-\begin{questionbox}[label=q:1-indicator-function]{指示関数（Indicator function）の理解 \hfill \normalfont \small 難易度：★0}
-
-機械学習の理論（特に損失関数や分類問題の評価など）では、ある条件が満たされているか否かを表す\textbf{指示関数（定義関数）}
-\(\ind\) が頻出する。条件（または事象） \(A\) に対して、指示関数
-\(\ind_A\) または \(\ind\{A\}\) は以下のように定義される。 \[
-\ind\{A\} = \begin{cases}
-1 & (\text{条件 } A \text{ が真のとき}) \\
-0 & (\text{条件 } A \text{ が偽のとき})
-\end{cases}
-\]
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  確率変数 \(X\) が次の値をとるときの指示関数 \(\ind\{X \ge 1\}\)
-  の値をそれぞれ求めよ。
-
-  \begin{enumerate}
-  \def\labelenumii{(\alph{enumii})}
-  \tightlist
-  \item
-    \(X = 0\)
-  \item
-    \(X = 2\)
-  \end{enumerate}
-\item
-  確率変数 \(Y = \ind\{X \ge 1\}\)
-  がとり得る値と、それぞれの値をとる確率（確率分布）を求めよ。
-\end{enumerate}
-
-\hfill 
-
-\hyperref[a:1-indicator-function]{（解答・解説へ）}
 
 \end{questionbox}
 
@@ -217,7 +225,7 @@ p(x) = 2x \cdot \ind\{0 \le x \le 1\}
 
 \end{tcolorbox}
 
-\begin{questionbox}[label=q:1-variance-formula-proof]{共分散（Covariance）の2次形式的振る舞い \hfill \normalfont \small 難易度：★1}
+\begin{questionbox}[label=q:1-variance-formula-proof]{共分散（Covariance）の2次形式的振る舞い \hfill \normalfont \small 難易度：★3}
 
 確率変数 \(X, Y, Z\) と定数 \(a, b\)
 について、共分散の性質（双線形性・対称性） \begin{align*}
@@ -339,13 +347,20 @@ Cov(X,Y) &= Cov(Y,X)
     となります。
   \end{itemize}
 
-  まとめると、確率分布は以下の通りです： \[
-  Y = \begin{cases}
-  1 & (\text{確率 } 0.8) \\
-  0 & (\text{確率 } 0.2)
-  \end{cases}
-  \] ::: \{.right\} \hyperref[q:1-indicator-function]{（問題へ戻る）}
-  :::
+  まとめると、確率分布の空欄に入る値は以下の通りです：
+
+  \begin{itemize}
+  \tightlist
+  \item
+    （ア） \(0\)
+  \item
+    （イ） \(1\)
+  \item
+    （ウ） \(0.2\)
+  \item
+    （エ） \(0.8\) ::: \{.right\}
+    \hyperref[q:1-indicator-function]{（問題へ戻る）} :::
+  \end{itemize}
 \end{enumerate}
 
 \end{answerbox}
@@ -414,7 +429,7 @@ Cov(X,Y) &= Cov(Y,X)
 \(n\) 個の訓練データ \(\{(x_i, y_i)\}_{i=1}^n\)
 が与えられている。モデルクラスとして1次関数 \(f_{(w,b)}(x) = wx + b\)
 を採用し、損失関数を二乗誤差 \(l(y, \hat{y}) = (y - \hat{y})^2\)
-とするとき、目的関数 \(L(w,b)\) を \(\sum_{i=1}^n\) を用いて書き下せ。
+とするとき、経験リスク \(\hat{R}(f_{(w,b)})\) を書き下せ。
 
 \hfill 
 
@@ -428,9 +443,9 @@ Cov(X,Y) &= Cov(Y,X)
 
 \begin{center}
 \begin{tabular}{cc}
-$x$ & $y$ \\ \hline
-$1$ & $2$ \\
-$3$ & $4$
+\(x\) & \(y\) \\ \hline
+\(1\) & \(2\) \\
+\(3\) & \(4\) \\
 \end{tabular}
 \end{center}
 

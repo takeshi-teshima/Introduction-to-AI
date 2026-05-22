@@ -206,3 +206,58 @@ function Pandoc(doc)
   doc.blocks = new_blocks
   return doc
 end
+
+-- 4. Hook to render markdown tables as simple LaTeX tabular environments (without booktabs/longtable)
+function Table(el)
+  if FORMAT:match 'latex' then
+    local latex = "\\begin{center}\n\\begin{tabular}{"
+    local aligns = {}
+    for _, colspec in ipairs(el.colspecs) do
+      local align = colspec[1]
+      if align == 'AlignLeft' then table.insert(aligns, "l")
+      elseif align == 'AlignRight' then table.insert(aligns, "r")
+      elseif align == 'AlignCenter' then table.insert(aligns, "c")
+      else table.insert(aligns, "c") end
+    end
+    latex = latex .. table.concat(aligns, "") .. "}\n"
+    
+    local function row_to_latex(row)
+      local cells = {}
+      for _, cell in ipairs(row.cells) do
+        -- Use pandoc.utils.stringify to get plain text, or we can use 
+        -- a walk function if we want to support bold/math in cells.
+        -- For most math exercises, stringify will escape math. Wait!
+        -- If we use stringify, $x$ becomes $x$ in string?
+        -- Actually, stringify strips formatting. Let's write a small compiler for cell content.
+        -- wait, if we stringify, inline math $x$ remains $x$? No, pandoc.utils.stringify(Math("InlineMath", "x")) -> "x" but without dollar signs.
+        -- That would break math in tables!
+        -- To preserve math, we shouldn't use stringify if we can avoid it.
+        -- We can just convert the cell to LaTeX.
+        -- To convert a block/inlines to latex: pandoc.write(pandoc.Pandoc({cell}), 'latex')
+        -- Let's use pandoc.write!
+        -- Wait, a cell contains blocks (e.g. Plain or Para).
+        local cell_doc = pandoc.Pandoc(cell.contents or cell)
+        local cell_latex = pandoc.write(cell_doc, 'latex')
+        -- pandoc.write might add newlines at the end.
+        cell_latex = cell_latex:gsub("\n$", "")
+        table.insert(cells, cell_latex)
+      end
+      return table.concat(cells, " & ") .. " \\\\"
+    end
+    
+    if el.head and #el.head.rows > 0 then
+      for _, row in ipairs(el.head.rows) do
+        latex = latex .. row_to_latex(row) .. " \\hline\n"
+      end
+    end
+    
+    for _, body in ipairs(el.bodies) do
+      for _, row in ipairs(body.body) do
+        latex = latex .. row_to_latex(row) .. "\n"
+      end
+    end
+    latex = latex .. "\\end{tabular}\n\\end{center}"
+    return pandoc.RawBlock('latex', latex)
+  end
+end
+
