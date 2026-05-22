@@ -462,6 +462,64 @@ $$
 [（解答・解説へ）](#a:3-matrix-vector-multiplication-practice)
 :::
 
+### 【復習とヒント】ベクトル・行列の掛け算の頻出パターン {.tcolorbox option="enhanced, colback=blue!2!white, colframe=blue!60!black, fonttitle=\bfseries, drop shadow"}
+
+ベクトルや行列の掛け算は、それぞれの「形状」を意識することで、結果がどのような形になるか（スカラー、ベクトル、行列）を視覚的に捉えることができます。
+
+\begin{center}
+\begin{tikzpicture}[>=stealth, thick, scale=0.9, every node/.style={align=center}]
+  % カラー定義
+  \colorlet{vecbg}{cyan!10}
+  \colorlet{vecborder}{cyan!70!blue}
+  \colorlet{matbg}{magenta!10}
+  \colorlet{matborder}{magenta!70!purple}
+
+  % 1. 横ベクトル x 縦ベクトル -> スカラー
+  \begin{scope}[yshift=0cm]
+    \node[anchor=west, text=black!60!red] at (0, 0) {$\blacksquare$ \textcolor{black!80}{横ベクトル・縦ベクトルの掛け算 $\rightarrow$ スカラーになる}};
+    \draw[fill=vecbg, draw=vecborder] (2.5, -1.25) rectangle (4.5, -0.75) node[midway, font=\small] {ベクトル};
+    \draw[fill=vecbg, draw=vecborder] (4.8, -2.0) rectangle (5.3, 0.0) node[midway, font=\small, align=center] {ベ\\ク\\ト\\ル};
+    \node at (5.8, -1.0) {$=$};
+    \node at (6.8, -1.0) {スカラー};
+    \node[anchor=west] at (8.0, -1.0) {$\mathbf{a}^\top \mathbf{b} = c$};
+  \end{scope}
+
+  % 2. 縦ベクトル x 横ベクトル -> 行列
+  \begin{scope}[yshift=-3.0cm]
+    \node[anchor=west, text=black!60!red] at (0, 0) {$\blacksquare$ \textcolor{black!80}{縦ベクトル・横ベクトルの掛け算 $\rightarrow$ 行列になる}};
+    \draw[fill=vecbg, draw=vecborder] (3.0, -2.0) rectangle (3.5, 0.0) node[midway, font=\small, align=center] {ベ\\ク\\ト\\ル};
+    \draw[fill=vecbg, draw=vecborder] (3.8, -1.25) rectangle (5.8, -0.75) node[midway, font=\small] {ベクトル};
+    \node at (6.3, -1.0) {$=$};
+    \draw[fill=matbg, draw=matborder] (6.8, -2.0) rectangle (8.8, 0.0) node[midway, font=\small] {行列};
+    \node[anchor=west] at (9.3, -1.0) {$\mathbf{a} \mathbf{b}^\top = M$};
+  \end{scope}
+
+  % 3. 行列 x 縦ベクトル -> 縦ベクトル
+  \begin{scope}[yshift=-6.0cm]
+    \node[anchor=west, text=black!60!red] at (0, 0) {$\blacksquare$ \textcolor{black!80}{行列を縦ベクトルに掛ける $\rightarrow$ 縦ベクトルになる}};
+    \draw[fill=matbg, draw=matborder] (3.5, -2.0) rectangle (5.5, 0.0) node[midway, font=\small] {行列};
+    \draw[fill=vecbg, draw=vecborder] (5.8, -2.0) rectangle (6.3, 0.0) node[midway, font=\small, align=center] {ベ\\ク\\ト\\ル};
+    \node at (6.8, -1.0) {$=$};
+    \draw[fill=vecbg, draw=vecborder] (7.3, -2.0) rectangle (7.8, 0.0) node[midway, font=\small, align=center] {ベ\\ク\\ト\\ル};
+    \node[anchor=west] at (8.3, -1.0) {$M \mathbf{x} = \mathbf{y}$};
+  \end{scope}
+
+  % 4. 横ベクトル x 行列 x 縦ベクトル -> スカラー
+  \begin{scope}[yshift=-9.0cm]
+    \node[anchor=west, text=black!60!red] at (0, 0) {$\blacksquare$ \textcolor{black!80}{横ベクトル・行列・縦ベクトルの順に掛ける $\rightarrow$ スカラーになる}};
+    \draw[fill=vecbg, draw=vecborder] (0.9, -1.25) rectangle (2.9, -0.75) node[midway, font=\small] {ベクトル};
+    \draw[fill=matbg, draw=matborder] (3.2, -2.0) rectangle (5.2, 0.0) node[midway, font=\small] {行列};
+    \draw[fill=vecbg, draw=vecborder] (5.5, -2.0) rectangle (6.0, 0.0) node[midway, font=\small, align=center] {ベ\\ク\\ト\\ル};
+    \node at (6.5, -1.0) {$=$};
+    \node at (7.5, -1.0) {スカラー};
+    \node[anchor=west] at (8.8, -1.0) {$\mathbf{a}^\top M \mathbf{b} = c$};
+  \end{scope}
+
+\end{tikzpicture}
+\end{center}
+
+【注意】いずれも、行列やベクトルの形状が掛け算可能なように整合していることを前提としています。
+
 ### ベクトル・行列の積の頻出パターンと成分表示 {#q:3-matrix-vector-patterns .questionbox difficulty="★2"}
 
 講義スライドで登場した行列・ベクトルの積に関する視覚的なパターンの意味を、成分表示を用いて確認せよ。
