@@ -476,33 +476,36 @@ $$
    この結果 $c$ が内積 $\langle \mathbf{a}, \mathbf{b} \rangle = a_1b_1 + \dots + a_db_d$ と一致することを、成分計算により確認せよ。また、同様にして $\mathbf{a}^\top \mathbf{b} = \mathbf{b}^\top \mathbf{a}$ となること（内積の順序の入れ替え可能性）も確認せよ。ただし、$1\times 1$行列はスカラーと同一視してよい。
 
 2. **【行列 $\times$ 縦ベクトル $\to$ 縦ベクトル】**
-   行列 $B \in \mathbb{R}^{m \times d}$ と縦ベクトル $\mathbf{v} \in \mathbb{R}^d$ の積 $B\mathbf{v}$ について、以下の2つのブロック表示が成り立つことを成分計算により確認せよ。
+   行列 $B \in \mathbb{R}^{m \times d}$ を、横ベクトルを縦に並べたブロック行列、および縦ベクトルを横に並べたブロック行列としてそれぞれ解釈する。つまり、
+   $$
+   B = \begin{pmatrix} B_{11} & \dots & B_{1d} \\ \vdots & \ddots & \vdots \\ B_{m1} & \dots & B_{md} \end{pmatrix} 
+   = \begin{pmatrix} \quad \mathbf{b}_1^\top \quad \\ \vdots \\ \quad \mathbf{b}_m^\top \quad \end{pmatrix} 
+   = \begin{pmatrix} \boldsymbol{\beta}_1 & \dots & \boldsymbol{\beta}_d \end{pmatrix}
+   $$
+   と捉えるとき、縦ベクトル $\mathbf{v} \in \mathbb{R}^d$ との積 $B\mathbf{v}$ について次の等式がそれぞれ成り立つことを成分計算により確認せよ。
 
    - **横ベクトルが縦に並んでいるとみなす場合（内積の縦並び）：**
-     $B = \begin{pmatrix} \quad \mathbf{b}_1^\top \quad \\ \quad \mathbf{b}_2^\top \quad \\ \vdots \\ \quad \mathbf{b}_m^\top \quad \end{pmatrix}$ のとき、
      $$
      B\mathbf{v} =
-     \begin{pmatrix} \quad \mathbf{b}_1^\top \quad \\ \quad \mathbf{b}_2^\top \quad \\ \vdots \\ \quad \mathbf{b}_m^\top \quad \end{pmatrix} \mathbf{v}
-     = \begin{pmatrix} \mathbf{b}_1^\top \mathbf{v} \\ \mathbf{b}_2^\top \mathbf{v} \\ \vdots \\ \mathbf{b}_m^\top \mathbf{v} \end{pmatrix}
+     \begin{pmatrix} \quad \mathbf{b}_1^\top \quad \\ \vdots \\ \quad \mathbf{b}_m^\top \quad \end{pmatrix} \mathbf{v}
+     = \begin{pmatrix} \mathbf{b}_1^\top \mathbf{v} \\ \vdots \\ \mathbf{b}_m^\top \mathbf{v} \end{pmatrix}
      $$
 
    - **縦ベクトルが横に並んでいるとみなす場合（列ベクトルの重み付き和）：**
-     $B = \begin{pmatrix} \boldsymbol{\beta}_1 & \boldsymbol{\beta}_2 & \dots & \boldsymbol{\beta}_d \end{pmatrix}$ のとき、
      $$
      B\mathbf{v} =
-     \begin{pmatrix} \boldsymbol{\beta}_1 & \boldsymbol{\beta}_2 & \dots & \boldsymbol{\beta}_d \end{pmatrix}
-     \begin{pmatrix} v_1 \\ v_2 \\ \vdots \\ v_d \end{pmatrix}
-     = v_1 \boldsymbol{\beta}_1 + v_2 \boldsymbol{\beta}_2 + \dots + v_d \boldsymbol{\beta}_d
+     \begin{pmatrix} \boldsymbol{\beta}_1 & \dots & \boldsymbol{\beta}_d \end{pmatrix}
+     \begin{pmatrix} v_1 \\ \vdots \\ v_d \end{pmatrix}
+     = v_1 \boldsymbol{\beta}_1 + \dots + v_d \boldsymbol{\beta}_d
      $$
 
 3. **【複数データの予測値の行列表現（計画行列）】**
-   線型モデルの各データに対する予測値を $\hat{y}_i = \boldsymbol{\phi}(\mathbf{x}_i)^\top \boldsymbol{\theta}$ と性質1を用いて表すとき、
+   計画行列を $\Phi := \begin{pmatrix} \quad \boldsymbol{\phi}(\mathbf{x}_1)^\top \quad \\ \vdots \\ \quad \boldsymbol{\phi}(\mathbf{x}_n)^\top \quad \end{pmatrix}$ と定義する。
+   線型モデル $f_{\boldsymbol{\theta}}(\mathbf{x}) := \boldsymbol{\theta}^\top \boldsymbol{\phi}(\mathbf{x})$ の出力値を各データ $\mathbf{x}_1, \dots, \mathbf{x}_n$ について計算し、縦に並べたベクトル
    $$
-   \hat{\mathbf{y}} = \begin{pmatrix} \hat{y}_1 \\ \hat{y}_2 \\ \vdots \\ \hat{y}_n \end{pmatrix}
-   = \begin{pmatrix} \quad \boldsymbol{\phi}(\mathbf{x}_1)^\top \quad \\ \quad \boldsymbol{\phi}(\mathbf{x}_2)^\top \quad \\ \vdots \\ \quad \boldsymbol{\phi}(\mathbf{x}_n)^\top \quad \end{pmatrix} \boldsymbol{\theta}
-   = \Phi \boldsymbol{\theta}
+   \begin{pmatrix} f_{\boldsymbol{\theta}}(\mathbf{x}_1) \\ \vdots \\ f_{\boldsymbol{\theta}}(\mathbf{x}_n) \end{pmatrix}
    $$
-   となる。このとき、計画行列 $\Phi \in \mathbb{R}^{n \times d}$ が、特徴ベクトル $\boldsymbol{\phi}(\mathbf{x}_i)$ を横ベクトルに「転置」して縦に並べた行列構造になることを成分計算により確認せよ。
+   が、$\Phi \boldsymbol{\theta}$ と表せることを確認せよ。
 
 ::: {.right}
 [（解答・解説へ）](#a:3-matrix-vector-patterns)
@@ -612,29 +615,25 @@ $$
    これは内積 $\langle \mathbf{a}, \mathbf{b} \rangle$ の定義そのものである。また、同様に計算すると $\mathbf{b}^\top \mathbf{a} = \sum_{i=1}^d b_i a_i$ であり、実数の積は順序を入れ替えても値が変わらない（$a_i b_i = b_i a_i$）ため、$\mathbf{a}^\top \mathbf{b} = \mathbf{b}^\top \mathbf{a}$ となる。
 2.
    - **横ベクトルが縦に並んでいるとみなす場合：**
-     $B = \begin{pmatrix} \quad \mathbf{b}_1^\top \quad \\ \vdots \\ \quad \mathbf{b}_m^\top \quad \end{pmatrix}$ とおく。$B\mathbf{v}$ を計算すると、行列の積の定義より、各行 $\mathbf{b}_i^\top$ と列ベクトル $\mathbf{v}$ を掛けたものになるため、
+     行列の積の定義より、各行 $\mathbf{b}_i^\top$ と列ベクトル $\mathbf{v}$ を掛けたものが結果のベクトルの各成分になるため、
      $$
      B\mathbf{v} = \begin{pmatrix} \mathbf{b}_1^\top \mathbf{v} \\ \vdots \\ \mathbf{b}_m^\top \mathbf{v} \end{pmatrix}
      $$
      となり、各成分が内積 $\mathbf{b}_i^\top \mathbf{v}$ として計算されることがわかる。
    - **縦ベクトルが横に並んでいるとみなす場合：**
-     $B = \begin{pmatrix} \boldsymbol{\beta}_1 & \dots & \boldsymbol{\beta}_d \end{pmatrix}$ とおく。$\mathbf{v} = (v_1, \dots, v_d)^\top$ と掛けるとき、列ベクトルごとの重み付き和として展開される。
+     列ベクトル $\boldsymbol{\beta}_j$ の成分ごとの和として展開される。
      $$
-     B\mathbf{v} = \begin{pmatrix} \boldsymbol{\beta}_1 & \dots & \boldsymbol{\beta}_d \end{pmatrix} \begin{pmatrix} v_1 \\ \vdots \\ v_d \end{pmatrix} = v_1 \boldsymbol{\beta}_1 + v_2 \boldsymbol{\beta}_2 + \dots + v_d \boldsymbol{\beta}_d = \sum_{j=1}^d v_j \boldsymbol{\beta}_j
+     B\mathbf{v} = \begin{pmatrix} \boldsymbol{\beta}_1 & \dots & \boldsymbol{\beta}_d \end{pmatrix} \begin{pmatrix} v_1 \\ \vdots \\ v_d \end{pmatrix} = v_1 \boldsymbol{\beta}_1 + \dots + v_d \boldsymbol{\beta}_d = \sum_{j=1}^d v_j \boldsymbol{\beta}_j
      $$
-3. 予測値のベクトル $\hat{\mathbf{y}}$ は次のように書ける。
+3. モデルの出力値のベクトルは、性質1（内積の順序の入れ替え可能性）および2の性質（横ベクトルが縦に並んでいるパターン）より、次のように変形できる。
    $$
-   \hat{\mathbf{y}} = \begin{pmatrix} \hat{y}_1 \\ \vdots \\ \hat{y}_n \end{pmatrix} = \begin{pmatrix} \boldsymbol{\phi}(\mathbf{x}_1)^\top \boldsymbol{\theta} \\ \vdots \\ \boldsymbol{\phi}(\mathbf{x}_n)^\top \boldsymbol{\theta} \end{pmatrix}
+   \begin{pmatrix} f_{\boldsymbol{\theta}}(\mathbf{x}_1) \\ \vdots \\ f_{\boldsymbol{\theta}}(\mathbf{x}_n) \end{pmatrix}
+   = \begin{pmatrix} \boldsymbol{\theta}^\top \boldsymbol{\phi}(\mathbf{x}_1) \\ \vdots \\ \boldsymbol{\theta}^\top \boldsymbol{\phi}(\mathbf{x}_n) \end{pmatrix}
+   = \begin{pmatrix} \boldsymbol{\phi}(\mathbf{x}_1)^\top \boldsymbol{\theta} \\ \vdots \\ \boldsymbol{\phi}(\mathbf{x}_n)^\top \boldsymbol{\theta} \end{pmatrix}
+   = \begin{pmatrix} \quad \boldsymbol{\phi}(\mathbf{x}_1)^\top \quad \\ \vdots \\ \quad \boldsymbol{\phi}(\mathbf{x}_n)^\top \quad \end{pmatrix} \boldsymbol{\theta}
+   = \Phi \boldsymbol{\theta}
    $$
-   これを「行列 $\times$ ベクトル」の形に分解すると、2の性質（横ベクトルが縦に並んでいるパターン）より、
-   $$
-   \hat{\mathbf{y}} = \begin{pmatrix} \quad \boldsymbol{\phi}(\mathbf{x}_1)^\top \quad \\ \vdots \\ \quad \boldsymbol{\phi}(\mathbf{x}_n)^\top \quad \end{pmatrix} \boldsymbol{\theta}
-   $$
-   となる。したがって、計画行列 $\Phi$ は、各データポイント $\mathbf{x}_i$ の特徴ベクトル $\boldsymbol{\phi}(\mathbf{x}_i)$ を「横ベクトルに転置して縦に並べた」以下の行列として定義される。
-   $$
-   \Phi = \begin{pmatrix} \phi_1(\mathbf{x}_1) & \phi_2(\mathbf{x}_1) & \dots & \phi_d(\mathbf{x}_1) \\ \phi_1(\mathbf{x}_2) & \phi_2(\mathbf{x}_2) & \dots & \phi_d(\mathbf{x}_2) \\ \vdots & \vdots & \ddots & \vdots \\ \phi_1(\mathbf{x}_n) & \phi_2(\mathbf{x}_n) & \dots & \phi_d(\mathbf{x}_n) \end{pmatrix}
-   $$
-   本来の列ベクトル $\boldsymbol{\phi}(\mathbf{x}_i)$ が行に対応するように配置されるため、形状を合わせるための工夫として機能していることがわかる。
+   したがって出力値のベクトルが $\Phi \boldsymbol{\theta}$ と表せることが確認された。
 
 ::: {.right}
 [（問題へ戻る）](#q:3-matrix-vector-patterns)
