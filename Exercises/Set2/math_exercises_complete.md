@@ -467,24 +467,28 @@ $$
 講義スライドで登場した行列・ベクトルの積に関する視覚的なパターンの意味を、成分表示を用いて確認せよ。
 
 1. **【横ベクトル $\times$ 縦ベクトル $\to$ スカラー】**
-   $d$ 次元縦ベクトル $\mathbf{a}, \mathbf{b}$ について、横ベクトル $\mathbf{a}^\top$ と縦ベクトル $\mathbf{b}$ を掛けるとスカラーになる。
    $$
    \mathbf{a}^\top \mathbf{b} = 
    \begin{pmatrix} a_1 & a_2 & \dots & a_d \end{pmatrix}
    \begin{pmatrix} b_1 \\ b_2 \\ \vdots \\ b_d \end{pmatrix}
    = c
    $$
-   この結果 $c$ が内積の定義式 $\langle \mathbf{a}, \mathbf{b} \rangle = a_1b_1 + \dots + a_db_d$ と一致することを、行と列の積の定義から確認せよ。
+   この結果 $c$ が内積 $\langle \mathbf{a}, \mathbf{b} \rangle = a_1b_1 + \dots + a_db_d$ と一致することを、成分計算により確認せよ。
    
 2. **【内積の順序の入れ替え】**
-   上記と同様に、2つのベクトル $\mathbf{w}, \mathbf{x} \in \mathbb{R}^d$ において、
    $$
-   \mathbf{w}^\top \mathbf{x} = \mathbf{x}^\top \mathbf{w}
+   \mathbf{w}^\top \mathbf{x} = 
+   \begin{pmatrix} w_1 & w_2 & \dots & w_d \end{pmatrix}
+   \begin{pmatrix} x_1 \\ x_2 \\ \vdots \\ x_d \end{pmatrix}
+   \quad \text{と} \quad
+   \mathbf{x}^\top \mathbf{w} = 
+   \begin{pmatrix} x_1 & x_2 & \dots & x_d \end{pmatrix}
+   \begin{pmatrix} w_1 \\ w_2 \\ \vdots \\ w_d \end{pmatrix}
    $$
-   となることを、成分ごとの計算式を用いて示せ。
+   について、成分計算から $\mathbf{w}^\top \mathbf{x} = \mathbf{x}^\top \mathbf{w}$ となることを確認せよ。
 
-3. **【行列 $\times$ 縦ベクトルの2つの見方】**
-   行列 $B \in \mathbb{R}^{m \times d}$ と縦ベクトル $\mathbf{v} \in \mathbb{R}^d$ の積 $B\mathbf{v}$ について、以下の2つの視点から成分計算を行い、図式の意味が正しいことを示せ。
+3. **【行列 $\times$ 縦ベクトル $\to$ 縦ベクトル】**
+   行列 $B \in \mathbb{R}^{m \times d}$ と縦ベクトル $\mathbf{v} \in \mathbb{R}^d$ の積 $B\mathbf{v}$ について、以下の2つのブロック表示が成り立つことを成分計算により確認せよ。
 
    - **横ベクトルが縦に並んでいるとみなす場合（内積の縦並び）：**
      $$
@@ -492,7 +496,6 @@ $$
      \begin{pmatrix} \mathbf{b}_1^\top \\ \mathbf{b}_2^\top \\ \vdots \\ \mathbf{b}_m^\top \end{pmatrix} \mathbf{v}
      = \begin{pmatrix} \mathbf{b}_1^\top \mathbf{v} \\ \mathbf{b}_2^\top \mathbf{v} \\ \vdots \\ \mathbf{b}_m^\top \mathbf{v} \end{pmatrix}
      $$
-     行列の各行が、それぞれ $\mathbf{v}$ との内積として計算されることを確かめよ。
 
    - **縦ベクトルが横に並んでいるとみなす場合（列ベクトルの重み付き和）：**
      $$
@@ -501,18 +504,15 @@ $$
      \begin{pmatrix} v_1 \\ v_2 \\ \vdots \\ v_d \end{pmatrix}
      = v_1 \boldsymbol{\beta}_1 + v_2 \boldsymbol{\beta}_2 + \dots + v_d \boldsymbol{\beta}_d
      $$
-     計算結果が各列ベクトル $\boldsymbol{\beta}_j$ の線形結合（重み $v_j$ での和）になることを確かめよ。
 
-4. **【複数データをまとめて扱う文字列表現（計画行列）】**
-   線型モデルの各データ $\mathbf{x}_i$ に対する予測値は $\hat{y}_i = \boldsymbol{\theta}^\top \boldsymbol{\phi}(\mathbf{x}_i)$ であるが、性質2より $\boldsymbol{\theta}^\top \boldsymbol{\phi}(\mathbf{x}_i) = \boldsymbol{\phi}(\mathbf{x}_i)^\top \boldsymbol{\theta}$ とみなす。
-   $n$ 個のデータに対する予測値を縦に並べたベクトル $\hat{\mathbf{y}}$ を計算する際、
+4. **【複数データの予測値の行列表現（計画行列）】**
+   線型モデルの各データに対する予測値を $\hat{y}_i = \boldsymbol{\phi}(\mathbf{x}_i)^\top \boldsymbol{\theta}$ と性質2を用いて表すとき、
    $$
    \hat{\mathbf{y}} = \begin{pmatrix} \hat{y}_1 \\ \hat{y}_2 \\ \vdots \\ \hat{y}_n \end{pmatrix} 
    = \begin{pmatrix} \boldsymbol{\phi}(\mathbf{x}_1)^\top \\ \boldsymbol{\phi}(\mathbf{x}_2)^\top \\ \vdots \\ \boldsymbol{\phi}(\mathbf{x}_n)^\top \end{pmatrix} \boldsymbol{\theta} 
    = \Phi \boldsymbol{\theta}
    $$
-   と表す。
-   このとき、計画行列 $\Phi \in \mathbb{R}^{n \times d}$ が、個々の特徴ベクトル $\boldsymbol{\phi}(\mathbf{x}_i)$ を横ベクトルに「転置」して縦に並べた構造（各要素の特徴が列ではなく行に対応する）として定義されることを成分を用いて確認せよ。
+   となる。このとき、計画行列 $\Phi \in \mathbb{R}^{n \times d}$ が、特徴ベクトル $\boldsymbol{\phi}(\mathbf{x}_i)$ を横ベクトルに「転置」して縦に並べた行列構造になることを成分計算により確認せよ。
 
 ::: {.right}
 [（解答・解説へ）](#a:3-matrix-vector-patterns)
