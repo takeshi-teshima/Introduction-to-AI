@@ -468,20 +468,20 @@ $$
 
 1. **【横ベクトル $\times$ 縦ベクトル $\to$ スカラー】**
    $$
-   \mathbf{a}^\top \mathbf{b} = 
+   \mathbf{a}^\top \mathbf{b} =
    \begin{pmatrix} a_1 & a_2 & \dots & a_d \end{pmatrix}
    \begin{pmatrix} b_1 \\ b_2 \\ \vdots \\ b_d \end{pmatrix}
    = c
    $$
    この結果 $c$ が内積 $\langle \mathbf{a}, \mathbf{b} \rangle = a_1b_1 + \dots + a_db_d$ と一致することを、成分計算により確認せよ。
-   
+
 2. **【内積の順序の入れ替え】**
    $$
-   \mathbf{w}^\top \mathbf{x} = 
+   \mathbf{w}^\top \mathbf{x} =
    \begin{pmatrix} w_1 & w_2 & \dots & w_d \end{pmatrix}
    \begin{pmatrix} x_1 \\ x_2 \\ \vdots \\ x_d \end{pmatrix}
    \quad \text{と} \quad
-   \mathbf{x}^\top \mathbf{w} = 
+   \mathbf{x}^\top \mathbf{w} =
    \begin{pmatrix} x_1 & x_2 & \dots & x_d \end{pmatrix}
    \begin{pmatrix} w_1 \\ w_2 \\ \vdots \\ w_d \end{pmatrix}
    $$
@@ -492,14 +492,14 @@ $$
 
    - **横ベクトルが縦に並んでいるとみなす場合（内積の縦並び）：**
      $$
-     B\mathbf{v} = 
-     \begin{pmatrix} \mathbf{b}_1^\top \\ \mathbf{b}_2^\top \\ \vdots \\ \mathbf{b}_m^\top \end{pmatrix} \mathbf{v}
+     B\mathbf{v} =
+     \begin{pmatrix} \quad \mathbf{b}_1^\top \quad \\ \quad \mathbf{b}_2^\top \quad \\ \vdots \\ \quad \mathbf{b}_m^\top \quad \end{pmatrix} \mathbf{v}
      = \begin{pmatrix} \mathbf{b}_1^\top \mathbf{v} \\ \mathbf{b}_2^\top \mathbf{v} \\ \vdots \\ \mathbf{b}_m^\top \mathbf{v} \end{pmatrix}
      $$
 
    - **縦ベクトルが横に並んでいるとみなす場合（列ベクトルの重み付き和）：**
      $$
-     B\mathbf{v} = 
+     B\mathbf{v} =
      \begin{pmatrix} \boldsymbol{\beta}_1 & \boldsymbol{\beta}_2 & \dots & \boldsymbol{\beta}_d \end{pmatrix}
      \begin{pmatrix} v_1 \\ v_2 \\ \vdots \\ v_d \end{pmatrix}
      = v_1 \boldsymbol{\beta}_1 + v_2 \boldsymbol{\beta}_2 + \dots + v_d \boldsymbol{\beta}_d
@@ -508,8 +508,8 @@ $$
 4. **【複数データの予測値の行列表現（計画行列）】**
    線型モデルの各データに対する予測値を $\hat{y}_i = \boldsymbol{\phi}(\mathbf{x}_i)^\top \boldsymbol{\theta}$ と性質2を用いて表すとき、
    $$
-   \hat{\mathbf{y}} = \begin{pmatrix} \hat{y}_1 \\ \hat{y}_2 \\ \vdots \\ \hat{y}_n \end{pmatrix} 
-   = \begin{pmatrix} \boldsymbol{\phi}(\mathbf{x}_1)^\top \\ \boldsymbol{\phi}(\mathbf{x}_2)^\top \\ \vdots \\ \boldsymbol{\phi}(\mathbf{x}_n)^\top \end{pmatrix} \boldsymbol{\theta} 
+   \hat{\mathbf{y}} = \begin{pmatrix} \hat{y}_1 \\ \hat{y}_2 \\ \vdots \\ \hat{y}_n \end{pmatrix}
+   = \begin{pmatrix} \quad \boldsymbol{\phi}(\mathbf{x}_1)^\top \quad \\ \quad \boldsymbol{\phi}(\mathbf{x}_2)^\top \quad \\ \vdots \\ \quad \boldsymbol{\phi}(\mathbf{x}_n)^\top \quad \end{pmatrix} \boldsymbol{\theta}
    = \Phi \boldsymbol{\theta}
    $$
    となる。このとき、計画行列 $\Phi \in \mathbb{R}^{n \times d}$ が、特徴ベクトル $\boldsymbol{\phi}(\mathbf{x}_i)$ を横ベクトルに「転置」して縦に並べた行列構造になることを成分計算により確認せよ。
@@ -621,9 +621,9 @@ $$
    $$
    これは内積 $\langle \mathbf{a}, \mathbf{b} \rangle$ の定義そのものである。
 2. 上記1の結果より、$\mathbf{w}^\top \mathbf{x} = \sum_{i=1}^d w_i x_i$ であり、また $\mathbf{x}^\top \mathbf{w} = \sum_{i=1}^d x_i w_i$ である。実数の掛け算は順序を入れ替えても値が変わらない（$w_i x_i = x_i w_i$）ため、$\mathbf{w}^\top \mathbf{x} = \mathbf{x}^\top \mathbf{w}$ となる。（※スカラーの転置は自分自身であることからも $( \mathbf{w}^\top \mathbf{x} )^\top = \mathbf{x}^\top \mathbf{w}$ として導ける）
-3. 
+3.
    - **横ベクトルが縦に並んでいるとみなす場合：**
-     $B = \begin{pmatrix} \mathbf{b}_1^\top \\ \vdots \\ \mathbf{b}_m^\top \end{pmatrix}$ とおく。$B\mathbf{v}$ を計算すると、行列の積の定義より、各行 $\mathbf{b}_i^\top$ と列ベクトル $\mathbf{v}$ を掛けたものになるため、
+     $B = \begin{pmatrix} \quad \mathbf{b}_1^\top \quad \\ \vdots \\ \quad \mathbf{b}_m^\top \quad \end{pmatrix}$ とおく。$B\mathbf{v}$ を計算すると、行列の積の定義より、各行 $\mathbf{b}_i^\top$ と列ベクトル $\mathbf{v}$ を掛けたものになるため、
      $$
      B\mathbf{v} = \begin{pmatrix} \mathbf{b}_1^\top \mathbf{v} \\ \vdots \\ \mathbf{b}_m^\top \mathbf{v} \end{pmatrix}
      $$
@@ -639,7 +639,7 @@ $$
    $$
    これを「行列 $\times$ ベクトル」の形に分解すると、3の性質（横ベクトルが縦に並んでいるパターン）より、
    $$
-   \hat{\mathbf{y}} = \begin{pmatrix} \boldsymbol{\phi}(\mathbf{x}_1)^\top \\ \vdots \\ \boldsymbol{\phi}(\mathbf{x}_n)^\top \end{pmatrix} \boldsymbol{\theta}
+   \hat{\mathbf{y}} = \begin{pmatrix} \quad \boldsymbol{\phi}(\mathbf{x}_1)^\top \quad \\ \vdots \\ \quad \boldsymbol{\phi}(\mathbf{x}_n)^\top \quad \end{pmatrix} \boldsymbol{\theta}
    $$
    となる。したがって、計画行列 $\Phi$ は、各データポイント $\mathbf{x}_i$ の特徴ベクトル $\boldsymbol{\phi}(\mathbf{x}_i)$ を「横ベクトルに転置して縦に並べた」以下の行列として定義される。
    $$
