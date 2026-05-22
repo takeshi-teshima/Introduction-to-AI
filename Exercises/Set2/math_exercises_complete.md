@@ -499,13 +499,7 @@ $$
      = v_1 \boldsymbol{\beta}_1 + \cdots + v_d \boldsymbol{\beta}_d
      $$
 
-3. **【複数データの予測値の行列表現（計画行列）】**
-   計画行列を $\Phi := \begin{pmatrix} \quad \boldsymbol{\phi}(\mathbf{x}_1)^\top \quad \\ \vdots \\ \quad \boldsymbol{\phi}(\mathbf{x}_n)^\top \quad \end{pmatrix}$ と定義する。
-   線型モデル $f_{\boldsymbol{\theta}}(\mathbf{x}) := \boldsymbol{\theta}^\top \boldsymbol{\phi}(\mathbf{x})$ の出力値を各データ $\mathbf{x}_1, \dots, \mathbf{x}_n$ について計算し、縦に並べたベクトル
-   $$
-   \begin{pmatrix} f_{\boldsymbol{\theta}}(\mathbf{x}_1) \\ \vdots \\ f_{\boldsymbol{\theta}}(\mathbf{x}_n) \end{pmatrix}
-   $$
-   が、$\Phi \boldsymbol{\theta}$ と表せることを確認せよ。
+
 
 ::: {.right}
 [（解答・解説へ）](#a:3-matrix-vector-patterns)
@@ -625,15 +619,7 @@ $$
      $$
      B\mathbf{v} = \begin{pmatrix} \boldsymbol{\beta}_1 & \dots & \boldsymbol{\beta}_d \end{pmatrix} \begin{pmatrix} v_1 \\ \vdots \\ v_d \end{pmatrix} = v_1 \boldsymbol{\beta}_1 + \dots + v_d \boldsymbol{\beta}_d = \sum_{j=1}^d v_j \boldsymbol{\beta}_j
      $$
-3. モデルの出力値のベクトルは、性質1（内積の順序の入れ替え可能性）および2の性質（横ベクトルが縦に並んでいるパターン）より、次のように変形できる。
-   $$
-   \begin{pmatrix} f_{\boldsymbol{\theta}}(\mathbf{x}_1) \\ \vdots \\ f_{\boldsymbol{\theta}}(\mathbf{x}_n) \end{pmatrix}
-   = \begin{pmatrix} \boldsymbol{\theta}^\top \boldsymbol{\phi}(\mathbf{x}_1) \\ \vdots \\ \boldsymbol{\theta}^\top \boldsymbol{\phi}(\mathbf{x}_n) \end{pmatrix}
-   = \begin{pmatrix} \boldsymbol{\phi}(\mathbf{x}_1)^\top \boldsymbol{\theta} \\ \vdots \\ \boldsymbol{\phi}(\mathbf{x}_n)^\top \boldsymbol{\theta} \end{pmatrix}
-   = \begin{pmatrix} \quad \boldsymbol{\phi}(\mathbf{x}_1)^\top \quad \\ \vdots \\ \quad \boldsymbol{\phi}(\mathbf{x}_n)^\top \quad \end{pmatrix} \boldsymbol{\theta}
-   = \Phi \boldsymbol{\theta}
-   $$
-   したがって出力値のベクトルが $\Phi \boldsymbol{\theta}$ と表せることが確認された。
+
 
 ::: {.right}
 [（問題へ戻る）](#q:3-matrix-vector-patterns)
@@ -816,19 +802,28 @@ $$
 
 ### 行列とベクトルによる目的関数の書き直し {#q:3-matrix-empirical-risk .questionbox difficulty="★2"}
 
-$n$ 個のデータ $(x_1, y_1), \dots, (x_n, y_n)$ に対して、計画行列 $\Phi \in \mathbb{R}^{n \times d}$ とラベルベクトル $\mathbf{y} \in \mathbb{R}^n$ を次のように定義する。
+$n$ 個のデータ $(x_1, y_1), \dots, (x_n, y_n)$ に対して、線型モデルを $f_{\boldsymbol{\theta}}(x) = \boldsymbol{\theta}^\top \boldsymbol{\phi}(x)$ とする。また、計画行列 $\Phi \in \mathbb{R}^{n \times d}$ とラベルベクトル $\mathbf{y} \in \mathbb{R}^n$ を次のように定義する。
 $$
 \Phi = \begin{pmatrix} \quad \boldsymbol{\phi}(x_1)^\top \quad \\ \vdots \\ \quad \boldsymbol{\phi}(x_n)^\top \quad \end{pmatrix}, \quad \mathbf{y} = \begin{pmatrix} y_1 \\ \vdots \\ y_n \end{pmatrix}
 $$
-線型モデル $f_{\boldsymbol{\theta}}(x) = \boldsymbol{\theta}^\top \boldsymbol{\phi}(x)$ に対する平均二乗誤差
-$$
-\hat{R}(f_{\boldsymbol{\theta}}) = \frac{1}{n} \sum_{i=1}^n (f_{\boldsymbol{\theta}}(x_i) - y_i)^2
-$$
-が、行列とベクトルの積およびノルムを用いて
-$$
-\hat{R}(f_{\boldsymbol{\theta}}) = \frac{1}{n} \|\Phi \boldsymbol{\theta} - \mathbf{y}\|^2
-$$
-と書き直せることを、計画行列の性質およびベクトルのノルムの定義 $\left(\|\mathbf{v}\|^2 = \sum_{i=1}^n v_i^2\right)$ を用いて確認せよ。
+
+1. **【予測値の行列表現】**
+   モデルの出力値を各データについて計算し、縦に並べた予測値ベクトル
+   $$
+   \begin{pmatrix} f_{\boldsymbol{\theta}}(x_1) \\ \vdots \\ f_{\boldsymbol{\theta}}(x_n) \end{pmatrix}
+   $$
+   が、前問までの結果（内積の順序入れ替えおよびブロック行列の積）を用いて $\Phi \boldsymbol{\theta}$ と表せることを確認せよ。
+
+2. **【平均二乗誤差のノルム表現】**
+   平均二乗誤差
+   $$
+   \hat{R}(f_{\boldsymbol{\theta}}) = \frac{1}{n} \sum_{i=1}^n (f_{\boldsymbol{\theta}}(x_i) - y_i)^2
+   $$
+   が、行列とベクトルの積およびノルムを用いて
+   $$
+   \hat{R}(f_{\boldsymbol{\theta}}) = \frac{1}{n} \|\Phi \boldsymbol{\theta} - \mathbf{y}\|^2
+   $$
+   と書き直せることを、上記1の結果およびベクトルのノルムの定義 $\left(\|\mathbf{v}\|^2 = \sum_{i=1}^n v_i^2\right)$ を用いて確認せよ。
 
 ::: {.right}
 [（解答・解説へ）](#a:3-matrix-empirical-risk)
@@ -886,27 +881,28 @@ $$
 
 ### 問3-matrix-empirical-risk の解答・解説 {#a:3-matrix-empirical-risk .answerbox ref="q:3-matrix-empirical-risk"}
 
-各データに対する予測値 $f_{\boldsymbol{\theta}}(x_i) = \boldsymbol{\theta}^\top \boldsymbol{\phi}(x_i) = \boldsymbol{\phi}(x_i)^\top \boldsymbol{\theta}$ を縦に並べたベクトルは、計画行列の性質（横ベクトルが縦に並んでいるブロック行列と縦ベクトルの積）から次のように書ける。
-$$
-\begin{pmatrix} f_{\boldsymbol{\theta}}(x_1) \\ \vdots \\ f_{\boldsymbol{\theta}}(x_n) \end{pmatrix}
-= \begin{pmatrix} \boldsymbol{\phi}(x_1)^\top \boldsymbol{\theta} \\ \vdots \\ \boldsymbol{\phi}(x_n)^\top \boldsymbol{\theta} \end{pmatrix}
-= \begin{pmatrix} \quad \boldsymbol{\phi}(x_1)^\top \quad \\ \vdots \\ \quad \boldsymbol{\phi}(x_n)^\top \quad \end{pmatrix} \boldsymbol{\theta}
-= \Phi \boldsymbol{\theta}
-$$
-したがって、予測値と正解ラベルの差を並べたベクトルは
-$$
-\Phi \boldsymbol{\theta} - \mathbf{y} = \begin{pmatrix} f_{\boldsymbol{\theta}}(x_1) - y_1 \\ \vdots \\ f_{\boldsymbol{\theta}}(x_n) - y_n \end{pmatrix}
-$$
-となる。
-ベクトルのL2ノルムの2乗は各成分の2乗和なので、このベクトルのノルムの2乗を計算すると
-$$
-\|\Phi\boldsymbol{\theta} - \mathbf{y}\|^2 = \sum_{i=1}^n (f_{\boldsymbol{\theta}}(x_i) - y_i)^2
-$$
-となる。両辺を $n$ で割ることで、
-$$
-\frac{1}{n}\|\Phi\boldsymbol{\theta} - \mathbf{y}\|^2 = \frac{1}{n} \sum_{i=1}^n (f_{\boldsymbol{\theta}}(x_i) - y_i)^2 = \hat{R}(f_{\boldsymbol{\theta}})
-$$
-が導かれ、式が一致することが確認された。（証明終）
+1. 各データに対する予測値 $f_{\boldsymbol{\theta}}(x_i) = \boldsymbol{\theta}^\top \boldsymbol{\phi}(x_i) = \boldsymbol{\phi}(x_i)^\top \boldsymbol{\theta}$ を縦に並べたベクトルは、計画行列の定義とブロック行列の積の性質（横ベクトルが縦に並んでいるブロック行列と縦ベクトルの積）から次のように書ける。
+   $$
+   \begin{pmatrix} f_{\boldsymbol{\theta}}(x_1) \\ \vdots \\ f_{\boldsymbol{\theta}}(x_n) \end{pmatrix}
+   = \begin{pmatrix} \boldsymbol{\phi}(x_1)^\top \boldsymbol{\theta} \\ \vdots \\ \boldsymbol{\phi}(x_n)^\top \boldsymbol{\theta} \end{pmatrix}
+   = \begin{pmatrix} \quad \boldsymbol{\phi}(x_1)^\top \quad \\ \vdots \\ \quad \boldsymbol{\phi}(x_n)^\top \quad \end{pmatrix} \boldsymbol{\theta}
+   = \Phi \boldsymbol{\theta}
+   $$
+   したがって出力値のベクトルが $\Phi \boldsymbol{\theta}$ と表せることが確認された。
+
+2. 上記1の結果より、予測値と正解ラベルの差を並べたベクトルは
+   $$
+   \Phi \boldsymbol{\theta} - \mathbf{y} = \begin{pmatrix} f_{\boldsymbol{\theta}}(x_1) - y_1 \\ \vdots \\ f_{\boldsymbol{\theta}}(x_n) - y_n \end{pmatrix}
+   $$
+   となる。ベクトルのL2ノルムの2乗は各成分の2乗和なので、このベクトルのノルムの2乗を計算すると
+   $$
+   \|\Phi\boldsymbol{\theta} - \mathbf{y}\|^2 = \sum_{i=1}^n (f_{\boldsymbol{\theta}}(x_i) - y_i)^2
+   $$
+   となる。両辺を $n$ で割ることで、
+   $$
+   \frac{1}{n}\|\Phi\boldsymbol{\theta} - \mathbf{y}\|^2 = \frac{1}{n} \sum_{i=1}^n (f_{\boldsymbol{\theta}}(x_i) - y_i)^2 = \hat{R}(f_{\boldsymbol{\theta}})
+   $$
+   が導かれ、式が一致することが確認された。（証明終）
 
 ::: {.right}
 [（問題へ戻る）](#q:3-matrix-empirical-risk)
