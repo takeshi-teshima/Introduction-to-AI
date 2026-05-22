@@ -491,6 +491,7 @@ $$
    行列 $B \in \mathbb{R}^{m \times d}$ と縦ベクトル $\mathbf{v} \in \mathbb{R}^d$ の積 $B\mathbf{v}$ について、以下の2つのブロック表示が成り立つことを成分計算により確認せよ。
 
    - **横ベクトルが縦に並んでいるとみなす場合（内積の縦並び）：**
+     $B = \begin{pmatrix} \quad \mathbf{b}_1^\top \quad \\ \quad \mathbf{b}_2^\top \quad \\ \vdots \\ \quad \mathbf{b}_m^\top \quad \end{pmatrix}$ のとき、
      $$
      B\mathbf{v} =
      \begin{pmatrix} \quad \mathbf{b}_1^\top \quad \\ \quad \mathbf{b}_2^\top \quad \\ \vdots \\ \quad \mathbf{b}_m^\top \quad \end{pmatrix} \mathbf{v}
@@ -498,6 +499,7 @@ $$
      $$
 
    - **縦ベクトルが横に並んでいるとみなす場合（列ベクトルの重み付き和）：**
+     $B = \begin{pmatrix} \boldsymbol{\beta}_1 & \boldsymbol{\beta}_2 & \dots & \boldsymbol{\beta}_d \end{pmatrix}$ のとき、
      $$
      B\mathbf{v} =
      \begin{pmatrix} \boldsymbol{\beta}_1 & \boldsymbol{\beta}_2 & \dots & \boldsymbol{\beta}_d \end{pmatrix}
