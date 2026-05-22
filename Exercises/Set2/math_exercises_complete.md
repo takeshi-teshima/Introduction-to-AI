@@ -466,57 +466,61 @@ $$
 
 ベクトルや行列の掛け算は、それぞれの「形状」を意識することで、結果がどのような形になるか（スカラー、ベクトル、行列）を視覚的に捉えることができます。
 
-\begin{center}
-\begin{tikzpicture}[>=stealth, thick, scale=0.9, every node/.style={align=center}]
-  % カラー定義
-  \colorlet{vecbg}{cyan!10}
-  \colorlet{vecborder}{cyan!70!blue}
-  \colorlet{matbg}{magenta!10}
-  \colorlet{matborder}{magenta!70!purple}
+- **横ベクトル・縦ベクトルの掛け算 $\rightarrow$ スカラーになる**
 
-  % 1. 横ベクトル x 縦ベクトル -> スカラー
-  \begin{scope}[yshift=0cm]
-    \node[anchor=west, text=black!60!red] at (0, 0) {$\blacksquare$ \textcolor{black!80}{横ベクトル・縦ベクトルの掛け算 $\rightarrow$ スカラーになる}};
-    \draw[fill=vecbg, draw=vecborder] (2.5, -1.75) rectangle (4.5, -1.25) node[midway, font=\small] {ベクトル};
-    \draw[fill=vecbg, draw=vecborder] (4.8, -2.5) rectangle (5.3, -0.5) node[midway, font=\small, align=center] {ベ\\ク\\ト\\ル};
-    \node at (5.8, -1.5) {$=$};
-    \node at (6.8, -1.5) {スカラー};
-    \node[anchor=west] at (8.0, -1.5) {$\mathbf{a}^\top \mathbf{b} = c$};
-  \end{scope}
+    \begin{center}
+    \begin{tikzpicture}[>=stealth, thick, scale=0.9, every node/.style={align=center}]
+      \colorlet{vecbg}{cyan!10} \colorlet{vecborder}{cyan!70!blue}
+      \draw[fill=vecbg, draw=vecborder] (0, -0.25) rectangle (2, 0.25) node[midway, font=\small] {ベクトル};
+      \draw[fill=vecbg, draw=vecborder] (2.3, -1) rectangle (2.8, 1) node[midway, font=\small, align=center] {ベ\\ク\\ト\\ル};
+      \node at (3.3, 0) {$=$};
+      \node at (4.3, 0) {スカラー};
+      \node[anchor=west] at (5.3, 0) {$\mathbf{a}^\top \mathbf{b} = c$};
+    \end{tikzpicture}
+    \end{center}
 
-  % 2. 縦ベクトル x 横ベクトル -> 行列
-  \begin{scope}[yshift=-3.5cm]
-    \node[anchor=west, text=black!60!red] at (0, 0) {$\blacksquare$ \textcolor{black!80}{縦ベクトル・横ベクトルの掛け算 $\rightarrow$ 行列になる}};
-    \draw[fill=vecbg, draw=vecborder] (3.0, -2.5) rectangle (3.5, -0.5) node[midway, font=\small, align=center] {ベ\\ク\\ト\\ル};
-    \draw[fill=vecbg, draw=vecborder] (3.8, -1.75) rectangle (5.8, -1.25) node[midway, font=\small] {ベクトル};
-    \node at (6.3, -1.5) {$=$};
-    \draw[fill=matbg, draw=matborder] (6.8, -2.5) rectangle (8.8, -0.5) node[midway, font=\small] {行列};
-    \node[anchor=west] at (9.3, -1.5) {$\mathbf{a} \mathbf{b}^\top = M$};
-  \end{scope}
+- **縦ベクトル・横ベクトルの掛け算 $\rightarrow$ 行列になる**
 
-  % 3. 行列 x 縦ベクトル -> 縦ベクトル
-  \begin{scope}[yshift=-7.0cm]
-    \node[anchor=west, text=black!60!red] at (0, 0) {$\blacksquare$ \textcolor{black!80}{行列を縦ベクトルに掛ける $\rightarrow$ 縦ベクトルになる}};
-    \draw[fill=matbg, draw=matborder] (3.5, -2.5) rectangle (5.5, -0.5) node[midway, font=\small] {行列};
-    \draw[fill=vecbg, draw=vecborder] (5.8, -2.5) rectangle (6.3, -0.5) node[midway, font=\small, align=center] {ベ\\ク\\ト\\ル};
-    \node at (6.8, -1.5) {$=$};
-    \draw[fill=vecbg, draw=vecborder] (7.3, -2.5) rectangle (7.8, -0.5) node[midway, font=\small, align=center] {ベ\\ク\\ト\\ル};
-    \node[anchor=west] at (8.3, -1.5) {$M \mathbf{x} = \mathbf{y}$};
-  \end{scope}
+    \begin{center}
+    \begin{tikzpicture}[>=stealth, thick, scale=0.9, every node/.style={align=center}]
+      \colorlet{vecbg}{cyan!10} \colorlet{vecborder}{cyan!70!blue}
+      \colorlet{matbg}{magenta!10} \colorlet{matborder}{magenta!70!purple}
+      \draw[fill=vecbg, draw=vecborder] (0, -1) rectangle (0.5, 1) node[midway, font=\small, align=center] {ベ\\ク\\ト\\ル};
+      \draw[fill=vecbg, draw=vecborder] (0.8, -0.25) rectangle (2.8, 0.25) node[midway, font=\small] {ベクトル};
+      \node at (3.3, 0) {$=$};
+      \draw[fill=matbg, draw=matborder] (3.8, -1) rectangle (5.8, 1) node[midway, font=\small] {行列};
+      \node[anchor=west] at (6.3, 0) {$\mathbf{a} \mathbf{b}^\top = M$};
+    \end{tikzpicture}
+    \end{center}
 
-  % 4. 横ベクトル x 行列 x 縦ベクトル -> スカラー
-  \begin{scope}[yshift=-10.5cm]
-    \node[anchor=west, text=black!60!red] at (0, 0) {$\blacksquare$ \textcolor{black!80}{横ベクトル・行列・縦ベクトルの順に掛ける $\rightarrow$ スカラーになる}};
-    \draw[fill=vecbg, draw=vecborder] (0.9, -1.75) rectangle (2.9, -1.25) node[midway, font=\small] {ベクトル};
-    \draw[fill=matbg, draw=matborder] (3.2, -2.5) rectangle (5.2, -0.5) node[midway, font=\small] {行列};
-    \draw[fill=vecbg, draw=vecborder] (5.5, -2.5) rectangle (6.0, -0.5) node[midway, font=\small, align=center] {ベ\\ク\\ト\\ル};
-    \node at (6.5, -1.5) {$=$};
-    \node at (7.5, -1.5) {スカラー};
-    \node[anchor=west] at (8.8, -1.5) {$\mathbf{a}^\top M \mathbf{b} = c$};
-  \end{scope}
+- **行列を縦ベクトルに掛ける $\rightarrow$ 縦ベクトルになる**
 
-\end{tikzpicture}
-\end{center}
+    \begin{center}
+    \begin{tikzpicture}[>=stealth, thick, scale=0.9, every node/.style={align=center}]
+      \colorlet{vecbg}{cyan!10} \colorlet{vecborder}{cyan!70!blue}
+      \colorlet{matbg}{magenta!10} \colorlet{matborder}{magenta!70!purple}
+      \draw[fill=matbg, draw=matborder] (0, -1) rectangle (2, 1) node[midway, font=\small] {行列};
+      \draw[fill=vecbg, draw=vecborder] (2.3, -1) rectangle (2.8, 1) node[midway, font=\small, align=center] {ベ\\ク\\ト\\ル};
+      \node at (3.3, 0) {$=$};
+      \draw[fill=vecbg, draw=vecborder] (3.8, -1) rectangle (4.3, 1) node[midway, font=\small, align=center] {ベ\\ク\\ト\\ル};
+      \node[anchor=west] at (4.8, 0) {$M \mathbf{x} = \mathbf{y}$};
+    \end{tikzpicture}
+    \end{center}
+
+- **横ベクトル・行列・縦ベクトルの順に掛ける $\rightarrow$ スカラーになる**
+
+    \begin{center}
+    \begin{tikzpicture}[>=stealth, thick, scale=0.9, every node/.style={align=center}]
+      \colorlet{vecbg}{cyan!10} \colorlet{vecborder}{cyan!70!blue}
+      \colorlet{matbg}{magenta!10} \colorlet{matborder}{magenta!70!purple}
+      \draw[fill=vecbg, draw=vecborder] (0, -0.25) rectangle (2, 0.25) node[midway, font=\small] {ベクトル};
+      \draw[fill=matbg, draw=matborder] (2.3, -1) rectangle (4.3, 1) node[midway, font=\small] {行列};
+      \draw[fill=vecbg, draw=vecborder] (4.6, -1) rectangle (5.1, 1) node[midway, font=\small, align=center] {ベ\\ク\\ト\\ル};
+      \node at (5.6, 0) {$=$};
+      \node at (6.6, 0) {スカラー};
+      \node[anchor=west] at (7.6, 0) {$\mathbf{a}^\top M \mathbf{b} = c$};
+    \end{tikzpicture}
+    \end{center}
 
 【注意】いずれも、行列やベクトルの形状が掛け算可能なように整合していることを前提としています。
 
@@ -870,7 +874,7 @@ $$
    $$
    \begin{pmatrix} f_{\boldsymbol{\theta}}(x_1) \\ \vdots \\ f_{\boldsymbol{\theta}}(x_n) \end{pmatrix}
    $$
-   が、前問までの結果（内積の順序入れ替えおよびブロック行列の積）を用いて $\Phi \boldsymbol{\theta}$ と表せることを確認せよ。
+   が、 $\Phi \boldsymbol{\theta}$ と表せることを確認せよ。
 
 2. **【平均二乗誤差のノルム表現】**
    平均二乗誤差
