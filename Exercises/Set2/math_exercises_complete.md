@@ -466,7 +466,7 @@ $$
 
 ベクトルや行列の掛け算は、それぞれの「形状」を意識することで、結果がどのような形になるか（スカラー、ベクトル、行列）を視覚的に捉えることができます。
 
-- **横ベクトル・縦ベクトルの掛け算 $\rightarrow$ スカラーになる**
+- **横ベクトル・縦ベクトルの掛け算 $\rightarrow$ スカラーができる**
 
     \begin{center}
     \begin{tikzpicture}[>=stealth, thick, scale=0.9, every node/.style={align=center}]
@@ -479,7 +479,7 @@ $$
     \end{tikzpicture}
     \end{center}
 
-- **縦ベクトル・横ベクトルの掛け算 $\rightarrow$ 行列になる**
+- **縦ベクトル・横ベクトルの掛け算 $\rightarrow$ 行列ができる**
 
     \begin{center}
     \begin{tikzpicture}[>=stealth, thick, scale=0.9, every node/.style={align=center}]
@@ -578,9 +578,9 @@ $$
     \begin{tikzpicture}[>=stealth, thick, scale=0.9, every node/.style={align=center}]
       \colorlet{vecbg}{cyan!10} \colorlet{vecborder}{cyan!70!blue}
       \colorlet{colbg}{magenta!10} \colorlet{colborder}{magenta!70!purple}
-      
-      \node at (-1.2, 0) {$B =$};
-      \draw[draw=black, thick] (0, 1.2) -- (-0.2, 1.2) -- (-0.2, -1.2) -- (0, -1.2);
+
+      \node at (-1.5, 0) {$B =$};
+      \draw[draw=black, thick] (0, 1.2) -- (-0.4, 1.2) -- (-0.4, -1.2) -- (0, -1.2);
       \draw[draw=black, thick] (2.0, 1.2) -- (2.2, 1.2) -- (2.2, -1.2) -- (2.0, -1.2);
       \foreach \y/\i in {0.75/1, 0.25/2, -0.25/3, -0.75/4} {
         \node[anchor=east] at (0.3, \y) {$\mathbf{b}_\i^\top$};
@@ -603,9 +603,9 @@ $$
     \begin{tikzpicture}[>=stealth, thick, scale=0.9, every node/.style={align=center}]
       \colorlet{vecbg}{cyan!10} \colorlet{vecborder}{cyan!70!blue}
       \colorlet{vbg}{orange!10} \colorlet{vborder}{orange!80!red}
-      
-      \node at (-1.5, 0) {$B \mathbf{v} =$};
-      \draw[draw=black, thick] (0, 1.2) -- (-0.2, 1.2) -- (-0.2, -1.2) -- (0, -1.2);
+
+      \node at (-1.7, 0) {$B \mathbf{v} =$};
+      \draw[draw=black, thick] (0, 1.2) -- (-0.4, 1.2) -- (-0.4, -1.2) -- (0, -1.2);
       \draw[draw=black, thick] (1.8, 1.2) -- (2.0, 1.2) -- (2.0, -1.2) -- (1.8, -1.2);
       \foreach \y/\i in {0.75/1, 0.25/2, -0.25/3, -0.75/4} {
         \node[anchor=east] at (0.3, \y) {$\mathbf{b}_\i^\top$};
@@ -621,21 +621,21 @@ $$
       \draw[draw=black, thick] (5.6, 1.2) -- (5.8, 1.2) -- (5.8, -1.2) -- (5.6, -1.2);
       \foreach \y/\i in {0.75/1, 0.25/2, -0.25/3, -0.75/4} {
         \node[anchor=west] at (3.9, \y) {$\mathbf{b}_\i^\top \mathbf{v}$};
-        \draw[fill=vbg, draw=vborder] (5.2, \y-0.1) rectangle (5.4, \y+0.1); 
+        \draw[fill=vbg, draw=vborder] (5.2, \y-0.1) rectangle (5.4, \y+0.1);
       }
     \end{tikzpicture}
     \end{center}
 
 - **縦ベクトルが横に並んでいると思うと**
-  成分同士を掛けて足す「内積」あるいは「列ベクトルの重み付き和」のように振る舞います。
+  通常のベクトル間の内積（成分同士を掛けて足す）のように振る舞います。
 
     \begin{center}
     \begin{tikzpicture}[>=stealth, thick, scale=0.9, every node/.style={align=center}]
       \colorlet{colbg}{magenta!10} \colorlet{colborder}{magenta!70!purple}
       \colorlet{vbg}{orange!10} \colorlet{vborder}{orange!80!red}
-      
-      \node at (-1.5, 0) {$B \mathbf{v} =$};
-      \draw[draw=black, thick] (0, 1.2) -- (-0.2, 1.2) -- (-0.2, -1.2) -- (0, -1.2);
+
+      \node at (-1.7, 0) {$B \mathbf{v} =$};
+      \draw[draw=black, thick] (0, 1.2) -- (-0.4, 1.2) -- (-0.4, -1.2) -- (0, -1.2);
       \draw[draw=black, thick] (2.0, 1.2) -- (2.2, 1.2) -- (2.2, -1.2) -- (2.0, -1.2);
       \foreach \x/\i in {0.4/1, 1.0/2, 1.6/3} {
         \node[anchor=south, inner sep=1pt] at (\x, 1.0) {\small $\boldsymbol{\beta}_\i$};
@@ -647,10 +647,10 @@ $$
       \foreach \y/\i in {0.6/1, 0.0/2, -0.6/3} {
         \draw[fill=vbg, draw=vborder] (2.55, \y-0.15) rectangle (2.85, \y+0.15);
       }
-      \draw[->, orange!80!red, shorten >=2pt] (2.55, 0.6) to[out=150, in=60] (0.5, 1.3);
-      \draw[->, orange!80!red, shorten >=2pt] (2.55, 0.0) to[out=150, in=60] (1.1, 1.3);
-      \draw[->, orange!80!red, shorten >=2pt] (2.55, -0.6) to[out=150, in=60] (1.7, 1.3);
-      
+      \draw[->, orange!80!red, shorten >=2pt, thick] (0.55, 0.6) to[out=50, in=150] (2.5, 0.7);
+      \draw[->, orange!80!red, shorten >=2pt, thick] (1.15, 0.6) to[out=40, in=160] (2.5, 0.1);
+      \draw[->, orange!80!red, shorten >=2pt, thick] (1.75, 0.6) to[out=30, in=170] (2.5, -0.5);
+
       \node at (3.5, 0) {$=$};
       \node at (4.2, 0) {$\displaystyle \sum_{j=1}^3$};
       \draw[fill=colbg, draw=colborder] (4.8, -1.0) rectangle (5.1, 0.8);
