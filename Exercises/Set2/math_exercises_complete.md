@@ -601,6 +601,7 @@ $$
   $$
   \nabla_{\mathbf{x}} (\mathbf{x}^\top \mathbf{A} \mathbf{x}) = (\mathbf{A} + \mathbf{A}^\top)\mathbf{x}
   $$
+  特に対称行列（$\mathbf{A} = \mathbf{A}^\top$）の場合は、右辺が $2\mathbf{A}\mathbf{x}$ となります。
 
 ### 一階の条件の行列導出 {#q:3-matrix-derivative-first-order .questionbox difficulty="★1"}
 
@@ -614,6 +615,10 @@ $$
 \Phi^\top \Phi \boldsymbol{\theta} = \Phi^\top \mathbf{y}
 $$
 を導出せよ。
+
+---
+
+**ヒント：** $\Phi^\top \Phi$ は対称行列（$(\Phi^\top \Phi)^\top = \Phi^\top (\Phi^\top)^\top = \Phi^\top \Phi$）であることに注意せよ。
 
 ::: {.right}
 [（解答・解説へ）](#a:3-matrix-derivative-first-order)
