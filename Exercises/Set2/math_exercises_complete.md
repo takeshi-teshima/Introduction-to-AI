@@ -586,6 +586,15 @@ $$
    $$
    と書き直せることを、上記1の結果およびベクトルのノルムの定義 $\left(\|\mathbf{v}\|^2 = \sum_{i=1}^n v_i^2\right)$ を用いて確認せよ。
 
+3. **【ノルムの展開（二次形式との対応）】**
+   さらに、$\|\Phi\boldsymbol{\theta} - \mathbf{y}\|^2 = (\Phi\boldsymbol{\theta} - \mathbf{y})^\top (\Phi\boldsymbol{\theta} - \mathbf{y})$ の右辺を展開し、以下のようになることを確認せよ。
+   \begin{align*}
+   (\Phi\boldsymbol{\theta} - \mathbf{y})^\top (\Phi\boldsymbol{\theta} - \mathbf{y}) &= (\Phi\boldsymbol{\theta} - \mathbf{y})^\top (\Phi\boldsymbol{\theta}) - (\Phi\boldsymbol{\theta} - \mathbf{y})^\top \mathbf{y} \\
+   &= (\Phi\boldsymbol{\theta})^\top (\Phi\boldsymbol{\theta}) - \mathbf{y}^\top (\Phi\boldsymbol{\theta}) - (\Phi\boldsymbol{\theta})^\top \mathbf{y} + \mathbf{y}^\top \mathbf{y} \\
+   &= \boldsymbol{\theta}^\top \Phi^\top \Phi \boldsymbol{\theta} - 2\mathbf{y}^\top \Phi \boldsymbol{\theta} + \mathbf{y}^\top \mathbf{y}
+   \end{align*}
+   （ヒント：転置の公式 $(\mathbf{A}\mathbf{B})^\top = \mathbf{B}^\top \mathbf{A}^\top$ と、スカラーの内積 $\mathbf{a}^\top \mathbf{b} = \mathbf{b}^\top \mathbf{a}$ を用いること）
+
 ::: {.right}
 [（解答・解説へ）](#a:3-matrix-empirical-risk)
 :::
@@ -601,16 +610,33 @@ $$
   $$
   \nabla_{\mathbf{x}} (\mathbf{x}^\top \mathbf{A} \mathbf{x}) = (\mathbf{A} + \mathbf{A}^\top)\mathbf{x}
   $$
-  特に対称行列（$\mathbf{A} = \mathbf{A}^\top$）の場合は、右辺が $2\mathbf{A}\mathbf{x}$ となります。
+  特に対称行列（$\mathbf{A} = \mathbf{A}^\top$）の場合は、
+  $$\nabla_{\mathbf{x}} (\mathbf{x}^\top \mathbf{A} \mathbf{x}) = 2\mathbf{A}\mathbf{x}$$
+  となる。
 
-### 一階の条件の行列導出 {#q:3-matrix-derivative-first-order .questionbox difficulty="★1"}
-
-行列微分の公式
+<!-- 行列微分の公式
 \begin{align*}
 \nabla_{\boldsymbol{\theta}} (\mathbf{a}^\top \boldsymbol{\theta}) &= \mathbf{a} \\
 \nabla_{\boldsymbol{\theta}} (\boldsymbol{\theta}^\top \mathbf{A} \boldsymbol{\theta}) &= 2\mathbf{A}\boldsymbol{\theta} \quad \text{（$\mathbf{A}$は対称行列）}
 \end{align*}
-を用いて、目的関数 $L(\boldsymbol{\theta}) = \frac{1}{2}(\Phi\boldsymbol{\theta} - \mathbf{y})^\top (\Phi\boldsymbol{\theta} - \mathbf{y})$ の勾配 $\nabla_{\boldsymbol{\theta}} L(\boldsymbol{\theta})$ を求め、一階の条件 $\nabla_{\boldsymbol{\theta}} L(\boldsymbol{\theta}) = \mathbf{0}$ から正規方程式
+を用いて、 -->
+### 行列・ベクトルでの二次形式の展開と平方完成 {#q:3-quadratic-form-completing-square .questionbox difficulty="★2"}
+
+一変数関数における平方完成 $(x - b)^2 = x^2 - 2bx + b^2$ の行列・ベクトル版を確認する。
+対称行列 $\mathbf{A}$（すなわち $\mathbf{A} = \mathbf{A}^\top$）と、ベクトル $\mathbf{x}, \mathbf{b}$ があるとする。
+
+1. **【展開】**
+   二次形式 $(\mathbf{x} - \mathbf{b})^\top \mathbf{A} (\mathbf{x} - \mathbf{b})$ を展開し、$\mathbf{x}^\top \mathbf{A} \mathbf{x} - 2\mathbf{b}^\top \mathbf{A} \mathbf{x} + \mathbf{b}^\top \mathbf{A} \mathbf{b}$ となることを示せ。（ヒント：スカラー $\mathbf{b}^\top \mathbf{A} \mathbf{x}$ は転置しても同じ値になること、および $\mathbf{A}^\top = \mathbf{A}$ を用いる）
+2. **【平方完成】**
+   逆に、二次式 $\mathbf{x}^\top \mathbf{A} \mathbf{x} - 2\mathbf{c}^\top \mathbf{x}$ が与えられたとき、これを平方完成して $(\mathbf{x} - \boldsymbol{\mu})^\top \mathbf{A} (\mathbf{x} - \boldsymbol{\mu}) + \text{定数}$ の形にしたい。$\mathbf{A}$ が正則（逆行列 $\mathbf{A}^{-1}$ を持つ）であると仮定し、$\boldsymbol{\mu} = \mathbf{A}^{-1}\mathbf{c}$ とおくことで平方完成を完了させよ。
+
+::: {.right}
+[（解答・解説へ）](#a:3-quadratic-form-completing-square)
+:::
+
+### 一階の条件の行列導出 {#q:3-matrix-derivative-first-order .questionbox difficulty="★1"}
+
+目的関数 $L(\boldsymbol{\theta}) = \frac{1}{2}(\Phi\boldsymbol{\theta} - \mathbf{y})^\top (\Phi\boldsymbol{\theta} - \mathbf{y})$ の勾配 $\nabla_{\boldsymbol{\theta}} L(\boldsymbol{\theta})$ を求め、一階の条件 $\nabla_{\boldsymbol{\theta}} L(\boldsymbol{\theta}) = \mathbf{0}$ から正規方程式
 $$
 \Phi^\top \Phi \boldsymbol{\theta} = \Phi^\top \mathbf{y}
 $$
@@ -618,7 +644,7 @@ $$
 
 ---
 
-**ヒント：** $\Phi^\top \Phi$ は対称行列（$(\Phi^\top \Phi)^\top = \Phi^\top (\Phi^\top)^\top = \Phi^\top \Phi$）であることに注意せよ。
+**ヒント：** $\Phi^\top \Phi$ は対称行列である（転置に対して不変であることが $(\Phi^\top \Phi)^\top = \Phi^\top (\Phi^\top)^\top = \Phi^\top \Phi$ から確認できる）。
 
 ::: {.right}
 [（解答・解説へ）](#a:3-matrix-derivative-first-order)
@@ -626,16 +652,12 @@ $$
 
 ## 正則化（Regularization）
 
-### L2ノルムの性質と内積 {#q:3-l2-norm-properties .questionbox difficulty="★2"}
+### 【復習とヒント】L2ノルムの性質と内積 {.tcolorbox option="enhanced, colback=blue!2!white, colframe=blue!60!black, fonttitle=\bfseries, drop shadow"}
 
-一般の $d$ 次元ベクトル $\mathbf{w} = (w_1, \dots, w_d)^\top$ について、L2ノルムの定義 $\|\mathbf{w}\| = \sqrt{\sum_{i=1}^d w_i^2}$ と内積の定義を用いて、以下の等式が成り立つことを確認せよ。
+一般の $d$ 次元ベクトル $\mathbf{w} = (w_1, \dots, w_d)^\top$ について、L2ノルムの定義 $\|\mathbf{w}\| = \sqrt{\sum_{i=1}^d w_i^2}$ と内積の定義より、以下の等式が成り立ちます。
 $$
 \|\mathbf{w}\|^2 = \mathbf{w}^\top \mathbf{w}
 $$
-
-::: {.right}
-[（解答・解説へ）](#a:3-l2-norm-properties)
-:::
 
 ### L2正則化付き目的関数の書き下し {#q:3-l2-regularization-objective .questionbox difficulty="★1"}
 
@@ -1228,10 +1250,60 @@ $$
    $$
    \frac{1}{n}\|\Phi\boldsymbol{\theta} - \mathbf{y}\|^2 = \frac{1}{n} \sum_{i=1}^n (f_{\boldsymbol{\theta}}(x_i) - y_i)^2 = \hat{R}(f_{\boldsymbol{\theta}})
    $$
-   が導かれ、式が一致することが確認された。（証明終）
+   が導かれ、式が一致することが確認された。
+
+3. 展開の各ステップは以下の通りである。
+   \begin{align*}
+   (\Phi\boldsymbol{\theta} - \mathbf{y})^\top (\Phi\boldsymbol{\theta} - \mathbf{y})
+   &= (\Phi\boldsymbol{\theta} - \mathbf{y})^\top (\Phi\boldsymbol{\theta}) - (\Phi\boldsymbol{\theta} - \mathbf{y})^\top \mathbf{y} \\
+   &= (\Phi\boldsymbol{\theta})^\top (\Phi\boldsymbol{\theta}) - \mathbf{y}^\top (\Phi\boldsymbol{\theta}) - (\Phi\boldsymbol{\theta})^\top \mathbf{y} + \mathbf{y}^\top \mathbf{y}
+   \end{align*}
+   ここで、第1項は $(\Phi\boldsymbol{\theta})^\top (\Phi\boldsymbol{\theta}) = \boldsymbol{\theta}^\top \Phi^\top \Phi \boldsymbol{\theta}$ となる。
+   また、第3項 $(\Phi\boldsymbol{\theta})^\top \mathbf{y}$ はスカラー（内積）であるため、転置しても値が変わらない。よって $\mathbf{y}^\top (\Phi\boldsymbol{\theta})$ と等しくなる。
+   したがって、第2項と第3項がまとまり $-2\mathbf{y}^\top \Phi \boldsymbol{\theta}$ となる。
+   以上より、
+   $$
+   \boldsymbol{\theta}^\top \Phi^\top \Phi \boldsymbol{\theta} - 2\mathbf{y}^\top \Phi \boldsymbol{\theta} + \mathbf{y}^\top \mathbf{y}
+   $$
+   となることが示された。（証明終）
 
 ::: {.right}
 [（問題へ戻る）](#q:3-matrix-empirical-risk)
+:::
+
+### 問3-quadratic-form-completing-square の解答・解説 {#a:3-quadratic-form-completing-square .answerbox ref="q:3-quadratic-form-completing-square"}
+
+1. 前から順に展開する。
+   \begin{align*}
+   (\mathbf{x} - \mathbf{b})^\top \mathbf{A} (\mathbf{x} - \mathbf{b})
+   &= (\mathbf{x} - \mathbf{b})^\top (\mathbf{A}\mathbf{x} - \mathbf{A}\mathbf{b}) \\
+   &= \mathbf{x}^\top \mathbf{A}\mathbf{x} - \mathbf{x}^\top \mathbf{A}\mathbf{b} - \mathbf{b}^\top \mathbf{A}\mathbf{x} + \mathbf{b}^\top \mathbf{A}\mathbf{b}
+   \end{align*}
+   ここで $\mathbf{x}^\top \mathbf{A}\mathbf{b}$ はスカラーであるため、転置しても値が変わらない。$\mathbf{A}$ が対称行列（$\mathbf{A}^\top = \mathbf{A}$）であることを用いると、
+   $$
+   (\mathbf{x}^\top \mathbf{A}\mathbf{b})^\top = \mathbf{b}^\top \mathbf{A}^\top \mathbf{x} = \mathbf{b}^\top \mathbf{A}\mathbf{x}
+   $$
+   となる。したがって、第2項と第3項が等しくなり、
+   $$
+   \mathbf{x}^\top \mathbf{A} \mathbf{x} - 2\mathbf{b}^\top \mathbf{A} \mathbf{x} + \mathbf{b}^\top \mathbf{A} \mathbf{b}
+   $$
+   となることが示された。（証明終）
+2. $(\mathbf{x} - \boldsymbol{\mu})^\top \mathbf{A} (\mathbf{x} - \boldsymbol{\mu})$ を(1)と同様に展開すると、
+   $$
+   \mathbf{x}^\top \mathbf{A} \mathbf{x} - 2\boldsymbol{\mu}^\top \mathbf{A} \mathbf{x} + \boldsymbol{\mu}^\top \mathbf{A} \boldsymbol{\mu}
+   $$
+   となる。これと元の式 $\mathbf{x}^\top \mathbf{A} \mathbf{x} - 2\mathbf{c}^\top \mathbf{x}$ の $\mathbf{x}$ の1次の項を比較すると、
+   $$
+   \boldsymbol{\mu}^\top \mathbf{A} = \mathbf{c}^\top \iff \mathbf{A}\boldsymbol{\mu} = \mathbf{c} \quad \text{（両辺の転置をとり、$\mathbf{A}^\top=\mathbf{A}$を用いた）}
+   $$
+   となればよい。$\mathbf{A}$ が正則であるから、$\boldsymbol{\mu} = \mathbf{A}^{-1}\mathbf{c}$ とおく。
+   このとき、元の式は以下のように平方完成される。
+   $$
+   \mathbf{x}^\top \mathbf{A} \mathbf{x} - 2\mathbf{c}^\top \mathbf{x} = (\mathbf{x} - \mathbf{A}^{-1}\mathbf{c})^\top \mathbf{A} (\mathbf{x} - \mathbf{A}^{-1}\mathbf{c}) - \mathbf{c}^\top \mathbf{A}^{-1} \mathbf{c}
+   $$
+
+::: {.right}
+[（問題へ戻る）](#q:3-quadratic-form-completing-square)
 :::
 
 ### 問3-matrix-derivative-first-order の解答・解説 {#a:3-matrix-derivative-first-order .answerbox ref="q:3-matrix-derivative-first-order"}
@@ -1260,22 +1332,6 @@ $$
 **【該当内容】** 第3回スライド45〜50「過適合の対策＞正則化、L2正則化」
 **【ねらい】** 過学習を防ぐL2正則化（Ridge）の目的関数について、代数表現と行列表現の一致を確かめ、単位行列 $I$ が出現する理由を数式変形で完全に理解する。
 
-### 問3-l2-norm-properties の解答・解説 {#a:3-l2-norm-properties .answerbox ref="q:3-l2-norm-properties"}
-
-L2ノルムの定義より、その2乗は各成分の2乗和となる。
-$$
-\|\mathbf{w}\|^2 = \left( \sqrt{\sum_{i=1}^d w_i^2} \right)^2 = \sum_{i=1}^d w_i^2
-$$
-一方、ベクトル $\mathbf{w}$ とそれ自身との内積は、対応する成分の積の和であるから、
-$$
-\mathbf{w}^\top \mathbf{w} = \sum_{i=1}^d w_i w_i = \sum_{i=1}^d w_i^2
-$$
-となる。
-両者の結果が一致するため、$\|\mathbf{w}\|^2 = \mathbf{w}^\top \mathbf{w}$ が成り立つことが確認された。（証明終）
-
-::: {.right}
-[（問題へ戻る）](#q:3-l2-norm-properties)
-:::
 
 ### 問3-l2-regularization-objective の解答・解説 {#a:3-l2-regularization-objective .answerbox ref="q:3-l2-regularization-objective"}
 
