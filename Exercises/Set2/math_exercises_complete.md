@@ -708,18 +708,6 @@ $$
 [（解答・解説へ）](#a:3-inner-product-roles)
 :::
 
-### 内積の線形性と対称性の証明 {#q:3-inner-product-properties .questionbox difficulty="★3"}
-
-任意の次元のベクトル $\mathbf{x}, \mathbf{y}$ およびスカラー $c$ について、
-\begin{align*}
-\mathbf{x}^\top \mathbf{y} &= \mathbf{y}^\top \mathbf{x} \quad \text{（対称性）} \\
-(c\mathbf{x})^\top \mathbf{y} &= c(\mathbf{x}^\top \mathbf{y}) \quad \text{（線形性）}
-\end{align*}
-が成り立つことを、各成分を明示して確かめよ。
-
-::: {.right}
-[（解答・解説へ）](#a:3-inner-product-properties)
-:::
 
 ### 解答・解説
 
@@ -809,25 +797,6 @@ $$
 :::
 
 
-### 問3-inner-product-properties の解答・解説 {#a:3-inner-product-properties .answerbox ref="q:3-inner-product-properties"}
-
-$\mathbf{x} = (x_1, \dots, x_d)^\top$, $\mathbf{y} = (y_1, \dots, y_d)^\top$ とおく。
-
-1. 内積の定義より $\mathbf{x}^\top \mathbf{y} = \sum_{i=1}^d x_i y_i$ である。
-        実数の積は可換（$x_i y_i = y_i x_i$）なので、
-        $$
-        \mathbf{x}^\top \mathbf{y} = \sum_{i=1}^d y_i x_i = \mathbf{y}^\top \mathbf{x}
-        $$
-        となり、対称性が成立する。
-2. ベクトルのスカラー倍の定義より $c\mathbf{x} = (cx_1, \dots, cx_d)^\top$ である。
-        $$
-        (c\mathbf{x})^\top \mathbf{y} = \sum_{i=1}^d (cx_i)y_i = c \sum_{i=1}^d x_i y_i = c(\mathbf{x}^\top \mathbf{y})
-        $$
-        となり、線形性（スカラー倍の同伴性）が成立する。（証明終）
-
-::: {.right}
-[（問題へ戻る）](#q:3-inner-product-properties)
-:::
 
 ## パラメータ線型モデルの表現（特徴写像）
 
