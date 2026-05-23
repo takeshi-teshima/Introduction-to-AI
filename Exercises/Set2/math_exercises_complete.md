@@ -634,8 +634,8 @@ $$
       \colorlet{colbg}{magenta!10} \colorlet{colborder}{magenta!70!purple}
       \colorlet{vbg}{orange!10} \colorlet{vborder}{orange!80!red}
 
-      \node at (-1.7, 0) {$B \mathbf{v} =$};
-      \draw[draw=black, thick] (0, 1.2) -- (-0.4, 1.2) -- (-0.4, -1.2) -- (0, -1.2);
+      \node at (-1.5, 0) {$B \mathbf{v} =$};
+      \draw[draw=black, thick] (0, 1.2) -- (-0.2, 1.2) -- (-0.2, -1.2) -- (0, -1.2);
       \draw[draw=black, thick] (2.0, 1.2) -- (2.2, 1.2) -- (2.2, -1.2) -- (2.0, -1.2);
       \foreach \x/\i in {0.4/1, 1.0/2, 1.6/3} {
         \node[anchor=south, inner sep=1pt] at (\x, 1.0) {\small $\boldsymbol{\beta}_\i$};
