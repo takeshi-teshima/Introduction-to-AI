@@ -155,3 +155,25 @@ $\mathbf{x} = (x_1, \dots, x_d)^\top$, $\mathbf{y} = (y_1, \dots, y_d)^\top$ と
 ::: {.right}
 [（問題へ戻る）](#q:3-inner-product-properties)
 :::
+
+## パラメータ線型モデルの表現
+
+### 最小二乗誤差の解の公式 {#q:3-least-squares-formula .questionbox tags="発展"}
+
+計画行列を $\Phi$ 、ラベルベクトルを $\mathbf{y}$ とする。このとき、最小二乗誤差の意味で最適なパラメータ $\hat{\boldsymbol{\theta}}$ を求める一般式を、$\Phi$ と $\mathbf{y}$ を用いて（逆行列の記号を用いて）書き下せ。（ただし，この設定において $\Phi^\top \Phi$ の逆行列が存在することは認めてよい．）
+
+::: {.right}
+[（解答・解説へ）](#a:3-least-squares-formula)
+:::
+
+### 問3-least-squares-formula の解答・解説 {#a:3-least-squares-formula .answerbox ref="q:3-least-squares-formula"}
+
+最小二乗誤差の目的関数の一階の条件から導かれる正規方程式 $\Phi^\top \Phi \boldsymbol{\theta} = \Phi^\top \mathbf{y}$ の両辺に左から $(\Phi^\top \Phi)^{-1}$ を掛けることで、
+$$
+\hat{\boldsymbol{\theta}} = (\Phi^\top \Phi)^{-1} \Phi^\top \mathbf{y}
+$$
+となる。
+
+::: {.right}
+[（問題へ戻る）](#q:3-least-squares-formula)
+:::

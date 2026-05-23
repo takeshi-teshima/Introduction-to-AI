@@ -2,7 +2,7 @@
 title: "経営学への応用を目指すAI入門：数学演習問題集"
 subtitle: "第1回〜第6回 講義内容完全準拠・論理展開追体験セット（完全版）"
 author: "特殊講義1 補助資料"
-date: "2026年5月17日（最終更新）"
+date: \today
 geometry: margin=20mm
 numbersections: true
 header-includes: |
@@ -11,6 +11,7 @@ header-includes: |
   \usepackage[most]{tcolorbox}
   \usepackage{tikz}
   \usetikzlibrary{arrows.meta, positioning}
+  \usepackage{fontawesome5}
   \newcounter{question}
   \newtcolorbox[use counter=question]{questionbox}[2][]{enhanced, breakable, colback=red!2!gray!3!white, colframe=red!50!gray, fonttitle=\bfseries, title={問\arabic{question}\ #2}, #1}
   \newtcolorbox{answerbox}[2][]{enhanced, breakable, colback=green!2!gray!3!white, colframe=green!45!gray, fonttitle=\bfseries, title={問\ref{#2}の解答・解説}, #1}
@@ -22,7 +23,7 @@ header-includes: |
 ---
 
 \begin{flushright}
-\textbf{最終更新日：2026年5月17日 (v1.0)}
+\textbf{最終更新日：\today{} (v1.0)}
 \end{flushright}
 
 # 本演習問題集の進め方と活用法 {.unnumbered}
@@ -31,10 +32,10 @@ header-includes: |
 
 また、各設問には以下の難易度が設定されています。
 
-* **難易度：★0 (不要)** ：解き方が分かるなら解かなくてもいい。
-* **難易度：★1 (確認)** ：スライドの定義そのものの確認や、簡単な代入問題。
-* **難易度：★2 (基礎)** ：必須。講義の論理展開の行間を埋める標準的な問題。
-* **難易度：★3 (発展)** ：余裕があれば解くとよい。
+* **不要** ：解き方が分かるなら解かなくてもいい。
+* **確認** ：定義を簡単な代入問題で辿る確認や、立式などの最低限の確認。
+* **必須** ：講義の行間を埋める標準的な問題。
+* **発展** ：余裕があれば解くとよい。
 
 ---
 
@@ -42,7 +43,7 @@ header-includes: |
 
 ## 確率の基礎と期待値・分散の計算
 
-### 指示関数（Indicator function）の理解 {#q:1-indicator-function .questionbox tags="確認"}
+### 指示関数（Indicator function）の理解 {#q:1-indicator-function .questionbox tags="確認\faCheck"}
 
 機械学習の理論（特に損失関数や分類問題の評価など）では、ある条件が満たされているか否かを表す**指示関数（定義関数）** $\ind$ が頻出する。条件（または事象） $A$ に対して、指示関数 $\ind\{A\}$ は以下のように定義される。
 $$
@@ -105,7 +106,7 @@ $$
 * \textbf{分散と共分散の関係}: $\mathbb{V}[X] = Cov(X,X)$
 * \textbf{共分散の双線形性}: $Cov(aX+bY, Z) = aCov(X,Z) + bCov(Y,Z)$
 
-### 共分散（Covariance）の2次形式的振る舞い {#q:1-variance-formula-proof .questionbox tags="発展"}
+### 共分散（Covariance）の2次形式的振る舞い {#q:1-variance-formula-proof .questionbox tags="発展\faRocket"}
 
 確率変数 $X, Y, Z$ と定数 $a, b$ について、共分散の性質（双線形性・対称性）
 \begin{align*}
@@ -125,7 +126,7 @@ Cov(X,Y) &= Cov(Y,X)
 
 ## 経験リスクの数式化（シグマを用いた書き下し）
 
-### 経験リスクの立式 {#q:2-empirical-risk-formulation .questionbox tags="必須"}
+### 経験リスクの立式 {#q:2-empirical-risk-formulation .questionbox tags="必須\faStar"}
 
 $n$ 個の訓練データ $\{(x_i, y_i)\}_{i=1}^n$ が与えられている。モデルクラスとして1次関数 $f_{(w,b)}(x) = wx + b$ を採用し、損失関数を二乗誤差 $l(y, \hat{y}) = (y - \hat{y})^2$ とするとき、経験リスク $\hat{R}(f_{(w,b)})$ を書き下せ。
 <!-- $\sum_{i=1}^n$ を用いて -->
@@ -134,7 +135,7 @@ $n$ 個の訓練データ $\{(x_i, y_i)\}_{i=1}^n$ が与えられている。�
 [（解答・解説へ）](#a:2-empirical-risk-formulation)
 :::
 
-### 最適化問題の定式化：穴埋め {#q:2-optimization-formulation-blank .questionbox tags="必須"}
+### 最適化問題の定式化：穴埋め {#q:2-optimization-formulation-blank .questionbox tags="必須\faStar"}
 
 以下の最適化問題の定式化について、空欄 (ア) 〜 (エ) に入る適切な数式や記号を答えよ。
 
@@ -174,7 +175,7 @@ $$
 
 ## 最小二乗法の真髄：偏微分から一階の条件へ
 
-### 偏微分と勾配 {#q:3-multivariate-gradient .questionbox tags="必須"}
+### 偏微分と勾配 {#q:3-multivariate-gradient .questionbox tags="必須\faStar"}
 
 ベクトル $\mathbf{w} = (w_1, w_2, w_3)^\top \in \mathbb{R}^3$ に対する以下の関数 $g(\mathbf{w})$ について、勾配 $\nabla g(\mathbf{w})$ を求めよ。
 $$
@@ -185,7 +186,7 @@ $$
 [（解答・解説へ）](#a:3-multivariate-gradient)
 :::
 
-### 線型単回帰モデルの最適パラメータ導出 {#q:2-partial-derivative-gradient .questionbox tags="必須"}
+### 線型単回帰モデルの最適パラメータ導出 {#q:2-partial-derivative-gradient .questionbox tags="必須\faStar"}
 
 1次元の入力 $x$ に対する線型単回帰モデル $f_{w,b}(x) = wx + b$ を考える。$n$ 個の訓練データ $\{(x_i, y_i)\}_{i=1}^n$ に対する目的関数（経験リスク）を二乗誤差を用いて
 $$
@@ -303,7 +304,7 @@ $$
 
 【注意】いずれも、行列やベクトルの形状が掛け算可能なように整合していることを前提としています。
 
-### ベクトル・行列の積の頻出パターンと成分表示 {#q:3-matrix-vector-patterns .questionbox tags="必須"}
+### ベクトル・行列の積の頻出パターンと成分表示 {#q:3-matrix-vector-patterns .questionbox tags="必須\faStar"}
 
 講義スライドで登場した行列・ベクトルの積に関する視覚的なパターンの意味を、成分表示を用いて確認せよ。
 
@@ -489,7 +490,7 @@ $$
 
 ## パラメータ線型モデルの表現（特徴写像）
 
-### 多項式特徴写像による線型表現 {#q:3-polynomial-feature-mapping .questionbox tags="確認"}
+### 多項式特徴写像による線型表現 {#q:3-polynomial-feature-mapping .questionbox tags="確認\faCheck"}
 
 1次元の入力 $x$ に対し、特徴写像を $\boldsymbol{\phi}(x) = (1, x, x^2)^\top$ と定義する。
 パラメータベクトルを $\boldsymbol{\theta} = (\theta_0, \theta_1, \theta_2)^\top$ とする。
@@ -502,7 +503,7 @@ $$
 [（解答・解説へ）](#a:3-polynomial-feature-mapping)
 :::
 
-### テキストデータへの適用（Bag-of-Words）と最小二乗法 {#q:3-bag-of-words-representation .questionbox tags="必須"}
+### テキストデータへの適用（Bag-of-Words）と最小二乗法 {#q:3-bag-of-words-representation .questionbox tags="必須\faStar"}
 
 テキストの文書分類や数値予測を行う際、文書中の単語の出現頻度をもとに特徴ベクトルを作る手法を**Bag-of-Words**と呼びます。
 
@@ -537,8 +538,8 @@ $$
    なお，計画行列とは，ここでは，
    $$\Phi = \begin{pmatrix} \boldsymbol{\phi}(x_1)^\top \\ \boldsymbol{\phi}(x_2)^\top \\ \boldsymbol{\phi}(x_3)^\top \\ \boldsymbol{\phi}(x_4)^\top \end{pmatrix}$$
    のことである．
-3. このモデルに対して、最小二乗誤差の意味で最適なパラメータ $\hat{\boldsymbol{\theta}}$ を求める一般式を、計画行列 $\Phi$ とラベルベクトル $\mathbf{y}$ を用いて（逆行列の記号を用いて）書き下せ。
-   （ただし，この設定において $\Phi^\top \Phi$ の逆行列が存在することは認めてよい．）
+
+※ ここで計算した $\Phi$ は，後に最適なパラメーターの解の公式に現れる．
 
 ::: {.right}
 [（解答・解説へ）](#a:3-bag-of-words-representation)
@@ -546,7 +547,7 @@ $$
 
 ## 多変数関数の経験リスクと勾配
 
-### 3変数パラメータの経験リスク {#q:3-multivariate-empirical-risk .questionbox tags="確認"}
+### 3変数パラメータの経験リスク {#q:3-multivariate-empirical-risk .questionbox tags="確認\faCheck"}
 
 3つのデータポイント $(x_1, y_1) = (1, 2)$, $(x_2, y_2) = (2, 3)$, $(x_3, y_3) = (3, 5)$ が与えられている。予測モデルを3変数パラメータ $\boldsymbol{\theta} = (\theta_1, \theta_2, \theta_3)^\top$ を用いたモデル $f_{\boldsymbol{\theta}}(x) = \theta_1 + \theta_2 x + \theta_3 x^2$ とし、損失関数を二乗誤差とする。
 このとき、経験リスク
@@ -561,7 +562,7 @@ $$
 
 ## 最小二乗法の行列表記と一階の条件（最重要）
 
-### 行列とベクトルによる目的関数の書き直し {#q:3-matrix-empirical-risk .questionbox tags="必須"}
+### 行列とベクトルによる目的関数の書き直し {#q:3-matrix-empirical-risk .questionbox tags="必須\faStar"}
 
 $n$ 個のデータ $(x_1, y_1), \dots, (x_n, y_n)$ に対して、線型モデルを $f_{\boldsymbol{\theta}}(x) = \boldsymbol{\theta}^\top \boldsymbol{\phi}(x)$ とする。また、計画行列 $\Phi \in \mathbb{R}^{n \times d}$ とラベルベクトル $\mathbf{y} \in \mathbb{R}^n$ を次のように定義する。
 $$
@@ -620,23 +621,37 @@ $$
 \nabla_{\boldsymbol{\theta}} (\boldsymbol{\theta}^\top \mathbf{A} \boldsymbol{\theta}) &= 2\mathbf{A}\boldsymbol{\theta} \quad \text{（$\mathbf{A}$は対称行列）}
 \end{align*}
 を用いて、 -->
-### 行列・ベクトルでの二次形式の展開と平方完成 {#q:3-quadratic-form-completing-square .questionbox tags="必須"}
+### 行列・ベクトルでの二次形式の展開と平方完成 {#q:3-quadratic-form-completing-square .questionbox tags="必須\faStar"}
 
 一変数関数における平方完成 $(x - b)^2 = x^2 - 2bx + b^2$ の行列・ベクトル版を確認する。
 対称行列 $\mathbf{A}$（すなわち $\mathbf{A} = \mathbf{A}^\top$）と、ベクトル $\mathbf{x}, \mathbf{b}$ があるとする。
 
 1. **【展開】**
-   二次形式 $(\mathbf{x} - \mathbf{b})^\top \mathbf{A} (\mathbf{x} - \mathbf{b})$ を展開し、$\mathbf{x}^\top \mathbf{A} \mathbf{x} - 2\mathbf{b}^\top \mathbf{A} \mathbf{x} + \mathbf{b}^\top \mathbf{A} \mathbf{b}$ となることを示せ。（ヒント：スカラー $\mathbf{b}^\top \mathbf{A} \mathbf{x}$ は転置しても同じ値になること、および $\mathbf{A}^\top = \mathbf{A}$ を用いる）
+   二次形式 $(\mathbf{x} - \mathbf{b})^\top \mathbf{A} (\mathbf{x} - \mathbf{b})$ を展開し、以下の式となることを示せ。
+   $$
+   \mathbf{x}^\top \mathbf{A} \mathbf{x} - 2\mathbf{b}^\top \mathbf{A} \mathbf{x} + \mathbf{b}^\top \mathbf{A} \mathbf{b}
+   $$
+
 2. **【平方完成】**
-   逆に、二次式 $\mathbf{x}^\top \mathbf{A} \mathbf{x} - 2\mathbf{c}^\top \mathbf{x}$ が与えられたとき、これを平方完成して $(\mathbf{x} - \boldsymbol{\mu})^\top \mathbf{A} (\mathbf{x} - \boldsymbol{\mu}) + \text{定数}$ の形にしたい。$\mathbf{A}$ が正則（逆行列 $\mathbf{A}^{-1}$ を持つ）であると仮定し、$\boldsymbol{\mu} = \mathbf{A}^{-1}\mathbf{c}$ とおくことで平方完成を完了させよ。
+   逆に、以下の二次式が与えられたとき、
+   $$
+   \mathbf{x}^\top \mathbf{A} \mathbf{x} - 2\mathbf{c}^\top \mathbf{x}
+   $$
+   これを平方完成して $(\mathbf{x} - \boldsymbol{\mu})^\top \mathbf{A} (\mathbf{x} - \boldsymbol{\mu}) + \text{定数}$ の形にしたい。
+
+   $\mathbf{A}$ が正則（逆行列 $\mathbf{A}^{-1}$ を持つ）であると仮定し、$\boldsymbol{\mu} = \mathbf{A}^{-1}\mathbf{c}$ とおくことで平方完成を完了させよ。
+
+---
+
+**ヒント：** スカラー $\mathbf{b}^\top \mathbf{A} \mathbf{x}$ は転置しても同じ値になること、および $\mathbf{A}^\top = \mathbf{A}$ を用いる。
 
 ::: {.right}
 [（解答・解説へ）](#a:3-quadratic-form-completing-square)
 :::
 
-### 一階の条件の行列導出 {#q:3-matrix-derivative-first-order .questionbox tags="確認"}
+### 一階の条件の行列導出 {#q:3-matrix-derivative-first-order .questionbox tags="確認\faCheck"}
 
-目的関数 $L(\boldsymbol{\theta}) = \frac{1}{2}(\Phi\boldsymbol{\theta} - \mathbf{y})^\top (\Phi\boldsymbol{\theta} - \mathbf{y})$ の勾配 $\nabla_{\boldsymbol{\theta}} L(\boldsymbol{\theta})$ を求め、一階の条件 $\nabla_{\boldsymbol{\theta}} L(\boldsymbol{\theta}) = \mathbf{0}$ から正規方程式
+目的関数 $L(\boldsymbol{\theta}) = \frac{1}{2}(\Phi\boldsymbol{\theta} - \mathbf{y})^\top (\Phi\boldsymbol{\theta} - \mathbf{y})$ の勾配 $\nabla_{\boldsymbol{\theta}} L(\boldsymbol{\theta})$ を求め、一階の条件 $\nabla_{\boldsymbol{\theta}} L(\boldsymbol{\theta}) = \mathbf{0}$ から次式
 $$
 \Phi^\top \Phi \boldsymbol{\theta} = \Phi^\top \mathbf{y}
 $$
@@ -659,7 +674,7 @@ $$
 \|\mathbf{w}\|^2 = \mathbf{w}^\top \mathbf{w}
 $$
 
-### L2正則化付き目的関数の書き下し {#q:3-l2-regularization-objective .questionbox tags="確認"}
+### L2正則化付き目的関数の書き下し {#q:3-l2-regularization-objective .questionbox tags="確認\faCheck"}
 
 損失関数を二乗誤差、正則化項をL2ノルムの2乗とし、正則化係数を $\lambda = 0.01$ とする。 $n$ 個のデータに対するL2正則化付き経験リスク最小化の目的関数 $L_{\text{reg}}(\boldsymbol{\theta})$ の式をシグマ表記で書き下せ。
 
@@ -667,7 +682,7 @@ $$
 [（解答・解説へ）](#a:3-l2-regularization-objective)
 :::
 
-### 行列による書き直しと一階の条件 {#q:3-l2-regularization-gradient .questionbox tags="必須"}
+### 行列による書き直しと一階の条件 {#q:3-l2-regularization-gradient .questionbox tags="必須\faStar"}
 
 目的関数を $L_{\text{reg}}(\boldsymbol{\theta}) = \frac{1}{2}\|\Phi\boldsymbol{\theta} - \mathbf{y}\|^2 + \frac{\lambda}{2}\|\boldsymbol{\theta}\|^2$ とする。全体の勾配を $\mathbf{0}$ と置く一階の条件から、最適解
 $$
@@ -702,7 +717,7 @@ $$
 
 ## 同時分布・条件付き分布・条件付き期待値
 
-### 同時確率表からの条件付き分布と期待値 {#q:4-conditional-probability-table .questionbox tags="確認"}
+### 同時確率表からの条件付き分布と期待値 {#q:4-conditional-probability-table .questionbox tags="確認\faCheck"}
 
 離散確率変数 $X \in \{0,1\}$ と $Y \in \{1,2,3\}$ の同時確率 $P(X, Y)$ について、 $X=0$ のとき、$Y=1, 2, 3$ となる確率はそれぞれ $0.1, 0.2, 0.1$ である。
 
@@ -716,7 +731,7 @@ $$
 
 ## 分位点（Quantile）と外れ値の影響
 
-### 飛びのある分布の分位点とロバスト性 {#q:4-absolute-loss-mae .questionbox tags="確認"}
+### 飛びのある分布の分位点とロバスト性 {#q:4-absolute-loss-mae .questionbox tags="確認\faCheck"}
 
 1. データセット $\{2, 3, 5, 7, 100\}$ の平均値と中央値を求めよ。
 2. 外れ値の $100$ が $1000$ に化けたとする。このとき平均値と中央値はどう変化するか計算し、ピンボール損失（中央値の場合は絶対値損失）が外れ値に対して持つ優位性を説明せよ。
@@ -745,7 +760,7 @@ $$
 
 ## ロジスティック回帰の基礎と非線型目的関数の勾配
 
-### 指示関数の期待値と確率の関係 {#q:5-indicator-expectation .questionbox tags="必須"}
+### 指示関数の期待値と確率の関係 {#q:5-indicator-expectation .questionbox tags="必須\faStar"}
 
 確率変数 $X$ の値が集合 $A$ に入るという事象について、
 $$
@@ -761,7 +776,7 @@ $$
 
 ## ロジスティック関数の微分と交差エントロピー
 
-### シグモイド関数の微分証明 {#q:5-sigmoid-derivative .questionbox tags="必須"}
+### シグモイド関数の微分証明 {#q:5-sigmoid-derivative .questionbox tags="必須\faStar"}
 
 ロジスティック関数（シグモイド関数） $\sigma(z) = \frac{1}{1 + e^{-z}}$ について、
 
@@ -772,27 +787,92 @@ $$
 [（解答・解説へ）](#a:5-sigmoid-derivative)
 :::
 
-### 交差エントロピーとチェインルールによる勾配導出 {#q:5-cross-entropy-gradient .questionbox tags="必須"}
+### 交差エントロピーとチェインルールによる勾配導出 {#q:5-cross-entropy-gradient .questionbox tags="必須\faStar"}
 
-交差エントロピー損失
+2クラス分類の交差エントロピー損失は、モデルの出力（ロジット）を $z$、シグモイド関数を $\sigma(z)$ とすると、次のように表される。
 $$
-l = -y \log \sigma(z) - (1-y) \log(1 - \sigma(z)) \quad (\text{ただし } z = \boldsymbol{\theta}^\top \boldsymbol{\phi}(x))
+l(z) = -y \log \sigma(z) - (1-y) \log(1 - \sigma(z))
 $$
-について、チェインルール $\nabla_{\boldsymbol{\theta}} l = \frac{\partial l}{\partial z} \cdot \nabla_{\boldsymbol{\theta}} z$ を用いて、勾配が
-$$
-\nabla_{\boldsymbol{\theta}} l = (\sigma(z) - y)\boldsymbol{\phi}(x)
-$$
-となることを導出せよ。
+
+以下の手順に従って、この損失関数のパラメーターに関する勾配を丁寧に変形して導出せよ。
+
+1. まず、線型モデルなどの具体的なモデルの形を仮定せず、一般のロジット $z$ に対する損失 $l(z)$ の微分 $\frac{\partial l}{\partial z}$ を求め、
+   $$
+   \frac{\partial l}{\partial z} = \sigma(z) - y
+   $$
+   となることを示せ。（必要に応じて前問の $\sigma'(z)$ や $\frac{d}{dz} \log \sigma(z)$ の結果を利用してよい）
+
+2. 次に、モデルが線型モデルであり、$z = \boldsymbol{\theta}^\top \boldsymbol{\phi}(x)$ と表されるとする。このとき、チェインルール $\nabla_{\boldsymbol{\theta}} l = \frac{\partial l}{\partial z} \cdot \nabla_{\boldsymbol{\theta}} z$ を用いて、パラメーター $\boldsymbol{\theta}$ に対する勾配が
+   $$
+   \nabla_{\boldsymbol{\theta}} l = (\sigma(z) - y)\boldsymbol{\phi}(x)
+   $$
+   となることを導出せよ。
 
 ::: {.right}
 [（解答・解説へ）](#a:5-cross-entropy-gradient)
+:::
+
+## 勾配降下法と正則化
+
+### 勾配降下法による最適化（アルゴリズムの構成） {#q:6-gradient-descent-algorithm .questionbox tags="確認\faCheck"}
+
+以下の勾配降下法のアルゴリズム中の各空欄 $\fbox{\,ア\,}$ 〜 $\fbox{\,ク\,}$ に当てはまる最も適切なものを、以下のそれぞれの語群から一つずつ選び、番号で答えよ。
+
+【日本語の語群】（空欄 $\fbox{\,ア\,}, \fbox{\,ウ\,}, \fbox{\,オ\,}, \fbox{\,キ\,}$）
+① パラメーターを更新する　② 勾配を計算する　③ 初期化する　④ 反復を中断する
+
+【数式・操作の語群】（空欄 $\fbox{\,イ\,}, \fbox{\,エ\,}, \fbox{\,カ\,}, \fbox{\,ク\,}$）
+⑤ $\boldsymbol{\theta} \leftarrow \boldsymbol{\theta} - \eta \mathbf{g}$　⑥ `break`　⑦ $\mathbf{g} \leftarrow \nabla L(\boldsymbol{\theta})$　⑧ $\boldsymbol{\theta} \leftarrow \text{ランダムな値}$
+
+【勾配降下法のアルゴリズム】
+
+> **`Algorithm: Gradient Descent`**
+>
+> - `Step 1`: ( 目的: $\fbox{\,ア\,}$ )  ( 操作: $\fbox{\,イ\,}$ )
+> - `Step 2`: `Loop` 以下の処理を繰り返す
+>     - `Step 2-1`: ( 目的: $\fbox{\,ウ\,}$ )  ( 操作: $\fbox{\,エ\,}$ )
+>     - `Step 2-2`: ( 目的: $\fbox{\,オ\,}$ )  ( 操作: $\fbox{\,カ\,}$ )
+>     - `Step 2-3`: `if` 早期停止条件を満たしたら、( 目的: $\fbox{\,キ\,}$ )  ( 操作: $\fbox{\,ク\,}$ )
+> - `Step 3`: `return` $\boldsymbol{\theta}$ （最適化されたパラメーター）
+
+::: {.right}
+[（解答・解説へ）](#a:6-gradient-descent-algorithm)
+:::
+
+### 重み減衰（Weight Decay）の導出 {#q:6-weight-decay-derivation .questionbox tags="必須\faStar"}
+
+勾配法で最適化を行う場合、L2正則化は重み減衰（weight decay）とも呼ばれる。
+目的関数が経験リスク $\hat{R}(\boldsymbol{\theta})$ とL2正則化項の和である $L(\boldsymbol{\theta}) = \hat{R}(\boldsymbol{\theta}) + \lambda \|\boldsymbol{\theta}\|^2$ で与えられるとする（$\lambda > 0$ は正則化係数）。
+
+1. この目的関数に対する勾配 $\nabla L(\boldsymbol{\theta})$ を、$\nabla \hat{R}(\boldsymbol{\theta})$ と $\boldsymbol{\theta}$ を用いて表せ。
+2. 勾配降下法の更新式 $\boldsymbol{\theta} \leftarrow \boldsymbol{\theta} - \eta \nabla L(\boldsymbol{\theta})$ に上記で求めた勾配を代入し、「単に経験リスク $\hat{R}$ を小さくする方向に進むだけでなく、現在のパラメーターを原点に向けて一定割合で縮小する」という直感的な解釈が成り立つことを、数式を用いて説明せよ。
+
+::: {.right}
+[（解答・解説へ）](#a:6-weight-decay-derivation)
+:::
+
+### ロジスティック回帰＋L2正則化の更新式と具体例計算 {#q:6-logistic-l2-update .questionbox tags="確認\faCheck"}
+
+二値分類タスクにおいて、ロジスティックモデル $f_\theta(x) = \sigma(\theta x)$ を考える（バイアス項は無視し、特徴量も1次元のスカラー $x$ とする）。
+損失関数を負の対数尤度（交差エントロピー損失）とし、L2正則化項を加えた目的関数は以下のようになる。
+$$L(\theta) = - \frac{1}{n} \sum_{i=1}^n \left\{ y_i \log \sigma(\theta x_i) + (1-y_i) \log(1-\sigma(\theta x_i)) \right\} + \lambda \theta^2$$
+
+1. これまでの章で導出した交差エントロピーの勾配の公式を用いて、この目的関数に対する勾配降下法の更新式（パラメーター $\theta$ の更新則）を書き下せ。
+2. 簡単な数値例として、$n=2$ のデータ $\{(x_1, y_1) = (1, 1), (x_2, y_2) = (-1, 0)\}$ を考える。現在のパラメーターが $\theta = 0$、学習率が $\eta = 0.5$、正則化係数が $\lambda = 0.1$ のとき、1回目の更新後のパラメーター $\theta$ の値を計算せよ。
+
+---
+
+**ヒント（問2）：** $\theta=0$ のとき、シグモイド関数の値は $\sigma(0) = 0.5$ となることに注意して計算せよ。
+
+::: {.right}
+[（解答・解説へ）](#a:6-logistic-l2-update)
 :::
 
 # 確率論的多値分類とソフトマックス回帰
 
 ## ソフトマックス関数と多クラス交差エントロピー
 
-### ソフトマックス損失の勾配公式の導出 {#q:6-softmax-gradient-derivation .questionbox tags="必須"}
+### ソフトマックス損失の勾配公式の導出 {#q:6-softmax-gradient-derivation .questionbox tags="必須\faStar"}
 
 多クラス分類問題において、入力 $\mathbf{x}$ に対するスコアベクトルを $s_{\boldsymbol{\theta}}(\mathbf{x}) \in \mathbb{R}^K$ とし、モデル $g_{\boldsymbol{\theta}}(\mathbf{x}) = \text{Softmax}(s_{\boldsymbol{\theta}}(\mathbf{x}))$ を考える。ここで、モデルの出力ベクトルの第 $k$ 成分 $g_{\boldsymbol{\theta}}(\mathbf{x})[k]$ は以下のように定義される。
 $$
@@ -811,7 +891,7 @@ $$
 [（解答・解説へ）](#a:6-softmax-gradient-derivation)
 :::
 
-### 多クラスロジスティック回帰の勾配公式 {#q:6-multiclass-logistic-gradient .questionbox tags="確認"}
+### 多クラスロジスティック回帰の勾配公式 {#q:6-multiclass-logistic-gradient .questionbox tags="確認\faCheck"}
 
 前問「ソフトマックス損失の勾配公式の導出」に引き続き、多クラスロジスティック回帰（ソフトマックス回帰）モデルを考える。このモデルでは、クラス $j$ のスコアがクラス固有のパラメータベクトル $\boldsymbol{\theta}_j$ と特徴量 $\boldsymbol{\phi}(\mathbf{x})$ の内積
 $$
@@ -836,7 +916,10 @@ $$
    $$
    \nabla_{\boldsymbol{\theta}} \ell((\mathbf{x}, y), g_{\boldsymbol{\theta}}) = \begin{pmatrix} \nabla_{\boldsymbol{\theta}_1} \ell((\mathbf{x}, y), g_{\boldsymbol{\theta}}) \\ \vdots \\ \nabla_{\boldsymbol{\theta}_K} \ell((\mathbf{x}, y), g_{\boldsymbol{\theta}}) \end{pmatrix} = \begin{pmatrix} (g_{\boldsymbol{\theta}}(\mathbf{x})[1] - \mathbf{1}\{1 = y\}) \boldsymbol{\phi}(\mathbf{x}) \\ \vdots \\ (g_{\boldsymbol{\theta}}(\mathbf{x})[K] - \mathbf{1}\{K = y\}) \boldsymbol{\phi}(\mathbf{x}) \end{pmatrix}
    $$
-   （ヒント：各 $\boldsymbol{\theta}_k$ の偏微分は他のクラスのパラメータに依存しないため、全体の勾配ベクトルは単純にそれぞれの $\nabla_{\boldsymbol{\theta}_k} \ell$ を並べたものになる）
+
+---
+
+**ヒント：** 全体の勾配ベクトルは単純にそれぞれの $\nabla_{\boldsymbol{\theta}_k} \ell$ を並べたものになる。
 
 ::: {.right}
 [（解答・解説へ）](#a:6-multiclass-logistic-gradient)
@@ -1530,29 +1613,31 @@ $$
 
 ### 問5-cross-entropy-gradient の解答・解説 {#a:5-cross-entropy-gradient .answerbox ref="q:5-cross-entropy-gradient"}
 
-対数尤度損失 $l$ を $z$ について偏微分する。
-$$
-\frac{\partial l}{\partial z} = -y \frac{d}{dz}(\log \sigma(z)) - (1-y) \frac{d}{dz}(\log(1 - \sigma(z)))
-$$
-第1項 of 微分は問9の(2)より $1 - \sigma(z)$。第2項 of 微分は同様に、
-$$
-\frac{d}{dz} \log(1 - \sigma(z)) = \frac{-\sigma'(z)}{1 - \sigma(z)} = \frac{-\sigma(z)(1 - \sigma(z))}{1 - \sigma(z)} = -\sigma(z)
-$$
-これらを代入して整理する。
-\begin{align*}
-\frac{\partial l}{\partial z} &= -y(1 - \sigma(z)) - (1-y)(-\sigma(z)) \\
-&= -y + y\sigma(z) + \sigma(z) - y\sigma(z) \\
-&= \sigma(z) - y
-\end{align*}
-次に、勾配 $\nabla_{\boldsymbol{\theta}} z$ を計算する。$z = \boldsymbol{\theta}^\top \boldsymbol{\phi}(x)$ はパラメータ $\boldsymbol{\theta}$ について線型であるため、
-$$
-\nabla_{\boldsymbol{\theta}} z = \boldsymbol{\phi}(x)
-$$
-チェインルールを適用して両者を掛け合わせる。
-$$
-\nabla_{\boldsymbol{\theta}} l = \frac{\partial l}{\partial z} \cdot \nabla_{\boldsymbol{\theta}} z = (\sigma(z) - y)\boldsymbol{\phi}(x)
-$$
-なり、導出された。（証明終）
+1. 交差エントロピー損失 $l(z)$ を $z$ について偏微分する。
+   $$
+   \frac{\partial l}{\partial z} = -y \frac{d}{dz}(\log \sigma(z)) - (1-y) \frac{d}{dz}(\log(1 - \sigma(z)))
+   $$
+   第1項の微分は前問の(2)より $1 - \sigma(z)$。第2項の微分は同様に、
+   $$
+   \frac{d}{dz} \log(1 - \sigma(z)) = \frac{-\sigma'(z)}{1 - \sigma(z)} = \frac{-\sigma(z)(1 - \sigma(z))}{1 - \sigma(z)} = -\sigma(z)
+   $$
+   これらを代入して整理する。
+   \begin{align*}
+   \frac{\partial l}{\partial z} &= -y(1 - \sigma(z)) - (1-y)(-\sigma(z)) \\
+   &= -y + y\sigma(z) + \sigma(z) - y\sigma(z) \\
+   &= \sigma(z) - y
+   \end{align*}
+   となる。（証明終）
+
+2. 次に、勾配 $\nabla_{\boldsymbol{\theta}} z$ を計算する。$z = \boldsymbol{\theta}^\top \boldsymbol{\phi}(x)$ はパラメータ $\boldsymbol{\theta}$ について線型であるため、
+   $$
+   \nabla_{\boldsymbol{\theta}} z = \boldsymbol{\phi}(x)
+   $$
+   チェインルールを適用して両者を掛け合わせる。
+   $$
+   \nabla_{\boldsymbol{\theta}} l = \frac{\partial l}{\partial z} \cdot \nabla_{\boldsymbol{\theta}} z = (\sigma(z) - y)\boldsymbol{\phi}(x)
+   $$
+   となり、導出された。（証明終）
 
 ::: {.right}
 [（問題へ戻る）](#q:5-cross-entropy-gradient)
@@ -1629,4 +1714,61 @@ $$
 
 ::: {.right}
 [（問題へ戻る）](#q:6-multiclass-logistic-gradient)
+:::
+
+### 問6-gradient-descent-algorithm の解答・解説 {#a:6-gradient-descent-algorithm .answerbox ref="q:6-gradient-descent-algorithm"}
+
+正しい組み合わせは以下の通り。
+
+- `Step 1`　: ( 目的: ア = **③** ) \quad ( 操作: イ = **⑧** )
+- `Step 2-1`: ( 目的: ウ = **②** ) \quad ( 操作: エ = **⑦** )
+- `Step 2-2`: ( 目的: オ = **①** ) \quad ( 操作: カ = **⑤** )
+- `Step 2-3`: ( 目的: キ = **④** ) \quad ( 操作: ク = **⑥** )
+
+::: {.right}
+[（問題へ戻る）](#q:6-gradient-descent-algorithm)
+:::
+
+### 問6-weight-decay-derivation の解答・解説 {#a:6-weight-decay-derivation .answerbox ref="q:6-weight-decay-derivation"}
+
+1. $\nabla \|\boldsymbol{\theta}\|^2 = 2\boldsymbol{\theta}$ であるため、全体の勾配は
+   $$ \nabla L(\boldsymbol{\theta}) = \nabla \hat{R}(\boldsymbol{\theta}) + 2\lambda \boldsymbol{\theta} $$
+   となる。
+
+2. 勾配降下法の更新式にこれを代入すると、
+   \begin{align*}
+   \boldsymbol{\theta} &\leftarrow \boldsymbol{\theta} - \eta \left( \nabla \hat{R}(\boldsymbol{\theta}) + 2\lambda \boldsymbol{\theta} \right) \\
+   &= \boldsymbol{\theta} - 2\eta\lambda \boldsymbol{\theta} - \eta \nabla \hat{R}(\boldsymbol{\theta}) \\
+   &= (1 - 2\eta\lambda) \boldsymbol{\theta} - \eta \nabla \hat{R}(\boldsymbol{\theta})
+   \end{align*}
+   となる。
+   この式において、$(1 - 2\eta\lambda) \boldsymbol{\theta}$ の部分は現在のパラメーター $\boldsymbol{\theta}$ を $1 - 2\eta\lambda$ 倍（通常 $0 < 1 - 2\eta\lambda < 1$ となるように $\eta, \lambda$ が設定される）して、原点に少し近づける（縮小する）働きをしている。その上で、$-\eta \nabla \hat{R}(\boldsymbol{\theta})$ によって経験リスクを減少させる方向へ更新が行われている。これが L2正則化が重み減衰（Weight Decay）と呼ばれる理由である。
+
+::: {.right}
+[（問題へ戻る）](#q:6-weight-decay-derivation)
+:::
+
+### 問6-logistic-l2-update の解答・解説 {#a:6-logistic-l2-update .answerbox ref="q:6-logistic-l2-update"}
+
+1. 前章で導出したように、1データ $(x_i, y_i)$ あたりの交差エントロピー損失の勾配は $(\sigma(\theta x_i) - y_i)x_i$ である。また正則化項 $\lambda \theta^2$ の勾配は $2\lambda \theta$ である。
+   よって目的関数全体の勾配は
+   $$ \nabla L(\theta) = \frac{1}{n} \sum_{i=1}^n (\sigma(\theta x_i) - y_i)x_i + 2\lambda \theta $$
+   となる。
+   更新式はこれを用いて
+   $$ \theta \leftarrow \theta - \eta \left( \frac{1}{n} \sum_{i=1}^n (\sigma(\theta x_i) - y_i)x_i + 2\lambda \theta \right) $$
+   と書き下せる。
+
+2. $\theta = 0$ のとき $\sigma(\theta x_1) = \sigma(0) = 0.5$、$\sigma(\theta x_2) = \sigma(0) = 0.5$ である。
+   $n=2$, $(x_1, y_1) = (1, 1)$, $(x_2, y_2) = (-1, 0)$ を代入して勾配を計算する。
+   \begin{align*}
+   \nabla L(0) &= \frac{1}{2} \left[ (0.5 - 1) \times 1 + (0.5 - 0) \times (-1) \right] + 2 \times 0.1 \times 0 \\
+   &= \frac{1}{2} \left[ -0.5 - 0.5 \right] + 0 \\
+   &= \frac{1}{2} \times (-1.0) = -0.5
+   \end{align*}
+   更新後のパラメーターは
+   $$ \theta \leftarrow 0 - 0.5 \times (-0.5) = 0.25 $$
+   となる。
+
+::: {.right}
+[（問題へ戻る）](#q:6-logistic-l2-update)
 :::
