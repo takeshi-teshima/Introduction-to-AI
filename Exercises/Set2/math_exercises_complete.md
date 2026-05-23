@@ -569,7 +569,7 @@ $$
 
 ### 【復習とヒント】ベクトル・行列の積のコツ {.tcolorbox option="enhanced, colback=blue!2!white, colframe=blue!60!black, fonttitle=\bfseries, drop shadow"}
 
-行列は、行（横ベクトル）や列（縦ベクトル）が並んだものとしてイメージすると、複雑な計算も直感的に捉えやすくなります。
+行列は、いくつかの計算パターンでは、行（横ベクトル）や列（縦ベクトル）が並んだものとしてイメージすると、複雑な計算も直感的に捉えやすくなります。
 
 - **行列の行ベクトル・列ベクトル表現**
   行列は横ベクトルが縦に並んだものとも、縦ベクトルが横に並んだものとも思えます。
@@ -627,7 +627,7 @@ $$
     \end{center}
 
 - **縦ベクトルが横に並んでいると思うと**
-  通常のベクトル間の内積（成分同士を掛けて足す）のように振る舞います。
+  あたかも通常のベクトル間の内積（成分同士を掛けて足す）かのように振る舞います。
 
     \begin{center}
     \begin{tikzpicture}[>=stealth, thick, scale=0.9, every node/.style={align=center}]
@@ -647,9 +647,9 @@ $$
       \foreach \y/\i in {0.6/1, 0.0/2, -0.6/3} {
         \draw[fill=vbg, draw=vborder] (2.55, \y-0.15) rectangle (2.85, \y+0.15);
       }
-      \draw[->, orange!80!red, shorten >=2pt, thick] (0.55, 0.6) to[out=50, in=150] (2.5, 0.7);
-      \draw[->, orange!80!red, shorten >=2pt, thick] (1.15, 0.2) to[out=40, in=160] (2.5, 0.1);
-      \draw[->, orange!80!red, shorten >=2pt, thick] (1.75, -0.2) to[out=30, in=170] (2.5, -0.5);
+      \draw[dashed, orange!80!red, shorten >=2pt, thick] (0.55, 0.6) to[out=50, in=150] (2.5, 0.7);
+      \draw[dashed, orange!80!red, shorten >=2pt, thick] (1.15, 0.2) to[out=40, in=160] (2.5, 0.1);
+      \draw[dashed, orange!80!red, shorten >=2pt, thick] (1.75, -0.2) to[out=30, in=170] (2.5, -0.5);
 
       \node at (3.5, 0) {$=$};
       \node at (4.2, 0) {$\displaystyle \sum_{j=1}^3$};
