@@ -667,13 +667,13 @@ $$
 [（解答・解説へ）](#a:3-l2-regularization-objective)
 :::
 
-### 行列による書き直しと一階の条件 {#q:3-l2-regularization-gradient .questionbox difficulty="★1"}
+### 行列による書き直しと一階の条件 {#q:3-l2-regularization-gradient .questionbox difficulty="★2"}
 
 目的関数を $L_{\text{reg}}(\boldsymbol{\theta}) = \frac{1}{2}\|\Phi\boldsymbol{\theta} - \mathbf{y}\|^2 + \frac{\lambda}{2}\|\boldsymbol{\theta}\|^2$ とする。全体の勾配を $\mathbf{0}$ と置く一階の条件から、最適解
 $$
 \hat{\boldsymbol{\theta}} = (\Phi^\top \Phi + \lambda \mathbf{I})^{-1}\Phi^\top \mathbf{y}
 $$
-を導出せよ（ただし逆行列は存在すると仮定する）。
+を導出せよ（ただし上式の逆行列は存在すると仮定する）。
 
 ---
 
@@ -745,13 +745,15 @@ $$
 
 ## ロジスティック回帰の基礎と非線型目的関数の勾配
 
-### 指示関数の期待値と確率の関係 {#q:5-indicator-expectation .questionbox difficulty="★1"}
+### 指示関数の期待値と確率の関係 {#q:5-indicator-expectation .questionbox difficulty="★2"}
 
-事象（または条件） $A$ について、指示関数の期待値 $\mathbb{E}[\ind\{X \in A\}]$ は、事象 $\{X \in A\}$ が発生する確率 $\mathbb{P}(X \in A)$ と等しくなること、すなわち
+確率変数 $X$ の値が集合 $A$ に入るという事象について、
 $$
 \mathbb{E}[\ind\{X \in A\}] = \mathbb{P}(X \in A)
 $$
-が常に成り立つことを示せ。
+が成り立つことを示せ。
+
+<!-- 指示関数 $\ind\{X \in A\}$ の期待値 $\mathbb{E}[\ind\{X \in A\}]$ は、事象 $\{X \in A\}$ が発生する確率 $\mathbb{P}(X \in A)$ と等しくなること、すなわち -->
 
 ::: {.right}
 [（解答・解説へ）](#a:5-indicator-expectation)
@@ -790,7 +792,7 @@ $$
 
 ## ソフトマックス関数と多クラス交差エントロピー
 
-### ソフトマックス損失の勾配公式の導出 {#q:6-softmax-gradient-derivation .questionbox difficulty="★1"}
+### ソフトマックス損失の勾配公式の導出 {#q:6-softmax-gradient-derivation .questionbox difficulty="★2"}
 
 多クラス分類問題において、入力 $\mathbf{x}$ に対するスコアベクトルを $s_{\boldsymbol{\theta}}(\mathbf{x}) \in \mathbb{R}^K$ とし、モデル $g_{\boldsymbol{\theta}}(\mathbf{x}) = \text{Softmax}(s_{\boldsymbol{\theta}}(\mathbf{x}))$ を考える。ここで、モデルの出力ベクトルの第 $k$ 成分 $g_{\boldsymbol{\theta}}(\mathbf{x})[k]$ は以下のように定義される。
 $$
@@ -800,21 +802,35 @@ $$
 $$
 \ell((\mathbf{x}, y), g_{\boldsymbol{\theta}}) = -\log g_{\boldsymbol{\theta}}(\mathbf{x})[y]
 $$
-と定義する。このとき、以下の問いに答えよ。
+と定義する。このとき、損失関数のパラメータ $\boldsymbol{\theta}$ に対する勾配が、以下のように表されることを示せ。
+$$
+\nabla_{\boldsymbol{\theta}} \ell((\mathbf{x}, y), g_{\boldsymbol{\theta}}) = -\nabla_{\boldsymbol{\theta}} s_{\boldsymbol{\theta}}(\mathbf{x})[y] + \sum_{k=1}^K g_{\boldsymbol{\theta}}(\mathbf{x})[k] \cdot \nabla_{\boldsymbol{\theta}} s_{\boldsymbol{\theta}}(\mathbf{x})[k]
+$$
 
-1. 損失関数のパラメータ $\boldsymbol{\theta}$ に対する勾配が、以下のように表されることを示せ。
+::: {.right}
+[（解答・解説へ）](#a:6-softmax-gradient-derivation)
+:::
+
+### 多クラスロジスティック回帰の勾配公式 {#q:6-multiclass-logistic-gradient .questionbox difficulty="★1"}
+
+前問「ソフトマックス損失の勾配公式の導出」に引き続き、多クラスロジスティック回帰（ソフトマックス回帰）モデルを考える。このモデルでは、クラス $j$ のスコアがクラス固有のパラメータベクトル $\boldsymbol{\theta}_j$ と特徴量 $\boldsymbol{\phi}(\mathbf{x})$ の内積
+$$
+s_{\boldsymbol{\theta}}(\mathbf{x})[j] = \boldsymbol{\theta}_j^\top \boldsymbol{\phi}(\mathbf{x})
+$$
+で与えられる。特定のクラス $k$ のパラメータ $\boldsymbol{\theta}_k$ に対する損失関数の勾配 $\nabla_{\boldsymbol{\theta}_k} \ell((\mathbf{x}, y), g_{\boldsymbol{\theta}})$ を、以下の手順で導出せよ。
+
+1. **【スコア関数の偏微分】**
+   スコア $s_{\boldsymbol{\theta}}(\mathbf{x})[j]$ の $\boldsymbol{\theta}_k$ による勾配 $\nabla_{\boldsymbol{\theta}_k} s_{\boldsymbol{\theta}}(\mathbf{x})[j]$ を求め、指示関数 $\mathbf{1}\{\cdot\}$ を用いて
    $$
-   \nabla_{\boldsymbol{\theta}} \ell((\mathbf{x}, y), g_{\boldsymbol{\theta}}) = -\nabla_{\boldsymbol{\theta}} s_{\boldsymbol{\theta}}(\mathbf{x})[y] + \sum_{k=1}^K g_{\boldsymbol{\theta}}(\mathbf{x})[k] \cdot \nabla_{\boldsymbol{\theta}} s_{\boldsymbol{\theta}}(\mathbf{x})[k]
+   \nabla_{\boldsymbol{\theta}_k} s_{\boldsymbol{\theta}}(\mathbf{x})[j] = \mathbf{1}\{j = k\} \boldsymbol{\phi}(\mathbf{x})
    $$
-2. 多クラスロジスティック回帰（ソフトマックス回帰）モデルにおいて、クラス $k$ のスコアが、クラス固有のパラメータベクトル $\boldsymbol{\theta}_k$ と特徴量 $\boldsymbol{\phi}(\mathbf{x})$ の内積
-   $$
-   s_{\boldsymbol{\theta}}(\mathbf{x})[k] = \boldsymbol{\theta}_k^\top \boldsymbol{\phi}(\mathbf{x})
-   $$
-   で与えられるとする。このとき、損失関数のパラメータ $\boldsymbol{\theta}_k$ に対する勾配 $\nabla_{\boldsymbol{\theta}_k} \ell((\mathbf{x}, y), g_{\boldsymbol{\theta}})$ が
+   と表せることを確認せよ。
+2. **【勾配公式の適用と整理】**
+   前問で求めた勾配公式の $\nabla_{\boldsymbol{\theta}}$ を $\nabla_{\boldsymbol{\theta}_k}$ に置き換え、(1) の結果を代入せよ。和 $\sum_{j=1}^K$ を整理することで、最終的な勾配が
    $$
    \nabla_{\boldsymbol{\theta}_k} \ell((\mathbf{x}, y), g_{\boldsymbol{\theta}}) = \left( g_{\boldsymbol{\theta}}(\mathbf{x})[k] - \mathbf{1}\{k = y\} \right) \boldsymbol{\phi}(\mathbf{x})
    $$
-   となることを示せ。ただし、$\mathbf{1}\{\cdot\}$ は指示関数であり、条件が真のとき $1$、偽のとき $0$ をとる。
+   となることを示せ。
 
 ::: {.right}
 [（解答・解説へ）](#a:6-softmax-gradient-derivation)
@@ -1546,31 +1562,35 @@ $$
 
 ### 問6-softmax-gradient-derivation の解答・解説 {#a:6-softmax-gradient-derivation .answerbox ref="q:6-softmax-gradient-derivation"}
 
-1. 負の対数尤度損失 $\ell((\mathbf{x}, y), g_{\boldsymbol{\theta}}) = -\log g_{\boldsymbol{\theta}}(\mathbf{x})[y]$ に、モデルの定義を代入して対数の分解を行う。
-   \begin{align*}
-   \ell((\mathbf{x}, y), g_{\boldsymbol{\theta}}) &= -\log \left( \frac{\exp(s_{\boldsymbol{\theta}}[\mathbf{x}](y))}{\sum_{j=1}^K \exp(s_{\boldsymbol{\theta}}[\mathbf{x}](j))} \right) \\
-   &= -\left( \log \exp(s_{\boldsymbol{\theta}}[\mathbf{x}](y)) - \log \sum_{j=1}^K \exp(s_{\boldsymbol{\theta}}[\mathbf{x}](j)) \right) \\
-   &= -s_{\boldsymbol{\theta}}[\mathbf{x}](y) + \log \left( \sum_{j=1}^K \exp(s_{\boldsymbol{\theta}}[\mathbf{x}](j)) \right)
-   \end{align*}
-   両辺の $\boldsymbol{\theta}$ に対する勾配をとる：
-   $$
-   \nabla_{\boldsymbol{\theta}} \ell((\mathbf{x}, y), g_{\boldsymbol{\theta}}) = -\nabla_{\boldsymbol{\theta}} s_{\boldsymbol{\theta}}(\mathbf{x})[y] + \nabla_{\boldsymbol{\theta}} \log \left( \sum_{j=1}^K \exp(s_{\boldsymbol{\theta}}(\mathbf{x})[j]) \right)
-   $$
-   ここで、第2項の勾配を合成関数の微分公式 $(\log f(\boldsymbol{\theta}))' = \frac{\nabla f(\boldsymbol{\theta})}{f(\boldsymbol{\theta})}$ を用いて計算する：
-   \begin{align*}
-   \nabla_{\boldsymbol{\theta}} \log \left( \sum_{j=1}^K \exp(s_{\boldsymbol{\theta}}[\mathbf{x}](j)) \right) &= \frac{\nabla_{\boldsymbol{\theta}} \left( \sum_{k=1}^K \exp(s_{\boldsymbol{\theta}}[\mathbf{x}](k)) \right)}{\sum_{j=1}^K \exp(s_{\boldsymbol{\theta}}[\mathbf{x}](j))} \\
-   &= \frac{\sum_{k=1}^K \exp(s_{\boldsymbol{\theta}}[\mathbf{x}](k)) \cdot \nabla_{\boldsymbol{\theta}} s_{\boldsymbol{\theta}}[\mathbf{x}](k)}{\sum_{j=1}^K \exp(s_{\boldsymbol{\theta}}[\mathbf{x}](j))} \\
-   &= \sum_{k=1}^K \frac{\exp(s_{\boldsymbol{\theta}}[\mathbf{x}](k))}{\sum_{j=1}^K \exp(s_{\boldsymbol{\theta}}[\mathbf{x}](j))} \cdot \nabla_{\boldsymbol{\theta}} s_{\boldsymbol{\theta}}[\mathbf{x}](k) \\
-   &= \sum_{k=1}^K g_{\boldsymbol{\theta}}[\mathbf{x}](k) \cdot \nabla_{\boldsymbol{\theta}} s_{\boldsymbol{\theta}}[\mathbf{x}](k)
-   \end{align*}
-   これを元の式に代入すると、求める勾配公式が得られる：
-   $$
-   \nabla_{\boldsymbol{\theta}} \ell((\mathbf{x}, y), g_{\boldsymbol{\theta}}) = -\nabla_{\boldsymbol{\theta}} s_{\boldsymbol{\theta}}(\mathbf{x})[y] + \sum_{k=1}^K g_{\boldsymbol{\theta}}(\mathbf{x})[k] \cdot \nabla_{\boldsymbol{\theta}} s_{\boldsymbol{\theta}}(\mathbf{x})[k] \quad \text{（証明終）}
-   $$
+負の対数尤度損失 $\ell((\mathbf{x}, y), g_{\boldsymbol{\theta}}) = -\log g_{\boldsymbol{\theta}}(\mathbf{x})[y]$ に、モデルの定義を代入して対数の分解を行う。
+\begin{align*}
+\ell((\mathbf{x}, y), g_{\boldsymbol{\theta}}) &= -\log \left( \frac{\exp(s_{\boldsymbol{\theta}}[\mathbf{x}](y))}{\sum_{j=1}^K \exp(s_{\boldsymbol{\theta}}[\mathbf{x}](j))} \right) \\
+&= -\left( \log \exp(s_{\boldsymbol{\theta}}[\mathbf{x}](y)) - \log \sum_{j=1}^K \exp(s_{\boldsymbol{\theta}}[\mathbf{x}](j)) \right) \\
+&= -s_{\boldsymbol{\theta}}[\mathbf{x}](y) + \log \left( \sum_{j=1}^K \exp(s_{\boldsymbol{\theta}}[\mathbf{x}](j)) \right)
+\end{align*}
+両辺の $\boldsymbol{\theta}$ に対する勾配をとる：
+$$
+\nabla_{\boldsymbol{\theta}} \ell((\mathbf{x}, y), g_{\boldsymbol{\theta}}) = -\nabla_{\boldsymbol{\theta}} s_{\boldsymbol{\theta}}(\mathbf{x})[y] + \nabla_{\boldsymbol{\theta}} \log \left( \sum_{j=1}^K \exp(s_{\boldsymbol{\theta}}(\mathbf{x})[j]) \right)
+$$
+ここで、第2項の勾配を合成関数の微分公式 $(\log f(\boldsymbol{\theta}))' = \frac{\nabla f(\boldsymbol{\theta})}{f(\boldsymbol{\theta})}$ を用いて計算する：
+\begin{align*}
+\nabla_{\boldsymbol{\theta}} \log \left( \sum_{j=1}^K \exp(s_{\boldsymbol{\theta}}[\mathbf{x}](j)) \right) &= \frac{\nabla_{\boldsymbol{\theta}} \left( \sum_{k=1}^K \exp(s_{\boldsymbol{\theta}}[\mathbf{x}](k)) \right)}{\sum_{j=1}^K \exp(s_{\boldsymbol{\theta}}[\mathbf{x}](j))} \\
+&= \frac{\sum_{k=1}^K \exp(s_{\boldsymbol{\theta}}[\mathbf{x}](k)) \cdot \nabla_{\boldsymbol{\theta}} s_{\boldsymbol{\theta}}[\mathbf{x}](k)}{\sum_{j=1}^K \exp(s_{\boldsymbol{\theta}}[\mathbf{x}](j))} \\
+&= \sum_{k=1}^K \frac{\exp(s_{\boldsymbol{\theta}}[\mathbf{x}](k))}{\sum_{j=1}^K \exp(s_{\boldsymbol{\theta}}[\mathbf{x}](j))} \cdot \nabla_{\boldsymbol{\theta}} s_{\boldsymbol{\theta}}[\mathbf{x}](k) \\
+&= \sum_{k=1}^K g_{\boldsymbol{\theta}}[\mathbf{x}](k) \cdot \nabla_{\boldsymbol{\theta}} s_{\boldsymbol{\theta}}[\mathbf{x}](k)
+\end{align*}
+これを元の式に代入すると、求める勾配公式が得られる：
+$$
+\nabla_{\boldsymbol{\theta}} \ell((\mathbf{x}, y), g_{\boldsymbol{\theta}}) = -\nabla_{\boldsymbol{\theta}} s_{\boldsymbol{\theta}}(\mathbf{x})[y] + \sum_{k=1}^K g_{\boldsymbol{\theta}}(\mathbf{x})[k] \cdot \nabla_{\boldsymbol{\theta}} s_{\boldsymbol{\theta}}(\mathbf{x})[k] \quad \text{（証明終）}
+$$
 
-2. スコア関数が $s_{\boldsymbol{\theta}}(\mathbf{x})[j] = \boldsymbol{\theta}_j^\top \boldsymbol{\phi}(\mathbf{x})$ で与えられるとき、特定のパラメータ $\boldsymbol{\theta}_k$ に関する勾配を考える。
+::: {.right}
+[（問題へ戻る）](#q:6-softmax-gradient-derivation)
+:::
 
-   まず、$\boldsymbol{\theta}_j^\top \boldsymbol{\phi}(\mathbf{x})$ を $\boldsymbol{\theta}_k$ で偏微分すると、
+### 問6-multiclass-logistic-gradient の解答・解説 {#a:6-multiclass-logistic-gradient .answerbox ref="q:6-multiclass-logistic-gradient"}
+
+1. $\boldsymbol{\theta}_j^\top \boldsymbol{\phi}(\mathbf{x})$ を $\boldsymbol{\theta}_k$ で偏微分すると、
    $$
    \nabla_{\boldsymbol{\theta}_k} \left( \boldsymbol{\theta}_j^\top \boldsymbol{\phi}(\mathbf{x}) \right) = \begin{cases}
    \boldsymbol{\phi}(\mathbf{x}) & (j = k \text{ のとき}) \\
@@ -1582,11 +1602,14 @@ $$
    \nabla_{\boldsymbol{\theta}_k} s_{\boldsymbol{\theta}}(\mathbf{x})[j] = \mathbf{1}\{j = k\} \boldsymbol{\phi}(\mathbf{x})
    $$
 
-   これを用いて、(1)の勾配公式を $\boldsymbol{\theta}_k$ について適用する：
+2. 前問で求めた勾配公式を $\boldsymbol{\theta}_k$ について適用し、(1) の結果を代入する：
    \begin{align*}
    \nabla_{\boldsymbol{\theta}_k} \ell((\mathbf{x}, y), g_{\boldsymbol{\theta}}) &= -\nabla_{\boldsymbol{\theta}_k} s_{\boldsymbol{\theta}}[\mathbf{x}](y) + \sum_{j=1}^K g_{\boldsymbol{\theta}}[\mathbf{x}](j) \cdot \nabla_{\boldsymbol{\theta}_k} s_{\boldsymbol{\theta}}[\mathbf{x}](j) \\
-   &= -\mathbf{1}\{y = k\} \boldsymbol{\phi}(\mathbf{x}) + \sum_{j=1}^K g_{\boldsymbol{\theta}}[\mathbf{x}](j) \cdot \mathbf{1}\{j = k\} \boldsymbol{\phi}(\mathbf{x}) \\
-   &= -\mathbf{1}\{k = y\} \boldsymbol{\phi}(\mathbf{x}) + g_{\boldsymbol{\theta}}[\mathbf{x}](k) \boldsymbol{\phi}(\mathbf{x}) \\
+   &= -\mathbf{1}\{y = k\} \boldsymbol{\phi}(\mathbf{x}) + \sum_{j=1}^K g_{\boldsymbol{\theta}}[\mathbf{x}](j) \cdot \mathbf{1}\{j = k\} \boldsymbol{\phi}(\mathbf{x})
+   \end{align*}
+   ここで、右辺の第2項の和（$\sum_{j=1}^K$）の中身は $j = k$ のとき以外は $0$ になるため、和が外れて $j=k$ の項だけが残る。
+   \begin{align*}
+   \dots &= -\mathbf{1}\{k = y\} \boldsymbol{\phi}(\mathbf{x}) + g_{\boldsymbol{\theta}}[\mathbf{x}](k) \boldsymbol{\phi}(\mathbf{x}) \\
    &= \left( g_{\boldsymbol{\theta}}[\mathbf{x}](k) - \mathbf{1}\{k = y\} \right) \boldsymbol{\phi}(\mathbf{x})
    \end{align*}
    となり、求める勾配が導出された。（証明終）
