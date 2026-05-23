@@ -32,7 +32,7 @@ header-includes: |
 
 また、各設問には以下の難易度が設定されています。
 
-* **不要** ：解き方が分かるなら解かなくてもいい。
+* **スキップ可** ：解き方が分かるなら解かなくてもいい。
 * **確認** ：定義を簡単な代入問題で辿る確認や、立式などの最低限の確認。
 * **必須** ：講義の行間を埋める標準的な問題。
 * **発展** ：余裕があれば解くとよい。
@@ -67,7 +67,7 @@ $$
 [（解答・解説へ）](#a:1-indicator-function)
 :::
 
-### 離散型確率分布での期待値・分散計算 {#q:1-discrete-expectation-variance .questionbox tags="不要"}
+### 離散型確率分布での期待値・分散計算 {#q:1-discrete-expectation-variance .questionbox tags="スキップ可"}
 
 ある離散確率変数 $X$ は、確率 $0.2$ で $0$、確率 $0.5$ で $1$、確率 $0.3$ で $2$ をとる。
 
@@ -79,7 +79,7 @@ $$
 [（解答・解説へ）](#a:1-discrete-expectation-variance)
 :::
 
-### 連続型確率分布での期待値・分散計算 {#q:1-continuous-expectation-variance .questionbox tags="不要"}
+### 連続型確率分布での期待値・分散計算 {#q:1-continuous-expectation-variance .questionbox tags="スキップ可"}
 
 連続確率変数 $X$ の確率密度関数 $p(x)$ が、指示関数 $\ind$ を用いて実数全体 $\mathbb{R}$ 上で以下のように定義されている。
 $$
@@ -154,7 +154,7 @@ $n$ 個の訓練データ $\{(x_i, y_i)\}_{i=1}^n$ が与えられている。�
 :::
 
 
-### 目的関数のパラメータ関数化 {#q:2-erm-parameter-function .questionbox tags="不要"}
+### 目的関数のパラメータ関数化 {#q:2-erm-parameter-function .questionbox tags="スキップ可"}
 
 以下の2つのデータポイントが与えられている。
 
@@ -199,11 +199,11 @@ $$
    $$
    \begin{pmatrix} ? & ? \\ ? & ? \end{pmatrix} \begin{pmatrix} w \\ b \end{pmatrix} = \begin{pmatrix} ? \\ ? \end{pmatrix}
    $$
-3. 上記の行列方程式を解くことで、最適なパラメータ $(\hat{w}, \hat{b})$ を求める式が
+3. 上記の方程式を解くことで、最適なパラメータ $(\hat{w}, \hat{b})$ を求める式が
    $$
    \begin{pmatrix} \hat{w} \\ \hat{b} \end{pmatrix} = \begin{pmatrix} \sum_{i=1}^n x_i^2 & \sum_{i=1}^n x_i \\ \sum_{i=1}^n x_i & n \end{pmatrix}^{-1} \begin{pmatrix} \sum_{i=1}^n x_i y_i \\ \sum_{i=1}^n y_i \end{pmatrix}
    $$
-   となることを示せ。
+   となることを示せ。ただし、上式の右辺にある逆行列は存在することを仮定する。
 
 ::: {.right}
 [（解答・解説へ）](#a:2-partial-derivative-gradient)
@@ -213,7 +213,7 @@ $$
 
 ## ベクトルと行列の計算
 
-### 行列・ベクトルの積の計算練習 {#q:3-matrix-vector-multiplication-practice .questionbox tags="不要"}
+### 行列・ベクトルの積の計算練習 {#q:3-matrix-vector-multiplication-practice .questionbox tags="スキップ可"}
 
 以下の行列・ベクトルの積を計算せよ。
 
@@ -468,7 +468,7 @@ $$
     \end{center}
   【補足】最後の $\mathbf{a} = \frac{\langle \mathbf{a}, \mathbf{b} \rangle}{\langle \mathbf{b}, \mathbf{b} \rangle} \mathbf{b} + (\mathbf{b}\text{に直交する成分})$ という分解は、$\langle \mathbf{a} - \frac{\langle \mathbf{a}, \mathbf{b} \rangle}{\langle \mathbf{b}, \mathbf{b} \rangle} \mathbf{b}, \mathbf{b} \rangle = 0$ により確かめられる。
 
-### 内積の役割と計算 {#q:3-inner-product-roles .questionbox tags="不要"}
+### 内積の役割と計算 {#q:3-inner-product-roles .questionbox tags="スキップ可"}
 
 以下の小問に答えよ。
 
@@ -539,7 +539,9 @@ $$
    $$\Phi = \begin{pmatrix} \boldsymbol{\phi}(x_1)^\top \\ \boldsymbol{\phi}(x_2)^\top \\ \boldsymbol{\phi}(x_3)^\top \\ \boldsymbol{\phi}(x_4)^\top \end{pmatrix}$$
    のことである．
 
-※ ここで計算した $\Phi$ は，後に最適なパラメーターの解の公式に現れる．
+---
+
+補足： ここで計算した $\Phi$ は，後にパラメーターの最適化において現れる．
 
 ::: {.right}
 [（解答・解説へ）](#a:3-bag-of-words-representation)
@@ -547,17 +549,17 @@ $$
 
 ## 多変数関数の経験リスクと勾配
 
-### 3変数パラメータの経験リスク {#q:3-multivariate-empirical-risk .questionbox tags="確認\faCheck"}
+### 2変数関数の偏微分と勾配ベクトル {#q:3-bivariate-gradient .questionbox tags="確認\faCheck"}
 
-3つのデータポイント $(x_1, y_1) = (1, 2)$, $(x_2, y_2) = (2, 3)$, $(x_3, y_3) = (3, 5)$ が与えられている。予測モデルを3変数パラメータ $\boldsymbol{\theta} = (\theta_1, \theta_2, \theta_3)^\top$ を用いたモデル $f_{\boldsymbol{\theta}}(x) = \theta_1 + \theta_2 x + \theta_3 x^2$ とし、損失関数を二乗誤差とする。
-このとき、経験リスク
-$$
-\hat{R}(f_{\boldsymbol{\theta}}) = \frac{1}{3} \sum_{i=1}^3 (y_i - f_{\boldsymbol{\theta}}(x_i))^2
-$$
-を $\boldsymbol{\theta}$ の関数として具体的な数値を用いて展開・書き下せ。（整理・簡略化までする必要はない。）
+2変数関数 $f(x, y) = x^2 + 3xy + 2y^2$ について、以下の問いに答えよ。
+
+1. 関数 $f$ の $x$ に関する偏微分 $\frac{\partial f}{\partial x}$ を求めよ。
+2. 関数 $f$ の $y$ に関する偏微分 $\frac{\partial f}{\partial y}$ を求めよ。
+3. 求めた偏微分を縦ベクトルに並べて、関数 $f$ の勾配ベクトル $\nabla f(x, y) = \begin{pmatrix} \frac{\partial f}{\partial x} \\ \frac{\partial f}{\partial y} \end{pmatrix}$ を書き下せ。
+4. 点 $(x, y) = (1, 2)$ における勾配ベクトル $\nabla f(1, 2)$ の値を計算せよ。
 
 ::: {.right}
-[（解答・解説へ）](#a:3-multivariate-empirical-risk)
+[（解答・解説へ）](#a:3-bivariate-gradient)
 :::
 
 ## 最小二乗法の行列表記と一階の条件（最重要）
@@ -585,16 +587,9 @@ $$
    $$
    \hat{R}(f_{\boldsymbol{\theta}}) = \frac{1}{n} \|\Phi \boldsymbol{\theta} - \mathbf{y}\|^2
    $$
-   と書き直せることを、上記1の結果およびベクトルのノルムの定義 $\left(\|\mathbf{v}\|^2 = \sum_{i=1}^n v_i^2\right)$ を用いて確認せよ。
+   と書き直せることを、上記1の結果を用いて確認せよ。
 
-3. **【ノルムの展開（二次形式との対応）】**
-   さらに、$\|\Phi\boldsymbol{\theta} - \mathbf{y}\|^2 = (\Phi\boldsymbol{\theta} - \mathbf{y})^\top (\Phi\boldsymbol{\theta} - \mathbf{y})$ の右辺を展開し、以下のようになることを確認せよ。
-   \begin{align*}
-   (\Phi\boldsymbol{\theta} - \mathbf{y})^\top (\Phi\boldsymbol{\theta} - \mathbf{y}) &= (\Phi\boldsymbol{\theta} - \mathbf{y})^\top (\Phi\boldsymbol{\theta}) - (\Phi\boldsymbol{\theta} - \mathbf{y})^\top \mathbf{y} \\
-   &= (\Phi\boldsymbol{\theta})^\top (\Phi\boldsymbol{\theta}) - \mathbf{y}^\top (\Phi\boldsymbol{\theta}) - (\Phi\boldsymbol{\theta})^\top \mathbf{y} + \mathbf{y}^\top \mathbf{y} \\
-   &= \boldsymbol{\theta}^\top \Phi^\top \Phi \boldsymbol{\theta} - 2\mathbf{y}^\top \Phi \boldsymbol{\theta} + \mathbf{y}^\top \mathbf{y}
-   \end{align*}
-   （ヒント：転置の公式 $(\mathbf{A}\mathbf{B})^\top = \mathbf{B}^\top \mathbf{A}^\top$ と、スカラーの内積 $\mathbf{a}^\top \mathbf{b} = \mathbf{b}^\top \mathbf{a}$ を用いること）
+<!-- およびベクトルのノルムの定義 $\left(\|\mathbf{v}\|^2 = \sum_{i=1}^n v_i^2\right)$  -->
 
 ::: {.right}
 [（解答・解説へ）](#a:3-matrix-empirical-risk)
@@ -649,22 +644,6 @@ $$
 [（解答・解説へ）](#a:3-quadratic-form-completing-square)
 :::
 
-### 一階の条件の行列導出 {#q:3-matrix-derivative-first-order .questionbox tags="確認\faCheck"}
-
-目的関数 $L(\boldsymbol{\theta}) = \frac{1}{2}(\Phi\boldsymbol{\theta} - \mathbf{y})^\top (\Phi\boldsymbol{\theta} - \mathbf{y})$ の勾配 $\nabla_{\boldsymbol{\theta}} L(\boldsymbol{\theta})$ を求め、一階の条件 $\nabla_{\boldsymbol{\theta}} L(\boldsymbol{\theta}) = \mathbf{0}$ から次式
-$$
-\Phi^\top \Phi \boldsymbol{\theta} = \Phi^\top \mathbf{y}
-$$
-を導出せよ。
-
----
-
-**ヒント：** $\Phi^\top \Phi$ は対称行列である（転置に対して不変であることが $(\Phi^\top \Phi)^\top = \Phi^\top (\Phi^\top)^\top = \Phi^\top \Phi$ から確認できる）。
-
-::: {.right}
-[（解答・解説へ）](#a:3-matrix-derivative-first-order)
-:::
-
 ## 正則化（Regularization）
 
 ### 【復習とヒント】L2ノルムの性質と内積 {.tcolorbox option="enhanced, colback=blue!2!white, colframe=blue!60!black, fonttitle=\bfseries, drop shadow"}
@@ -682,17 +661,58 @@ $$
 [（解答・解説へ）](#a:3-l2-regularization-objective)
 :::
 
-### 行列による書き直しと一階の条件 {#q:3-l2-regularization-gradient .questionbox tags="必須\faStar"}
+## L2正則化付き線型最小二乗回帰の解
 
-目的関数を $L_{\text{reg}}(\boldsymbol{\theta}) = \frac{1}{2}\|\Phi\boldsymbol{\theta} - \mathbf{y}\|^2 + \frac{\lambda}{2}\|\boldsymbol{\theta}\|^2$ とする。全体の勾配を $\mathbf{0}$ と置く一階の条件から、最適解
-$$
-\hat{\boldsymbol{\theta}} = (\Phi^\top \Phi + \lambda \mathbf{I})^{-1}\Phi^\top \mathbf{y}
-$$
-を導出せよ（ただし上式の逆行列は存在すると仮定する）。
+### 目的関数の展開と勾配の導出 {#q:3-matrix-derivative-first-order .questionbox tags="必須\faStar"}
+
+L2正則化なしの目的関数 $L(\boldsymbol{\theta}) = \frac{1}{2}\|\Phi\boldsymbol{\theta} - \mathbf{y}\|^2$ の展開と勾配について考える。（次問の正則化付きの問題の準備となる。）
+
+1. **【ノルムの展開】**
+   $\|\Phi\boldsymbol{\theta} - \mathbf{y}\|^2 = (\Phi\boldsymbol{\theta} - \mathbf{y})^\top (\Phi\boldsymbol{\theta} - \mathbf{y})$ の右辺を展開し、目的関数が以下のように展開されることを確認せよ。
+   $$
+   L(\boldsymbol{\theta}) = \frac{1}{2}\boldsymbol{\theta}^\top \Phi^\top \Phi \boldsymbol{\theta} - \mathbf{y}^\top \Phi \boldsymbol{\theta} + \frac{1}{2}\mathbf{y}^\top \mathbf{y}
+   $$
+
+2. **【勾配の導出】**
+   展開した式を用いて、目的関数の勾配 $\nabla_{\boldsymbol{\theta}} L(\boldsymbol{\theta})$ が以下のように表されることを導出せよ。
+   $$
+   \nabla_{\boldsymbol{\theta}} L(\boldsymbol{\theta}) = \Phi^\top \Phi \boldsymbol{\theta} - \Phi^\top \mathbf{y}
+   $$
 
 ---
 
-**ヒント：** $\frac{\lambda}{2}\|\boldsymbol{\theta}\|^2 = \boldsymbol{\theta}^\top (\frac{\lambda}{2}\mathbf{I}) \boldsymbol{\theta}$ である。
+**ヒント：**
+
+- ノルムの展開では、転置の公式 $(\mathbf{A}\mathbf{B})^\top = \mathbf{B}^\top \mathbf{A}^\top$ と、スカラーの内積 $\mathbf{a}^\top \mathbf{b} = \mathbf{b}^\top \mathbf{a}$ を用いる。
+- 勾配の導出では、二次形式の微分 $\nabla_{\boldsymbol{\theta}}(\boldsymbol{\theta}^\top \mathbf{A} \boldsymbol{\theta}) = 2\mathbf{A}\boldsymbol{\theta}$ （今回は $\mathbf{A} = \Phi^\top \Phi$ が対称行列）と、内積の微分 $\nabla_{\boldsymbol{\theta}}(\mathbf{a}^\top \boldsymbol{\theta}) = \mathbf{a}$ を用いる。
+
+::: {.right}
+[（解答・解説へ）](#a:3-matrix-derivative-first-order)
+:::
+
+### 行列による書き直しと一階の条件 {#q:3-l2-regularization-gradient .questionbox tags="必須\faStar"}
+L2正則化付き経験リスク最小化の目的関数 $L(\boldsymbol{\theta})$ を考える（$\boldsymbol{\theta}$ は $d$ 次元のパラメーターとする）．
+$$
+L(\boldsymbol{\theta}) = \frac{1}{2}\|\Phi\boldsymbol{\theta} - \mathbf{y}\|^2 + \frac{\lambda}{2}\|\boldsymbol{\theta}\|^2
+$$
+
+最適化問題
+$$
+\mathop{\mathrm{Min}}_{\boldsymbol{\theta} \in \mathbb{R}^d} \ L(\boldsymbol{\theta})
+$$
+の最適解が
+$$\hat{\boldsymbol{\theta}} = (\Phi^\top \Phi + \lambda \mathbf{I})^{-1}\Phi^\top \mathbf{y}$$
+で与えられることを示せ（ただし上式の逆行列は存在すると仮定する。また、$\mathbf{I}$ は $d$ 次元の単位行列である）。
+
+---
+
+まずは自力で試みてほしいが、以下に段階的なヒントを記載する。
+
+**ヒント1：** L2ノルムの2乗は内積を用いて $\|\boldsymbol{\theta}\|^2 = \boldsymbol{\theta}^\top \boldsymbol{\theta}$ と書ける。これを用いて、間に単位行列 $\mathbf{I}$ を挟んで $\frac{\lambda}{2}\|\boldsymbol{\theta}\|^2 = \boldsymbol{\theta}^\top \left(\frac{\lambda}{2}\mathbf{I}\right) \boldsymbol{\theta}$ とみなすことができる。
+
+**ヒント2：** 目的関数全体の勾配 $\nabla L(\boldsymbol{\theta})$ を計算し、それが $\mathbf{0}$ になるという方程式（一階の条件）を立てる。
+
+**ヒント3：** 方程式を $\boldsymbol{\theta}$ について解くために、$\boldsymbol{\theta}$ でくくれる項をまとめ、左から逆行列を掛ける。
 
 ::: {.right}
 [（解答・解説へ）](#a:3-l2-regularization-gradient)
@@ -700,9 +720,9 @@ $$
 
 ## モデル選択（交差検証）
 
-### K-foldとLOOCVのインデックス計算 {#q:3-cross-validation-indices .questionbox tags="不要"}
+### K-foldとLOOCVのインデックス計算 {#q:3-cross-validation-indices .questionbox tags="スキップ可"}
 
-1. $n=6$ 個のデータを $K=3$ 個のフォルダ
+1. $n=6$ 個のデータを $K=3$ 個のまとまり
         $$
         D_1 = \{1, 2\}, \quad D_2 = \{3, 4\}, \quad D_3 = \{5, 6\}
         $$
@@ -740,7 +760,7 @@ $$
 [（解答・解説へ）](#a:4-absolute-loss-mae)
 :::
 
-### ピンボール損失のグラフ描写の理解 {#q:4-pinball-loss-calculation .questionbox tags="不要"}
+### ピンボール損失のグラフ描写の理解 {#q:4-pinball-loss-calculation .questionbox tags="スキップ可"}
 
 ピンボール損失関数
 $$
@@ -778,7 +798,11 @@ $$
 
 ### シグモイド関数の微分証明 {#q:5-sigmoid-derivative .questionbox tags="必須\faStar"}
 
-ロジスティック関数（シグモイド関数） $\sigma(z) = \frac{1}{1 + e^{-z}}$ について、
+ロジスティック関数（シグモイド関数）について、
+$$
+\sigma(z) = \frac{1}{1 + e^{-z}}
+$$
+として以下の問いに答えよ。
 
 1. 商の微分公式を用いて $\sigma'(z) = \sigma(z)(1 - \sigma(z))$ になることを証明せよ。
 2. 合成関数の微分則を用いて $\frac{d}{dz} \log \sigma(z) = 1 - \sigma(z)$ が成り立つことを示せ。
@@ -791,20 +815,20 @@ $$
 
 2クラス分類の交差エントロピー損失は、モデルの出力（ロジット）を $z$、シグモイド関数を $\sigma(z)$ とすると、次のように表される。
 $$
-l(z) = -y \log \sigma(z) - (1-y) \log(1 - \sigma(z))
+\ell(z) = -y \log \sigma(z) - (1-y) \log(1 - \sigma(z))
 $$
 
 以下の手順に従って、この損失関数のパラメーターに関する勾配を丁寧に変形して導出せよ。
 
-1. まず、線型モデルなどの具体的なモデルの形を仮定せず、一般のロジット $z$ に対する損失 $l(z)$ の微分 $\frac{\partial l}{\partial z}$ を求め、
+1. まず、線型モデルなどの具体的なモデルの形を仮定せず、一般のロジット $z$ に対する損失 $\ell(z)$ の微分 $\frac{\partial \ell(z)}{\partial z}$ を求め、
    $$
-   \frac{\partial l}{\partial z} = \sigma(z) - y
+   \frac{\partial \ell(z)}{\partial z} = \sigma(z) - y
    $$
    となることを示せ。（必要に応じて前問の $\sigma'(z)$ や $\frac{d}{dz} \log \sigma(z)$ の結果を利用してよい）
 
-2. 次に、モデルが線型モデルであり、$z = \boldsymbol{\theta}^\top \boldsymbol{\phi}(x)$ と表されるとする。このとき、チェインルール $\nabla_{\boldsymbol{\theta}} l = \frac{\partial l}{\partial z} \cdot \nabla_{\boldsymbol{\theta}} z$ を用いて、パラメーター $\boldsymbol{\theta}$ に対する勾配が
+2. 次に、モデルが線型モデルであり、$z = \boldsymbol{\theta}^\top \boldsymbol{\phi}(x)$ と表されるとする。このとき、チェインルール $\nabla_{\boldsymbol{\theta}} \ell(z) = \frac{\partial \ell(z)}{\partial z} \cdot \nabla_{\boldsymbol{\theta}} z$ を用いて、パラメーター $\boldsymbol{\theta}$ に対する勾配が
    $$
-   \nabla_{\boldsymbol{\theta}} l = (\sigma(z) - y)\boldsymbol{\phi}(x)
+   \nabla_{\boldsymbol{\theta}} \ell(z) = (\sigma(z) - y)\boldsymbol{\phi}(x)
    $$
    となることを導出せよ。
 
@@ -818,10 +842,12 @@ $$
 
 以下の勾配降下法のアルゴリズム中の各空欄 $\fbox{\,ア\,}$ 〜 $\fbox{\,ク\,}$ に当てはまる最も適切なものを、以下のそれぞれの語群から一つずつ選び、番号で答えよ。
 
-【日本語の語群】（空欄 $\fbox{\,ア\,}, \fbox{\,ウ\,}, \fbox{\,オ\,}, \fbox{\,キ\,}$）
+【説明文の語群】（空欄 $\fbox{\,ア\,}, \fbox{\,ウ\,}, \fbox{\,オ\,}, \fbox{\,キ\,}$）
+
 ① パラメーターを更新する　② 勾配を計算する　③ 初期化する　④ 反復を中断する
 
 【数式・操作の語群】（空欄 $\fbox{\,イ\,}, \fbox{\,エ\,}, \fbox{\,カ\,}, \fbox{\,ク\,}$）
+
 ⑤ $\boldsymbol{\theta} \leftarrow \boldsymbol{\theta} - \eta \mathbf{g}$　⑥ `break`　⑦ $\mathbf{g} \leftarrow \nabla L(\boldsymbol{\theta})$　⑧ $\boldsymbol{\theta} \leftarrow \text{ランダムな値}$
 
 【勾配降下法のアルゴリズム】
@@ -829,11 +855,11 @@ $$
 > **`Algorithm: Gradient Descent`**
 >
 > - `Step 1`: ( 目的: $\fbox{\,ア\,}$ )  ( 操作: $\fbox{\,イ\,}$ )
-> - `Step 2`: `Loop` 以下の処理を繰り返す
+> - `Step 2`: `Loop` （以下の処理を繰り返す）
 >     - `Step 2-1`: ( 目的: $\fbox{\,ウ\,}$ )  ( 操作: $\fbox{\,エ\,}$ )
 >     - `Step 2-2`: ( 目的: $\fbox{\,オ\,}$ )  ( 操作: $\fbox{\,カ\,}$ )
->     - `Step 2-3`: `if` 早期停止条件を満たしたら、( 目的: $\fbox{\,キ\,}$ )  ( 操作: $\fbox{\,ク\,}$ )
-> - `Step 3`: `return` $\boldsymbol{\theta}$ （最適化されたパラメーター）
+>     - `Step 2-3`: もし 早期停止条件を満たしたら、( 目的: $\fbox{\,キ\,}$ )  ( 操作: $\fbox{\,ク\,}$ )
+> - `Step 3`: 終了して $\boldsymbol{\theta}$ を出力 （最適化されたパラメーター）
 
 ::: {.right}
 [（解答・解説へ）](#a:6-gradient-descent-algorithm)
@@ -871,6 +897,27 @@ $$L(\theta) = - \frac{1}{n} \sum_{i=1}^n \left\{ y_i \log \sigma(\theta x_i) + (
 # 確率論的多値分類とソフトマックス回帰
 
 ## ソフトマックス関数と多クラス交差エントロピー
+
+### ソフトマックス関数の微分 {#q:6-softmax-derivative .questionbox tags="確認\faCheck"}
+
+ベクトル $\mathbf{z}$ を入力とするソフトマックス関数 $\mathbf{p} = \text{Softmax}(\mathbf{z})$ について、その第 $i$ 成分 $\mathbf{p}[i]$ を
+$$
+\mathbf{p}[i] = \frac{e^{\mathbf{z}[i]}}{\sum_{k=1}^K e^{\mathbf{z}[k]}} \quad (i = 1, \dots, K)
+$$
+として以下の問いに答えよ。
+
+1. 商の微分公式を用いて、$i = j$ のとき $\frac{\partial \mathbf{p}[i]}{\partial \mathbf{z}[i]} = \mathbf{p}[i](1 - \mathbf{p}[i])$ になることを証明せよ。
+2. 商の微分公式を用いて、$i \neq j$ のとき $\frac{\partial \mathbf{p}[i]}{\partial \mathbf{z}[j]} = -\mathbf{p}[i] \mathbf{p}[j]$ になることを証明せよ。
+
+（参考）これらはクロネッカーのデルタ $\delta_{ij}$（$i=j$ のとき $1$、$i \neq j$ のとき $0$）を用いて、$\frac{\partial \mathbf{p}[i]}{\partial \mathbf{z}[j]} = \mathbf{p}[i](\delta_{ij} - \mathbf{p}[j])$ と一つの式でまとめることができる。
+
+---
+
+**ヒント：** 分数関数の微分公式 $\left(\frac{f(x)}{g(x)}\right)' = \frac{f'(x)g(x) - f(x)g'(x)}{g(x)^2}$ を用いる。分母 $\sum_{k=1}^K e^{\mathbf{z}[k]}$ を $\mathbf{z}[j]$ で微分するとどうなるかに注意せよ。
+
+::: {.right}
+[（解答・解説へ）](#a:6-softmax-derivative)
+:::
 
 ### ソフトマックス損失の勾配公式の導出 {#q:6-softmax-gradient-derivation .questionbox tags="必須\faStar"}
 
@@ -919,7 +966,7 @@ $$
 
 ---
 
-**ヒント：** 全体の勾配ベクトルは単純にそれぞれの $\nabla_{\boldsymbol{\theta}_k} \ell$ を並べたものになる。
+**ヒント：** 全体の勾配ベクトルは単純にそれぞれの $\nabla_{\boldsymbol{\theta}_k} \ell((\mathbf{x}, y), g_{\boldsymbol{\theta}})$ を並べたものになる。
 
 ::: {.right}
 [（解答・解説へ）](#a:6-multiclass-logistic-gradient)
@@ -1313,22 +1360,27 @@ $$
 **【該当内容】** 第3回スライド38〜44「線型モデルの最小二乗法、行列による表記」
 **【ねらい】** データの羅列をデザイン行列 $\Phi$ とラベルベクトル $\mathbf{y}$ にまとめ、目的関数をベクトルのノルムとしてスッキリ表現するテクニックと、その微分プロセスを完全にマスターする。
 
-### 問3-multivariate-empirical-risk の解答・解説 {#a:3-multivariate-empirical-risk .answerbox ref="q:3-multivariate-empirical-risk"}
+### 問3-bivariate-gradient の解答・解説 {#a:3-bivariate-gradient .answerbox ref="q:3-bivariate-gradient"}
 
-与えられたデータポイントの各数値をモデル $f_{\boldsymbol{\theta}}(x) = \theta_1 + \theta_2 x + \theta_3 x^2$ および経験リスクの式に代入します。
-
-* $f_{\boldsymbol{\theta}}(x_1) = f_{\boldsymbol{\theta}}(1) = \theta_1 + \theta_2 + \theta_3$
-* $f_{\boldsymbol{\theta}}(x_2) = f_{\boldsymbol{\theta}}(2) = \theta_1 + 2\theta_2 + 4\theta_3$
-* $f_{\boldsymbol{\theta}}(x_3) = f_{\boldsymbol{\theta}}(3) = \theta_1 + 3\theta_2 + 9\theta_3$
-
-これらを二乗誤差の式に代入して平均をとると、求める経験リスクは以下のようになります：
-$$
-\hat{R}(f_{\boldsymbol{\theta}}) = \frac{1}{3} \left[ (\theta_1 + \theta_2 + \theta_3 - 2)^2 + (\theta_1 + 2\theta_2 + 4\theta_3 - 3)^2 + (\theta_1 + 3\theta_2 + 9\theta_3 - 5)^2 \right]
-$$
-これが、パラメータ $\boldsymbol{\theta} = (\theta_1, \theta_2, \theta_3)^\top$ に対する目的関数となります。（証明終）
+1. $y$ を定数とみなして $x$ で微分する。
+   $$
+   \frac{\partial f}{\partial x} = 2x + 3y
+   $$
+2. $x$ を定数とみなして $y$ で微分する。
+   $$
+   \frac{\partial f}{\partial y} = 3x + 4y
+   $$
+3. 求めた偏微分を縦ベクトルに並べる。
+   $$
+   \nabla f(x, y) = \begin{pmatrix} 2x + 3y \\ 3x + 4y \end{pmatrix}
+   $$
+4. $x=1, y=2$ を代入する。
+   $$
+   \nabla f(1, 2) = \begin{pmatrix} 2(1) + 3(2) \\ 3(1) + 4(2) \end{pmatrix} = \begin{pmatrix} 8 \\ 11 \end{pmatrix}
+   $$
 
 ::: {.right}
-[（問題へ戻る）](#q:3-multivariate-empirical-risk)
+[（問題へ戻る）](#q:3-bivariate-gradient)
 :::
 
 
@@ -1356,21 +1408,6 @@ $$
    \frac{1}{n}\|\Phi\boldsymbol{\theta} - \mathbf{y}\|^2 = \frac{1}{n} \sum_{i=1}^n (f_{\boldsymbol{\theta}}(x_i) - y_i)^2 = \hat{R}(f_{\boldsymbol{\theta}})
    $$
    が導かれ、式が一致することが確認された。
-
-3. 展開の各ステップは以下の通りである。
-   \begin{align*}
-   (\Phi\boldsymbol{\theta} - \mathbf{y})^\top (\Phi\boldsymbol{\theta} - \mathbf{y})
-   &= (\Phi\boldsymbol{\theta} - \mathbf{y})^\top (\Phi\boldsymbol{\theta}) - (\Phi\boldsymbol{\theta} - \mathbf{y})^\top \mathbf{y} \\
-   &= (\Phi\boldsymbol{\theta})^\top (\Phi\boldsymbol{\theta}) - \mathbf{y}^\top (\Phi\boldsymbol{\theta}) - (\Phi\boldsymbol{\theta})^\top \mathbf{y} + \mathbf{y}^\top \mathbf{y}
-   \end{align*}
-   ここで、第1項は $(\Phi\boldsymbol{\theta})^\top (\Phi\boldsymbol{\theta}) = \boldsymbol{\theta}^\top \Phi^\top \Phi \boldsymbol{\theta}$ となる。
-   また、第3項 $(\Phi\boldsymbol{\theta})^\top \mathbf{y}$ はスカラー（内積）であるため、転置しても値が変わらない。よって $\mathbf{y}^\top (\Phi\boldsymbol{\theta})$ と等しくなる。
-   したがって、第2項と第3項がまとまり $-2\mathbf{y}^\top \Phi \boldsymbol{\theta}$ となる。
-   以上より、
-   $$
-   \boldsymbol{\theta}^\top \Phi^\top \Phi \boldsymbol{\theta} - 2\mathbf{y}^\top \Phi \boldsymbol{\theta} + \mathbf{y}^\top \mathbf{y}
-   $$
-   となることが示された。（証明終）
 
 ::: {.right}
 [（問題へ戻る）](#q:3-matrix-empirical-risk)
@@ -1413,19 +1450,21 @@ $$
 
 ### 問3-matrix-derivative-first-order の解答・解説 {#a:3-matrix-derivative-first-order .answerbox ref="q:3-matrix-derivative-first-order"}
 
-目的関数 $L(\boldsymbol{\theta})$ を展開する。内積はスカラーであり転置しても値が変わらないため、$\mathbf{y}^\top \Phi \boldsymbol{\theta} = (\mathbf{y}^\top \Phi \boldsymbol{\theta})^\top = \boldsymbol{\theta}^\top \Phi^\top \mathbf{y}$ が成り立ち、中央の項がまとめられる。
-$$
-L(\boldsymbol{\theta}) = \frac{1}{2} \left[ \boldsymbol{\theta}^\top \Phi^\top \Phi \boldsymbol{\theta} - 2 (\Phi^\top \mathbf{y})^\top \boldsymbol{\theta} + \mathbf{y}^\top \mathbf{y} \right]
-$$
-ここで、$\mathbf{A} = \Phi^\top \Phi$ とおくと、これは対称行列である。行列微分の公式を適用して $\boldsymbol{\theta}$ で勾配を計算する。
-$$
-\nabla_{\boldsymbol{\theta}} L(\boldsymbol{\theta}) = \frac{1}{2} \left[ 2 \Phi^\top \Phi \boldsymbol{\theta} - 2 \Phi^\top \mathbf{y} \right] = \Phi^\top \Phi \boldsymbol{\theta} - \Phi^\top \mathbf{y}
-$$
-一階の条件 $\nabla_{\boldsymbol{\theta}} L(\boldsymbol{\theta}) = \mathbf{0}$ より、
-$$
-\Phi^\top \Phi \boldsymbol{\theta} - \Phi^\top \mathbf{y} = \mathbf{0} \quad \Rightarrow \quad \Phi^\top \Phi \boldsymbol{\theta} = \Phi^\top \mathbf{y}
-$$
-が導出された。（証明終）
+1. 展開の各ステップは以下の通りである。
+   \begin{align*}
+   (\Phi\boldsymbol{\theta} - \mathbf{y})^\top (\Phi\boldsymbol{\theta} - \mathbf{y})
+   &= (\Phi\boldsymbol{\theta} - \mathbf{y})^\top (\Phi\boldsymbol{\theta}) - (\Phi\boldsymbol{\theta} - \mathbf{y})^\top \mathbf{y} \\
+   &= (\Phi\boldsymbol{\theta})^\top (\Phi\boldsymbol{\theta}) - \mathbf{y}^\top (\Phi\boldsymbol{\theta}) - (\Phi\boldsymbol{\theta})^\top \mathbf{y} + \mathbf{y}^\top \mathbf{y}
+   \end{align*}
+   ここで、第1項は $(\Phi\boldsymbol{\theta})^\top (\Phi\boldsymbol{\theta}) = \boldsymbol{\theta}^\top \Phi^\top \Phi \boldsymbol{\theta}$ となる。
+   また、第3項 $(\Phi\boldsymbol{\theta})^\top \mathbf{y}$ はスカラー（内積）であるため、転置しても値が変わらない。よって $\mathbf{y}^\top (\Phi\boldsymbol{\theta})$ と等しくなる。
+   したがって、第2項と第3項がまとまり $-2\mathbf{y}^\top \Phi \boldsymbol{\theta}$ となる。これらを全体に $1/2$ 掛けたものが目的関数 $L(\boldsymbol{\theta})$ となるため、与えられた式が得られる。
+
+2. $L(\boldsymbol{\theta}) = \frac{1}{2}\boldsymbol{\theta}^\top \Phi^\top \Phi \boldsymbol{\theta} - \mathbf{y}^\top \Phi \boldsymbol{\theta} + \frac{1}{2}\mathbf{y}^\top \mathbf{y}$ において、$\mathbf{A} = \Phi^\top \Phi$ とおくと、これは対称行列である。行列微分の公式を適用して $\boldsymbol{\theta}$ で勾配を計算する。
+   $$
+   \nabla_{\boldsymbol{\theta}} L(\boldsymbol{\theta}) = \frac{1}{2} \left[ 2 \Phi^\top \Phi \boldsymbol{\theta} \right] - \Phi^\top \mathbf{y} = \Phi^\top \Phi \boldsymbol{\theta} - \Phi^\top \mathbf{y}
+   $$
+   以上より、目的関数の勾配が導出された。
 
 ::: {.right}
 [（問題へ戻る）](#q:3-matrix-derivative-first-order)
@@ -1454,7 +1493,7 @@ $$
 $\|\boldsymbol{\theta}\|^2 = \boldsymbol{\theta}^\top \boldsymbol{\theta}$ より、第2項の勾配は $\nabla_{\boldsymbol{\theta}} \left( \frac{\lambda}{2} \boldsymbol{\theta}^\top \boldsymbol{\theta} \right) = \lambda \boldsymbol{\theta}$ である。
 これと二乗誤差項の勾配を合わせ、全体の勾配を一階の条件に従って $\mathbf{0}$ と置く。
 $$
-\nabla_{\boldsymbol{\theta}} L_{\text{reg}} = \Phi^\top \Phi \boldsymbol{\theta} - \Phi^\top \mathbf{y} + \lambda \boldsymbol{\theta} = \mathbf{0}
+\nabla_{\boldsymbol{\theta}} L(\boldsymbol{\theta}) = \Phi^\top \Phi \boldsymbol{\theta} - \Phi^\top \mathbf{y} + \lambda \boldsymbol{\theta} = \mathbf{0}
 $$
 ここで $\boldsymbol{\theta}$ でまとめる際、行列 $\Phi^\top \Phi$ とスカラー $\lambda$ は直接足し算できない。そのため、$\lambda \boldsymbol{\theta} = \lambda \mathbf{I} \boldsymbol{\theta}$（$\mathbf{I}$は単位行列）と変形する。
 $$
@@ -1613,9 +1652,9 @@ $$
 
 ### 問5-cross-entropy-gradient の解答・解説 {#a:5-cross-entropy-gradient .answerbox ref="q:5-cross-entropy-gradient"}
 
-1. 交差エントロピー損失 $l(z)$ を $z$ について偏微分する。
+1. 交差エントロピー損失 $\ell(z)$ を $z$ について偏微分する。
    $$
-   \frac{\partial l}{\partial z} = -y \frac{d}{dz}(\log \sigma(z)) - (1-y) \frac{d}{dz}(\log(1 - \sigma(z)))
+   \frac{\partial \ell(z)}{\partial z} = -y \frac{d}{dz}(\log \sigma(z)) - (1-y) \frac{d}{dz}(\log(1 - \sigma(z)))
    $$
    第1項の微分は前問の(2)より $1 - \sigma(z)$。第2項の微分は同様に、
    $$
@@ -1623,7 +1662,7 @@ $$
    $$
    これらを代入して整理する。
    \begin{align*}
-   \frac{\partial l}{\partial z} &= -y(1 - \sigma(z)) - (1-y)(-\sigma(z)) \\
+   \frac{\partial \ell(z)}{\partial z} &= -y(1 - \sigma(z)) - (1-y)(-\sigma(z)) \\
    &= -y + y\sigma(z) + \sigma(z) - y\sigma(z) \\
    &= \sigma(z) - y
    \end{align*}
@@ -1635,7 +1674,7 @@ $$
    $$
    チェインルールを適用して両者を掛け合わせる。
    $$
-   \nabla_{\boldsymbol{\theta}} l = \frac{\partial l}{\partial z} \cdot \nabla_{\boldsymbol{\theta}} z = (\sigma(z) - y)\boldsymbol{\phi}(x)
+   \nabla_{\boldsymbol{\theta}} \ell(z) = \frac{\partial \ell(z)}{\partial z} \cdot \nabla_{\boldsymbol{\theta}} z = (\sigma(z) - y)\boldsymbol{\phi}(x)
    $$
    となり、導出された。（証明終）
 
@@ -1650,6 +1689,36 @@ $$
 
 **【該当内容】** 第6回スライド「確率論的多値分類＞ソフトマックスと最尤法＞勾配」
 **【ねらい】** 多値分類で標準的に用いられるソフトマックス関数と負の対数尤度の組み合わせにおいて、その勾配が「予測確率と正解の差（誤差）×特徴量」という非常に直感的かつシンプルな形式で導かれるプロセスを数学的に理解する。
+
+### 問6-softmax-derivative の解答・解説 {#a:6-softmax-derivative .answerbox ref="q:6-softmax-derivative"}
+
+ソフトマックス関数 $\mathbf{p}[i] = \frac{e^{\mathbf{z}[i]}}{\sum_{k=1}^K e^{\mathbf{z}[k]}}$ の分母を $S = \sum_{k=1}^K e^{\mathbf{z}[k]}$ とおく。
+$S$ を $\mathbf{z}[j]$ で微分すると、$\frac{\partial S}{\partial \mathbf{z}[j]} = e^{\mathbf{z}[j]}$ となる。
+商の微分公式を用いて $\frac{\partial \mathbf{p}[i]}{\partial \mathbf{z}[j]}$ を計算する。
+
+1. **$i = j$ の場合**：
+   分子は $e^{\mathbf{z}[i]}$ であり、$\mathbf{z}[i]$ で微分すると $e^{\mathbf{z}[i]}$ となる。したがって、
+   \begin{align*}
+   \frac{\partial \mathbf{p}[i]}{\partial \mathbf{z}[i]} &= \frac{(e^{\mathbf{z}[i]})' \cdot S - e^{\mathbf{z}[i]} \cdot (S)'}{S^2} \\
+   &= \frac{e^{\mathbf{z}[i]} S - e^{\mathbf{z}[i]} e^{\mathbf{z}[i]}}{S^2} \\
+   &= \frac{e^{\mathbf{z}[i]}}{S} \frac{S - e^{\mathbf{z}[i]}}{S} \\
+   &= \mathbf{p}[i] (1 - \mathbf{p}[i])
+   \end{align*}
+   となる。
+
+2. **$i \neq j$ の場合**：
+   分子は $e^{\mathbf{z}[i]}$ であり、$\mathbf{z}[j]$（$j \neq i$）で微分すると $0$ になる。したがって、
+   \begin{align*}
+   \frac{\partial \mathbf{p}[i]}{\partial \mathbf{z}[j]} &= \frac{0 \cdot S - e^{\mathbf{z}[i]} \cdot (S)'}{S^2} \\
+   &= \frac{-e^{\mathbf{z}[i]} e^{\mathbf{z}[j]}}{S^2} \\
+   &= -\frac{e^{\mathbf{z}[i]}}{S} \frac{e^{\mathbf{z}[j]}}{S} \\
+   &= -\mathbf{p}[i] \mathbf{p}[j]
+   \end{align*}
+   となる。（証明終）
+
+::: {.right}
+[（問題へ戻る）](#q:6-softmax-derivative)
+:::
 
 ### 問6-softmax-gradient-derivation の解答・解説 {#a:6-softmax-gradient-derivation .answerbox ref="q:6-softmax-gradient-derivation"}
 

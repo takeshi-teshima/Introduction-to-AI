@@ -177,3 +177,36 @@ $$
 ::: {.right}
 [（問題へ戻る）](#q:3-least-squares-formula)
 :::
+
+## 多変数関数の経験リスクと勾配
+
+### 3変数パラメータの経験リスク {#q:3-multivariate-empirical-risk .questionbox tags="確認"}
+
+3つのデータポイント $(x_1, y_1) = (1, 2)$, $(x_2, y_2) = (2, 3)$, $(x_3, y_3) = (3, 5)$ が与えられている。予測モデルを3変数パラメータ $\boldsymbol{\theta} = (\theta_1, \theta_2, \theta_3)^\top$ を用いたモデル $f_{\boldsymbol{\theta}}(x) = \theta_1 + \theta_2 x + \theta_3 x^2$ とし、損失関数を二乗誤差とする。
+このとき、経験リスク
+$$
+\hat{R}(f_{\boldsymbol{\theta}}) = \frac{1}{3} \sum_{i=1}^3 (y_i - f_{\boldsymbol{\theta}}(x_i))^2
+$$
+を $\boldsymbol{\theta}$ の関数として具体的な数値を用いて展開・書き下せ。（整理・簡略化までする必要はない。）
+
+::: {.right}
+[（解答・解説へ）](#a:3-multivariate-empirical-risk)
+:::
+
+### 問3-multivariate-empirical-risk の解答・解説 {#a:3-multivariate-empirical-risk .answerbox ref="q:3-multivariate-empirical-risk"}
+
+与えられたデータポイントの各数値をモデル $f_{\boldsymbol{\theta}}(x) = \theta_1 + \theta_2 x + \theta_3 x^2$ および経験リスクの式に代入します。
+
+* $f_{\boldsymbol{\theta}}(x_1) = f_{\boldsymbol{\theta}}(1) = \theta_1 + \theta_2 + \theta_3$
+* $f_{\boldsymbol{\theta}}(x_2) = f_{\boldsymbol{\theta}}(2) = \theta_1 + 2\theta_2 + 4\theta_3$
+* $f_{\boldsymbol{\theta}}(x_3) = f_{\boldsymbol{\theta}}(3) = \theta_1 + 3\theta_2 + 9\theta_3$
+
+これらを二乗誤差の式に代入して平均をとると、求める経験リスクは以下のようになります：
+$$
+\hat{R}(f_{\boldsymbol{\theta}}) = \frac{1}{3} \left[ (\theta_1 + \theta_2 + \theta_3 - 2)^2 + (\theta_1 + 2\theta_2 + 4\theta_3 - 3)^2 + (\theta_1 + 3\theta_2 + 9\theta_3 - 5)^2 \right]
+$$
+これが、パラメータ $\boldsymbol{\theta} = (\theta_1, \theta_2, \theta_3)^\top$ に対する目的関数となります。（証明終）
+
+::: {.right}
+[（問題へ戻る）](#q:3-multivariate-empirical-risk)
+:::
