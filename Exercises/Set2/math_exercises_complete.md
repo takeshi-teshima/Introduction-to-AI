@@ -42,7 +42,7 @@ header-includes: |
 
 ## 確率の基礎と期待値・分散の計算
 
-### 指示関数（Indicator function）の理解 {#q:1-indicator-function .questionbox difficulty="★1"}
+### 指示関数（Indicator function）の理解 {#q:1-indicator-function .questionbox tags="確認"}
 
 機械学習の理論（特に損失関数や分類問題の評価など）では、ある条件が満たされているか否かを表す**指示関数（定義関数）** $\ind$ が頻出する。条件（または事象） $A$ に対して、指示関数 $\ind\{A\}$ は以下のように定義される。
 $$
@@ -66,7 +66,7 @@ $$
 [（解答・解説へ）](#a:1-indicator-function)
 :::
 
-### 離散型確率分布での期待値・分散計算 {#q:1-discrete-expectation-variance .questionbox difficulty="★0"}
+### 離散型確率分布での期待値・分散計算 {#q:1-discrete-expectation-variance .questionbox tags="不要"}
 
 ある離散確率変数 $X$ は、確率 $0.2$ で $0$、確率 $0.5$ で $1$、確率 $0.3$ で $2$ をとる。
 
@@ -78,7 +78,7 @@ $$
 [（解答・解説へ）](#a:1-discrete-expectation-variance)
 :::
 
-### 連続型確率分布での期待値・分散計算 {#q:1-continuous-expectation-variance .questionbox difficulty="★0"}
+### 連続型確率分布での期待値・分散計算 {#q:1-continuous-expectation-variance .questionbox tags="不要"}
 
 連続確率変数 $X$ の確率密度関数 $p(x)$ が、指示関数 $\ind$ を用いて実数全体 $\mathbb{R}$ 上で以下のように定義されている。
 $$
@@ -105,7 +105,7 @@ $$
 * \textbf{分散と共分散の関係}: $\mathbb{V}[X] = Cov(X,X)$
 * \textbf{共分散の双線形性}: $Cov(aX+bY, Z) = aCov(X,Z) + bCov(Y,Z)$
 
-### 共分散（Covariance）の2次形式的振る舞い {#q:1-variance-formula-proof .questionbox difficulty="★3"}
+### 共分散（Covariance）の2次形式的振る舞い {#q:1-variance-formula-proof .questionbox tags="発展"}
 
 確率変数 $X, Y, Z$ と定数 $a, b$ について、共分散の性質（双線形性・対称性）
 \begin{align*}
@@ -125,7 +125,7 @@ Cov(X,Y) &= Cov(Y,X)
 
 ## 経験リスクの数式化（シグマを用いた書き下し）
 
-### 経験リスクの立式 {#q:2-empirical-risk-formulation .questionbox difficulty="★2"}
+### 経験リスクの立式 {#q:2-empirical-risk-formulation .questionbox tags="必須"}
 
 $n$ 個の訓練データ $\{(x_i, y_i)\}_{i=1}^n$ が与えられている。モデルクラスとして1次関数 $f_{(w,b)}(x) = wx + b$ を採用し、損失関数を二乗誤差 $l(y, \hat{y}) = (y - \hat{y})^2$ とするとき、経験リスク $\hat{R}(f_{(w,b)})$ を書き下せ。
 <!-- $\sum_{i=1}^n$ を用いて -->
@@ -134,7 +134,7 @@ $n$ 個の訓練データ $\{(x_i, y_i)\}_{i=1}^n$ が与えられている。�
 [（解答・解説へ）](#a:2-empirical-risk-formulation)
 :::
 
-### 最適化問題の定式化：穴埋め {#q:2-optimization-formulation-blank .questionbox difficulty="★2"}
+### 最適化問題の定式化：穴埋め {#q:2-optimization-formulation-blank .questionbox tags="必須"}
 
 以下の最適化問題の定式化について、空欄 (ア) 〜 (エ) に入る適切な数式や記号を答えよ。
 
@@ -153,7 +153,7 @@ $n$ 個の訓練データ $\{(x_i, y_i)\}_{i=1}^n$ が与えられている。�
 :::
 
 
-### 目的関数のパラメータ関数化 {#q:2-erm-parameter-function .questionbox difficulty="★0"}
+### 目的関数のパラメータ関数化 {#q:2-erm-parameter-function .questionbox tags="不要"}
 
 以下の2つのデータポイントが与えられている。
 
@@ -174,7 +174,7 @@ $$
 
 ## 最小二乗法の真髄：偏微分から一階の条件へ
 
-### 偏微分と勾配 {#q:3-multivariate-gradient .questionbox difficulty="★2"}
+### 偏微分と勾配 {#q:3-multivariate-gradient .questionbox tags="必須"}
 
 ベクトル $\mathbf{w} = (w_1, w_2, w_3)^\top \in \mathbb{R}^3$ に対する以下の関数 $g(\mathbf{w})$ について、勾配 $\nabla g(\mathbf{w})$ を求めよ。
 $$
@@ -185,7 +185,7 @@ $$
 [（解答・解説へ）](#a:3-multivariate-gradient)
 :::
 
-### 線型単回帰モデルの最適パラメータ導出 {#q:2-partial-derivative-gradient .questionbox difficulty="★2"}
+### 線型単回帰モデルの最適パラメータ導出 {#q:2-partial-derivative-gradient .questionbox tags="必須"}
 
 1次元の入力 $x$ に対する線型単回帰モデル $f_{w,b}(x) = wx + b$ を考える。$n$ 個の訓練データ $\{(x_i, y_i)\}_{i=1}^n$ に対する目的関数（経験リスク）を二乗誤差を用いて
 $$
@@ -212,7 +212,7 @@ $$
 
 ## ベクトルと行列の計算
 
-### 行列・ベクトルの積の計算練習 {#q:3-matrix-vector-multiplication-practice .questionbox difficulty="★0"}
+### 行列・ベクトルの積の計算練習 {#q:3-matrix-vector-multiplication-practice .questionbox tags="不要"}
 
 以下の行列・ベクトルの積を計算せよ。
 
@@ -303,7 +303,7 @@ $$
 
 【注意】いずれも、行列やベクトルの形状が掛け算可能なように整合していることを前提としています。
 
-### ベクトル・行列の積の頻出パターンと成分表示 {#q:3-matrix-vector-patterns .questionbox difficulty="★2"}
+### ベクトル・行列の積の頻出パターンと成分表示 {#q:3-matrix-vector-patterns .questionbox tags="必須"}
 
 講義スライドで登場した行列・ベクトルの積に関する視覚的なパターンの意味を、成分表示を用いて確認せよ。
 
@@ -467,7 +467,7 @@ $$
     \end{center}
   【補足】最後の $\mathbf{a} = \frac{\langle \mathbf{a}, \mathbf{b} \rangle}{\langle \mathbf{b}, \mathbf{b} \rangle} \mathbf{b} + (\mathbf{b}\text{に直交する成分})$ という分解は、$\langle \mathbf{a} - \frac{\langle \mathbf{a}, \mathbf{b} \rangle}{\langle \mathbf{b}, \mathbf{b} \rangle} \mathbf{b}, \mathbf{b} \rangle = 0$ により確かめられる。
 
-### 内積の役割と計算 {#q:3-inner-product-roles .questionbox difficulty="★0"}
+### 内積の役割と計算 {#q:3-inner-product-roles .questionbox tags="不要"}
 
 以下の小問に答えよ。
 
@@ -489,7 +489,7 @@ $$
 
 ## パラメータ線型モデルの表現（特徴写像）
 
-### 多項式特徴写像による線型表現 {#q:3-polynomial-feature-mapping .questionbox difficulty="★1"}
+### 多項式特徴写像による線型表現 {#q:3-polynomial-feature-mapping .questionbox tags="確認"}
 
 1次元の入力 $x$ に対し、特徴写像を $\boldsymbol{\phi}(x) = (1, x, x^2)^\top$ と定義する。
 パラメータベクトルを $\boldsymbol{\theta} = (\theta_0, \theta_1, \theta_2)^\top$ とする。
@@ -502,7 +502,7 @@ $$
 [（解答・解説へ）](#a:3-polynomial-feature-mapping)
 :::
 
-### テキストデータへの適用（Bag-of-Words）と最小二乗法 {#q:3-bag-of-words-representation .questionbox difficulty="★2"}
+### テキストデータへの適用（Bag-of-Words）と最小二乗法 {#q:3-bag-of-words-representation .questionbox tags="必須"}
 
 テキストの文書分類や数値予測を行う際、文書中の単語の出現頻度をもとに特徴ベクトルを作る手法を**Bag-of-Words**と呼びます。
 
@@ -546,7 +546,7 @@ $$
 
 ## 多変数関数の経験リスクと勾配
 
-### 3変数パラメータの経験リスク {#q:3-multivariate-empirical-risk .questionbox difficulty="★1"}
+### 3変数パラメータの経験リスク {#q:3-multivariate-empirical-risk .questionbox tags="確認"}
 
 3つのデータポイント $(x_1, y_1) = (1, 2)$, $(x_2, y_2) = (2, 3)$, $(x_3, y_3) = (3, 5)$ が与えられている。予測モデルを3変数パラメータ $\boldsymbol{\theta} = (\theta_1, \theta_2, \theta_3)^\top$ を用いたモデル $f_{\boldsymbol{\theta}}(x) = \theta_1 + \theta_2 x + \theta_3 x^2$ とし、損失関数を二乗誤差とする。
 このとき、経験リスク
@@ -561,7 +561,7 @@ $$
 
 ## 最小二乗法の行列表記と一階の条件（最重要）
 
-### 行列とベクトルによる目的関数の書き直し {#q:3-matrix-empirical-risk .questionbox difficulty="★2"}
+### 行列とベクトルによる目的関数の書き直し {#q:3-matrix-empirical-risk .questionbox tags="必須"}
 
 $n$ 個のデータ $(x_1, y_1), \dots, (x_n, y_n)$ に対して、線型モデルを $f_{\boldsymbol{\theta}}(x) = \boldsymbol{\theta}^\top \boldsymbol{\phi}(x)$ とする。また、計画行列 $\Phi \in \mathbb{R}^{n \times d}$ とラベルベクトル $\mathbf{y} \in \mathbb{R}^n$ を次のように定義する。
 $$
@@ -620,7 +620,7 @@ $$
 \nabla_{\boldsymbol{\theta}} (\boldsymbol{\theta}^\top \mathbf{A} \boldsymbol{\theta}) &= 2\mathbf{A}\boldsymbol{\theta} \quad \text{（$\mathbf{A}$は対称行列）}
 \end{align*}
 を用いて、 -->
-### 行列・ベクトルでの二次形式の展開と平方完成 {#q:3-quadratic-form-completing-square .questionbox difficulty="★2"}
+### 行列・ベクトルでの二次形式の展開と平方完成 {#q:3-quadratic-form-completing-square .questionbox tags="必須"}
 
 一変数関数における平方完成 $(x - b)^2 = x^2 - 2bx + b^2$ の行列・ベクトル版を確認する。
 対称行列 $\mathbf{A}$（すなわち $\mathbf{A} = \mathbf{A}^\top$）と、ベクトル $\mathbf{x}, \mathbf{b}$ があるとする。
@@ -634,7 +634,7 @@ $$
 [（解答・解説へ）](#a:3-quadratic-form-completing-square)
 :::
 
-### 一階の条件の行列導出 {#q:3-matrix-derivative-first-order .questionbox difficulty="★1"}
+### 一階の条件の行列導出 {#q:3-matrix-derivative-first-order .questionbox tags="確認"}
 
 目的関数 $L(\boldsymbol{\theta}) = \frac{1}{2}(\Phi\boldsymbol{\theta} - \mathbf{y})^\top (\Phi\boldsymbol{\theta} - \mathbf{y})$ の勾配 $\nabla_{\boldsymbol{\theta}} L(\boldsymbol{\theta})$ を求め、一階の条件 $\nabla_{\boldsymbol{\theta}} L(\boldsymbol{\theta}) = \mathbf{0}$ から正規方程式
 $$
@@ -659,7 +659,7 @@ $$
 \|\mathbf{w}\|^2 = \mathbf{w}^\top \mathbf{w}
 $$
 
-### L2正則化付き目的関数の書き下し {#q:3-l2-regularization-objective .questionbox difficulty="★1"}
+### L2正則化付き目的関数の書き下し {#q:3-l2-regularization-objective .questionbox tags="確認"}
 
 損失関数を二乗誤差、正則化項をL2ノルムの2乗とし、正則化係数を $\lambda = 0.01$ とする。 $n$ 個のデータに対するL2正則化付き経験リスク最小化の目的関数 $L_{\text{reg}}(\boldsymbol{\theta})$ の式をシグマ表記で書き下せ。
 
@@ -667,7 +667,7 @@ $$
 [（解答・解説へ）](#a:3-l2-regularization-objective)
 :::
 
-### 行列による書き直しと一階の条件 {#q:3-l2-regularization-gradient .questionbox difficulty="★2"}
+### 行列による書き直しと一階の条件 {#q:3-l2-regularization-gradient .questionbox tags="必須"}
 
 目的関数を $L_{\text{reg}}(\boldsymbol{\theta}) = \frac{1}{2}\|\Phi\boldsymbol{\theta} - \mathbf{y}\|^2 + \frac{\lambda}{2}\|\boldsymbol{\theta}\|^2$ とする。全体の勾配を $\mathbf{0}$ と置く一階の条件から、最適解
 $$
@@ -685,7 +685,7 @@ $$
 
 ## モデル選択（交差検証）
 
-### K-foldとLOOCVのインデックス計算 {#q:3-cross-validation-indices .questionbox difficulty="★0"}
+### K-foldとLOOCVのインデックス計算 {#q:3-cross-validation-indices .questionbox tags="不要"}
 
 1. $n=6$ 個のデータを $K=3$ 個のフォルダ
         $$
@@ -702,7 +702,7 @@ $$
 
 ## 同時分布・条件付き分布・条件付き期待値
 
-### 同時確率表からの条件付き分布と期待値 {#q:4-conditional-probability-table .questionbox difficulty="★1"}
+### 同時確率表からの条件付き分布と期待値 {#q:4-conditional-probability-table .questionbox tags="確認"}
 
 離散確率変数 $X \in \{0,1\}$ と $Y \in \{1,2,3\}$ の同時確率 $P(X, Y)$ について、 $X=0$ のとき、$Y=1, 2, 3$ となる確率はそれぞれ $0.1, 0.2, 0.1$ である。
 
@@ -716,7 +716,7 @@ $$
 
 ## 分位点（Quantile）と外れ値の影響
 
-### 飛びのある分布の分位点とロバスト性 {#q:4-absolute-loss-mae .questionbox difficulty="★1"}
+### 飛びのある分布の分位点とロバスト性 {#q:4-absolute-loss-mae .questionbox tags="確認"}
 
 1. データセット $\{2, 3, 5, 7, 100\}$ の平均値と中央値を求めよ。
 2. 外れ値の $100$ が $1000$ に化けたとする。このとき平均値と中央値はどう変化するか計算し、ピンボール損失（中央値の場合は絶対値損失）が外れ値に対して持つ優位性を説明せよ。
@@ -725,7 +725,7 @@ $$
 [（解答・解説へ）](#a:4-absolute-loss-mae)
 :::
 
-### ピンボール損失のグラフ描写の理解 {#q:4-pinball-loss-calculation .questionbox difficulty="★0"}
+### ピンボール損失のグラフ描写の理解 {#q:4-pinball-loss-calculation .questionbox tags="不要"}
 
 ピンボール損失関数
 $$
@@ -745,7 +745,7 @@ $$
 
 ## ロジスティック回帰の基礎と非線型目的関数の勾配
 
-### 指示関数の期待値と確率の関係 {#q:5-indicator-expectation .questionbox difficulty="★2"}
+### 指示関数の期待値と確率の関係 {#q:5-indicator-expectation .questionbox tags="必須"}
 
 確率変数 $X$ の値が集合 $A$ に入るという事象について、
 $$
@@ -761,7 +761,7 @@ $$
 
 ## ロジスティック関数の微分と交差エントロピー
 
-### シグモイド関数の微分証明 {#q:5-sigmoid-derivative .questionbox difficulty="★2"}
+### シグモイド関数の微分証明 {#q:5-sigmoid-derivative .questionbox tags="必須"}
 
 ロジスティック関数（シグモイド関数） $\sigma(z) = \frac{1}{1 + e^{-z}}$ について、
 
@@ -772,7 +772,7 @@ $$
 [（解答・解説へ）](#a:5-sigmoid-derivative)
 :::
 
-### 交差エントロピーとチェインルールによる勾配導出 {#q:5-cross-entropy-gradient .questionbox difficulty="★2"}
+### 交差エントロピーとチェインルールによる勾配導出 {#q:5-cross-entropy-gradient .questionbox tags="必須"}
 
 交差エントロピー損失
 $$
@@ -792,7 +792,7 @@ $$
 
 ## ソフトマックス関数と多クラス交差エントロピー
 
-### ソフトマックス損失の勾配公式の導出 {#q:6-softmax-gradient-derivation .questionbox difficulty="★2"}
+### ソフトマックス損失の勾配公式の導出 {#q:6-softmax-gradient-derivation .questionbox tags="必須"}
 
 多クラス分類問題において、入力 $\mathbf{x}$ に対するスコアベクトルを $s_{\boldsymbol{\theta}}(\mathbf{x}) \in \mathbb{R}^K$ とし、モデル $g_{\boldsymbol{\theta}}(\mathbf{x}) = \text{Softmax}(s_{\boldsymbol{\theta}}(\mathbf{x}))$ を考える。ここで、モデルの出力ベクトルの第 $k$ 成分 $g_{\boldsymbol{\theta}}(\mathbf{x})[k]$ は以下のように定義される。
 $$
@@ -811,7 +811,7 @@ $$
 [（解答・解説へ）](#a:6-softmax-gradient-derivation)
 :::
 
-### 多クラスロジスティック回帰の勾配公式 {#q:6-multiclass-logistic-gradient .questionbox difficulty="★1"}
+### 多クラスロジスティック回帰の勾配公式 {#q:6-multiclass-logistic-gradient .questionbox tags="確認"}
 
 前問「ソフトマックス損失の勾配公式の導出」に引き続き、多クラスロジスティック回帰（ソフトマックス回帰）モデルを考える。このモデルでは、クラス $j$ のスコアがクラス固有のパラメータベクトル $\boldsymbol{\theta}_j$ と特徴量 $\boldsymbol{\phi}(\mathbf{x})$ の内積
 $$

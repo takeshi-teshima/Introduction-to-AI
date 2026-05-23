@@ -2,7 +2,7 @@
 
 ## リスク関数 and 経験リスク
 
-### 分布が既知の場合の真のリスク関数 {#q:1-2-1 .questionbox difficulty="★1"}
+### 分布が既知の場合の真のリスク関数 {#q:1-2-1 .questionbox tags="確認"}
 
 あるデータ生成分布において、入力 $X$ は常に $1$ で固定されており、ラベル $Y$ は確率 $0.6$ で $y=3$、確率 $0.4$ で $y=8$ をとるとする。予測モデル $f$ を定数 $c$ を出力するモデル $f(x)=c$ とし、損失関数を二乗誤差 $l(y, y') = (y-y')^2$ とする。
 
@@ -13,7 +13,7 @@
 [（解答・解説へ）](#a:1-2-1)
 :::
 
-### 経験リスクの計算と予測値の代入 {#q:1-2-2 .questionbox difficulty="★0"}
+### 経験リスクの計算と予測値の代入 {#q:1-2-2 .questionbox tags="不要"}
 
 上記のデータ生成分布から、現実世界でランダムに $n=3$ 個のサンプルを収集したところ、偶然にも全て $y_1=3, y_2=3, y_3=3$ であったとする。
 
@@ -55,7 +55,7 @@
 
 ## 最小二乗法の真髄：偏微分から一階の条件へ
 
-### 一階の条件からの式変形 {#q:2-first-order-conditions-scalar .questionbox difficulty="★1"}
+### 一階の条件からの式変形 {#q:2-first-order-conditions-scalar .questionbox tags="確認"}
 
 最適解において勾配ベクトルがゼロになるという一階の条件 $\nabla L(w,b) = \mathbf{0}$ のうち、$\frac{\partial L}{\partial b} = 0$ の式を変形し、最適な切片 $\hat{b}$ が、サンプルの平均値 $\bar{x} = \frac{1}{n}\sum_{i=1}^n x_i$, $\bar{y} = \frac{1}{n}\sum_{i=1}^n y_i$ を用いて
 $$
@@ -67,7 +67,7 @@ $$
 [（解答・解説へ）](#a:2-first-order-conditions-scalar)
 :::
 
-### 学習済みパラメータによる新規データの予測 {#q:2-prediction-with-learned-parameters .questionbox difficulty="★0"}
+### 学習済みパラメータによる新規データの予測 {#q:2-prediction-with-learned-parameters .questionbox tags="不要"}
 
 あるデータセットに対して最小二乗法を適用したところ、学習済みパラメータが $\hat{w} = 2.5, \hat{b} = 1.0$ と求まった。このとき、新規に観測された特徴量 $x_{\text{new}} = 6$ に対する予測値 $\hat{y}_{\text{new}}$ を計算せよ。
 
@@ -121,7 +121,7 @@ $$
 
 ## ベクトルの内積と性質
 
-### 内積の線形性と対称性の証明 {#q:3-inner-product-properties .questionbox difficulty="★3"}
+### 内積の線形性と対称性の証明 {#q:3-inner-product-properties .questionbox tags="発展"}
 
 任意の次元のベクトル $\mathbf{x}, \mathbf{y}$ およびスカラー $c$ について、
 \begin{align*}

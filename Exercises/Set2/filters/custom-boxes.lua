@@ -17,11 +17,11 @@ function transform_div(el)
   if has_class(el, 'questionbox') then
     local label = el.attributes['label'] or el.identifier
     local title = el.attributes['title'] or ""
-    local difficulty = el.attributes['difficulty']
+    local tags = el.attributes['tags']
 
     if FORMAT:match 'latex' then
-      if difficulty then
-        title = title .. " \\hfill \\normalfont \\small 難易度：" .. difficulty
+      if tags then
+        title = title .. " \\hfill \\normalfont \\small [ " .. tags .. " ]"
       end
       local opt = ""
       if label and label ~= "" then
@@ -35,10 +35,10 @@ function transform_div(el)
     else
       -- Fallback for HTML or other formats: wrap in a nice div with title
       local items = {}
-      if title ~= "" or difficulty then
+      if title ~= "" or tags then
         local title_text = title
-        if difficulty then
-          title_text = title .. " (難易度：" .. difficulty .. ")"
+        if tags then
+          title_text = title .. " [ " .. tags .. " ]"
         end
         local header = pandoc.Para({pandoc.Strong(title_text)})
         table.insert(items, header)
@@ -158,7 +158,7 @@ function Pandoc(doc)
       -- Extract attributes
       local label = header.identifier
       local title = pandoc.utils.stringify(header.content)
-      local difficulty = header.attributes['difficulty']
+      local tags = header.attributes['tags']
       local ref = header.attributes['ref']
       local option = header.attributes['option']
       
@@ -181,7 +181,7 @@ function Pandoc(doc)
       div.classes = {class_name}
       if label ~= "" then div.attributes['label'] = label end
       if title ~= "" then div.attributes['title'] = title end
-      if difficulty then div.attributes['difficulty'] = difficulty end
+      if tags then div.attributes['tags'] = tags end
       if ref then div.attributes['ref'] = ref end
       if option then div.attributes['option'] = option end
       
