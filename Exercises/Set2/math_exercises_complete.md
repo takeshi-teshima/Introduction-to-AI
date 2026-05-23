@@ -831,9 +831,15 @@ $$
    \nabla_{\boldsymbol{\theta}_k} \ell((\mathbf{x}, y), g_{\boldsymbol{\theta}}) = \left( g_{\boldsymbol{\theta}}(\mathbf{x})[k] - \mathbf{1}\{k = y\} \right) \boldsymbol{\phi}(\mathbf{x})
    $$
    となることを示せ。
+3. **【パラメータ全体での勾配のブロックベクトル表現】**
+   パラメータ全体を縦に並べたベクトル $\boldsymbol{\theta} = (\boldsymbol{\theta}_1^\top, \dots, \boldsymbol{\theta}_K^\top)^\top$ を考える。このとき、損失関数の $\boldsymbol{\theta}$ 全体に対する勾配 $\nabla_{\boldsymbol{\theta}} \ell((\mathbf{x}, y), g_{\boldsymbol{\theta}})$ が、各 $\boldsymbol{\theta}_k$ に関する勾配を縦に並べたブロックベクトルとして次のように表されることを確認せよ。
+   $$
+   \nabla_{\boldsymbol{\theta}} \ell((\mathbf{x}, y), g_{\boldsymbol{\theta}}) = \begin{pmatrix} \nabla_{\boldsymbol{\theta}_1} \ell((\mathbf{x}, y), g_{\boldsymbol{\theta}}) \\ \vdots \\ \nabla_{\boldsymbol{\theta}_K} \ell((\mathbf{x}, y), g_{\boldsymbol{\theta}}) \end{pmatrix} = \begin{pmatrix} (g_{\boldsymbol{\theta}}(\mathbf{x})[1] - \mathbf{1}\{1 = y\}) \boldsymbol{\phi}(\mathbf{x}) \\ \vdots \\ (g_{\boldsymbol{\theta}}(\mathbf{x})[K] - \mathbf{1}\{K = y\}) \boldsymbol{\phi}(\mathbf{x}) \end{pmatrix}
+   $$
+   （ヒント：各 $\boldsymbol{\theta}_k$ の偏微分は他のクラスのパラメータに依存しないため、全体の勾配ベクトルは単純にそれぞれの $\nabla_{\boldsymbol{\theta}_k} \ell$ を並べたものになる）
 
 ::: {.right}
-[（解答・解説へ）](#a:6-softmax-gradient-derivation)
+[（解答・解説へ）](#a:6-multiclass-logistic-gradient)
 :::
 
 
@@ -1614,6 +1620,13 @@ $$
    \end{align*}
    となり、求める勾配が導出された。（証明終）
 
+3. 全体のパラメータ $\boldsymbol{\theta}$ に対する勾配 $\nabla_{\boldsymbol{\theta}} \ell((\mathbf{x}, y), g_{\boldsymbol{\theta}})$ は、各パラメータ成分ごとの偏微分を並べたベクトルである。パラメータ $\boldsymbol{\theta}$ が $\boldsymbol{\theta}_1, \dots, \boldsymbol{\theta}_K$ を縦に結合したベクトル（ブロックベクトル）であるため、その勾配も各 $\boldsymbol{\theta}_k$ に関する勾配 $\nabla_{\boldsymbol{\theta}_k} \ell((\mathbf{x}, y), g_{\boldsymbol{\theta}})$ を同じように縦に並べたブロックベクトルとなる。
+   (2) の結果より、各ブロック $\nabla_{\boldsymbol{\theta}_k} \ell((\mathbf{x}, y), g_{\boldsymbol{\theta}})$ は $(g_{\boldsymbol{\theta}}(\mathbf{x})[k] - \mathbf{1}\{k = y\}) \boldsymbol{\phi}(\mathbf{x})$ で与えられるため、これを各行（各ブロック）に代入することで、
+   $$
+   \nabla_{\boldsymbol{\theta}} \ell((\mathbf{x}, y), g_{\boldsymbol{\theta}}) = \begin{pmatrix} (g_{\boldsymbol{\theta}}(\mathbf{x})[1] - \mathbf{1}\{1 = y\}) \boldsymbol{\phi}(\mathbf{x}) \\ \vdots \\ (g_{\boldsymbol{\theta}}(\mathbf{x})[K] - \mathbf{1}\{K = y\}) \boldsymbol{\phi}(\mathbf{x}) \end{pmatrix}
+   $$
+   が得られる。（証明終）
+
 ::: {.right}
-[（問題へ戻る）](#q:6-softmax-gradient-derivation)
+[（問題へ戻る）](#q:6-multiclass-logistic-gradient)
 :::
