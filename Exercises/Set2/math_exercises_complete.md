@@ -992,9 +992,12 @@ $$
 
 ## 正則化（Regularization）
 
-### L2ノルムの性質 {#q:3-l2-norm-properties .questionbox difficulty="★0"}
+### L2ノルムの性質と内積 {#q:3-l2-norm-properties .questionbox difficulty="★2"}
 
-ベクトル $\mathbf{w} = (3, -4)^\top$ のL2ノルム $\|\mathbf{w}\|$ を計算し、それが自身との内積の平方根 $\sqrt{\mathbf{w}^\top \mathbf{w}}$ と等しいことを示せ。
+一般の $d$ 次元ベクトル $\mathbf{w} = (w_1, \dots, w_d)^\top$ について、L2ノルムの定義 $\|\mathbf{w}\| = \sqrt{\sum_{i=1}^d w_i^2}$ と内積の定義を用いて、以下の等式が成り立つことを確認せよ。
+$$
+\|\mathbf{w}\|^2 = \mathbf{w}^\top \mathbf{w}
+$$
 
 ::: {.right}
 [（解答・解説へ）](#a:3-l2-norm-properties)
@@ -1027,15 +1030,16 @@ $$
 
 ### 問3-l2-norm-properties の解答・解説 {#a:3-l2-norm-properties .answerbox ref="q:3-l2-norm-properties"}
 
-L2ノルムの計算：
+L2ノルムの定義より、その2乗は各成分の2乗和となる。
 $$
-\|\mathbf{w}\| = \sqrt{3^2 + (-4)^2} = \sqrt{9 + 16} = \sqrt{25} = 5
+\|\mathbf{w}\|^2 = \left( \sqrt{\sum_{i=1}^d w_i^2} \right)^2 = \sum_{i=1}^d w_i^2
 $$
-内積の平方根の計算：
+一方、ベクトル $\mathbf{w}$ とそれ自身との内積は、対応する成分の積の和であるから、
 $$
-\mathbf{w}^\top \mathbf{w} = 3 \times 3 + (-4) \times (-4) = 9 + 16 = 25 \quad \Rightarrow \quad \sqrt{\mathbf{w}^\top \mathbf{w}} = 5
+\mathbf{w}^\top \mathbf{w} = \sum_{i=1}^d w_i w_i = \sum_{i=1}^d w_i^2
 $$
-よって $\|\mathbf{w}\| = \sqrt{\mathbf{w}^\top \mathbf{w}} = 5$ となり、一致する。
+となる。
+両者の結果が一致するため、$\|\mathbf{w}\|^2 = \mathbf{w}^\top \mathbf{w}$ が成り立つことが確認された。（証明終）
 
 ::: {.right}
 [（問題へ戻る）](#q:3-l2-norm-properties)
