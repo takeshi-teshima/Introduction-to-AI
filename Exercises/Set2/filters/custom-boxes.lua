@@ -25,7 +25,7 @@ function transform_div(el)
         for tag in string.gmatch(tags, "([^,]+)") do
           tag = tag:match("^%s*(.-)%s*$")
           if tag ~= "" then
-            latex_tags = latex_tags .. "\\tcbox[on line, boxsep=0pt, left=3pt, right=3pt, top=2pt, bottom=2pt, boxrule=0.5pt, arc=2pt, colback=white, colframe=black!70, colupper=black, fontupper=\\sffamily\\scriptsize\\bfseries]{" .. tag .. "}\\hspace{2pt}"
+            latex_tags = latex_tags .. "\\tcbox[enhanced, on line, boxsep=0pt, left=3pt, right=3pt, top=2pt, bottom=2pt, boxrule=0.5pt, arc=2pt, interior hidden, colframe=white, colupper=white, fontupper=\\small\\bfseries]{" .. tag .. "}\\hspace{2pt}"
           end
         end
         title = title .. " \\hfill " .. latex_tags
