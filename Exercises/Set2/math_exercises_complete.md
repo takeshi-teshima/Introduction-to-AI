@@ -567,6 +567,99 @@ $$
 [（解答・解説へ）](#a:3-matrix-vector-patterns)
 :::
 
+### 【復習とヒント】ベクトル・行列の積のコツ {.tcolorbox option="enhanced, colback=blue!2!white, colframe=blue!60!black, fonttitle=\bfseries, drop shadow"}
+
+行列は、行（横ベクトル）や列（縦ベクトル）が並んだものとしてイメージすると、複雑な計算も直感的に捉えやすくなります。
+
+- **行列の行ベクトル・列ベクトル表現**
+  行列は横ベクトルが縦に並んだものとも、縦ベクトルが横に並んだものとも思えます。
+
+    \begin{center}
+    \begin{tikzpicture}[>=stealth, thick, scale=0.9, every node/.style={align=center}]
+      \colorlet{vecbg}{cyan!10} \colorlet{vecborder}{cyan!70!blue}
+      \colorlet{colbg}{magenta!10} \colorlet{colborder}{magenta!70!purple}
+      
+      \node at (-1.2, 0) {$B =$};
+      \draw[draw=black, thick] (0, 1.2) -- (-0.2, 1.2) -- (-0.2, -1.2) -- (0, -1.2);
+      \draw[draw=black, thick] (2.0, 1.2) -- (2.2, 1.2) -- (2.2, -1.2) -- (2.0, -1.2);
+      \foreach \y/\i in {0.75/1, 0.25/2, -0.25/3, -0.75/4} {
+        \node[anchor=east] at (0.3, \y) {$\mathbf{b}_\i^\top$};
+        \draw[fill=vecbg, draw=vecborder] (0.4, \y-0.15) rectangle (1.8, \y+0.15);
+      }
+      \node at (2.8, 0) {$=$};
+      \draw[draw=black, thick] (3.4, 1.2) -- (3.2, 1.2) -- (3.2, -1.2) -- (3.4, -1.2);
+      \draw[draw=black, thick] (5.4, 1.2) -- (5.6, 1.2) -- (5.6, -1.2) -- (5.4, -1.2);
+      \foreach \x/\i in {3.8/1, 4.4/2, 5.0/3} {
+        \node[anchor=south] at (\x, 0.9) {$\boldsymbol{\beta}_\i$};
+        \draw[fill=colbg, draw=colborder] (\x-0.2, -1.0) rectangle (\x+0.2, 0.8);
+      }
+    \end{tikzpicture}
+    \end{center}
+
+- **横ベクトルが縦に並んでいると思うと**
+  各「横成分」に右のベクトルが分配されたように振る舞います。
+
+    \begin{center}
+    \begin{tikzpicture}[>=stealth, thick, scale=0.9, every node/.style={align=center}]
+      \colorlet{vecbg}{cyan!10} \colorlet{vecborder}{cyan!70!blue}
+      \colorlet{vbg}{orange!10} \colorlet{vborder}{orange!80!red}
+      
+      \node at (-1.5, 0) {$B \mathbf{v} =$};
+      \draw[draw=black, thick] (0, 1.2) -- (-0.2, 1.2) -- (-0.2, -1.2) -- (0, -1.2);
+      \draw[draw=black, thick] (1.8, 1.2) -- (2.0, 1.2) -- (2.0, -1.2) -- (1.8, -1.2);
+      \foreach \y/\i in {0.75/1, 0.25/2, -0.25/3, -0.75/4} {
+        \node[anchor=east] at (0.3, \y) {$\mathbf{b}_\i^\top$};
+        \draw[fill=vecbg, draw=vecborder] (0.4, \y-0.15) rectangle (1.6, \y+0.15);
+      }
+      \draw[fill=vbg, draw=vborder] (2.4, -0.75) rectangle (2.8, 0.75);
+      \node at (2.6, 1.0) {$\mathbf{v}$};
+      \foreach \y in {0.75, 0.25, -0.25, -0.75} {
+        \draw[->, orange!80!red, shorten >=2pt] (2.4, 0) to[out=180, in=0] (1.6, \y);
+      }
+      \node at (3.5, 0) {$=$};
+      \draw[draw=black, thick] (4.0, 1.2) -- (3.8, 1.2) -- (3.8, -1.2) -- (4.0, -1.2);
+      \draw[draw=black, thick] (5.6, 1.2) -- (5.8, 1.2) -- (5.8, -1.2) -- (5.6, -1.2);
+      \foreach \y/\i in {0.75/1, 0.25/2, -0.25/3, -0.75/4} {
+        \node[anchor=west] at (3.9, \y) {$\mathbf{b}_\i^\top \mathbf{v}$};
+        \draw[fill=vbg, draw=vborder] (5.2, \y-0.1) rectangle (5.4, \y+0.1); 
+      }
+    \end{tikzpicture}
+    \end{center}
+
+- **縦ベクトルが横に並んでいると思うと**
+  成分同士を掛けて足す「内積」あるいは「列ベクトルの重み付き和」のように振る舞います。
+
+    \begin{center}
+    \begin{tikzpicture}[>=stealth, thick, scale=0.9, every node/.style={align=center}]
+      \colorlet{colbg}{magenta!10} \colorlet{colborder}{magenta!70!purple}
+      \colorlet{vbg}{orange!10} \colorlet{vborder}{orange!80!red}
+      
+      \node at (-1.5, 0) {$B \mathbf{v} =$};
+      \draw[draw=black, thick] (0, 1.2) -- (-0.2, 1.2) -- (-0.2, -1.2) -- (0, -1.2);
+      \draw[draw=black, thick] (2.0, 1.2) -- (2.2, 1.2) -- (2.2, -1.2) -- (2.0, -1.2);
+      \foreach \x/\i in {0.4/1, 1.0/2, 1.6/3} {
+        \node[anchor=south, inner sep=1pt] at (\x, 1.0) {\small $\boldsymbol{\beta}_\i$};
+        \draw[fill=colbg, draw=colborder] (\x-0.15, -1.0) rectangle (\x+0.15, 0.8);
+      }
+      \draw[draw=black, thick] (2.4, 1.2) -- (2.3, 1.2) -- (2.3, -1.2) -- (2.4, -1.2);
+      \draw[draw=black, thick] (3.0, 1.2) -- (3.1, 1.2) -- (3.1, -1.2) -- (3.0, -1.2);
+      \node at (2.7, 1.4) {$\mathbf{v}$};
+      \foreach \y/\i in {0.6/1, 0.0/2, -0.6/3} {
+        \draw[fill=vbg, draw=vborder] (2.55, \y-0.15) rectangle (2.85, \y+0.15);
+      }
+      \draw[->, orange!80!red, shorten >=2pt] (2.55, 0.6) to[out=150, in=60] (0.5, 1.3);
+      \draw[->, orange!80!red, shorten >=2pt] (2.55, 0.0) to[out=150, in=60] (1.1, 1.3);
+      \draw[->, orange!80!red, shorten >=2pt] (2.55, -0.6) to[out=150, in=60] (1.7, 1.3);
+      
+      \node at (3.5, 0) {$=$};
+      \node at (4.2, 0) {$\displaystyle \sum_{j=1}^3$};
+      \draw[fill=colbg, draw=colborder] (4.8, -1.0) rectangle (5.1, 0.8);
+      \node[anchor=south] at (4.95, 0.8) {$\boldsymbol{\beta}_j$};
+      \draw[fill=vbg, draw=vborder] (5.4, -0.15) rectangle (5.7, 0.15);
+      \node[anchor=south] at (5.55, 0.15) {$v_j$};
+    \end{tikzpicture}
+    \end{center}
+
 ### 【復習とヒント】ベクトルの内積と射影 {.tcolorbox option="enhanced, colback=blue!2!white, colframe=blue!60!black, fonttitle=\bfseries, drop shadow"}
 
 内積 $\mathbf{a}^\top \mathbf{b}$ は、一方のベクトルを他方に「射影」したときの長さと、元のベクトルの長さの積として幾何学的に解釈できます。
