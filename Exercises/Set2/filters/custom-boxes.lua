@@ -21,7 +21,29 @@ function transform_div(el)
 
     if FORMAT:match 'latex' then
       if tags then
-        title = title .. " \\hfill \\normalfont \\small [ " .. tags .. " ]"
+        local latex_tags = ""
+        for tag in string.gmatch(tags, "([^,]+)") do
+          tag = tag:match("^%s*(.-)%s*$")
+          if tag ~= "" then
+            local colback = "gray!10"
+            local colframe = "gray!50"
+            if tag == "不要" then
+              colback = "gray!20"
+              colframe = "gray!50"
+            elseif tag == "確認" then
+              colback = "cyan!10"
+              colframe = "cyan!50"
+            elseif tag == "必須" then
+              colback = "red!10"
+              colframe = "red!50"
+            elseif tag == "発展" then
+              colback = "purple!10"
+              colframe = "purple!50"
+            end
+            latex_tags = latex_tags .. "\\tcbox[on line, boxsep=0pt, left=3pt, right=3pt, top=2pt, bottom=2pt, boxrule=0.5pt, arc=2pt, colback=" .. colback .. ", colframe=" .. colframe .. ", colupper=black, fontupper=\\sffamily\\scriptsize\\bfseries]{" .. tag .. "}\\hspace{2pt}"
+          end
+        end
+        title = title .. " \\hfill " .. latex_tags
       end
       local opt = ""
       if label and label ~= "" then
@@ -38,7 +60,14 @@ function transform_div(el)
       if title ~= "" or tags then
         local title_text = title
         if tags then
-          title_text = title .. " [ " .. tags .. " ]"
+          local html_tags = ""
+          for tag in string.gmatch(tags, "([^,]+)") do
+            tag = tag:match("^%s*(.-)%s*$")
+            if tag ~= "" then
+              html_tags = html_tags .. " [" .. tag .. "]"
+            end
+          end
+          title_text = title .. html_tags
         end
         local header = pandoc.Para({pandoc.Strong(title_text)})
         table.insert(items, header)
