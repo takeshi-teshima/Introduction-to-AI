@@ -105,7 +105,7 @@
 
 \subsection{確率の基礎と期待値・分散の計算}\label{ux78baux7387ux306eux57faux790eux3068ux671fux5f85ux5024ux5206ux6563ux306eux8a08ux7b97}
 
-\begin{questionbox}[label=q:1-indicator-function]{指示関数（Indicator function）の理解 \hfill \tcbox[enhanced, on line, boxsep=0pt, left=3pt, right=3pt, top=2pt, bottom=2pt, boxrule=0.5pt, arc=2pt, colback=white, opacityback=0, colframe=white, colupper=white, fontupper=\small\bfseries]{確認}\hspace{2pt}}
+\begin{questionbox}[label=q:1-indicator-function]{指示関数（Indicator function）の理解 \hfill \tikz[baseline=-0.8ex] \node[draw=white, rounded corners=2pt, inner sep=2.5pt, text=white, font=\small\bfseries, line width=0.5pt] {確認};\hspace{2pt}}
 
 機械学習の理論（特に損失関数や分類問題の評価など）では、ある条件が満たされているか否かを表す\textbf{指示関数（定義関数）}
 \(\ind\) が頻出する。条件（または事象） \(A\) に対して、指示関数
@@ -150,7 +150,7 @@
 
 \end{questionbox}
 
-\begin{questionbox}[label=q:1-discrete-expectation-variance]{離散型確率分布での期待値・分散計算 \hfill \tcbox[enhanced, on line, boxsep=0pt, left=3pt, right=3pt, top=2pt, bottom=2pt, boxrule=0.5pt, arc=2pt, colback=white, opacityback=0, colframe=white, colupper=white, fontupper=\small\bfseries]{不要}\hspace{2pt}}
+\begin{questionbox}[label=q:1-discrete-expectation-variance]{離散型確率分布での期待値・分散計算 \hfill \tikz[baseline=-0.8ex] \node[draw=white, rounded corners=2pt, inner sep=2.5pt, text=white, font=\small\bfseries, line width=0.5pt] {不要};\hspace{2pt}}
 
 ある離散確率変数 \(X\) は、確率 \(0.2\) で \(0\)、確率 \(0.5\) で
 \(1\)、確率 \(0.3\) で \(2\) をとる。
@@ -172,7 +172,7 @@
 
 \end{questionbox}
 
-\begin{questionbox}[label=q:1-continuous-expectation-variance]{連続型確率分布での期待値・分散計算 \hfill \tcbox[enhanced, on line, boxsep=0pt, left=3pt, right=3pt, top=2pt, bottom=2pt, boxrule=0.5pt, arc=2pt, colback=white, opacityback=0, colframe=white, colupper=white, fontupper=\small\bfseries]{不要}\hspace{2pt}}
+\begin{questionbox}[label=q:1-continuous-expectation-variance]{連続型確率分布での期待値・分散計算 \hfill \tikz[baseline=-0.8ex] \node[draw=white, rounded corners=2pt, inner sep=2.5pt, text=white, font=\small\bfseries, line width=0.5pt] {不要};\hspace{2pt}}
 
 連続確率変数 \(X\) の確率密度関数 \(p(x)\) が、指示関数 \(\ind\)
 を用いて実数全体 \(\mathbb{R}\) 上で以下のように定義されている。 \[
@@ -226,7 +226,7 @@ p(x) = 2x \cdot \ind\{0 \le x \le 1\}
 
 \end{tcolorbox}
 
-\begin{questionbox}[label=q:1-variance-formula-proof]{共分散（Covariance）の2次形式的振る舞い \hfill \tcbox[enhanced, on line, boxsep=0pt, left=3pt, right=3pt, top=2pt, bottom=2pt, boxrule=0.5pt, arc=2pt, colback=white, opacityback=0, colframe=white, colupper=white, fontupper=\small\bfseries]{発展}\hspace{2pt}}
+\begin{questionbox}[label=q:1-variance-formula-proof]{共分散（Covariance）の2次形式的振る舞い \hfill \tikz[baseline=-0.8ex] \node[draw=white, rounded corners=2pt, inner sep=2.5pt, text=white, font=\small\bfseries, line width=0.5pt] {発展};\hspace{2pt}}
 
 確率変数 \(X, Y, Z\) と定数 \(a, b\)
 について、共分散の性質（双線形性・対称性） \begin{align*}
@@ -254,7 +254,7 @@ Cov(X,Y) &= Cov(Y,X)
 
 \subsection{経験リスクの数式化（シグマを用いた書き下し）}\label{ux7d4cux9a13ux30eaux30b9ux30afux306eux6570ux5f0fux5316ux30b7ux30b0ux30deux3092ux7528ux3044ux305fux66f8ux304dux4e0bux3057}
 
-\begin{questionbox}[label=q:2-empirical-risk-formulation]{経験リスクの立式 \hfill \tcbox[enhanced, on line, boxsep=0pt, left=3pt, right=3pt, top=2pt, bottom=2pt, boxrule=0.5pt, arc=2pt, colback=white, opacityback=0, colframe=white, colupper=white, fontupper=\small\bfseries]{必須}\hspace{2pt}}
+\begin{questionbox}[label=q:2-empirical-risk-formulation]{経験リスクの立式 \hfill \tikz[baseline=-0.8ex] \node[draw=white, rounded corners=2pt, inner sep=2.5pt, text=white, font=\small\bfseries, line width=0.5pt] {必須};\hspace{2pt}}
 
 \(n\) 個の訓練データ \(\{(x_i, y_i)\}_{i=1}^n\)
 が与えられている。モデルクラスとして1次関数 \(f_{(w,b)}(x) = wx + b\)
@@ -267,7 +267,7 @@ Cov(X,Y) &= Cov(Y,X)
 
 \end{questionbox}
 
-\begin{questionbox}[label=q:2-optimization-formulation-blank]{最適化問題の定式化：穴埋め \hfill \tcbox[enhanced, on line, boxsep=0pt, left=3pt, right=3pt, top=2pt, bottom=2pt, boxrule=0.5pt, arc=2pt, colback=white, opacityback=0, colframe=white, colupper=white, fontupper=\small\bfseries]{必須}\hspace{2pt}}
+\begin{questionbox}[label=q:2-optimization-formulation-blank]{最適化問題の定式化：穴埋め \hfill \tikz[baseline=-0.8ex] \node[draw=white, rounded corners=2pt, inner sep=2.5pt, text=white, font=\small\bfseries, line width=0.5pt] {必須};\hspace{2pt}}
 
 以下の最適化問題の定式化について、空欄 (ア) 〜 (エ)
 に入る適切な数式や記号を答えよ。
@@ -298,7 +298,7 @@ Cov(X,Y) &= Cov(Y,X)
 
 \end{questionbox}
 
-\begin{questionbox}[label=q:2-erm-parameter-function]{目的関数のパラメータ関数化 \hfill \tcbox[enhanced, on line, boxsep=0pt, left=3pt, right=3pt, top=2pt, bottom=2pt, boxrule=0.5pt, arc=2pt, colback=white, opacityback=0, colframe=white, colupper=white, fontupper=\small\bfseries]{不要}\hspace{2pt}}
+\begin{questionbox}[label=q:2-erm-parameter-function]{目的関数のパラメータ関数化 \hfill \tikz[baseline=-0.8ex] \node[draw=white, rounded corners=2pt, inner sep=2.5pt, text=white, font=\small\bfseries, line width=0.5pt] {不要};\hspace{2pt}}
 
 以下の2つのデータポイントが与えられている。
 
@@ -324,7 +324,7 @@ Cov(X,Y) &= Cov(Y,X)
 
 \subsection{最小二乗法の真髄：偏微分から一階の条件へ}\label{ux6700ux5c0fux4e8cux4e57ux6cd5ux306eux771fux9ac4ux504fux5faeux5206ux304bux3089ux4e00ux968eux306eux6761ux4ef6ux3078}
 
-\begin{questionbox}[label=q:3-multivariate-gradient]{偏微分と勾配 \hfill \tcbox[enhanced, on line, boxsep=0pt, left=3pt, right=3pt, top=2pt, bottom=2pt, boxrule=0.5pt, arc=2pt, colback=white, opacityback=0, colframe=white, colupper=white, fontupper=\small\bfseries]{必須}\hspace{2pt}}
+\begin{questionbox}[label=q:3-multivariate-gradient]{偏微分と勾配 \hfill \tikz[baseline=-0.8ex] \node[draw=white, rounded corners=2pt, inner sep=2.5pt, text=white, font=\small\bfseries, line width=0.5pt] {必須};\hspace{2pt}}
 
 ベクトル \(\mathbf{w} = (w_1, w_2, w_3)^\top \in \mathbb{R}^3\)
 に対する以下の関数 \(g(\mathbf{w})\) について、勾配
@@ -338,7 +338,7 @@ g(\mathbf{w}) = w_1^2 + 2w_2^2 + 3w_3^2 - 4w_1w_2 - 6w_2w_3
 
 \end{questionbox}
 
-\begin{questionbox}[label=q:2-partial-derivative-gradient]{線型単回帰モデルの最適パラメータ導出 \hfill \tcbox[enhanced, on line, boxsep=0pt, left=3pt, right=3pt, top=2pt, bottom=2pt, boxrule=0.5pt, arc=2pt, colback=white, opacityback=0, colframe=white, colupper=white, fontupper=\small\bfseries]{必須}\hspace{2pt}}
+\begin{questionbox}[label=q:2-partial-derivative-gradient]{線型単回帰モデルの最適パラメータ導出 \hfill \tikz[baseline=-0.8ex] \node[draw=white, rounded corners=2pt, inner sep=2.5pt, text=white, font=\small\bfseries, line width=0.5pt] {必須};\hspace{2pt}}
 
 1次元の入力 \(x\) に対する線型単回帰モデル \(f_{w,b}(x) = wx + b\)
 を考える。\(n\) 個の訓練データ \(\{(x_i, y_i)\}_{i=1}^n\)
@@ -378,7 +378,7 @@ L(w,b) = \frac{1}{n} \sum_{i=1}^n (y_i - (wx_i + b))^2
 
 \subsection{ベクトルと行列の計算}\label{ux30d9ux30afux30c8ux30ebux3068ux884cux5217ux306eux8a08ux7b97}
 
-\begin{questionbox}[label=q:3-matrix-vector-multiplication-practice]{行列・ベクトルの積の計算練習 \hfill \tcbox[enhanced, on line, boxsep=0pt, left=3pt, right=3pt, top=2pt, bottom=2pt, boxrule=0.5pt, arc=2pt, colback=white, opacityback=0, colframe=white, colupper=white, fontupper=\small\bfseries]{不要}\hspace{2pt}}
+\begin{questionbox}[label=q:3-matrix-vector-multiplication-practice]{行列・ベクトルの積の計算練習 \hfill \tikz[baseline=-0.8ex] \node[draw=white, rounded corners=2pt, inner sep=2.5pt, text=white, font=\small\bfseries, line width=0.5pt] {不要};\hspace{2pt}}
 
 以下の行列・ベクトルの積を計算せよ。
 
@@ -483,7 +483,7 @@ L(w,b) = \frac{1}{n} \sum_{i=1}^n (y_i - (wx_i + b))^2
 
 \end{tcolorbox}
 
-\begin{questionbox}[label=q:3-matrix-vector-patterns]{ベクトル・行列の積の頻出パターンと成分表示 \hfill \tcbox[enhanced, on line, boxsep=0pt, left=3pt, right=3pt, top=2pt, bottom=2pt, boxrule=0.5pt, arc=2pt, colback=white, opacityback=0, colframe=white, colupper=white, fontupper=\small\bfseries]{必須}\hspace{2pt}}
+\begin{questionbox}[label=q:3-matrix-vector-patterns]{ベクトル・行列の積の頻出パターンと成分表示 \hfill \tikz[baseline=-0.8ex] \node[draw=white, rounded corners=2pt, inner sep=2.5pt, text=white, font=\small\bfseries, line width=0.5pt] {必須};\hspace{2pt}}
 
 講義スライドで登場した行列・ベクトルの積に関する視覚的なパターンの意味を、成分表示を用いて確認せよ。
 
@@ -675,7 +675,7 @@ L(w,b) = \frac{1}{n} \sum_{i=1}^n (y_i - (wx_i + b))^2
 
 \end{tcolorbox}
 
-\begin{questionbox}[label=q:3-inner-product-roles]{内積の役割と計算 \hfill \tcbox[enhanced, on line, boxsep=0pt, left=3pt, right=3pt, top=2pt, bottom=2pt, boxrule=0.5pt, arc=2pt, colback=white, opacityback=0, colframe=white, colupper=white, fontupper=\small\bfseries]{不要}\hspace{2pt}}
+\begin{questionbox}[label=q:3-inner-product-roles]{内積の役割と計算 \hfill \tikz[baseline=-0.8ex] \node[draw=white, rounded corners=2pt, inner sep=2.5pt, text=white, font=\small\bfseries, line width=0.5pt] {不要};\hspace{2pt}}
 
 以下の小問に答えよ。
 
@@ -716,7 +716,7 @@ L(w,b) = \frac{1}{n} \sum_{i=1}^n (y_i - (wx_i + b))^2
 
 \subsection{パラメータ線型モデルの表現（特徴写像）}\label{ux30d1ux30e9ux30e1ux30fcux30bfux7ddaux578bux30e2ux30c7ux30ebux306eux8868ux73feux7279ux5fb4ux5199ux50cf}
 
-\begin{questionbox}[label=q:3-polynomial-feature-mapping]{多項式特徴写像による線型表現 \hfill \tcbox[enhanced, on line, boxsep=0pt, left=3pt, right=3pt, top=2pt, bottom=2pt, boxrule=0.5pt, arc=2pt, colback=white, opacityback=0, colframe=white, colupper=white, fontupper=\small\bfseries]{確認}\hspace{2pt}}
+\begin{questionbox}[label=q:3-polynomial-feature-mapping]{多項式特徴写像による線型表現 \hfill \tikz[baseline=-0.8ex] \node[draw=white, rounded corners=2pt, inner sep=2.5pt, text=white, font=\small\bfseries, line width=0.5pt] {確認};\hspace{2pt}}
 
 1次元の入力 \(x\) に対し、特徴写像を
 \(\boldsymbol{\phi}(x) = (1, x, x^2)^\top\) と定義する。
@@ -741,7 +741,7 @@ L(w,b) = \frac{1}{n} \sum_{i=1}^n (y_i - (wx_i + b))^2
 
 \end{questionbox}
 
-\begin{questionbox}[label=q:3-bag-of-words-representation]{テキストデータへの適用（Bag-of-Words）と最小二乗法 \hfill \tcbox[enhanced, on line, boxsep=0pt, left=3pt, right=3pt, top=2pt, bottom=2pt, boxrule=0.5pt, arc=2pt, colback=white, opacityback=0, colframe=white, colupper=white, fontupper=\small\bfseries]{必須}\hspace{2pt}}
+\begin{questionbox}[label=q:3-bag-of-words-representation]{テキストデータへの適用（Bag-of-Words）と最小二乗法 \hfill \tikz[baseline=-0.8ex] \node[draw=white, rounded corners=2pt, inner sep=2.5pt, text=white, font=\small\bfseries, line width=0.5pt] {必須};\hspace{2pt}}
 
 テキストの文書分類や数値予測を行う際、文書中の単語の出現頻度をもとに特徴ベクトルを作る手法を\textbf{Bag-of-Words}と呼びます。
 
@@ -799,7 +799,7 @@ L(w,b) = \frac{1}{n} \sum_{i=1}^n (y_i - (wx_i + b))^2
 
 \subsection{多変数関数の経験リスクと勾配}\label{ux591aux5909ux6570ux95a2ux6570ux306eux7d4cux9a13ux30eaux30b9ux30afux3068ux52feux914d}
 
-\begin{questionbox}[label=q:3-multivariate-empirical-risk]{3変数パラメータの経験リスク \hfill \tcbox[enhanced, on line, boxsep=0pt, left=3pt, right=3pt, top=2pt, bottom=2pt, boxrule=0.5pt, arc=2pt, colback=white, opacityback=0, colframe=white, colupper=white, fontupper=\small\bfseries]{確認}\hspace{2pt}}
+\begin{questionbox}[label=q:3-multivariate-empirical-risk]{3変数パラメータの経験リスク \hfill \tikz[baseline=-0.8ex] \node[draw=white, rounded corners=2pt, inner sep=2.5pt, text=white, font=\small\bfseries, line width=0.5pt] {確認};\hspace{2pt}}
 
 3つのデータポイント \((x_1, y_1) = (1, 2)\), \((x_2, y_2) = (2, 3)\),
 \((x_3, y_3) = (3, 5)\) が与えられている。予測モデルを3変数パラメータ
@@ -819,7 +819,7 @@ L(w,b) = \frac{1}{n} \sum_{i=1}^n (y_i - (wx_i + b))^2
 
 \subsection{最小二乗法の行列表記と一階の条件（最重要）}\label{ux6700ux5c0fux4e8cux4e57ux6cd5ux306eux884cux5217ux8868ux8a18ux3068ux4e00ux968eux306eux6761ux4ef6ux6700ux91cdux8981}
 
-\begin{questionbox}[label=q:3-matrix-empirical-risk]{行列とベクトルによる目的関数の書き直し \hfill \tcbox[enhanced, on line, boxsep=0pt, left=3pt, right=3pt, top=2pt, bottom=2pt, boxrule=0.5pt, arc=2pt, colback=white, opacityback=0, colframe=white, colupper=white, fontupper=\small\bfseries]{必須}\hspace{2pt}}
+\begin{questionbox}[label=q:3-matrix-empirical-risk]{行列とベクトルによる目的関数の書き直し \hfill \tikz[baseline=-0.8ex] \node[draw=white, rounded corners=2pt, inner sep=2.5pt, text=white, font=\small\bfseries, line width=0.5pt] {必須};\hspace{2pt}}
 
 \(n\) 個のデータ \((x_1, y_1), \dots, (x_n, y_n)\)
 に対して、線型モデルを
@@ -884,7 +884,7 @@ L(w,b) = \frac{1}{n} \sum_{i=1}^n (y_i - (wx_i + b))^2
 
 \end{tcolorbox}
 
-\begin{questionbox}[label=q:3-quadratic-form-completing-square]{行列・ベクトルでの二次形式の展開と平方完成 \hfill \tcbox[enhanced, on line, boxsep=0pt, left=3pt, right=3pt, top=2pt, bottom=2pt, boxrule=0.5pt, arc=2pt, colback=white, opacityback=0, colframe=white, colupper=white, fontupper=\small\bfseries]{必須}\hspace{2pt}}
+\begin{questionbox}[label=q:3-quadratic-form-completing-square]{行列・ベクトルでの二次形式の展開と平方完成 \hfill \tikz[baseline=-0.8ex] \node[draw=white, rounded corners=2pt, inner sep=2.5pt, text=white, font=\small\bfseries, line width=0.5pt] {必須};\hspace{2pt}}
 
 一変数関数における平方完成 \((x - b)^2 = x^2 - 2bx + b^2\)
 の行列・ベクトル版を確認する。 対称行列 \(\mathbf{A}\)（すなわち
@@ -918,7 +918,7 @@ L(w,b) = \frac{1}{n} \sum_{i=1}^n (y_i - (wx_i + b))^2
 
 \end{questionbox}
 
-\begin{questionbox}[label=q:3-matrix-derivative-first-order]{一階の条件の行列導出 \hfill \tcbox[enhanced, on line, boxsep=0pt, left=3pt, right=3pt, top=2pt, bottom=2pt, boxrule=0.5pt, arc=2pt, colback=white, opacityback=0, colframe=white, colupper=white, fontupper=\small\bfseries]{確認}\hspace{2pt}}
+\begin{questionbox}[label=q:3-matrix-derivative-first-order]{一階の条件の行列導出 \hfill \tikz[baseline=-0.8ex] \node[draw=white, rounded corners=2pt, inner sep=2.5pt, text=white, font=\small\bfseries, line width=0.5pt] {確認};\hspace{2pt}}
 
 目的関数
 \(L(\boldsymbol{\theta}) = \frac{1}{2}(\Phi\boldsymbol{\theta} - \mathbf{y})^\top (\Phi\boldsymbol{\theta} - \mathbf{y})\)
@@ -954,7 +954,7 @@ L(w,b) = \frac{1}{n} \sum_{i=1}^n (y_i - (wx_i + b))^2
 
 \end{tcolorbox}
 
-\begin{questionbox}[label=q:3-l2-regularization-objective]{L2正則化付き目的関数の書き下し \hfill \tcbox[enhanced, on line, boxsep=0pt, left=3pt, right=3pt, top=2pt, bottom=2pt, boxrule=0.5pt, arc=2pt, colback=white, opacityback=0, colframe=white, colupper=white, fontupper=\small\bfseries]{確認}\hspace{2pt}}
+\begin{questionbox}[label=q:3-l2-regularization-objective]{L2正則化付き目的関数の書き下し \hfill \tikz[baseline=-0.8ex] \node[draw=white, rounded corners=2pt, inner sep=2.5pt, text=white, font=\small\bfseries, line width=0.5pt] {確認};\hspace{2pt}}
 
 損失関数を二乗誤差、正則化項をL2ノルムの2乗とし、正則化係数を
 \(\lambda = 0.01\) とする。 \(n\)
@@ -967,7 +967,7 @@ L(w,b) = \frac{1}{n} \sum_{i=1}^n (y_i - (wx_i + b))^2
 
 \end{questionbox}
 
-\begin{questionbox}[label=q:3-l2-regularization-gradient]{行列による書き直しと一階の条件 \hfill \tcbox[enhanced, on line, boxsep=0pt, left=3pt, right=3pt, top=2pt, bottom=2pt, boxrule=0.5pt, arc=2pt, colback=white, opacityback=0, colframe=white, colupper=white, fontupper=\small\bfseries]{必須}\hspace{2pt}}
+\begin{questionbox}[label=q:3-l2-regularization-gradient]{行列による書き直しと一階の条件 \hfill \tikz[baseline=-0.8ex] \node[draw=white, rounded corners=2pt, inner sep=2.5pt, text=white, font=\small\bfseries, line width=0.5pt] {必須};\hspace{2pt}}
 
 目的関数を
 \(L_{\text{reg}}(\boldsymbol{\theta}) = \frac{1}{2}\|\Phi\boldsymbol{\theta} - \mathbf{y}\|^2 + \frac{\lambda}{2}\|\boldsymbol{\theta}\|^2\)
@@ -989,7 +989,7 @@ L(w,b) = \frac{1}{n} \sum_{i=1}^n (y_i - (wx_i + b))^2
 
 \subsection{モデル選択（交差検証）}\label{ux30e2ux30c7ux30ebux9078ux629eux4ea4ux5deeux691cux8a3c}
 
-\begin{questionbox}[label=q:3-cross-validation-indices]{K-foldとLOOCVのインデックス計算 \hfill \tcbox[enhanced, on line, boxsep=0pt, left=3pt, right=3pt, top=2pt, bottom=2pt, boxrule=0.5pt, arc=2pt, colback=white, opacityback=0, colframe=white, colupper=white, fontupper=\small\bfseries]{不要}\hspace{2pt}}
+\begin{questionbox}[label=q:3-cross-validation-indices]{K-foldとLOOCVのインデックス計算 \hfill \tikz[baseline=-0.8ex] \node[draw=white, rounded corners=2pt, inner sep=2.5pt, text=white, font=\small\bfseries, line width=0.5pt] {不要};\hspace{2pt}}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -1014,7 +1014,7 @@ L(w,b) = \frac{1}{n} \sum_{i=1}^n (y_i - (wx_i + b))^2
 
 \subsection{同時分布・条件付き分布・条件付き期待値}\label{ux540cux6642ux5206ux5e03ux6761ux4ef6ux4ed8ux304dux5206ux5e03ux6761ux4ef6ux4ed8ux304dux671fux5f85ux5024}
 
-\begin{questionbox}[label=q:4-conditional-probability-table]{同時確率表からの条件付き分布と期待値 \hfill \tcbox[enhanced, on line, boxsep=0pt, left=3pt, right=3pt, top=2pt, bottom=2pt, boxrule=0.5pt, arc=2pt, colback=white, opacityback=0, colframe=white, colupper=white, fontupper=\small\bfseries]{確認}\hspace{2pt}}
+\begin{questionbox}[label=q:4-conditional-probability-table]{同時確率表からの条件付き分布と期待値 \hfill \tikz[baseline=-0.8ex] \node[draw=white, rounded corners=2pt, inner sep=2.5pt, text=white, font=\small\bfseries, line width=0.5pt] {確認};\hspace{2pt}}
 
 離散確率変数 \(X \in \{0,1\}\) と \(Y \in \{1,2,3\}\) の同時確率
 \(P(X, Y)\) について、 \(X=0\) のとき、\(Y=1, 2, 3\)
@@ -1041,7 +1041,7 @@ L(w,b) = \frac{1}{n} \sum_{i=1}^n (y_i - (wx_i + b))^2
 
 \subsection{分位点（Quantile）と外れ値の影響}\label{ux5206ux4f4dux70b9quantileux3068ux5916ux308cux5024ux306eux5f71ux97ff}
 
-\begin{questionbox}[label=q:4-absolute-loss-mae]{飛びのある分布の分位点とロバスト性 \hfill \tcbox[enhanced, on line, boxsep=0pt, left=3pt, right=3pt, top=2pt, bottom=2pt, boxrule=0.5pt, arc=2pt, colback=white, opacityback=0, colframe=white, colupper=white, fontupper=\small\bfseries]{確認}\hspace{2pt}}
+\begin{questionbox}[label=q:4-absolute-loss-mae]{飛びのある分布の分位点とロバスト性 \hfill \tikz[baseline=-0.8ex] \node[draw=white, rounded corners=2pt, inner sep=2.5pt, text=white, font=\small\bfseries, line width=0.5pt] {確認};\hspace{2pt}}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -1059,7 +1059,7 @@ L(w,b) = \frac{1}{n} \sum_{i=1}^n (y_i - (wx_i + b))^2
 
 \end{questionbox}
 
-\begin{questionbox}[label=q:4-pinball-loss-calculation]{ピンボール損失のグラフ描写の理解 \hfill \tcbox[enhanced, on line, boxsep=0pt, left=3pt, right=3pt, top=2pt, bottom=2pt, boxrule=0.5pt, arc=2pt, colback=white, opacityback=0, colframe=white, colupper=white, fontupper=\small\bfseries]{不要}\hspace{2pt}}
+\begin{questionbox}[label=q:4-pinball-loss-calculation]{ピンボール損失のグラフ描写の理解 \hfill \tikz[baseline=-0.8ex] \node[draw=white, rounded corners=2pt, inner sep=2.5pt, text=white, font=\small\bfseries, line width=0.5pt] {不要};\hspace{2pt}}
 
 ピンボール損失関数 \[
 l_\alpha(y, y') =
@@ -1081,7 +1081,7 @@ l_\alpha(y, y') =
 
 \subsection{ロジスティック回帰の基礎と非線型目的関数の勾配}\label{ux30edux30b8ux30b9ux30c6ux30a3ux30c3ux30afux56deux5e30ux306eux57faux790eux3068ux975eux7ddaux578bux76eeux7684ux95a2ux6570ux306eux52feux914d}
 
-\begin{questionbox}[label=q:5-indicator-expectation]{指示関数の期待値と確率の関係 \hfill \tcbox[enhanced, on line, boxsep=0pt, left=3pt, right=3pt, top=2pt, bottom=2pt, boxrule=0.5pt, arc=2pt, colback=white, opacityback=0, colframe=white, colupper=white, fontupper=\small\bfseries]{必須}\hspace{2pt}}
+\begin{questionbox}[label=q:5-indicator-expectation]{指示関数の期待値と確率の関係 \hfill \tikz[baseline=-0.8ex] \node[draw=white, rounded corners=2pt, inner sep=2.5pt, text=white, font=\small\bfseries, line width=0.5pt] {必須};\hspace{2pt}}
 
 確率変数 \(X\) の値が集合 \(A\) に入るという事象について、 \[
 \mathbb{E}[\ind\{X \in A\}] = \mathbb{P}(X \in A)
@@ -1095,7 +1095,7 @@ l_\alpha(y, y') =
 
 \subsection{ロジスティック関数の微分と交差エントロピー}\label{ux30edux30b8ux30b9ux30c6ux30a3ux30c3ux30afux95a2ux6570ux306eux5faeux5206ux3068ux4ea4ux5deeux30a8ux30f3ux30c8ux30edux30d4ux30fc}
 
-\begin{questionbox}[label=q:5-sigmoid-derivative]{シグモイド関数の微分証明 \hfill \tcbox[enhanced, on line, boxsep=0pt, left=3pt, right=3pt, top=2pt, bottom=2pt, boxrule=0.5pt, arc=2pt, colback=white, opacityback=0, colframe=white, colupper=white, fontupper=\small\bfseries]{必須}\hspace{2pt}}
+\begin{questionbox}[label=q:5-sigmoid-derivative]{シグモイド関数の微分証明 \hfill \tikz[baseline=-0.8ex] \node[draw=white, rounded corners=2pt, inner sep=2.5pt, text=white, font=\small\bfseries, line width=0.5pt] {必須};\hspace{2pt}}
 
 ロジスティック関数（シグモイド関数）
 \(\sigma(z) = \frac{1}{1 + e^{-z}}\) について、
@@ -1117,7 +1117,7 @@ l_\alpha(y, y') =
 
 \end{questionbox}
 
-\begin{questionbox}[label=q:5-cross-entropy-gradient]{交差エントロピーとチェインルールによる勾配導出 \hfill \tcbox[enhanced, on line, boxsep=0pt, left=3pt, right=3pt, top=2pt, bottom=2pt, boxrule=0.5pt, arc=2pt, colback=white, opacityback=0, colframe=white, colupper=white, fontupper=\small\bfseries]{必須}\hspace{2pt}}
+\begin{questionbox}[label=q:5-cross-entropy-gradient]{交差エントロピーとチェインルールによる勾配導出 \hfill \tikz[baseline=-0.8ex] \node[draw=white, rounded corners=2pt, inner sep=2.5pt, text=white, font=\small\bfseries, line width=0.5pt] {必須};\hspace{2pt}}
 
 交差エントロピー損失 \[
 l = -y \log \sigma(z) - (1-y) \log(1 - \sigma(z)) \quad (\text{ただし } z = \boldsymbol{\theta}^\top \boldsymbol{\phi}(x))
@@ -1137,7 +1137,7 @@ l = -y \log \sigma(z) - (1-y) \log(1 - \sigma(z)) \quad (\text{ただし } z = \
 
 \subsection{ソフトマックス関数と多クラス交差エントロピー}\label{ux30bdux30d5ux30c8ux30deux30c3ux30afux30b9ux95a2ux6570ux3068ux591aux30afux30e9ux30b9ux4ea4ux5deeux30a8ux30f3ux30c8ux30edux30d4ux30fc}
 
-\begin{questionbox}[label=q:6-softmax-gradient-derivation]{ソフトマックス損失の勾配公式の導出 \hfill \tcbox[enhanced, on line, boxsep=0pt, left=3pt, right=3pt, top=2pt, bottom=2pt, boxrule=0.5pt, arc=2pt, colback=white, opacityback=0, colframe=white, colupper=white, fontupper=\small\bfseries]{必須}\hspace{2pt}}
+\begin{questionbox}[label=q:6-softmax-gradient-derivation]{ソフトマックス損失の勾配公式の導出 \hfill \tikz[baseline=-0.8ex] \node[draw=white, rounded corners=2pt, inner sep=2.5pt, text=white, font=\small\bfseries, line width=0.5pt] {必須};\hspace{2pt}}
 
 多クラス分類問題において、入力 \(\mathbf{x}\) に対するスコアベクトルを
 \(s_{\boldsymbol{\theta}}(\mathbf{x}) \in \mathbb{R}^K\) とし、モデル
@@ -1159,7 +1159,7 @@ g_{\boldsymbol{\theta}}(\mathbf{x})[k] = \frac{\exp(s_{\boldsymbol{\theta}}(\mat
 
 \end{questionbox}
 
-\begin{questionbox}[label=q:6-multiclass-logistic-gradient]{多クラスロジスティック回帰の勾配公式 \hfill \tcbox[enhanced, on line, boxsep=0pt, left=3pt, right=3pt, top=2pt, bottom=2pt, boxrule=0.5pt, arc=2pt, colback=white, opacityback=0, colframe=white, colupper=white, fontupper=\small\bfseries]{確認}\hspace{2pt}}
+\begin{questionbox}[label=q:6-multiclass-logistic-gradient]{多クラスロジスティック回帰の勾配公式 \hfill \tikz[baseline=-0.8ex] \node[draw=white, rounded corners=2pt, inner sep=2.5pt, text=white, font=\small\bfseries, line width=0.5pt] {確認};\hspace{2pt}}
 
 前問「ソフトマックス損失の勾配公式の導出」に引き続き、多クラスロジスティック回帰（ソフトマックス回帰）モデルを考える。このモデルでは、クラス
 \(j\) のスコアがクラス固有のパラメータベクトル \(\boldsymbol{\theta}_j\)
