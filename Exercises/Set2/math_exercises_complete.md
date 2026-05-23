@@ -431,7 +431,7 @@ $$
 
 # 線型モデルの行列表現と正則化・モデル選択
 
-## ベクトルの内積と性質
+## ベクトルと行列の計算
 
 ### 行列・ベクトルの積の計算練習 {#q:3-matrix-vector-multiplication-practice .questionbox difficulty="★0"}
 
@@ -528,7 +528,7 @@ $$
 
 講義スライドで登場した行列・ベクトルの積に関する視覚的なパターンの意味を、成分表示を用いて確認せよ。
 
-1. **【横ベクトル $\times$ 縦ベクトル $\to$ スカラー】**
+1. **【横ベクトル $\times$ 縦ベクトル $\to$ 内積】**
    $$
    \mathbf{a}^\top \mathbf{b} =
    \begin{pmatrix} a_1 & a_2 & \dots & a_d \end{pmatrix}
@@ -659,6 +659,8 @@ $$
       \node[anchor=south] at (5.55, 0.15) {$v_j$};
     \end{tikzpicture}
     \end{center}
+
+## ベクトルの内積と性質
 
 ### 【復習とヒント】ベクトルの内積と射影 {.tcolorbox option="enhanced, colback=blue!2!white, colframe=blue!60!black, fonttitle=\bfseries, drop shadow"}
 

@@ -48,7 +48,7 @@
 \newtcolorbox[use counter=question]{questionbox}[2][]{enhanced, breakable, colback=red!2!gray!3!white, colframe=red!50!gray, fonttitle=\bfseries, title={問\arabic{question}\ #2}, #1}
 \newtcolorbox{answerbox}[2][]{enhanced, breakable, colback=green!2!gray!3!white, colframe=green!45!gray, fonttitle=\bfseries, title={問\ref{#2}の解答・解説}, #1}
 \usepackage{titlesec}
-\titleformat{\section}[block]{\normalfont\Large\bfseries}{【第\thesection 回】}{0.5em}{}
+\titleformat{\section}[display]{\normalfont\Large\bfseries}{【第\thesection 回】}{0.2em}{}
 \titleformat{\subsection}[block]{\normalfont\large\bfseries}{\thesection-\arabic{subsection}.}{0.5em}{}
 \newcommand{\ind}{\mathbf{1}}
 \usepackage{bookmark}
@@ -91,11 +91,12 @@
   \textbf{難易度：★0 (不要)} ：解き方が分かるなら解かなくてもいい。
 \item
   \textbf{難易度：★1 (確認)}
-  ：スライドの定義そのものの確認や、直感的な代入問題。
+  ：スライドの定義そのものの確認や、簡単な代入問題。
 \item
-  \textbf{難易度：★2 (基礎)} ：講義の数式展開を再現する標準的な手計算。
+  \textbf{難易度：★2 (基礎)}
+  ：必須。講義の論理展開の行間を埋める標準的な問題。
 \item
-  \textbf{難易度：★3 (発展)} ：一歩進んだ証明問題など。
+  \textbf{難易度：★3 (発展)} ：余裕があれば解くとよい。
 \end{itemize}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
@@ -358,10 +359,13 @@ Cov(X,Y) &= Cov(Y,X)
   \item
     （ウ） \(0.2\)
   \item
-    （エ） \(0.8\) ::: \{.right\}
-    \hyperref[q:1-indicator-function]{（問題へ戻る）} :::
+    （エ） \(0.8\)
   \end{itemize}
 \end{enumerate}
+
+\hfill 
+
+\hyperref[q:1-indicator-function]{（問題へ戻る）}
 
 \end{answerbox}
 
@@ -416,15 +420,13 @@ Cov(X,Y) &= Cov(Y,X)
 
 \hyperref[q:1-variance-formula-proof]{（問題へ戻る）}
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
 \end{answerbox}
 
 \section{最適化と最小二乗法・偏微分}\label{ux6700ux9069ux5316ux3068ux6700ux5c0fux4e8cux4e57ux6cd5ux504fux5faeux5206}
 
 \subsection{経験リスクの数式化（シグマを用いた書き下し）}\label{ux7d4cux9a13ux30eaux30b9ux30afux306eux6570ux5f0fux5316ux30b7ux30b0ux30deux3092ux7528ux3044ux305fux66f8ux304dux4e0bux3057}
 
-\begin{questionbox}[label=q:2-empirical-risk-formulation]{経験リスクの立式 \hfill \normalfont \small 難易度：★1}
+\begin{questionbox}[label=q:2-empirical-risk-formulation]{経験リスクの立式 \hfill \normalfont \small 難易度：★2}
 
 \(n\) 個の訓練データ \(\{(x_i, y_i)\}_{i=1}^n\)
 が与えられている。モデルクラスとして1次関数 \(f_{(w,b)}(x) = wx + b\)
@@ -437,31 +439,7 @@ Cov(X,Y) &= Cov(Y,X)
 
 \end{questionbox}
 
-\begin{questionbox}[label=q:2-erm-parameter-function]{目的関数のパラメータ関数化 \hfill \normalfont \small 難易度：★0}
-
-以下の2つのデータポイントが与えられている。
-
-\begin{center}
-\begin{tabular}{cc}
-\(x\) & \(y\) \\ \hline
-\(1\) & \(2\) \\
-\(3\) & \(4\) \\
-\end{tabular}
-\end{center}
-
-予測モデルを原点を通る直線 \(f_\theta(x) = \theta x\)
-とし、損失関数を二乗誤差とする。このとき、経験リスク \[
-\hat{R}(f_\theta) = \frac{1}{2} \sum_{i=1}^2 (y_i - f_\theta(x_i))^2
-\] に具体的な数値を代入し、\(\theta\) の2次関数
-\(A\theta^2 + B\theta + C\) の形に展開・整理せよ。
-
-\hfill 
-
-\hyperref[a:2-erm-parameter-function]{（解答・解説へ）}
-
-\end{questionbox}
-
-\begin{questionbox}[label=q:2-optimization-formulation-blank]{最適化問題の定式化：穴埋め \hfill \normalfont \small 難易度：★0}
+\begin{questionbox}[label=q:2-optimization-formulation-blank]{最適化問題の定式化：穴埋め \hfill \normalfont \small 難易度：★2}
 
 以下の最適化問題の定式化について、空欄 (ア) 〜 (エ)
 に入る適切な数式や記号を答えよ。
@@ -489,6 +467,30 @@ Cov(X,Y) &= Cov(Y,X)
 \hfill 
 
 \hyperref[a:2-optimization-formulation-blank]{（解答・解説へ）}
+
+\end{questionbox}
+
+\begin{questionbox}[label=q:2-erm-parameter-function]{目的関数のパラメータ関数化 \hfill \normalfont \small 難易度：★0}
+
+以下の2つのデータポイントが与えられている。
+
+\begin{center}
+\begin{tabular}{cc}
+\(x\) & \(y\) \\ \hline
+\(1\) & \(2\) \\
+\(3\) & \(4\) \\
+\end{tabular}
+\end{center}
+
+予測モデルを原点を通る直線 \(f_\theta(x) = \theta x\)
+とし、損失関数を二乗誤差とする。このとき、経験リスク \[
+\hat{R}(f_\theta) = \frac{1}{2} \sum_{i=1}^2 (y_i - f_\theta(x_i))^2
+\] に具体的な数値を代入し、\(\theta\) の2次関数
+\(A\theta^2 + B\theta + C\) の形に展開・整理せよ。
+
+\hfill 
+
+\hyperref[a:2-erm-parameter-function]{（解答・解説へ）}
 
 \end{questionbox}
 
@@ -556,17 +558,53 @@ L(w,b) = \frac{1}{n} \sum_{i=1}^n (y_i - (wx_i + b))^2
 
 \hyperref[q:2-optimization-formulation-blank]{（問題へ戻る）}
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
 \end{answerbox}
 
 \subsection{最小二乗法の真髄：偏微分から一階の条件へ}\label{ux6700ux5c0fux4e8cux4e57ux6cd5ux306eux771fux9ac4ux504fux5faeux5206ux304bux3089ux4e00ux968eux306eux6761ux4ef6ux3078}
 
-\begin{questionbox}[label=q:2-partial-derivative-gradient]{偏微分と勾配ベクトルの書き下し \hfill \normalfont \small 難易度：★1}
+\begin{questionbox}[label=q:3-multivariate-gradient]{偏微分と勾配 \hfill \normalfont \small 難易度：★2}
 
-目的関数 \(L(w,b) = \frac{1}{n} \sum_{i=1}^n (y_i - wx_i - b)^2\)
-とする。この目的関数について、勾配ベクトル \(\nabla_{(w,b)} L(w,b)\)
-を求めよ。
+ベクトル \(\mathbf{w} = (w_1, w_2, w_3)^\top \in \mathbb{R}^3\)
+に対する以下の関数 \(g(\mathbf{w})\) について、勾配
+\(\nabla g(\mathbf{w})\) を求めよ。 \[
+g(\mathbf{w}) = w_1^2 + 2w_2^2 + 3w_3^2 - 4w_1w_2 - 6w_2w_3
+\]
+
+\hfill 
+
+\hyperref[a:3-multivariate-gradient]{（解答・解説へ）}
+
+\end{questionbox}
+
+\begin{questionbox}[label=q:2-partial-derivative-gradient]{線型単回帰モデルの最適パラメータ導出 \hfill \normalfont \small 難易度：★2}
+
+1次元の入力 \(x\) に対する線型単回帰モデル \(f_{w,b}(x) = wx + b\)
+を考える。\(n\) 個の訓練データ \(\{(x_i, y_i)\}_{i=1}^n\)
+に対する目的関数（経験リスク）を二乗誤差を用いて \[
+L(w,b) = \frac{1}{n} \sum_{i=1}^n (y_i - (wx_i + b))^2
+\] と定義する。この目的関数を最小化する最適なパラメータ
+\((\hat{w}, \hat{b})\) を、以下の誘導に従って導出せよ。
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  目的関数 \(L(w,b)\) を \(w\) および \(b\) について偏微分し、勾配
+  \(\nabla L(w,b) = \begin{pmatrix} \frac{\partial L}{\partial w} \\ \frac{\partial L}{\partial b} \end{pmatrix}\)
+  を求めよ。
+\item
+  一階の条件 \(\nabla L(w,b) = \mathbf{0}\) を用いて、パラメータ
+  \(w, b\)
+  に関する連立方程式を導き、それを行列とベクトルを用いた以下の形に整理せよ。
+  \[
+  \begin{pmatrix} ? & ? \\ ? & ? \end{pmatrix} \begin{pmatrix} w \\ b \end{pmatrix} = \begin{pmatrix} ? \\ ? \end{pmatrix}
+  \]
+\item
+  上記の行列方程式を解くことで、最適なパラメータ \((\hat{w}, \hat{b})\)
+  を求める式が \[
+  \begin{pmatrix} \hat{w} \\ \hat{b} \end{pmatrix} = \begin{pmatrix} \sum_{i=1}^n x_i^2 & \sum_{i=1}^n x_i \\ \sum_{i=1}^n x_i & n \end{pmatrix}^{-1} \begin{pmatrix} \sum_{i=1}^n x_i y_i \\ \sum_{i=1}^n y_i \end{pmatrix}
+  \] となることを示せ。
+\end{enumerate}
 
 \hfill 
 
@@ -574,68 +612,82 @@ L(w,b) = \frac{1}{n} \sum_{i=1}^n (y_i - (wx_i + b))^2
 
 \end{questionbox}
 
-\begin{questionbox}[label=q:2-first-order-conditions-scalar]{一階の条件からの式変形 \hfill \normalfont \small 難易度：★1}
-
-最適解において勾配ベクトルがゼロになるという一階の条件
-\(\nabla L(w,b) = \mathbf{0}\)
-のうち、\(\frac{\partial L}{\partial b} = 0\) の式を変形し、最適な切片
-\(\hat{b}\) が、サンプルの平均値
-\(\bar{x} = \frac{1}{n}\sum_{i=1}^n x_i\),
-\(\bar{y} = \frac{1}{n}\sum_{i=1}^n y_i\) を用いて \[
-\hat{b} = \bar{y} - w\bar{x}
-\] と表せることを証明せよ。
-
-\hfill 
-
-\hyperref[a:2-first-order-conditions-scalar]{（解答・解説へ）}
-
-\end{questionbox}
-
-\begin{questionbox}[label=q:2-prediction-with-learned-parameters]{学習済みパラメータによる新規データの予測 \hfill \normalfont \small 難易度：★0}
-
-あるデータセットに対して最小二乗法を適用したところ、学習済みパラメータが
-\(\hat{w} = 2.5, \hat{b} = 1.0\)
-と求まった。このとき、新規に観測された特徴量 \(x_{\text{new}} = 6\)
-に対する予測値 \(\hat{y}_{\text{new}}\) を計算せよ。
-
-\hfill 
-
-\hyperref[a:2-prediction-with-learned-parameters]{（解答・解説へ）}
-
-\end{questionbox}
-
 \subsubsection{解答・解説}\label{ux89e3ux7b54ux89e3ux8aac-2}
 
 \textbf{【該当内容】} 第2回スライド38〜45「一階の条件、偏微分・勾配」
 \textbf{【ねらい】} スライドで省略されている目的関数 \(L(w,b)\)
-の偏微分から勾配ベクトルの構築、一階の条件による正規方程式のスカラ版の導出を完全に追体験する。
+の偏微分から勾配の構築、一階の条件による正規方程式のスカラ版の導出を完全に追体験する。
+
+\begin{answerbox}[phantomlabel=a:3-multivariate-gradient]{q:3-multivariate-gradient}
+
+各変数 \(\mathit{w}_1, \mathit{w}_2, \mathit{w}_3\)
+について偏微分を行います。
+
+\begin{itemize}
+\tightlist
+\item
+  \(w_1\) についての偏微分： \[
+  \frac{\partial g}{\partial w_1} = 2w_1 - 4w_2
+  \]
+\item
+  \(w_2\) についての偏微分： \[
+  \frac{\partial g}{\partial w_2} = 4w_2 - 4w_1 - 6w_3
+  \]
+\item
+  \(w_3\) についての偏微分： \[
+  \frac{\partial g}{\partial w_3} = 6w_3 - 6w_2
+  \]
+\end{itemize}
+
+これらをベクトルとしてまとめると、求める勾配は以下のようになります： \[
+\nabla g(\mathbf{w}) = \begin{pmatrix} 2w_1 - 4w_2 \\ -4w_1 + 4w_2 - 6w_3 \\ -6w_2 + 6w_3 \end{pmatrix}
+\] （証明終）
+
+\hfill 
+
+\hyperref[q:3-multivariate-gradient]{（問題へ戻る）}
+
+\end{answerbox}
 
 \begin{answerbox}[phantomlabel=a:2-partial-derivative-gradient]{q:2-partial-derivative-gradient}
 
-勾配ベクトル \(\nabla_{(w,b)} L(w,b)\)
-は、各変数に対する偏微分を縦に並べたものである： \[
-\nabla_{(w,b)} L(w,b) = \begin{pmatrix} \frac{\partial L}{\partial w} \\ \frac{\partial L}{\partial b} \end{pmatrix}
-\] それぞれの偏微分を計算する。
-
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
-\tightlist
 \item
-  \textbf{\(w\) についての偏微分：}
-  合成関数の微分（チェインルール）を用いる。カッコの中身を \(w\)
-  で微分した \(-x_i\) が外に出る。 \[
+  \textbf{偏微分と勾配の計算：}
+  合成関数の微分（チェインルール）を用いて、それぞれ \(w\) と \(b\)
+  について偏微分を行う。 \[
        \frac{\partial L}{\partial w} = \frac{1}{n} \sum_{i=1}^n 2(y_i - wx_i - b) \cdot (-x_i) = -\frac{2}{n} \sum_{i=1}^n (y_i - wx_i - b)x_i
+       \] \[
+       \frac{\partial L}{\partial b} = \frac{1}{n} \sum_{i=1}^n 2(y_i - wx_i - b) \cdot (-1) = -\frac{2}{n} \sum_{i=1}^n (y_i - wx_i - b)
+       \] これらを縦に並べたものが勾配である。 \[
+       \nabla L(w,b) = \begin{pmatrix} -\frac{2}{n} \sum_{i=1}^n (y_i - wx_i - b)x_i \\ -\frac{2}{n} \sum_{i=1}^n (y_i - wx_i - b) \end{pmatrix}
        \]
 \item
-  \textbf{\(b\) についての偏微分：} 同様に、中身を \(b\) で微分した
-  \(-1\) が外に出る。 \[
-       \frac{\partial L}{\partial b} = \frac{1}{n} \sum_{i=1}^n 2(y_i - wx_i - b) \cdot (-1) = -\frac{2}{n} \sum_{i=1}^n (y_i - wx_i - b)
+  \textbf{一階の条件からの連立方程式の導出：} 一階の条件
+  \(\nabla L(w,b) = \mathbf{0}\) より、各成分が \(0\) となる。 \[
+       \begin{cases}
+       -\frac{2}{n} \sum_{i=1}^n (y_i - wx_i - b)x_i = 0 \\
+       -\frac{2}{n} \sum_{i=1}^n (y_i - wx_i - b) = 0
+       \end{cases}
+       \] 両辺に \(-\frac{n}{2}\) を掛けて整理し、\(w, b\)
+  を含む項を左辺に、含まない項を右辺にまとめる。 \[
+       \begin{cases}
+       w \sum_{i=1}^n x_i^2 + b \sum_{i=1}^n x_i = \sum_{i=1}^n x_i y_i \\
+       w \sum_{i=1}^n x_i + b \sum_{i=1}^n 1 = \sum_{i=1}^n y_i
+       \end{cases}
+       \] ここで \(\sum_{i=1}^n 1 = n\)
+  であることに注意し、これを行列とベクトルを用いた形に書き直すと以下のようになる。
+  \[
+       \begin{pmatrix} \sum_{i=1}^n x_i^2 & \sum_{i=1}^n x_i \\ \sum_{i=1}^n x_i & n \end{pmatrix} \begin{pmatrix} w \\ b \end{pmatrix} = \begin{pmatrix} \sum_{i=1}^n x_i y_i \\ \sum_{i=1}^n y_i \end{pmatrix}
        \]
+\item
+  \textbf{最適なパラメータの導出：}
+  求めた行列方程式の両辺の左から、係数行列の逆行列を掛けることで、目的の式が導かれる。
+  \[
+       \begin{pmatrix} \hat{w} \\ \hat{b} \end{pmatrix} = \begin{pmatrix} \sum_{i=1}^n x_i^2 & \sum_{i=1}^n x_i \\ \sum_{i=1}^n x_i & n \end{pmatrix}^{-1} \begin{pmatrix} \sum_{i=1}^n x_i y_i \\ \sum_{i=1}^n y_i \end{pmatrix}
+       \] （証明終）
 \end{enumerate}
-
-これらを縦に並べることで、求める勾配ベクトルは以下のようになる： \[
-\nabla_{(w,b)} L(w,b) = \begin{pmatrix} -\frac{2}{n} \sum_{i=1}^n (y_i - wx_i - b)x_i \\ -\frac{2}{n} \sum_{i=1}^n (y_i - wx_i - b) \end{pmatrix}
-\]
 
 \hfill 
 
@@ -643,41 +695,265 @@ L(w,b) = \frac{1}{n} \sum_{i=1}^n (y_i - (wx_i + b))^2
 
 \end{answerbox}
 
-\begin{answerbox}[phantomlabel=a:2-first-order-conditions-scalar]{q:2-first-order-conditions-scalar}
-
-一階の条件 \(\frac{\partial L}{\partial b} = 0\) より、 \[
--\frac{2}{n} \sum_{i=1}^n (y_i - wx_i - b) = 0
-\] 両辺を \(-\frac{2}{n}\) で割り、和を分割する。 \[
-\sum_{i=1}^n y_i - w \sum_{i=1}^n x_i - \sum_{i=1}^n b = 0
-\] 定数 \(b\) を \(n\) 回足すと \(nb\) になるので、 \[
-\sum_{i=1}^n y_i - w \sum_{i=1}^n x_i - nb = 0
-\] 両辺を \(n\) で割ると、 \[
-\frac{1}{n}\sum_{i=1}^n y_i - w \left( \frac{1}{n}\sum_{i=1}^n x_i \right) - b = 0
-\] 平均値の定義 \(\bar{x}, \bar{y}\) を代入すると、 \[
-\bar{y} - w\bar{x} - b = 0 \quad \Rightarrow \quad \hat{b} = \bar{y} - w\bar{x}
-\] が導かれる。（証明終）
-
-\hfill 
-
-\hyperref[q:2-first-order-conditions-scalar]{（問題へ戻る）}
-
-\end{answerbox}
-
-\begin{answerbox}[phantomlabel=a:2-prediction-with-learned-parameters]{q:2-prediction-with-learned-parameters}
-
-学習済みモデル \(f(x) = \hat{w}x + \hat{b}\) に数値を代入する。 \[
-\hat{y}_{\text{new}} = 2.5 \times 6 + 1.0 = 15.0 + 1.0 = 16.0
-\]
-
-\hfill 
-
-\hyperref[q:2-prediction-with-learned-parameters]{（問題へ戻る）}
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
-\end{answerbox}
-
 \section{線型モデルの行列表現と正則化・モデル選択}\label{ux7ddaux578bux30e2ux30c7ux30ebux306eux884cux5217ux8868ux73feux3068ux6b63ux5247ux5316ux30e2ux30c7ux30ebux9078ux629e}
+
+\subsection{ベクトルと行列の計算}\label{ux30d9ux30afux30c8ux30ebux3068ux884cux5217ux306eux8a08ux7b97}
+
+\begin{questionbox}[label=q:3-matrix-vector-multiplication-practice]{行列・ベクトルの積の計算練習 \hfill \normalfont \small 難易度：★0}
+
+以下の行列・ベクトルの積を計算せよ。
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{【行列 \(\times\) 行列】} \[
+  \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix} \begin{pmatrix} 2 & 0 & 1 \\ 1 & 3 & -1 \end{pmatrix}
+  \]
+\item
+  \textbf{【行列 \(\times\) 縦ベクトル】} \[
+  \begin{pmatrix} 1 & -1 & 2 \\ 0 & 3 & 1 \end{pmatrix} \begin{pmatrix} 2 \\ 1 \\ -1 \end{pmatrix}
+  \]
+\item
+  \textbf{【横ベクトル \(\times\) 行列 \(\times\)
+  縦ベクトル（二次形式）】} \[
+  \begin{pmatrix} 1 & 2 \end{pmatrix} \begin{pmatrix} 2 & 0 \\ 0 & 3 \end{pmatrix} \begin{pmatrix} 1 \\ 2 \end{pmatrix}
+  \]
+\item
+  \textbf{【横ベクトル \(\times\) 縦ベクトル（内積）】} \[
+  \begin{pmatrix} 1 & 3 & -2 \end{pmatrix} \begin{pmatrix} 4 \\ -1 \\ 2 \end{pmatrix}
+  \]
+\item
+  \textbf{【縦ベクトル \(\times\) 横ベクトル】} \[
+  \begin{pmatrix} 2 \\ -1 \\ 3 \end{pmatrix} \begin{pmatrix} 1 & 4 \end{pmatrix}
+  \]
+\end{enumerate}
+
+\hfill 
+
+\hyperref[a:3-matrix-vector-multiplication-practice]{（解答・解説へ）}
+
+\end{questionbox}
+
+\begin{tcolorbox}[enhanced, colback=blue!2!white, colframe=blue!60!black, fonttitle=\bfseries, drop shadow, title={【復習とヒント】ベクトル・行列の掛け算の頻出パターン}]
+
+ベクトルや行列の掛け算は、それぞれの「形状」を意識することで、結果がどのような形になるか（スカラー、ベクトル、行列）を視覚的に捉えることができます。
+
+\begin{itemize}
+\item
+  \textbf{横ベクトル・縦ベクトルの掛け算 \(\rightarrow\)
+  スカラーができる}
+
+  \begin{center}
+    \begin{tikzpicture}[>=stealth, thick, scale=0.9, every node/.style={align=center}]
+      \colorlet{vecbg}{cyan!10} \colorlet{vecborder}{cyan!70!blue}
+      \draw[fill=vecbg, draw=vecborder] (0, -0.25) rectangle (2, 0.25) node[midway, font=\small] {ベクトル};
+      \draw[fill=vecbg, draw=vecborder] (2.3, -1) rectangle (2.8, 1) node[midway, font=\small, align=center] {ベ\\ク\\ト\\ル};
+      \node at (3.3, 0) {$=$};
+      \node at (4.3, 0) {スカラー};
+      \node[anchor=west] at (5.3, 0) {$\mathbf{a}^\top \mathbf{b} = c$};
+    \end{tikzpicture}
+    \end{center}
+\item
+  \textbf{縦ベクトル・横ベクトルの掛け算 \(\rightarrow\) 行列ができる}
+
+  \begin{center}
+    \begin{tikzpicture}[>=stealth, thick, scale=0.9, every node/.style={align=center}]
+      \colorlet{vecbg}{cyan!10} \colorlet{vecborder}{cyan!70!blue}
+      \colorlet{matbg}{magenta!10} \colorlet{matborder}{magenta!70!purple}
+      \draw[fill=vecbg, draw=vecborder] (0, -1) rectangle (0.5, 1) node[midway, font=\small, align=center] {ベ\\ク\\ト\\ル};
+      \draw[fill=vecbg, draw=vecborder] (0.8, -0.25) rectangle (2.8, 0.25) node[midway, font=\small] {ベクトル};
+      \node at (3.3, 0) {$=$};
+      \draw[fill=matbg, draw=matborder] (3.8, -1) rectangle (5.8, 1) node[midway, font=\small] {行列};
+      \node[anchor=west] at (6.3, 0) {$\mathbf{a} \mathbf{b}^\top = M$};
+    \end{tikzpicture}
+    \end{center}
+\item
+  \textbf{行列を縦ベクトルに掛ける \(\rightarrow\) 縦ベクトルになる}
+
+  \begin{center}
+    \begin{tikzpicture}[>=stealth, thick, scale=0.9, every node/.style={align=center}]
+      \colorlet{vecbg}{cyan!10} \colorlet{vecborder}{cyan!70!blue}
+      \colorlet{matbg}{magenta!10} \colorlet{matborder}{magenta!70!purple}
+      \draw[fill=matbg, draw=matborder] (0, -1) rectangle (2, 1) node[midway, font=\small] {行列};
+      \draw[fill=vecbg, draw=vecborder] (2.3, -1) rectangle (2.8, 1) node[midway, font=\small, align=center] {ベ\\ク\\ト\\ル};
+      \node at (3.3, 0) {$=$};
+      \draw[fill=vecbg, draw=vecborder] (3.8, -1) rectangle (4.3, 1) node[midway, font=\small, align=center] {ベ\\ク\\ト\\ル};
+      \node[anchor=west] at (4.8, 0) {$M \mathbf{x} = \mathbf{y}$};
+    \end{tikzpicture}
+    \end{center}
+\item
+  \textbf{横ベクトル・行列・縦ベクトルの順に掛ける \(\rightarrow\)
+  スカラーになる}
+
+  \begin{center}
+    \begin{tikzpicture}[>=stealth, thick, scale=0.9, every node/.style={align=center}]
+      \colorlet{vecbg}{cyan!10} \colorlet{vecborder}{cyan!70!blue}
+      \colorlet{matbg}{magenta!10} \colorlet{matborder}{magenta!70!purple}
+      \draw[fill=vecbg, draw=vecborder] (0, -0.25) rectangle (2, 0.25) node[midway, font=\small] {ベクトル};
+      \draw[fill=matbg, draw=matborder] (2.3, -1) rectangle (4.3, 1) node[midway, font=\small] {行列};
+      \draw[fill=vecbg, draw=vecborder] (4.6, -1) rectangle (5.1, 1) node[midway, font=\small, align=center] {ベ\\ク\\ト\\ル};
+      \node at (5.6, 0) {$=$};
+      \node at (6.6, 0) {スカラー};
+      \node[anchor=west] at (7.6, 0) {$\mathbf{a}^\top M \mathbf{b} = c$};
+    \end{tikzpicture}
+    \end{center}
+\end{itemize}
+
+【注意】いずれも、行列やベクトルの形状が掛け算可能なように整合していることを前提としています。
+
+\end{tcolorbox}
+
+\begin{questionbox}[label=q:3-matrix-vector-patterns]{ベクトル・行列の積の頻出パターンと成分表示 \hfill \normalfont \small 難易度：★2}
+
+講義スライドで登場した行列・ベクトルの積に関する視覚的なパターンの意味を、成分表示を用いて確認せよ。
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{【横ベクトル \(\times\) 縦ベクトル \(\to\) 内積】} \[
+  \mathbf{a}^\top \mathbf{b} =
+  \begin{pmatrix} a_1 & a_2 & \dots & a_d \end{pmatrix}
+  \begin{pmatrix} b_1 \\ b_2 \\ \vdots \\ b_d \end{pmatrix}
+  = c
+  \] この結果 \(c\) が内積
+  \(\langle \mathbf{a}, \mathbf{b} \rangle = a_1b_1 + \dots + a_db_d\)
+  と一致することを、成分計算により確認せよ。また、同様にして
+  \(\mathbf{a}^\top \mathbf{b} = \mathbf{b}^\top \mathbf{a}\)
+  となること（内積の順序の入れ替え可能性）も確認せよ。ただし、\(1\times 1\)行列はスカラーと同一視してよい。
+\item
+  \textbf{【行列 \(\times\) 縦ベクトル \(\to\) 縦ベクトル】} 行列
+  \(B \in \mathbb{R}^{m \times d}\)
+  を、横ベクトルを縦に並べたブロック行列、および縦ベクトルを横に並べたブロック行列としてそれぞれ解釈する。つまり、
+  \[
+  B = \begin{pmatrix} B_{11} & \dots & B_{1d} \\ \vdots & \ddots & \vdots \\ B_{m1} & \dots & B_{md} \end{pmatrix}
+  = \begin{pmatrix} \quad \mathbf{b}_1^\top \quad \\ \vdots \\ \quad \mathbf{b}_m^\top \quad \end{pmatrix}
+  = \begin{pmatrix} \boldsymbol{\beta}_1 & \cdots & \boldsymbol{\beta}_d \end{pmatrix}
+  \] と捉えるとき、縦ベクトル \(\mathbf{v} \in \mathbb{R}^d\) との積
+  \(B\mathbf{v}\)
+  について次の等式がそれぞれ成り立つことを成分計算により確認せよ。
+
+  \begin{itemize}
+  \item
+    \textbf{横ベクトルが縦に並んでいるとみなす場合（内積の縦並び）：} \[
+    B\mathbf{v} =
+    \begin{pmatrix} \quad \mathbf{b}_1^\top \quad \\ \vdots \\ \quad \mathbf{b}_m^\top \quad \end{pmatrix} \mathbf{v}
+    = \begin{pmatrix} \mathbf{b}_1^\top \mathbf{v} \\ \vdots \\ \mathbf{b}_m^\top \mathbf{v} \end{pmatrix}
+    \]
+  \item
+    \textbf{縦ベクトルが横に並んでいるとみなす場合（列ベクトルの重み付き和）：}
+    \[
+    B\mathbf{v} =
+    \begin{pmatrix} \boldsymbol{\beta}_1 & \cdots & \boldsymbol{\beta}_d \end{pmatrix}
+    \begin{pmatrix} v_1 \\ \vdots \\ v_d \end{pmatrix}
+    = v_1 \boldsymbol{\beta}_1 + \cdots + v_d \boldsymbol{\beta}_d
+    \]
+  \end{itemize}
+\end{enumerate}
+
+\hfill 
+
+\hyperref[a:3-matrix-vector-patterns]{（解答・解説へ）}
+
+\end{questionbox}
+
+\begin{tcolorbox}[enhanced, colback=blue!2!white, colframe=blue!60!black, fonttitle=\bfseries, drop shadow, title={【復習とヒント】ベクトル・行列の積のコツ}]
+
+行列は、いくつかの計算パターンでは、行（横ベクトル）や列（縦ベクトル）が並んだものとしてイメージすると、複雑な計算も直感的に捉えやすくなります。
+
+\begin{itemize}
+\item
+  \textbf{行列の行ベクトル・列ベクトル表現}
+  行列は横ベクトルが縦に並んだものとも、縦ベクトルが横に並んだものとも思えます。
+
+  \begin{center}
+    \begin{tikzpicture}[>=stealth, thick, scale=0.9, every node/.style={align=center}]
+      \colorlet{vecbg}{cyan!10} \colorlet{vecborder}{cyan!70!blue}
+      \colorlet{colbg}{magenta!10} \colorlet{colborder}{magenta!70!purple}
+
+      \node at (-1.5, 0) {$B =$};
+      \draw[draw=black, thick] (0, 1.2) -- (-0.4, 1.2) -- (-0.4, -1.2) -- (0, -1.2);
+      \draw[draw=black, thick] (2.0, 1.2) -- (2.2, 1.2) -- (2.2, -1.2) -- (2.0, -1.2);
+      \foreach \y/\i in {0.75/1, 0.25/2, -0.25/3, -0.75/4} {
+        \node[anchor=east] at (0.3, \y) {$\mathbf{b}_\i^\top$};
+        \draw[fill=vecbg, draw=vecborder] (0.4, \y-0.15) rectangle (1.8, \y+0.15);
+      }
+      \node at (2.8, 0) {$=$};
+      \draw[draw=black, thick] (3.4, 1.2) -- (3.2, 1.2) -- (3.2, -1.2) -- (3.4, -1.2);
+      \draw[draw=black, thick] (5.4, 1.2) -- (5.6, 1.2) -- (5.6, -1.2) -- (5.4, -1.2);
+      \foreach \x/\i in {3.8/1, 4.4/2, 5.0/3} {
+        \node[anchor=south] at (\x, 0.9) {$\boldsymbol{\beta}_\i$};
+        \draw[fill=colbg, draw=colborder] (\x-0.2, -1.0) rectangle (\x+0.2, 0.8);
+      }
+    \end{tikzpicture}
+    \end{center}
+\item
+  \textbf{横ベクトルが縦に並んでいると思うと}
+  各「横成分」に右のベクトルが分配されたように振る舞います。
+
+  \begin{center}
+    \begin{tikzpicture}[>=stealth, thick, scale=0.9, every node/.style={align=center}]
+      \colorlet{vecbg}{cyan!10} \colorlet{vecborder}{cyan!70!blue}
+      \colorlet{vbg}{orange!10} \colorlet{vborder}{orange!80!red}
+
+      \node at (-1.7, 0) {$B \mathbf{v} =$};
+      \draw[draw=black, thick] (0, 1.2) -- (-0.4, 1.2) -- (-0.4, -1.2) -- (0, -1.2);
+      \draw[draw=black, thick] (1.8, 1.2) -- (2.0, 1.2) -- (2.0, -1.2) -- (1.8, -1.2);
+      \foreach \y/\i in {0.75/1, 0.25/2, -0.25/3, -0.75/4} {
+        \node[anchor=east] at (0.3, \y) {$\mathbf{b}_\i^\top$};
+        \draw[fill=vecbg, draw=vecborder] (0.4, \y-0.15) rectangle (1.6, \y+0.15);
+      }
+      \draw[fill=vbg, draw=vborder] (2.4, -0.75) rectangle (2.8, 0.75);
+      \node at (2.6, 1.0) {$\mathbf{v}$};
+      \foreach \y in {0.75, 0.25, -0.25, -0.75} {
+        \draw[->, orange!80!red, shorten >=2pt] (2.4, 0) to[out=180, in=0] (1.6, \y);
+      }
+      \node at (3.5, 0) {$=$};
+      \draw[draw=black, thick] (4.0, 1.2) -- (3.8, 1.2) -- (3.8, -1.2) -- (4.0, -1.2);
+      \draw[draw=black, thick] (5.6, 1.2) -- (5.8, 1.2) -- (5.8, -1.2) -- (5.6, -1.2);
+      \foreach \y/\i in {0.75/1, 0.25/2, -0.25/3, -0.75/4} {
+        \node[anchor=west] at (3.9, \y) {$\mathbf{b}_\i^\top \mathbf{v}$};
+        \draw[fill=vbg, draw=vborder] (5.2, \y-0.1) rectangle (5.4, \y+0.1);
+      }
+    \end{tikzpicture}
+    \end{center}
+\item
+  \textbf{縦ベクトルが横に並んでいると思うと}
+  あたかも通常のベクトル間の内積（成分同士を掛けて足す）かのように振る舞います。
+
+  \begin{center}
+    \begin{tikzpicture}[>=stealth, thick, scale=0.9, every node/.style={align=center}]
+      \colorlet{colbg}{magenta!10} \colorlet{colborder}{magenta!70!purple}
+      \colorlet{vbg}{orange!10} \colorlet{vborder}{orange!80!red}
+
+      \node at (-1.5, 0) {$B \mathbf{v} =$};
+      \draw[draw=black, thick] (0, 1.2) -- (-0.2, 1.2) -- (-0.2, -1.2) -- (0, -1.2);
+      \draw[draw=black, thick] (2.0, 1.2) -- (2.2, 1.2) -- (2.2, -1.2) -- (2.0, -1.2);
+      \foreach \x/\i in {0.4/1, 1.0/2, 1.6/3} {
+        \node[anchor=south, inner sep=1pt] at (\x, 1.0) {\small $\boldsymbol{\beta}_\i$};
+        \draw[fill=colbg, draw=colborder] (\x-0.15, -1.0) rectangle (\x+0.15, 0.8);
+      }
+      \draw[draw=black, thick] (2.4, 1.2) -- (2.3, 1.2) -- (2.3, -1.2) -- (2.4, -1.2);
+      \draw[draw=black, thick] (3.0, 1.2) -- (3.1, 1.2) -- (3.1, -1.2) -- (3.0, -1.2);
+      \node at (2.7, 1.4) {$\mathbf{v}$};
+      \foreach \y/\i in {0.6/1, 0.0/2, -0.6/3} {
+        \draw[fill=vbg, draw=vborder] (2.55, \y-0.15) rectangle (2.85, \y+0.15);
+      }
+      \draw[dashed, orange!80!red, shorten >=2pt, thick] (0.55, 0.6) to[out=50, in=150] (2.5, 0.7);
+      \draw[dashed, orange!80!red, shorten >=2pt, thick] (1.15, 0.2) to[out=40, in=160] (2.5, 0.1);
+      \draw[dashed, orange!80!red, shorten >=2pt, thick] (1.75, -0.2) to[out=30, in=170] (2.5, -0.5);
+
+      \node at (3.5, 0) {$=$};
+      \node at (4.2, 0) {$\displaystyle \sum_{j=1}^3$};
+      \draw[fill=colbg, draw=colborder] (4.8, -1.0) rectangle (5.1, 0.8);
+      \node[anchor=south] at (4.95, 0.8) {$\boldsymbol{\beta}_j$};
+      \draw[fill=vbg, draw=vborder] (5.4, -0.15) rectangle (5.7, 0.15);
+      \node[anchor=south] at (5.55, 0.15) {$v_j$};
+    \end{tikzpicture}
+    \end{center}
+\end{itemize}
+
+\end{tcolorbox}
 
 \subsection{ベクトルの内積と性質}\label{ux30d9ux30afux30c8ux30ebux306eux5185ux7a4dux3068ux6027ux8cea}
 
@@ -748,7 +1024,7 @@ L(w,b) = \frac{1}{n} \sum_{i=1}^n (y_i - (wx_i + b))^2
 
 \end{questionbox}
 
-\begin{questionbox}[label=q:3-inner-product-properties]{内積の線形性と対称性の証明 \hfill \normalfont \small 難易度：★1}
+\begin{questionbox}[label=q:3-inner-product-properties]{内積の線形性と対称性の証明 \hfill \normalfont \small 難易度：★3}
 
 任意の次元のベクトル \(\mathbf{x}, \mathbf{y}\) およびスカラー \(c\)
 について、 \begin{align*}
@@ -768,6 +1044,84 @@ L(w,b) = \frac{1}{n} \sum_{i=1}^n (y_i - (wx_i + b))^2
 第3回スライド22〜26「線型モデルの幾何学的解釈、内積の性質」
 \textbf{【ねらい】}
 機械学習における予測の基本演算である「内積」について、重み付き和、幾何的な向きの検出、射影という3つの側面を手計算を通じて習得する。
+
+\begin{answerbox}[phantomlabel=a:3-matrix-vector-multiplication-practice]{q:3-matrix-vector-multiplication-practice}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{【行列 \(\times\) 行列】} \[
+  \begin{pmatrix} 1 \cdot 2 + 2 \cdot 1 & 1 \cdot 0 + 2 \cdot 3 & 1 \cdot 1 + 2 \cdot (-1) \\ 3 \cdot 2 + 4 \cdot 1 & 3 \cdot 0 + 4 \cdot 3 & 3 \cdot 1 + 4 \cdot (-1) \end{pmatrix} = \begin{pmatrix} 4 & 6 & -1 \\ 10 & 12 & -1 \end{pmatrix}
+  \]
+\item
+  \textbf{【行列 \(\times\) 縦ベクトル】} \[
+  \begin{pmatrix} 1 \cdot 2 + (-1) \cdot 1 + 2 \cdot (-1) \\ 0 \cdot 2 + 3 \cdot 1 + 1 \cdot (-1) \end{pmatrix} = \begin{pmatrix} -1 \\ 2 \end{pmatrix}
+  \]
+\item
+  \textbf{【横ベクトル \(\times\) 行列 \(\times\)
+  縦ベクトル（二次形式）】} 先に後ろの「行列 \(\times\)
+  縦ベクトル」を計算すると、 \[
+  \begin{pmatrix} 2 & 0 \\ 0 & 3 \end{pmatrix} \begin{pmatrix} 1 \\ 2 \end{pmatrix} = \begin{pmatrix} 2 \\ 6 \end{pmatrix}
+  \] これに横ベクトルを掛けるとスカラーになる。 \[
+  \begin{pmatrix} 1 & 2 \end{pmatrix} \begin{pmatrix} 2 \\ 6 \end{pmatrix} = 1 \cdot 2 + 2 \cdot 6 = 14
+  \]
+\item
+  \textbf{【横ベクトル \(\times\) 縦ベクトル（内積）】} \[
+  1 \cdot 4 + 3 \cdot (-1) + (-2) \cdot 2 = 4 - 3 - 4 = -3
+  \]
+\item
+  \textbf{【縦ベクトル \(\times\) 横ベクトル】} \(3 \times 1\) 行列と
+  \(1 \times 2\) 行列の積となり、\(3 \times 2\) の行列が生成される。 \[
+  \begin{pmatrix} 2 \cdot 1 & 2 \cdot 4 \\ -1 \cdot 1 & -1 \cdot 4 \\ 3 \cdot 1 & 3 \cdot 4 \end{pmatrix} = \begin{pmatrix} 2 & 8 \\ -1 & -4 \\ 3 & 12 \end{pmatrix}
+  \]
+\end{enumerate}
+
+\hfill 
+
+\hyperref[q:3-matrix-vector-multiplication-practice]{（問題へ戻る）}
+
+\end{answerbox}
+
+\begin{answerbox}[phantomlabel=a:3-matrix-vector-patterns]{q:3-matrix-vector-patterns}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \(\mathbf{a}^\top = \begin{pmatrix} a_1 & \dots & a_d \end{pmatrix}\)
+  は \(1 \times d\) 行列、\(\mathbf{b}\) は \(d \times 1\)
+  行列である。行列の積の定義より、これらを掛けるとスカラー（\(1 \times 1\)
+  行列）となる。 \[
+  \mathbf{a}^\top \mathbf{b} = a_1 b_1 + a_2 b_2 + \dots + a_d b_d = \sum_{i=1}^d a_i b_i
+  \] これは内積 \(\langle \mathbf{a}, \mathbf{b} \rangle\)
+  の定義そのものである。また、同様に計算すると
+  \(\mathbf{b}^\top \mathbf{a} = \sum_{i=1}^d b_i a_i\)
+  であり、実数の積は順序を入れ替えても値が変わらない（\(a_i b_i = b_i a_i\)）ため、\(\mathbf{a}^\top \mathbf{b} = \mathbf{b}^\top \mathbf{a}\)
+  となる。
+\item
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{横ベクトルが縦に並んでいるとみなす場合：}
+    行列の積の定義より、各行 \(\mathbf{b}_i^\top\) と列ベクトル
+    \(\mathbf{v}\) を掛けたものが結果のベクトルの各成分になるため、 \[
+    B\mathbf{v} = \begin{pmatrix} \mathbf{b}_1^\top \mathbf{v} \\ \vdots \\ \mathbf{b}_m^\top \mathbf{v} \end{pmatrix}
+    \] となり、各成分が内積 \(\mathbf{b}_i^\top \mathbf{v}\)
+    として計算されることがわかる。
+  \item
+    \textbf{縦ベクトルが横に並んでいるとみなす場合：} 列ベクトル
+    \(\boldsymbol{\beta}_j\) の成分ごとの和として展開される。 \[
+    B\mathbf{v} = \begin{pmatrix} \boldsymbol{\beta}_1 & \dots & \boldsymbol{\beta}_d \end{pmatrix} \begin{pmatrix} v_1 \\ \vdots \\ v_d \end{pmatrix} = v_1 \boldsymbol{\beta}_1 + \dots + v_d \boldsymbol{\beta}_d = \sum_{j=1}^d v_j \boldsymbol{\beta}_j
+    \]
+  \end{itemize}
+\end{enumerate}
+
+\hfill 
+
+\hyperref[q:3-matrix-vector-patterns]{（問題へ戻る）}
+
+\end{answerbox}
 
 \begin{answerbox}[phantomlabel=a:3-inner-product-geometry]{q:3-inner-product-geometry}
 
@@ -822,8 +1176,6 @@ L(w,b) = \frac{1}{n} \sum_{i=1}^n (y_i - (wx_i + b))^2
 
 \hyperref[q:3-inner-product-properties]{（問題へ戻る）}
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
 \end{answerbox}
 
 \subsection{パラメータ線型モデルの表現（特徴写像）}\label{ux30d1ux30e9ux30e1ux30fcux30bfux7ddaux578bux30e2ux30c7ux30ebux306eux8868ux73feux7279ux5fb4ux5199ux50cf}
@@ -839,8 +1191,8 @@ L(w,b) = \frac{1}{n} \sum_{i=1}^n (y_i - (wx_i + b))^2
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  内積によるモデル表現
-  \(f(x) = \boldsymbol{\theta}^\top \boldsymbol{\phi}(x)\) を書き下せ。
+  線型モデル \(f(x) = \boldsymbol{\theta}^\top \boldsymbol{\phi}(x)\)
+  を書き下せ。
 \item
   このモデルは、パラメータ \(\boldsymbol{\theta}\)
   に着目すると何次式か。また、入力 \(x\) に着目すると何次式か答えよ。
@@ -853,7 +1205,7 @@ L(w,b) = \frac{1}{n} \sum_{i=1}^n (y_i - (wx_i + b))^2
 
 \end{questionbox}
 
-\begin{questionbox}[label=q:3-bag-of-words-representation]{テキストデータへの適用（Bag-of-Words）と最小二乗法 \hfill \normalfont \small 難易度：★0}
+\begin{questionbox}[label=q:3-bag-of-words-representation]{テキストデータへの適用（Bag-of-Words）と最小二乗法 \hfill \normalfont \small 難易度：★2}
 
 テキストの文書分類や数値予測を行う際、文書中の単語の出現頻度をもとに特徴ベクトルを作る手法を\textbf{Bag-of-Words}と呼びます。
 
@@ -874,10 +1226,7 @@ L(w,b) = \frac{1}{n} \sum_{i=1}^n (y_i - (wx_i + b))^2
 \end{center}
 \smallskip
 
-語彙となる名詞のリストを
-\(V = \{\text{「AI」}, \text{「ビジネス」}, \text{「犬」}\}\)
-とし、特徴ベクトル \(\boldsymbol{\phi}(x)\) を以下のように定義します。
-\[
+特徴ベクトル \(\boldsymbol{\phi}(x)\) を以下のように定義します。 \[
 \boldsymbol{\phi}(x) = \begin{pmatrix} \text{「AI」の出現回数} \\ \text{「ビジネス」の出現回数} \\ \text{「犬」の出現回数} \end{pmatrix}
 \]
 
@@ -889,18 +1238,18 @@ L(w,b) = \frac{1}{n} \sum_{i=1}^n (y_i - (wx_i + b))^2
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  各文書 \(x_1, x_2, x_3, x_4\) に対する特徴ベクトル
+  各文書 \(x_1, x_2, x_3, x_4\) に対応する特徴ベクトル
   \(\boldsymbol{\phi}(x_1), \boldsymbol{\phi}(x_2), \boldsymbol{\phi}(x_3), \boldsymbol{\phi}(x_4)\)
   をそれぞれ具体的に求めよ。
 \item
-  全体のデータに対するデザイン行列 \(\Phi \in \mathbb{R}^{4 \times 3}\)
-  と、ラベルベクトル \(\mathbf{y} \in \mathbb{R}^4\)
-  を具体的に数値で書き下せ。 ここで，
+  計画行列 \(\Phi \in \mathbb{R}^{4 \times 3}\) と、ラベルベクトル
+  \(\mathbf{y} \in \mathbb{R}^4\) をそれぞれ具体的に数値で書き下せ。
+  なお，計画行列とは，ここでは，
   \[\Phi = \begin{pmatrix} \boldsymbol{\phi}(x_1)^\top \\ \boldsymbol{\phi}(x_2)^\top \\ \boldsymbol{\phi}(x_3)^\top \\ \boldsymbol{\phi}(x_4)^\top \end{pmatrix}\]
-  である．
+  のことである．
 \item
   このモデルに対して、最小二乗誤差の意味で最適なパラメータ
-  \(\hat{\boldsymbol{\theta}}\) を求める一般式を、デザイン行列 \(\Phi\)
+  \(\hat{\boldsymbol{\theta}}\) を求める一般式を、計画行列 \(\Phi\)
   とラベルベクトル \(\mathbf{y}\)
   を用いて（逆行列の記号を用いて）書き下せ。 （ただし，この設定において
   \(\Phi^\top \Phi\) の逆行列が存在することは認めてよい．）
@@ -1038,11 +1387,9 @@ L(w,b) = \frac{1}{n} \sum_{i=1}^n (y_i - (wx_i + b))^2
 
 \hyperref[q:3-bag-of-words-representation]{（問題へ戻る）}
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
 \end{answerbox}
 
-\subsection{多変数関数の経験リスクと勾配ベクトル}\label{ux591aux5909ux6570ux95a2ux6570ux306eux7d4cux9a13ux30eaux30b9ux30afux3068ux52feux914dux30d9ux30afux30c8ux30eb}
+\subsection{多変数関数の経験リスクと勾配}\label{ux591aux5909ux6570ux95a2ux6570ux306eux7d4cux9a13ux30eaux30b9ux30afux3068ux52feux914d}
 
 \begin{questionbox}[label=q:3-multivariate-empirical-risk]{3変数パラメータの経験リスク \hfill \normalfont \small 難易度：★1}
 
@@ -1062,38 +1409,35 @@ L(w,b) = \frac{1}{n} \sum_{i=1}^n (y_i - (wx_i + b))^2
 
 \end{questionbox}
 
-\begin{questionbox}[label=q:3-multivariate-gradient]{3変数関数の勾配ベクトル \hfill \normalfont \small 難易度：★1}
-
-実数上の3変数ベクトル
-\(\mathbf{w} = (w_1, w_2, w_3)^\top \in \mathbb{R}^3\)
-に対する以下の関数 \(g(\mathbf{w})\)
-について、それぞれの変数で偏微分し、勾配ベクトル
-\(\nabla g(\mathbf{w})\) を求めよ。 \[
-g(\mathbf{w}) = w_1^2 + 2w_2^2 + 3w_3^2 - 4w_1w_2 - 6w_2w_3
-\]
-
-\hfill 
-
-\hyperref[a:3-multivariate-gradient]{（解答・解説へ）}
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
-\end{questionbox}
-
 \subsection{最小二乗法の行列表記と一階の条件（最重要）}\label{ux6700ux5c0fux4e8cux4e57ux6cd5ux306eux884cux5217ux8868ux8a18ux3068ux4e00ux968eux306eux6761ux4ef6ux6700ux91cdux8981}
 
-\begin{questionbox}[label=q:3-matrix-empirical-risk]{行列とベクトルによる目的関数の書き直し \hfill \normalfont \small 難易度：★1}
+\begin{questionbox}[label=q:3-matrix-empirical-risk]{行列とベクトルによる目的関数の書き直し \hfill \normalfont \small 難易度：★2}
 
-\(n=2\) 個のデータがあり、それぞれの特徴ベクトルと正解ラベルが、 \[
-\boldsymbol{\phi}(x_1) = \begin{pmatrix} 1 \\ 2 \end{pmatrix}, y_1 = 4, \quad \boldsymbol{\phi}(x_2) = \begin{pmatrix} 1 \\ 5 \end{pmatrix}, y_2 = 7
-\] である。デザイン行列
-\(\Phi = \begin{pmatrix} \boldsymbol{\phi}(x_1)^\top \\ \boldsymbol{\phi}(x_2)^\top \end{pmatrix}\)
-およびラベルベクトル \(\mathbf{y} = (y_1, y_2)^\top\)
-を具体的に数字で書き下し、目的関数 \[
-L(\boldsymbol{\theta}) = \frac{1}{2} \|\Phi\boldsymbol{\theta} - \mathbf{y}\|^2
-\] が個別の二乗誤差の和
-\(\frac{1}{2}\sum_{i=1}^2 (y_i - \boldsymbol{\theta}^\top \boldsymbol{\phi}(x_i))^2\)
-と完全に等しいことを展開して確かめよ。
+\(n\) 個のデータ \((x_1, y_1), \dots, (x_n, y_n)\)
+に対して、線型モデルを
+\(f_{\boldsymbol{\theta}}(x) = \boldsymbol{\theta}^\top \boldsymbol{\phi}(x)\)
+とする。また、計画行列 \(\Phi \in \mathbb{R}^{n \times d}\)
+とラベルベクトル \(\mathbf{y} \in \mathbb{R}^n\) を次のように定義する。
+\[
+\Phi = \begin{pmatrix} \quad \boldsymbol{\phi}(x_1)^\top \quad \\ \vdots \\ \quad \boldsymbol{\phi}(x_n)^\top \quad \end{pmatrix}, \quad \mathbf{y} = \begin{pmatrix} y_1 \\ \vdots \\ y_n \end{pmatrix}
+\]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{【予測値の行列表現】}
+  モデルの出力値を各データについて計算し、縦に並べた予測値ベクトル \[
+  \begin{pmatrix} f_{\boldsymbol{\theta}}(x_1) \\ \vdots \\ f_{\boldsymbol{\theta}}(x_n) \end{pmatrix}
+  \] が、 \(\Phi \boldsymbol{\theta}\) と表せることを確認せよ。
+\item
+  \textbf{【平均二乗誤差のノルム表現】} 平均二乗誤差 \[
+  \hat{R}(f_{\boldsymbol{\theta}}) = \frac{1}{n} \sum_{i=1}^n (f_{\boldsymbol{\theta}}(x_i) - y_i)^2
+  \] が、行列とベクトルの積およびノルムを用いて \[
+  \hat{R}(f_{\boldsymbol{\theta}}) = \frac{1}{n} \|\Phi \boldsymbol{\theta} - \mathbf{y}\|^2
+  \] と書き直せることを、上記1の結果およびベクトルのノルムの定義
+  \(\left(\|\mathbf{v}\|^2 = \sum_{i=1}^n v_i^2\right)\)
+  を用いて確認せよ。
+\end{enumerate}
 
 \hfill 
 
@@ -1184,51 +1528,32 @@ L(\boldsymbol{\theta}) = \frac{1}{2} \|\Phi\boldsymbol{\theta} - \mathbf{y}\|^2
 
 \end{answerbox}
 
-\begin{answerbox}[phantomlabel=a:3-multivariate-gradient]{q:3-multivariate-gradient}
-
-各変数 \(\mathit{w}_1, \mathit{w}_2, \mathit{w}_3\)
-について偏微分を行います。
-
-\begin{itemize}
-\tightlist
-\item
-  \(w_1\) についての偏微分： \[
-  \frac{\partial g}{\partial w_1} = 2w_1 - 4w_2
-  \]
-\item
-  \(w_2\) についての偏微分： \[
-  \frac{\partial g}{\partial w_2} = 4w_2 - 4w_1 - 6w_3
-  \]
-\item
-  \(w_3\) についての偏微分： \[
-  \frac{\partial g}{\partial w_3} = 6w_3 - 6w_2
-  \]
-\end{itemize}
-
-これらをベクトルとしてまとめると、求める勾配ベクトルは以下のようになります：
-\[
-\nabla g(\mathbf{w}) = \begin{pmatrix} 2w_1 - 4w_2 \\ -4w_1 + 4w_2 - 6w_3 \\ -6w_2 + 6w_3 \end{pmatrix}
-\] （証明終）
-
-\hfill 
-
-\hyperref[q:3-multivariate-gradient]{（問題へ戻る）}
-
-\end{answerbox}
-
 \begin{answerbox}[phantomlabel=a:3-matrix-empirical-risk]{q:3-matrix-empirical-risk}
 
-デザイン行列 \(\Phi\) とラベルベクトル \(\mathbf{y}\)
-は以下のようになる。 \[
-\Phi = \begin{pmatrix} 1 & 2 \\ 1 & 5 \end{pmatrix}, \quad \mathbf{y} = \begin{pmatrix} 4 \\ 7 \end{pmatrix}
-\] パラメータを \(\boldsymbol{\theta} = (\theta_0, \theta_1)^\top\)
-とすると、 \[
-\Phi\boldsymbol{\theta} - \mathbf{y} = \begin{pmatrix} 1 & 2 \\ 1 & 5 \end{pmatrix} \begin{pmatrix} \theta_0 \\ \theta_1 \end{pmatrix} - \begin{pmatrix} 4 \\ 7 \end{pmatrix} = \begin{pmatrix} \theta_0 + 2\theta_1 - 4 \\ \theta_0 + 5\theta_1 - 7 \end{pmatrix}
-\] ベクトルのL2ノルムの2乗は各成分の2乗和なので、 \[
-\frac{1}{2}\|\Phi\boldsymbol{\theta} - \mathbf{y}\|^2 = \frac{1}{2} \left[ (\theta_0 + 2\theta_1 - 4)^2 + (\theta_0 + 5\theta_1 - 7)^2 \right]
-\] これは各データの誤差二乗和
-\(\frac{1}{2} \sum_{i=1}^2 (\boldsymbol{\theta}^\top \boldsymbol{\phi}(x_i) - y_i)^2\)
-と完全に一致する。（証明終）
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  各データに対する予測値
+  \(f_{\boldsymbol{\theta}}(x_i) = \boldsymbol{\theta}^\top \boldsymbol{\phi}(x_i) = \boldsymbol{\phi}(x_i)^\top \boldsymbol{\theta}\)
+  を縦に並べたベクトルは、計画行列の定義とブロック行列の積の性質（横ベクトルが縦に並んでいるブロック行列と縦ベクトルの積）から次のように書ける。
+  \[
+  \begin{pmatrix} f_{\boldsymbol{\theta}}(x_1) \\ \vdots \\ f_{\boldsymbol{\theta}}(x_n) \end{pmatrix}
+  = \begin{pmatrix} \boldsymbol{\phi}(x_1)^\top \boldsymbol{\theta} \\ \vdots \\ \boldsymbol{\phi}(x_n)^\top \boldsymbol{\theta} \end{pmatrix}
+  = \begin{pmatrix} \quad \boldsymbol{\phi}(x_1)^\top \quad \\ \vdots \\ \quad \boldsymbol{\phi}(x_n)^\top \quad \end{pmatrix} \boldsymbol{\theta}
+  = \Phi \boldsymbol{\theta}
+  \] したがって出力値のベクトルが \(\Phi \boldsymbol{\theta}\)
+  と表せることが確認された。
+\item
+  上記1の結果より、予測値と正解ラベルの差を並べたベクトルは \[
+  \Phi \boldsymbol{\theta} - \mathbf{y} = \begin{pmatrix} f_{\boldsymbol{\theta}}(x_1) - y_1 \\ \vdots \\ f_{\boldsymbol{\theta}}(x_n) - y_n \end{pmatrix}
+  \]
+  となる。ベクトルのL2ノルムの2乗は各成分の2乗和なので、このベクトルのノルムの2乗を計算すると
+  \[
+  \|\Phi\boldsymbol{\theta} - \mathbf{y}\|^2 = \sum_{i=1}^n (f_{\boldsymbol{\theta}}(x_i) - y_i)^2
+  \] となる。両辺を \(n\) で割ることで、 \[
+  \frac{1}{n}\|\Phi\boldsymbol{\theta} - \mathbf{y}\|^2 = \frac{1}{n} \sum_{i=1}^n (f_{\boldsymbol{\theta}}(x_i) - y_i)^2 = \hat{R}(f_{\boldsymbol{\theta}})
+  \] が導かれ、式が一致することが確認された。（証明終）
+\end{enumerate}
 
 \hfill 
 
@@ -1256,17 +1581,17 @@ L(\boldsymbol{\theta}) = \frac{1}{2} \left[ \boldsymbol{\theta}^\top \Phi^\top \
 
 \hyperref[q:3-matrix-derivative-first-order]{（問題へ戻る）}
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
 \end{answerbox}
 
 \subsection{正則化（Regularization）}\label{ux6b63ux5247ux5316regularization}
 
-\begin{questionbox}[label=q:3-l2-norm-properties]{L2ノルムの性質 \hfill \normalfont \small 難易度：★0}
+\begin{questionbox}[label=q:3-l2-norm-properties]{L2ノルムの性質と内積 \hfill \normalfont \small 難易度：★2}
 
-ベクトル \(\mathbf{w} = (3, -4)^\top\) のL2ノルム \(\|\mathbf{w}\|\)
-を計算し、それが自身との内積の平方根
-\(\sqrt{\mathbf{w}^\top \mathbf{w}}\) と等しいことを示せ。
+一般の \(d\) 次元ベクトル \(\mathbf{w} = (w_1, \dots, w_d)^\top\)
+について、L2ノルムの定義 \(\|\mathbf{w}\| = \sqrt{\sum_{i=1}^d w_i^2}\)
+と内積の定義を用いて、以下の等式が成り立つことを確認せよ。 \[
+\|\mathbf{w}\|^2 = \mathbf{w}^\top \mathbf{w}
+\]
 
 \hfill 
 
@@ -1312,12 +1637,14 @@ L(\boldsymbol{\theta}) = \frac{1}{2} \left[ \boldsymbol{\theta}^\top \Phi^\top \
 
 \begin{answerbox}[phantomlabel=a:3-l2-norm-properties]{q:3-l2-norm-properties}
 
-L2ノルムの計算： \[
-\|\mathbf{w}\| = \sqrt{3^2 + (-4)^2} = \sqrt{9 + 16} = \sqrt{25} = 5
-\] 内積の平方根の計算： \[
-\mathbf{w}^\top \mathbf{w} = 3 \times 3 + (-4) \times (-4) = 9 + 16 = 25 \quad \Rightarrow \quad \sqrt{\mathbf{w}^\top \mathbf{w}} = 5
-\] よって \(\|\mathbf{w}\| = \sqrt{\mathbf{w}^\top \mathbf{w}} = 5\)
-となり、一致する。
+L2ノルムの定義より、その2乗は各成分の2乗和となる。 \[
+\|\mathbf{w}\|^2 = \left( \sqrt{\sum_{i=1}^d w_i^2} \right)^2 = \sum_{i=1}^d w_i^2
+\] 一方、ベクトル \(\mathbf{w}\)
+とそれ自身との内積は、対応する成分の積の和であるから、 \[
+\mathbf{w}^\top \mathbf{w} = \sum_{i=1}^d w_i w_i = \sum_{i=1}^d w_i^2
+\] となる。
+両者の結果が一致するため、\(\|\mathbf{w}\|^2 = \mathbf{w}^\top \mathbf{w}\)
+が成り立つことが確認された。（証明終）
 
 \hfill 
 
@@ -1360,8 +1687,6 @@ L_{\text{reg}}(\boldsymbol{\theta}) = \frac{1}{n} \sum_{i=1}^n (y_i - \boldsymbo
 \hfill 
 
 \hyperref[q:3-l2-regularization-gradient]{（問題へ戻る）}
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \end{answerbox}
 
@@ -1410,8 +1735,6 @@ L_{\text{reg}}(\boldsymbol{\theta}) = \frac{1}{n} \sum_{i=1}^n (y_i - \boldsymbo
 \hfill 
 
 \hyperref[q:3-cross-validation-indices]{（問題へ戻る）}
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \end{answerbox}
 
@@ -1480,8 +1803,6 @@ L_{\text{reg}}(\boldsymbol{\theta}) = \frac{1}{n} \sum_{i=1}^n (y_i - \boldsymbo
 \hfill 
 
 \hyperref[q:4-conditional-probability-table]{（問題へ戻る）}
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \end{answerbox}
 
@@ -1577,8 +1898,6 @@ l_\alpha(y, y') =
 
 \hyperref[q:4-pinball-loss-calculation]{（問題へ戻る）}
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
 \end{answerbox}
 
 \section{確率論的二値分類と非線型最適化}\label{ux78baux7387ux8ad6ux7684ux4e8cux5024ux5206ux985eux3068ux975eux7ddaux578bux6700ux9069ux5316}
@@ -1629,7 +1948,7 @@ l_\alpha(y, y') =
 l = -y \log \sigma(z) - (1-y) \log(1 - \sigma(z)) \quad (\text{ただし } z = \boldsymbol{\theta}^\top \boldsymbol{\phi}(x))
 \] について、チェインルール
 \(\nabla_{\boldsymbol{\theta}} l = \frac{\partial l}{\partial z} \cdot \nabla_{\boldsymbol{\theta}} z\)
-を用いて、勾配ベクトルが \[
+を用いて、勾配が \[
 \nabla_{\boldsymbol{\theta}} l = (\sigma(z) - y)\boldsymbol{\phi}(x)
 \] となることを導出せよ。
 
@@ -1722,8 +2041,6 @@ l = -y \log \sigma(z) - (1-y) \log(1 - \sigma(z)) \quad (\text{ただし } z = \
 \hfill 
 
 \hyperref[q:5-cross-entropy-gradient]{（問題へ戻る）}
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \end{answerbox}
 
