@@ -662,48 +662,45 @@ $$
 
 ## ベクトルの内積と性質
 
-### 【復習とヒント】ベクトルの内積と射影 {.tcolorbox option="enhanced, colback=blue!2!white, colframe=blue!60!black, fonttitle=\bfseries, drop shadow"}
+### 【復習とヒント】ベクトルの内積の主な出番 {.tcolorbox option="enhanced, colback=blue!2!white, colframe=blue!60!black, fonttitle=\bfseries, drop shadow"}
 
-内積 $\mathbf{a}^\top \mathbf{b}$ は、一方のベクトルを他方に「射影」したときの長さと、元のベクトルの長さの積として幾何学的に解釈できます。
+内積の主な出番は3つあります。
 
-\begin{center}
-\begin{tikzpicture}[>=stealth, thick, scale=1.2]
-  % ベクトルb
-  \draw[->, blue!80!black, line width=1.2pt] (0,0) -- (4,0) node[below] {$\mathbf{b}$};
-  % ベクトルa
-  \draw[->, red!80!black, line width=1.2pt] (0,0) -- (2.5,2) node[above left] {$\mathbf{a}$};
-  % 垂線
-  \draw[dashed, gray] (2.5,2) -- (2.5,0);
-  % 直角マーク
-  \draw (2.3,0) -- (2.3,0.2) -- (2.5,0.2);
-  % 角度
-  \draw (0.6,0) arc (0:38.66:0.6);
-  \node at (0.8, 0.3) {$\theta$};
-  % 射影ベクトル
-  \draw[->, orange, line width=1.5pt] (0,-0.05) -- (2.5,-0.05) node[midway, below] {$\mathbf{a}$ の $\mathbf{b}$ への射影};
-\end{tikzpicture}
-\end{center}
+- **重み付き和を簡潔に表す**（成分ごとの重み $\mathbf{w} = (w_1, \dots, w_d)^\top$）
+  $$ \mathbf{w}^\top \mathbf{x} = w_1 x_1 + \dots + w_d x_d $$
 
-* \textbf{幾何学的定義}: $\mathbf{a}^\top \mathbf{b} = \|\mathbf{a}\| \|\mathbf{b}\| \cos \theta$
-* \textbf{直交性}: 内積が $0$ ならば、$\cos \theta = 0$ となり、2つのベクトルは直交する（$\theta = 90^\circ$）。
+- **2つのベクトルの向きの揃い具合**（同じ向きで最大、逆向きで最小）
+  長さ1のベクトル同士なら、
+  $$ \langle \textcolor{orange!80!red}{\nwarrow}, \textcolor{green!70!black}{\searrow} \rangle = -1, \quad \langle \textcolor{orange!80!red}{\nwarrow}, \textcolor{green!70!black}{\nearrow} \rangle = 0, \quad \langle \textcolor{orange!80!red}{\nwarrow}, \textcolor{green!70!black}{\nwarrow} \rangle = 1 \quad \text{（長さ1の場合）} $$
+  【補足】同じ向きを向いている場合に内積が最も大きくなるという主張はコーシー・シュワルツの不等式から従う。ここでベクトルの長さは $\|\cdot\| = \sqrt{\langle\cdot, \cdot\rangle}$ で測る。
 
-### 内積の計算と幾何的解釈 {#q:3-inner-product-geometry .questionbox difficulty="★0"}
+- **特定の方向の成分の抽出**（ベクトル $\mathbf{a}$ の「ベクトル $\mathbf{b}$ 方向成分」）
+  $$ \mathbf{a} = \frac{\langle \mathbf{a}, \mathbf{b} \rangle}{\langle \mathbf{b}, \mathbf{b} \rangle} \mathbf{b} + (\mathbf{b}\text{に直交する成分}) $$
 
-2つのベクトル $\mathbf{a} = (2, 3)^\top$, $\mathbf{b} = (-6, 4)^\top$ がある。
+    \begin{center}
+    \begin{tikzpicture}[>=stealth, thick, scale=1.0]
+      \draw[->, orange!80!red, line width=1.2pt] (0,0) -- (4,1.5) node[right] {$\mathbf{b}$};
+      \draw[->, cyan!70!blue, line width=1.2pt] (0,0) -- (1,2) node[above] {$\mathbf{a}$};
+      \draw[dashed, black!70] (1,2) -- (1.52,0.57);
+      \fill[orange!80!red] (1.52,0.57) circle (2pt);
+      \node[below left] at (0,0) {$0$};
+    \end{tikzpicture}
+    \end{center}
+  【補足】最後の $\mathbf{a} = \frac{\langle \mathbf{a}, \mathbf{b} \rangle}{\langle \mathbf{b}, \mathbf{b} \rangle} \mathbf{b} + (\mathbf{b}\text{に直交する成分})$ という分解は、$\langle \mathbf{a} - \frac{\langle \mathbf{a}, \mathbf{b} \rangle}{\langle \mathbf{b}, \mathbf{b} \rangle} \mathbf{b}, \mathbf{b} \rangle = 0$ により確かめられる。
 
-1. 内積 $\mathbf{a}^\top \mathbf{b}$ を計算せよ。
-2. この2つのベクトルの幾何学的な位置関係（同じ方向、逆方向、直交のいずれか）を特定せよ。
+### 内積の役割と計算 {#q:3-inner-product-roles .questionbox difficulty="★0"}
 
-::: {.right}
-[（解答・解説へ）](#a:3-inner-product-geometry)
-:::
+以下の小問に答えよ。
 
-### 射影成分の計算 {#q:3-projection-component .questionbox difficulty="★1"}
-
-大きさ（ノルム）が $1$ である方向ベクトル $\mathbf{u} = (1, 0)^\top$ がある。任意のベクトル $\mathbf{x} = (5, -3)^\top$ を $\mathbf{u}$ 方向の成分に射影したときの係数（射影の長さ）を内積を用いて計算せよ。
+1. **【重み付き和の計算】**
+   ある商品の特徴量が $\mathbf{x} = (2, 5)^\top$ であり、各特徴量に対する重みが $\mathbf{w} = (3, -1)^\top$ であるとする。この商品のスコアを内積 $\mathbf{w}^\top \mathbf{x}$ として計算せよ。
+2. **【内積の計算と幾何的解釈】**
+   2つのベクトル $\mathbf{a} = (2, 3)^\top$, $\mathbf{b} = (-6, 4)^\top$ について、内積 $\mathbf{a}^\top \mathbf{b}$ を計算し、これら2つのベクトルの幾何学的な位置関係（同じ方向、逆方向、直交のいずれか）を特定せよ。
+3. **【射影成分の計算】**
+   大きさ（ノルム）が $1$ である方向ベクトル $\mathbf{u} = (1, 0)^\top$ がある。任意のベクトル $\mathbf{x} = (5, -3)^\top$ を $\mathbf{u}$ 方向へ射影した成分の長さ（射影の長さ）を、内積を用いて計算せよ。
 
 ::: {.right}
-[（解答・解説へ）](#a:3-projection-component)
+[（解答・解説へ）](#a:3-inner-product-roles)
 :::
 
 ### 内積の線形性と対称性の証明 {#q:3-inner-product-properties .questionbox difficulty="★3"}
@@ -782,26 +779,22 @@ $$
 [（問題へ戻る）](#q:3-matrix-vector-patterns)
 :::
 
-### 問3-inner-product-geometry の解答・解説 {#a:3-inner-product-geometry .answerbox ref="q:3-inner-product-geometry"}
+### 問3-inner-product-roles の解答・解説 {#a:3-inner-product-roles .answerbox ref="q:3-inner-product-roles"}
 
-1. $$\mathbf{a}^\top \mathbf{b} = 2 \times (-6) + 3 \times 4 = -12 + 12 = 0$$
-2. 内積が $0$ であるため、2つのベクトルは\textbf{直交している}。
-
-::: {.right}
-[（問題へ戻る）](#q:3-inner-product-geometry)
-:::
-
-### 問3-projection-component の解答・解説 {#a:3-projection-component .answerbox ref="q:3-projection-component"}
-
-求める射影の長さは内積 $\mathbf{x}^\top \mathbf{u}$ で与えられる。
-$$
-\mathbf{x}^\top \mathbf{u} = 5 \times 1 + (-3) \times 0 = 5
-$$
-よって $\mathbf{u}$ 方向への射影の長さは $5$ である。
+1. **【重み付き和の計算】**
+   $\mathbf{w}^\top \mathbf{x} = 3 \times 2 + (-1) \times 5 = 6 - 5 = 1$
+2. **【内積の計算と幾何的解釈】**
+   $\mathbf{a}^\top \mathbf{b} = 2 \times (-6) + 3 \times 4 = -12 + 12 = 0$
+   内積が $0$ であるため、2つのベクトルは\textbf{直交している}。
+3. **【射影成分の計算】**
+   求める射影の長さは内積 $\mathbf{x}^\top \mathbf{u}$ で与えられる。
+   $\mathbf{x}^\top \mathbf{u} = 5 \times 1 + (-3) \times 0 = 5$
+   よって $\mathbf{u}$ 方向への射影の長さは $5$ である。
 
 ::: {.right}
-[（問題へ戻る）](#q:3-projection-component)
+[（問題へ戻る）](#q:3-inner-product-roles)
 :::
+
 
 ### 問3-inner-product-properties の解答・解説 {#a:3-inner-product-properties .answerbox ref="q:3-inner-product-properties"}
 
@@ -986,14 +979,17 @@ $$
 [（解答・解説へ）](#a:3-matrix-empirical-risk)
 :::
 
-### 【復習とヒント】行列・ベクトルの転置と微分公式 {.tcolorbox option="enhanced, colback=blue!2!white, colframe=blue!60!black, fonttitle=\bfseries, drop shadow"}
+### 【復習とヒント】ベクトルによる微分の公式 {.tcolorbox option="enhanced, colback=blue!2!white, colframe=blue!60!black, fonttitle=\bfseries, drop shadow"}
 
-* \textbf{転置の積の法則}: $(\mathbf{A}\mathbf{B})^\top = \mathbf{B}^\top \mathbf{A}^\top$
-* \textbf{スカラーの転置}: 内積はスカラー（$1 \times 1$行列）なので、転置しても値は変わらない。 \\
-          $(\mathbf{x}^\top \mathbf{y})^\top = \mathbf{y}^\top \mathbf{x} = \mathbf{x}^\top \mathbf{y}$
-* \textbf{L2ノルムの2乗}: $\|\mathbf{x}\|^2 = \mathbf{x}^\top \mathbf{x}$
-* \textbf{線形項の勾配}: $\nabla_{\mathbf{x}} (\mathbf{a}^\top \mathbf{x}) = \nabla_{\mathbf{x}} (\mathbf{x}^\top \mathbf{a}) = \mathbf{a}$
-* \textbf{2次形式の勾配}: $\nabla_{\mathbf{x}} (\mathbf{x}^\top \mathbf{A} \mathbf{x}) = 2\mathbf{A}\mathbf{x}$ \quad （$\mathbf{A}$ が対称行列のとき）
+- **内積の微分** $\rightarrow$ 係数が残る（1次元でいう $(ax)' = a$ の一般化）
+  $$
+  \nabla_{\mathbf{x}} (\mathbf{a}^\top \mathbf{x}) = \nabla_{\mathbf{x}} (\mathbf{x}^\top \mathbf{a}) = \mathbf{a}
+  $$
+
+- **二次形式の微分** $\rightarrow$ 一次の項が残る（1次元でいう $(ax^2)' = 2ax$ の一般化）
+  $$
+  \nabla_{\mathbf{x}} (\mathbf{x}^\top \mathbf{A} \mathbf{x}) = (\mathbf{A} + \mathbf{A}^\top)\mathbf{x}
+  $$
 
 ### 一階の条件の行列導出 {#q:3-matrix-derivative-first-order .questionbox difficulty="★1"}
 
@@ -1112,7 +1108,11 @@ $$
 $$
 \hat{\boldsymbol{\theta}} = (\Phi^\top \Phi + \lambda \mathbf{I})^{-1}\Phi^\top \mathbf{y}
 $$
-を導出せよ。なぜ単位行列 $\mathbf{I}$ が必要なのか説明せよ（ただし逆行列は存在すると仮定する）。
+を導出せよ（ただし逆行列は存在すると仮定する）。
+
+---
+
+**ヒント：** $\frac{\lambda}{2}\|\boldsymbol{\theta}\|^2 = \boldsymbol{\theta}^\top (\frac{\lambda}{2}\mathbf{I}) \boldsymbol{\theta}$ である。
 
 ::: {.right}
 [（解答・解説へ）](#a:3-l2-regularization-gradient)
