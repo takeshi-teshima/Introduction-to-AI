@@ -648,8 +648,8 @@ $$
         \draw[fill=vbg, draw=vborder] (2.55, \y-0.15) rectangle (2.85, \y+0.15);
       }
       \draw[->, orange!80!red, shorten >=2pt, thick] (0.55, 0.6) to[out=50, in=150] (2.5, 0.7);
-      \draw[->, orange!80!red, shorten >=2pt, thick] (1.15, 0.6) to[out=40, in=160] (2.5, 0.1);
-      \draw[->, orange!80!red, shorten >=2pt, thick] (1.75, 0.6) to[out=30, in=170] (2.5, -0.5);
+      \draw[->, orange!80!red, shorten >=2pt, thick] (1.15, 0.2) to[out=40, in=160] (2.5, 0.1);
+      \draw[->, orange!80!red, shorten >=2pt, thick] (1.75, -0.2) to[out=30, in=170] (2.5, -0.5);
 
       \node at (3.5, 0) {$=$};
       \node at (4.2, 0) {$\displaystyle \sum_{j=1}^3$};
