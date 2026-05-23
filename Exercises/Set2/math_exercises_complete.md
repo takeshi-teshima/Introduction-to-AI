@@ -665,6 +665,7 @@ $$
 ### 【復習とヒント】ベクトルの内積の主な出番 {.tcolorbox option="enhanced, colback=blue!2!white, colframe=blue!60!black, fonttitle=\bfseries, drop shadow"}
 
 内積の主な出番は3つあります。
+内積は $\langle \cdot, \cdot \rangle$ や $\mathbf{x}^\top \mathbf{y}$ で表します。
 
 - **重み付き和を簡潔に表す**（成分ごとの重み $\mathbf{w} = (w_1, \dots, w_d)^\top$）
   $$ \mathbf{w}^\top \mathbf{x} = w_1 x_1 + \dots + w_d x_d $$
@@ -693,11 +694,15 @@ $$
 以下の小問に答えよ。
 
 1. **【重み付き和の計算】**
-   ある商品の特徴量が $\mathbf{x} = (2, 5)^\top$ であり、各特徴量に対する重みが $\mathbf{w} = (3, -1)^\top$ であるとする。この商品のスコアを内積 $\mathbf{w}^\top \mathbf{x}$ として計算せよ。
-2. **【内積の計算と幾何的解釈】**
-   2つのベクトル $\mathbf{a} = (2, 3)^\top$, $\mathbf{b} = (-6, 4)^\top$ について、内積 $\mathbf{a}^\top \mathbf{b}$ を計算し、これら2つのベクトルの幾何学的な位置関係（同じ方向、逆方向、直交のいずれか）を特定せよ。
-3. **【射影成分の計算】**
-   大きさ（ノルム）が $1$ である方向ベクトル $\mathbf{u} = (1, 0)^\top$ がある。任意のベクトル $\mathbf{x} = (5, -3)^\top$ を $\mathbf{u}$ 方向へ射影した成分の長さ（射影の長さ）を、内積を用いて計算せよ。
+   ある商品の3つの特徴量が $\mathbf{x} = (2, -1, 4)^\top$ であり、各特徴量に対する重みが $\mathbf{w} = (3, 2, 1)^\top$ であるとする。この商品のスコアを内積 $\mathbf{w}^\top \mathbf{x}$ として計算せよ。
+2. **【ベクトルの揃い具合と直交性 (1)】**
+   長さが1のベクトル $\mathbf{a} = (\frac{2}{3}, \frac{2}{3}, \frac{1}{3})^\top$ と $\mathbf{b} = (\frac{2}{3}, -\frac{1}{3}, -\frac{2}{3})^\top$ について、内積 $\mathbf{a}^\top \mathbf{b}$ を計算し、これら2つのベクトルの幾何学的な位置関係（同じ方向、真逆の方向、直交、それらのどれでもない、のいずれか）を特定せよ。
+3. **【ベクトルの揃い具合と直交性 (2)】**
+   長さが1のベクトル $\mathbf{a} = (\frac{2}{3}, \frac{2}{3}, \frac{1}{3})^\top$ と $\mathbf{c} = (\frac{1}{3}, \frac{2}{3}, \frac{2}{3})^\top$ について、内積 $\mathbf{a}^\top \mathbf{c}$ を計算し、位置関係（同じ方向、真逆の方向、直交、それらのどれでもない、のいずれか）を特定せよ。
+4. **【直交分解の係数】**
+   ベクトル $\mathbf{x} = (5, 2, -1)^\top$ と $\mathbf{u} = (1, -1, 2)^\top$ がある。ベクトル $\mathbf{x}$ を、$\mathbf{u}$ と平行な成分と $\mathbf{u}$ に直交する成分 $\mathbf{v}$ を用いて
+   $$ \mathbf{x} = \beta \mathbf{u} + \mathbf{v} \quad (\mathbf{v} \text{ は } \mathbf{u} \text{ と直交}) $$
+   と分解するとき、係数 $\beta$ を内積を用いて求めよ。
 
 ::: {.right}
 [（解答・解説へ）](#a:3-inner-product-roles)
@@ -782,14 +787,22 @@ $$
 ### 問3-inner-product-roles の解答・解説 {#a:3-inner-product-roles .answerbox ref="q:3-inner-product-roles"}
 
 1. **【重み付き和の計算】**
-   $\mathbf{w}^\top \mathbf{x} = 3 \times 2 + (-1) \times 5 = 6 - 5 = 1$
-2. **【内積の計算と幾何的解釈】**
-   $\mathbf{a}^\top \mathbf{b} = 2 \times (-6) + 3 \times 4 = -12 + 12 = 0$
-   内積が $0$ であるため、2つのベクトルは\textbf{直交している}。
-3. **【射影成分の計算】**
-   求める射影の長さは内積 $\mathbf{x}^\top \mathbf{u}$ で与えられる。
-   $\mathbf{x}^\top \mathbf{u} = 5 \times 1 + (-3) \times 0 = 5$
-   よって $\mathbf{u}$ 方向への射影の長さは $5$ である。
+   $\mathbf{w}^\top \mathbf{x} = 3 \times 2 + 2 \times (-1) + 1 \times 4 = 6 - 2 + 4 = 8$
+2. **【ベクトルの揃い具合と直交性 (1)】**
+   $\mathbf{a}^\top \mathbf{b} = \frac{2}{3} \times \frac{2}{3} + \frac{2}{3} \times \left(-\frac{1}{3}\right) + \frac{1}{3} \times \left(-\frac{2}{3}\right) = \frac{4}{9} - \frac{2}{9} - \frac{2}{9} = 0$
+   内積が $0$ であるため、2つのベクトルは\textbf{直交}している。
+3. **【ベクトルの揃い具合と直交性 (2)】**
+   $\mathbf{a}^\top \mathbf{c} = \frac{2}{3} \times \frac{1}{3} + \frac{2}{3} \times \frac{2}{3} + \frac{1}{3} \times \frac{2}{3} = \frac{2}{9} + \frac{4}{9} + \frac{2}{9} = \frac{8}{9}$
+   内積が $1, -1, 0$ のいずれでもないため、位置関係は\textbf{それらのどれでもない}。
+4. **【直交分解の係数】**
+   $\mathbf{x} = \beta \mathbf{u} + \mathbf{v}$ の両辺について、右から $\mathbf{u}$ との内積をとる（$\mathbf{u}$ を掛ける）と、
+   $$ \mathbf{x}^\top \mathbf{u} = (\beta \mathbf{u} + \mathbf{v})^\top \mathbf{u} = \beta \mathbf{u}^\top \mathbf{u} + \mathbf{v}^\top \mathbf{u} $$
+   $\mathbf{v}$ は $\mathbf{u}$ と直交するため、$\mathbf{v}^\top \mathbf{u} = 0$ となる。
+   したがって、$\mathbf{x}^\top \mathbf{u} = \beta \|\mathbf{u}\|^2$ となり、$\beta = \frac{\mathbf{x}^\top \mathbf{u}}{\|\mathbf{u}\|^2}$ となる。
+   各内積を計算すると、
+   $\mathbf{x}^\top \mathbf{u} = 5 \times 1 + 2 \times (-1) + (-1) \times 2 = 5 - 2 - 2 = 1$
+   $\|\mathbf{u}\|^2 = \mathbf{u}^\top \mathbf{u} = 1^2 + (-1)^2 + 2^2 = 1 + 1 + 4 = 6$
+   よって、$\beta = \frac{1}{6}$ である。
 
 ::: {.right}
 [（問題へ戻る）](#q:3-inner-product-roles)
