@@ -250,178 +250,6 @@ Cov(X,Y) &= Cov(Y,X)
 
 \end{questionbox}
 
-\subsubsection{解答・解説}\label{ux89e3ux7b54ux89e3ux8aac}
-
-\textbf{【該当内容】} 第1回スライド34〜38「基本知識＞確率分布、期待値」
-\textbf{【ねらい】} 期待値 \(\mathbb{E}[\cdot]\) や分散
-\(\mathbb{V}[\cdot]\)
-の計算規則を、離散型・連続型の両面から手計算で確かめ、のちに登場する「リスク関数」の数学的実態を掴む。
-
-\begin{answerbox}[phantomlabel=a:1-discrete-expectation-variance]{q:1-discrete-expectation-variance}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\item
-  \(\mathbb{E}[X] = 0 \times 0.2 + 1 \times 0.5 + 2 \times 0.3 = 0 + 0.5 + 0.6 = 1.1\)
-\item
-  \(\mathbb{E}[f(X)] = \mathbb{E}[X^2] = 0^2 \times 0.2 + 1^2 \times 0.5 + 2^2 \times 0.3 = 0 + 0.5 + 1.2 = 1.7\)
-\item
-  分散 \(\mathbb{V}[f(X)]\)
-  の計算方法には、定義から計算する方法と、公式を用いる方法の2通りがあります。
-
-  \textbf{方法1：定義から直接計算する方法} 分散の定義
-  \(\mathbb{V}[Y] = \mathbb{E}[(Y - \mathbb{E}[Y])^2]\)
-  において、\(Y = f(X)\) と置くと、 \[
-   \mathbb{V}[f(X)] = \mathbb{E}\left[ (f(X) - \mathbb{E}[f(X)])^2 \right]
-   \] となります。(2) より \(\mathbb{E}[f(X)] = 1.7\) であるため、各
-  \(X\) の値における \(f(X)\) の値から期待値 \(1.7\)
-  を引き、その2乗の期待値をとります。 \begin{align*}
-   \mathbb{V}[f(X)] &= (f(0) - 1.7)^2 \times 0.2 + (f(1) - 1.7)^2 \times 0.5 + (f(2) - 1.7)^2 \times 0.3 \\
-   &= (0^2 - 1.7)^2 \times 0.2 + (1^2 - 1.7)^2 \times 0.5 + (2^2 - 1.7)^2 \times 0.3 \\
-   &= (-1.7)^2 \times 0.2 + (-0.7)^2 \times 0.5 + (2.3)^2 \times 0.3 \\
-   &= 2.89 \times 0.2 + 0.49 \times 0.5 + 5.29 \times 0.3 \\
-   &= 0.578 + 0.245 + 1.587 \\
-   &= 2.41
-   \end{align*}
-
-  \textbf{方法2：公式
-  \(\mathbb{V}[f(X)] = \mathbb{E}[(f(X))^2] - (\mathbb{E}[f(X)])^2\)
-  を用いる方法} まず、\(\mathbb{E}[(f(X))^2] = \mathbb{E}[X^4]\)
-  を計算します。 \[
-   \mathbb{E}[X^4] = 0^4 \times 0.2 + 1^4 \times 0.5 + 2^4 \times 0.3 = 0 + 0.5 + 16 \times 0.3 = 5.3
-   \] これと (2) の結果 \(\mathbb{E}[f(X)] = 1.7\) を公式に代入します。
-  \[
-   \mathbb{V}[f(X)] = 5.3 - (1.7)^2 = 5.3 - 2.89 = 2.41
-   \]
-\end{enumerate}
-
-\hfill 
-
-\hyperref[q:1-discrete-expectation-variance]{（問題へ戻る）}
-
-\end{answerbox}
-
-\begin{answerbox}[phantomlabel=a:1-indicator-function]{q:1-indicator-function}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  指示関数の定義「条件が真なら \(1\)、偽なら
-  \(0\)」に基づいて計算します。
-
-  \begin{itemize}
-  \tightlist
-  \item
-    \begin{enumerate}
-    \def\labelenumii{(\alph{enumii})}
-    \tightlist
-    \item
-      \(X = 0\) のとき：条件 \(X \ge 1\)
-      は偽（不成立）となるため、\(\ind\{0 \ge 1\} = 0\) です。
-    \end{enumerate}
-  \item
-    \begin{enumerate}
-    \def\labelenumii{(\alph{enumii})}
-    \setcounter{enumii}{1}
-    \tightlist
-    \item
-      \(X = 2\) のとき：条件 \(X \ge 1\)
-      は真（成立）となるため、\(\ind\{2 \ge 1\} = 1\) です。
-    \end{enumerate}
-  \end{itemize}
-\item
-  \(Y = \ind\{X \ge 1\}\) がとり得る値は、定義より \(0\) または \(1\)
-  です。
-
-  \begin{itemize}
-  \tightlist
-  \item
-    \(Y = 0\) となるのは、条件 \(X \ge 1\) が偽のとき、すなわち
-    \(X = 0\) のときです。
-    したがって、\(\mathbb{P}(Y = 0) = \mathbb{P}(X = 0) = 0.2\)
-    となります。
-  \item
-    \(Y = 1\) となるのは、条件 \(X \ge 1\) が真のとき、すなわち
-    \(X = 1\) または \(X = 2\) のときです。
-    したがって、\(\mathbb{P}(Y = 1) = \mathbb{P}(X = 1) + \mathbb{P}(X = 2) = 0.5 + 0.3 = 0.8\)
-    となります。
-  \end{itemize}
-
-  まとめると、確率分布の空欄に入る値は以下の通りです：
-
-  \begin{itemize}
-  \tightlist
-  \item
-    （ア） \(0\)
-  \item
-    （イ） \(1\)
-  \item
-    （ウ） \(0.2\)
-  \item
-    （エ） \(0.8\)
-  \end{itemize}
-\end{enumerate}
-
-\hfill 
-
-\hyperref[q:1-indicator-function]{（問題へ戻る）}
-
-\end{answerbox}
-
-\begin{answerbox}[phantomlabel=a:1-continuous-expectation-variance]{q:1-continuous-expectation-variance}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  指示関数の定義より、\(\ind\{0 \le x \le 1\}\) は \(0 \le x \le 1\)
-  のとき \(1\)、それ以外の範囲では \(0\)
-  となります。したがって、実数全体 \((-\infty, \infty)\) の積分を
-  \([0, 1]\) の範囲に絞ることができます。 \[
-   \int_{-\infty}^\infty p(x) dx = \int_{-\infty}^\infty 2x \cdot \ind\{0 \le x \le 1\} dx = \int_0^1 2x dx = \left[ x^2 \right]_0^1 = 1^2 - 0^2 = 1 \quad \text{（証明終）}
-   \]
-\item
-  期待値 \(\mathbb{E}[X]\)
-  も同様に指示関数を用いて積分範囲を絞って計算します。 \[
-   \mathbb{E}[X] = \int_{-\infty}^\infty x \cdot p(x) dx = \int_{-\infty}^\infty x \cdot 2x \cdot \ind\{0 \le x \le 1\} dx = \int_0^1 2x^2 dx = \left[ \frac{2}{3}x^3 \right]_0^1 = \frac{2}{3}
-   \]
-\item
-  \(\mathbb{E}[X^2]\) の計算： \[
-   \mathbb{E}[X^2] = \int_{-\infty}^\infty x^2 \cdot p(x) dx = \int_{-\infty}^\infty x^2 \cdot 2x \cdot \ind\{0 \le x \le 1\} dx = \int_0^1 2x^3 dx = \left[ \frac{1}{2}x^4 \right]_0^1 = \frac{1}{2}
-   \] よって分散 \(\mathbb{V}[X]\) は、 \[
-   \mathbb{V}[X] = \mathbb{E}[X^2] - (\mathbb{E}[X])^2 = \frac{1}{2} - \left(\frac{2}{3}\right)^2 = \frac{1}{2} - \frac{4}{9} = \frac{1}{18}
-   \]
-\end{enumerate}
-
-\hfill 
-
-\hyperref[q:1-continuous-expectation-variance]{（問題へ戻る）}
-
-\end{answerbox}
-
-\begin{answerbox}[phantomlabel=a:1-variance-formula-proof]{q:1-variance-formula-proof}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  \[Cov(X, X+Y) = Cov(X,X) + Cov(X,Y) = \mathbb{V}[X] + Cov(X,Y)\]
-\item
-  \begin{align*}
-       \mathbb{V}[aX+bY] &= Cov(aX+bY, aX+bY) \\
-       &= a^2 Cov(X,X) + ab Cov(X,Y) + ba Cov(Y,X) + b^2 Cov(Y,Y) \\
-       &= a^2 \mathbb{V}[X] + 2ab Cov(X,Y) + b^2 \mathbb{V}[Y] \quad \text{（対称性より）}
-       \end{align*}
-  この展開の構造は、のちに行列やベクトルの内積（2次形式）を展開する際の論理構造と全く同じである。
-\end{enumerate}
-
-\hfill 
-
-\hyperref[q:1-variance-formula-proof]{（問題へ戻る）}
-
-\end{answerbox}
-
 \section{最適化と最小二乗法・偏微分}\label{ux6700ux9069ux5316ux3068ux6700ux5c0fux4e8cux4e57ux6cd5ux504fux5faeux5206}
 
 \subsection{経験リスクの数式化（シグマを用いた書き下し）}\label{ux7d4cux9a13ux30eaux30b9ux30afux306eux6570ux5f0fux5316ux30b7ux30b0ux30deux3092ux7528ux3044ux305fux66f8ux304dux4e0bux3057}
@@ -494,72 +322,6 @@ Cov(X,Y) &= Cov(Y,X)
 
 \end{questionbox}
 
-\subsubsection{解答・解説}\label{ux89e3ux7b54ux89e3ux8aac-1}
-
-\textbf{【該当内容】}
-第2回スライド27〜37「予測系タスクの具体例＞線型単回帰、最小二乗法」
-\textbf{【ねらい】} \(n\)
-個の一般的なデータ表記に対して、二乗損失を用いた経験リスクの正確な数式をシグマ
-\(\sum\) を用いて構築できるようにする。
-
-\begin{answerbox}[phantomlabel=a:2-empirical-risk-formulation]{q:2-empirical-risk-formulation}
-
-モデルの出力 \(\hat{y}_i = wx_i + b\)
-を損失関数に代入し、その標本平均をとる。 \[
-L(w,b) = \frac{1}{n} \sum_{i=1}^n (y_i - (wx_i + b))^2
-\]
-
-\hfill 
-
-\hyperref[q:2-empirical-risk-formulation]{（問題へ戻る）}
-
-\end{answerbox}
-
-\begin{answerbox}[phantomlabel=a:2-erm-parameter-function]{q:2-erm-parameter-function}
-
-与えられた数値を代入して整理する。 \begin{align*}
-\hat{R}(\theta) &= \frac{1}{2} \left[ (2 - \theta \cdot 1)^2 + (4 - \theta \cdot 3)^2 \right] \\
-&= \frac{1}{2} \left[ (4 - 4\theta + \theta^2) + (16 - 24\theta + 9\theta^2) \right] \\
-&= \frac{1}{2} (10\theta^2 - 28\theta + 20) \\
-&= 5\theta^2 - 14\theta + 10
-\end{align*}
-これによって、最適化（微分して最小値を求める）対象がパラメータ
-\(\theta\) だけの関数になったことが示される。
-
-\hfill 
-
-\hyperref[q:2-erm-parameter-function]{（問題へ戻る）}
-
-\end{answerbox}
-
-\begin{answerbox}[phantomlabel=a:2-optimization-formulation-blank]{q:2-optimization-formulation-blank}
-
-\begin{itemize}
-\tightlist
-\item
-  \textbf{(ア)} \(\boldsymbol{\theta} \in \mathbb{R}^d\)
-\item
-  \textbf{(イ)} \(L(\boldsymbol{\theta})\) よって全体の式は
-  \(\mathop{\mathrm{Min}}_{\boldsymbol{\theta} \in \mathbb{R}^d} L(\boldsymbol{\theta})\)
-  となる。最適化を行う範囲（定義域）を \(\mathrm{Min}\) の下に記述する。
-\item
-  \textbf{(ウ)}
-  \(\boldsymbol{\theta} \in \{\boldsymbol{\theta} \in \mathbb{R}^d : \|\boldsymbol{\theta}\| \le C\}\)
-  （または
-  \(\boldsymbol{\theta} \in \mathbb{R}^d \text{ s.t. } \|\boldsymbol{\theta}\| \le C\)）
-\item
-  \textbf{(エ)} \(L(\boldsymbol{\theta})\) よって全体の式は
-  \(\mathop{\mathrm{Min}}_{\boldsymbol{\theta} \in \{\boldsymbol{\theta} \in \mathbb{R}^d : \|\boldsymbol{\theta}\| \le C\}} L(\boldsymbol{\theta})\)
-  となる。制約条件は変数が属する集合（定義域）として \(\mathrm{Min}\)
-  の下に記述することができる。
-\end{itemize}
-
-\hfill 
-
-\hyperref[q:2-optimization-formulation-blank]{（問題へ戻る）}
-
-\end{answerbox}
-
 \subsection{最小二乗法の真髄：偏微分から一階の条件へ}\label{ux6700ux5c0fux4e8cux4e57ux6cd5ux306eux771fux9ac4ux504fux5faeux5206ux304bux3089ux4e00ux968eux306eux6761ux4ef6ux3078}
 
 \begin{questionbox}[label=q:3-multivariate-gradient]{偏微分と勾配 \hfill \normalfont \small 難易度：★2}
@@ -611,89 +373,6 @@ L(w,b) = \frac{1}{n} \sum_{i=1}^n (y_i - (wx_i + b))^2
 \hyperref[a:2-partial-derivative-gradient]{（解答・解説へ）}
 
 \end{questionbox}
-
-\subsubsection{解答・解説}\label{ux89e3ux7b54ux89e3ux8aac-2}
-
-\textbf{【該当内容】} 第2回スライド38〜45「一階の条件、偏微分・勾配」
-\textbf{【ねらい】} スライドで省略されている目的関数 \(L(w,b)\)
-の偏微分から勾配の構築、一階の条件による正規方程式のスカラ版の導出を完全に追体験する。
-
-\begin{answerbox}[phantomlabel=a:3-multivariate-gradient]{q:3-multivariate-gradient}
-
-各変数 \(\mathit{w}_1, \mathit{w}_2, \mathit{w}_3\)
-について偏微分を行います。
-
-\begin{itemize}
-\tightlist
-\item
-  \(w_1\) についての偏微分： \[
-  \frac{\partial g}{\partial w_1} = 2w_1 - 4w_2
-  \]
-\item
-  \(w_2\) についての偏微分： \[
-  \frac{\partial g}{\partial w_2} = 4w_2 - 4w_1 - 6w_3
-  \]
-\item
-  \(w_3\) についての偏微分： \[
-  \frac{\partial g}{\partial w_3} = 6w_3 - 6w_2
-  \]
-\end{itemize}
-
-これらをベクトルとしてまとめると、求める勾配は以下のようになります： \[
-\nabla g(\mathbf{w}) = \begin{pmatrix} 2w_1 - 4w_2 \\ -4w_1 + 4w_2 - 6w_3 \\ -6w_2 + 6w_3 \end{pmatrix}
-\] （証明終）
-
-\hfill 
-
-\hyperref[q:3-multivariate-gradient]{（問題へ戻る）}
-
-\end{answerbox}
-
-\begin{answerbox}[phantomlabel=a:2-partial-derivative-gradient]{q:2-partial-derivative-gradient}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\item
-  \textbf{偏微分と勾配の計算：}
-  合成関数の微分（チェインルール）を用いて、それぞれ \(w\) と \(b\)
-  について偏微分を行う。 \[
-       \frac{\partial L}{\partial w} = \frac{1}{n} \sum_{i=1}^n 2(y_i - wx_i - b) \cdot (-x_i) = -\frac{2}{n} \sum_{i=1}^n (y_i - wx_i - b)x_i
-       \] \[
-       \frac{\partial L}{\partial b} = \frac{1}{n} \sum_{i=1}^n 2(y_i - wx_i - b) \cdot (-1) = -\frac{2}{n} \sum_{i=1}^n (y_i - wx_i - b)
-       \] これらを縦に並べたものが勾配である。 \[
-       \nabla L(w,b) = \begin{pmatrix} -\frac{2}{n} \sum_{i=1}^n (y_i - wx_i - b)x_i \\ -\frac{2}{n} \sum_{i=1}^n (y_i - wx_i - b) \end{pmatrix}
-       \]
-\item
-  \textbf{一階の条件からの連立方程式の導出：} 一階の条件
-  \(\nabla L(w,b) = \mathbf{0}\) より、各成分が \(0\) となる。 \[
-       \begin{cases}
-       -\frac{2}{n} \sum_{i=1}^n (y_i - wx_i - b)x_i = 0 \\
-       -\frac{2}{n} \sum_{i=1}^n (y_i - wx_i - b) = 0
-       \end{cases}
-       \] 両辺に \(-\frac{n}{2}\) を掛けて整理し、\(w, b\)
-  を含む項を左辺に、含まない項を右辺にまとめる。 \[
-       \begin{cases}
-       w \sum_{i=1}^n x_i^2 + b \sum_{i=1}^n x_i = \sum_{i=1}^n x_i y_i \\
-       w \sum_{i=1}^n x_i + b \sum_{i=1}^n 1 = \sum_{i=1}^n y_i
-       \end{cases}
-       \] ここで \(\sum_{i=1}^n 1 = n\)
-  であることに注意し、これを行列とベクトルを用いた形に書き直すと以下のようになる。
-  \[
-       \begin{pmatrix} \sum_{i=1}^n x_i^2 & \sum_{i=1}^n x_i \\ \sum_{i=1}^n x_i & n \end{pmatrix} \begin{pmatrix} w \\ b \end{pmatrix} = \begin{pmatrix} \sum_{i=1}^n x_i y_i \\ \sum_{i=1}^n y_i \end{pmatrix}
-       \]
-\item
-  \textbf{最適なパラメータの導出：}
-  求めた行列方程式の両辺の左から、係数行列の逆行列を掛けることで、目的の式が導かれる。
-  \[
-       \begin{pmatrix} \hat{w} \\ \hat{b} \end{pmatrix} = \begin{pmatrix} \sum_{i=1}^n x_i^2 & \sum_{i=1}^n x_i \\ \sum_{i=1}^n x_i & n \end{pmatrix}^{-1} \begin{pmatrix} \sum_{i=1}^n x_i y_i \\ \sum_{i=1}^n y_i \end{pmatrix}
-       \] （証明終）
-\end{enumerate}
-
-\hfill 
-
-\hyperref[q:2-partial-derivative-gradient]{（問題へ戻る）}
-
-\end{answerbox}
 
 \section{線型モデルの行列表現と正則化・モデル選択}\label{ux7ddaux578bux30e2ux30c7ux30ebux306eux884cux5217ux8868ux73feux3068ux6b63ux5247ux5316ux30e2ux30c7ux30ebux9078ux629e}
 
@@ -957,226 +636,83 @@ L(w,b) = \frac{1}{n} \sum_{i=1}^n (y_i - (wx_i + b))^2
 
 \subsection{ベクトルの内積と性質}\label{ux30d9ux30afux30c8ux30ebux306eux5185ux7a4dux3068ux6027ux8cea}
 
-\begin{tcolorbox}[enhanced, colback=blue!2!white, colframe=blue!60!black, fonttitle=\bfseries, drop shadow, title={【復習とヒント】ベクトルの内積と射影}]
+\begin{tcolorbox}[enhanced, colback=blue!2!white, colframe=blue!60!black, fonttitle=\bfseries, drop shadow, title={【復習とヒント】ベクトルの内積の主な出番}]
 
-内積 \(\mathbf{a}^\top \mathbf{b}\)
-は、一方のベクトルを他方に「射影」したときの長さと、元のベクトルの長さの積として幾何学的に解釈できます。
-
-\begin{center}
-\begin{tikzpicture}[>=stealth, thick, scale=1.2]
-  % ベクトルb
-  \draw[->, blue!80!black, line width=1.2pt] (0,0) -- (4,0) node[below] {$\mathbf{b}$};
-  % ベクトルa
-  \draw[->, red!80!black, line width=1.2pt] (0,0) -- (2.5,2) node[above left] {$\mathbf{a}$};
-  % 垂線
-  \draw[dashed, gray] (2.5,2) -- (2.5,0);
-  % 直角マーク
-  \draw (2.3,0) -- (2.3,0.2) -- (2.5,0.2);
-  % 角度
-  \draw (0.6,0) arc (0:38.66:0.6);
-  \node at (0.8, 0.3) {$\theta$};
-  % 射影ベクトル
-  \draw[->, orange, line width=1.5pt] (0,-0.05) -- (2.5,-0.05) node[midway, below] {$\mathbf{a}$ の $\mathbf{b}$ への射影};
-\end{tikzpicture}
-\end{center}
+内積の主な出番は3つあります。 内積は \(\langle \cdot, \cdot \rangle\) や
+\(\mathbf{x}^\top \mathbf{y}\) で表します。
 
 \begin{itemize}
-\tightlist
 \item
-  \textbf{幾何学的定義}:
-  \(\mathbf{a}^\top \mathbf{b} = \|\mathbf{a}\| \|\mathbf{b}\| \cos \theta\)
+  \textbf{重み付き和を簡潔に表す}（成分ごとの重み
+  \(\mathbf{w} = (w_1, \dots, w_d)^\top\)）
+  \[ \mathbf{w}^\top \mathbf{x} = w_1 x_1 + \dots + w_d x_d \]
 \item
-  \textbf{直交性}: 内積が \(0\) ならば、\(\cos \theta = 0\)
-  となり、2つのベクトルは直交する（\(\theta = 90^\circ\)）。
+  \textbf{2つのベクトルの向きの揃い具合}（同じ向きで最大、逆向きで最小）
+  長さ1のベクトル同士なら、
+  \[ \langle \textcolor{orange!80!red}{\nwarrow}, \textcolor{green!70!black}{\searrow} \rangle = -1, \quad \langle \textcolor{orange!80!red}{\nwarrow}, \textcolor{green!70!black}{\nearrow} \rangle = 0, \quad \langle \textcolor{orange!80!red}{\nwarrow}, \textcolor{green!70!black}{\nwarrow} \rangle = 1 \quad \text{（長さ1の場合）} \]
+  【補足】同じ向きを向いている場合に内積が最も大きくなるという主張はコーシー・シュワルツの不等式から従う。ここでベクトルの長さは
+  \(\|\cdot\| = \sqrt{\langle\cdot, \cdot\rangle}\) で測る。
+\item
+  \textbf{特定の方向の成分の抽出}（ベクトル \(\mathbf{a}\) の「ベクトル
+  \(\mathbf{b}\) 方向成分」）
+  \[ \mathbf{a} = \frac{\langle \mathbf{a}, \mathbf{b} \rangle}{\langle \mathbf{b}, \mathbf{b} \rangle} \mathbf{b} + (\mathbf{b}\text{に直交する成分}) \]
+
+  \begin{center}
+    \begin{tikzpicture}[>=stealth, thick, scale=1.0]
+      \draw[->, orange!80!red, line width=1.2pt] (0,0) -- (4,1.5) node[right] {$\mathbf{b}$};
+      \draw[->, cyan!70!blue, line width=1.2pt] (0,0) -- (1,2) node[above] {$\mathbf{a}$};
+      \draw[dashed, black!70] (1,2) -- (1.52,0.57);
+      \fill[orange!80!red] (1.52,0.57) circle (2pt);
+      \node[below left] at (0,0) {$0$};
+    \end{tikzpicture}
+    \end{center}
+
+  【補足】最後の
+  \(\mathbf{a} = \frac{\langle \mathbf{a}, \mathbf{b} \rangle}{\langle \mathbf{b}, \mathbf{b} \rangle} \mathbf{b} + (\mathbf{b}\text{に直交する成分})\)
+  という分解は、\(\langle \mathbf{a} - \frac{\langle \mathbf{a}, \mathbf{b} \rangle}{\langle \mathbf{b}, \mathbf{b} \rangle} \mathbf{b}, \mathbf{b} \rangle = 0\)
+  により確かめられる。
 \end{itemize}
 
 \end{tcolorbox}
 
-\begin{questionbox}[label=q:3-inner-product-geometry]{内積の計算と幾何的解釈 \hfill \normalfont \small 難易度：★0}
+\begin{questionbox}[label=q:3-inner-product-roles]{内積の役割と計算 \hfill \normalfont \small 難易度：★0}
 
-2つのベクトル \(\mathbf{a} = (2, 3)^\top\),
-\(\mathbf{b} = (-6, 4)^\top\) がある。
+以下の小問に答えよ。
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  内積 \(\mathbf{a}^\top \mathbf{b}\) を計算せよ。
+  \textbf{【重み付き和の計算】} ある商品の3つの特徴量が
+  \(\mathbf{x} = (2, -1, 4)^\top\) であり、各特徴量に対する重みが
+  \(\mathbf{w} = (3, 2, 1)^\top\) であるとする。この商品のスコアを内積
+  \(\mathbf{w}^\top \mathbf{x}\) として計算せよ。
 \item
-  この2つのベクトルの幾何学的な位置関係（同じ方向、逆方向、直交のいずれか）を特定せよ。
+  \textbf{【ベクトルの揃い具合と直交性 (1)】} 長さが1のベクトル
+  \(\mathbf{a} = (\frac{2}{3}, \frac{2}{3}, \frac{1}{3})^\top\) と
+  \(\mathbf{b} = (\frac{2}{3}, -\frac{1}{3}, -\frac{2}{3})^\top\)
+  について、内積 \(\mathbf{a}^\top \mathbf{b}\)
+  を計算し、これら2つのベクトルの幾何学的な位置関係（同じ方向、真逆の方向、直交、それらのどれでもない、のいずれか）を特定せよ。
+\item
+  \textbf{【ベクトルの揃い具合と直交性 (2)】} 長さが1のベクトル
+  \(\mathbf{a} = (\frac{2}{3}, \frac{2}{3}, \frac{1}{3})^\top\) と
+  \(\mathbf{c} = (\frac{1}{3}, \frac{2}{3}, \frac{2}{3})^\top\)
+  について、内積 \(\mathbf{a}^\top \mathbf{c}\)
+  を計算し、位置関係（同じ方向、真逆の方向、直交、それらのどれでもない、のいずれか）を特定せよ。
+\item
+  \textbf{【直交分解の係数】} ベクトル \(\mathbf{x} = (5, 2, -1)^\top\)
+  と \(\mathbf{u} = (1, -1, 2)^\top\) がある。ベクトル \(\mathbf{x}\)
+  を、\(\mathbf{u}\) と平行な成分と \(\mathbf{u}\) に直交する成分
+  \(\mathbf{v}\) を用いて
+  \[ \mathbf{x} = \beta \mathbf{u} + \mathbf{v} \quad (\mathbf{v} \text{ は } \mathbf{u} \text{ と直交}) \]
+  と分解するとき、係数 \(\beta\) を内積を用いて求めよ。
 \end{enumerate}
 
 \hfill 
 
-\hyperref[a:3-inner-product-geometry]{（解答・解説へ）}
+\hyperref[a:3-inner-product-roles]{（解答・解説へ）}
 
 \end{questionbox}
-
-\begin{questionbox}[label=q:3-projection-component]{射影成分の計算 \hfill \normalfont \small 難易度：★1}
-
-大きさ（ノルム）が \(1\) である方向ベクトル \(\mathbf{u} = (1, 0)^\top\)
-がある。任意のベクトル \(\mathbf{x} = (5, -3)^\top\) を \(\mathbf{u}\)
-方向の成分に射影したときの係数（射影の長さ）を内積を用いて計算せよ。
-
-\hfill 
-
-\hyperref[a:3-projection-component]{（解答・解説へ）}
-
-\end{questionbox}
-
-\begin{questionbox}[label=q:3-inner-product-properties]{内積の線形性と対称性の証明 \hfill \normalfont \small 難易度：★3}
-
-任意の次元のベクトル \(\mathbf{x}, \mathbf{y}\) およびスカラー \(c\)
-について、 \begin{align*}
-\mathbf{x}^\top \mathbf{y} &= \mathbf{y}^\top \mathbf{x} \quad \text{（対称性）} \\
-(c\mathbf{x})^\top \mathbf{y} &= c(\mathbf{x}^\top \mathbf{y}) \quad \text{（線形性）}
-\end{align*} が成り立つことを、各成分を明示して確かめよ。
-
-\hfill 
-
-\hyperref[a:3-inner-product-properties]{（解答・解説へ）}
-
-\end{questionbox}
-
-\subsubsection{解答・解説}\label{ux89e3ux7b54ux89e3ux8aac-3}
-
-\textbf{【該当内容】}
-第3回スライド22〜26「線型モデルの幾何学的解釈、内積の性質」
-\textbf{【ねらい】}
-機械学習における予測の基本演算である「内積」について、重み付き和、幾何的な向きの検出、射影という3つの側面を手計算を通じて習得する。
-
-\begin{answerbox}[phantomlabel=a:3-matrix-vector-multiplication-practice]{q:3-matrix-vector-multiplication-practice}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  \textbf{【行列 \(\times\) 行列】} \[
-  \begin{pmatrix} 1 \cdot 2 + 2 \cdot 1 & 1 \cdot 0 + 2 \cdot 3 & 1 \cdot 1 + 2 \cdot (-1) \\ 3 \cdot 2 + 4 \cdot 1 & 3 \cdot 0 + 4 \cdot 3 & 3 \cdot 1 + 4 \cdot (-1) \end{pmatrix} = \begin{pmatrix} 4 & 6 & -1 \\ 10 & 12 & -1 \end{pmatrix}
-  \]
-\item
-  \textbf{【行列 \(\times\) 縦ベクトル】} \[
-  \begin{pmatrix} 1 \cdot 2 + (-1) \cdot 1 + 2 \cdot (-1) \\ 0 \cdot 2 + 3 \cdot 1 + 1 \cdot (-1) \end{pmatrix} = \begin{pmatrix} -1 \\ 2 \end{pmatrix}
-  \]
-\item
-  \textbf{【横ベクトル \(\times\) 行列 \(\times\)
-  縦ベクトル（二次形式）】} 先に後ろの「行列 \(\times\)
-  縦ベクトル」を計算すると、 \[
-  \begin{pmatrix} 2 & 0 \\ 0 & 3 \end{pmatrix} \begin{pmatrix} 1 \\ 2 \end{pmatrix} = \begin{pmatrix} 2 \\ 6 \end{pmatrix}
-  \] これに横ベクトルを掛けるとスカラーになる。 \[
-  \begin{pmatrix} 1 & 2 \end{pmatrix} \begin{pmatrix} 2 \\ 6 \end{pmatrix} = 1 \cdot 2 + 2 \cdot 6 = 14
-  \]
-\item
-  \textbf{【横ベクトル \(\times\) 縦ベクトル（内積）】} \[
-  1 \cdot 4 + 3 \cdot (-1) + (-2) \cdot 2 = 4 - 3 - 4 = -3
-  \]
-\item
-  \textbf{【縦ベクトル \(\times\) 横ベクトル】} \(3 \times 1\) 行列と
-  \(1 \times 2\) 行列の積となり、\(3 \times 2\) の行列が生成される。 \[
-  \begin{pmatrix} 2 \cdot 1 & 2 \cdot 4 \\ -1 \cdot 1 & -1 \cdot 4 \\ 3 \cdot 1 & 3 \cdot 4 \end{pmatrix} = \begin{pmatrix} 2 & 8 \\ -1 & -4 \\ 3 & 12 \end{pmatrix}
-  \]
-\end{enumerate}
-
-\hfill 
-
-\hyperref[q:3-matrix-vector-multiplication-practice]{（問題へ戻る）}
-
-\end{answerbox}
-
-\begin{answerbox}[phantomlabel=a:3-matrix-vector-patterns]{q:3-matrix-vector-patterns}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  \(\mathbf{a}^\top = \begin{pmatrix} a_1 & \dots & a_d \end{pmatrix}\)
-  は \(1 \times d\) 行列、\(\mathbf{b}\) は \(d \times 1\)
-  行列である。行列の積の定義より、これらを掛けるとスカラー（\(1 \times 1\)
-  行列）となる。 \[
-  \mathbf{a}^\top \mathbf{b} = a_1 b_1 + a_2 b_2 + \dots + a_d b_d = \sum_{i=1}^d a_i b_i
-  \] これは内積 \(\langle \mathbf{a}, \mathbf{b} \rangle\)
-  の定義そのものである。また、同様に計算すると
-  \(\mathbf{b}^\top \mathbf{a} = \sum_{i=1}^d b_i a_i\)
-  であり、実数の積は順序を入れ替えても値が変わらない（\(a_i b_i = b_i a_i\)）ため、\(\mathbf{a}^\top \mathbf{b} = \mathbf{b}^\top \mathbf{a}\)
-  となる。
-\item
-  \begin{itemize}
-  \tightlist
-  \item
-    \textbf{横ベクトルが縦に並んでいるとみなす場合：}
-    行列の積の定義より、各行 \(\mathbf{b}_i^\top\) と列ベクトル
-    \(\mathbf{v}\) を掛けたものが結果のベクトルの各成分になるため、 \[
-    B\mathbf{v} = \begin{pmatrix} \mathbf{b}_1^\top \mathbf{v} \\ \vdots \\ \mathbf{b}_m^\top \mathbf{v} \end{pmatrix}
-    \] となり、各成分が内積 \(\mathbf{b}_i^\top \mathbf{v}\)
-    として計算されることがわかる。
-  \item
-    \textbf{縦ベクトルが横に並んでいるとみなす場合：} 列ベクトル
-    \(\boldsymbol{\beta}_j\) の成分ごとの和として展開される。 \[
-    B\mathbf{v} = \begin{pmatrix} \boldsymbol{\beta}_1 & \dots & \boldsymbol{\beta}_d \end{pmatrix} \begin{pmatrix} v_1 \\ \vdots \\ v_d \end{pmatrix} = v_1 \boldsymbol{\beta}_1 + \dots + v_d \boldsymbol{\beta}_d = \sum_{j=1}^d v_j \boldsymbol{\beta}_j
-    \]
-  \end{itemize}
-\end{enumerate}
-
-\hfill 
-
-\hyperref[q:3-matrix-vector-patterns]{（問題へ戻る）}
-
-\end{answerbox}
-
-\begin{answerbox}[phantomlabel=a:3-inner-product-geometry]{q:3-inner-product-geometry}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  \[\mathbf{a}^\top \mathbf{b} = 2 \times (-6) + 3 \times 4 = -12 + 12 = 0\]
-\item
-  内積が \(0\) であるため、2つのベクトルは\textbf{直交している}。
-\end{enumerate}
-
-\hfill 
-
-\hyperref[q:3-inner-product-geometry]{（問題へ戻る）}
-
-\end{answerbox}
-
-\begin{answerbox}[phantomlabel=a:3-projection-component]{q:3-projection-component}
-
-求める射影の長さは内積 \(\mathbf{x}^\top \mathbf{u}\) で与えられる。 \[
-\mathbf{x}^\top \mathbf{u} = 5 \times 1 + (-3) \times 0 = 5
-\] よって \(\mathbf{u}\) 方向への射影の長さは \(5\) である。
-
-\hfill 
-
-\hyperref[q:3-projection-component]{（問題へ戻る）}
-
-\end{answerbox}
-
-\begin{answerbox}[phantomlabel=a:3-inner-product-properties]{q:3-inner-product-properties}
-
-\(\mathbf{x} = (x_1, \dots, x_d)^\top\),
-\(\mathbf{y} = (y_1, \dots, y_d)^\top\) とおく。
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  内積の定義より \(\mathbf{x}^\top \mathbf{y} = \sum_{i=1}^d x_i y_i\)
-  である。 実数の積は可換（\(x_i y_i = y_i x_i\)）なので、 \[
-       \mathbf{x}^\top \mathbf{y} = \sum_{i=1}^d y_i x_i = \mathbf{y}^\top \mathbf{x}
-       \] となり、対称性が成立する。
-\item
-  ベクトルのスカラー倍の定義より
-  \(c\mathbf{x} = (cx_1, \dots, cx_d)^\top\) である。 \[
-       (c\mathbf{x})^\top \mathbf{y} = \sum_{i=1}^d (cx_i)y_i = c \sum_{i=1}^d x_i y_i = c(\mathbf{x}^\top \mathbf{y})
-       \] となり、線形性（スカラー倍の同伴性）が成立する。（証明終）
-\end{enumerate}
-
-\hfill 
-
-\hyperref[q:3-inner-product-properties]{（問題へ戻る）}
-
-\end{answerbox}
 
 \subsection{パラメータ線型モデルの表現（特徴写像）}\label{ux30d1ux30e9ux30e1ux30fcux30bfux7ddaux578bux30e2ux30c7ux30ebux306eux8868ux73feux7279ux5fb4ux5199ux50cf}
 
@@ -1261,7 +797,843 @@ L(w,b) = \frac{1}{n} \sum_{i=1}^n (y_i - (wx_i + b))^2
 
 \end{questionbox}
 
-\subsubsection{解答・解説}\label{ux89e3ux7b54ux89e3ux8aac-4}
+\subsection{多変数関数の経験リスクと勾配}\label{ux591aux5909ux6570ux95a2ux6570ux306eux7d4cux9a13ux30eaux30b9ux30afux3068ux52feux914d}
+
+\begin{questionbox}[label=q:3-multivariate-empirical-risk]{3変数パラメータの経験リスク \hfill \normalfont \small 難易度：★1}
+
+3つのデータポイント \((x_1, y_1) = (1, 2)\), \((x_2, y_2) = (2, 3)\),
+\((x_3, y_3) = (3, 5)\) が与えられている。予測モデルを3変数パラメータ
+\(\boldsymbol{\theta} = (\theta_1, \theta_2, \theta_3)^\top\)
+を用いたモデル
+\(f_{\boldsymbol{\theta}}(x) = \theta_1 + \theta_2 x + \theta_3 x^2\)
+とし、損失関数を二乗誤差とする。 このとき、経験リスク \[
+\hat{R}(f_{\boldsymbol{\theta}}) = \frac{1}{3} \sum_{i=1}^3 (y_i - f_{\boldsymbol{\theta}}(x_i))^2
+\] を \(\boldsymbol{\theta}\)
+の関数として具体的な数値を用いて展開・書き下せ。（整理・簡略化までする必要はない。）
+
+\hfill 
+
+\hyperref[a:3-multivariate-empirical-risk]{（解答・解説へ）}
+
+\end{questionbox}
+
+\subsection{最小二乗法の行列表記と一階の条件（最重要）}\label{ux6700ux5c0fux4e8cux4e57ux6cd5ux306eux884cux5217ux8868ux8a18ux3068ux4e00ux968eux306eux6761ux4ef6ux6700ux91cdux8981}
+
+\begin{questionbox}[label=q:3-matrix-empirical-risk]{行列とベクトルによる目的関数の書き直し \hfill \normalfont \small 難易度：★2}
+
+\(n\) 個のデータ \((x_1, y_1), \dots, (x_n, y_n)\)
+に対して、線型モデルを
+\(f_{\boldsymbol{\theta}}(x) = \boldsymbol{\theta}^\top \boldsymbol{\phi}(x)\)
+とする。また、計画行列 \(\Phi \in \mathbb{R}^{n \times d}\)
+とラベルベクトル \(\mathbf{y} \in \mathbb{R}^n\) を次のように定義する。
+\[
+\Phi = \begin{pmatrix} \quad \boldsymbol{\phi}(x_1)^\top \quad \\ \vdots \\ \quad \boldsymbol{\phi}(x_n)^\top \quad \end{pmatrix}, \quad \mathbf{y} = \begin{pmatrix} y_1 \\ \vdots \\ y_n \end{pmatrix}
+\]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{【予測値の行列表現】}
+  モデルの出力値を各データについて計算し、縦に並べた予測値ベクトル \[
+  \begin{pmatrix} f_{\boldsymbol{\theta}}(x_1) \\ \vdots \\ f_{\boldsymbol{\theta}}(x_n) \end{pmatrix}
+  \] が、 \(\Phi \boldsymbol{\theta}\) と表せることを確認せよ。
+\item
+  \textbf{【平均二乗誤差のノルム表現】} 平均二乗誤差 \[
+  \hat{R}(f_{\boldsymbol{\theta}}) = \frac{1}{n} \sum_{i=1}^n (f_{\boldsymbol{\theta}}(x_i) - y_i)^2
+  \] が、行列とベクトルの積およびノルムを用いて \[
+  \hat{R}(f_{\boldsymbol{\theta}}) = \frac{1}{n} \|\Phi \boldsymbol{\theta} - \mathbf{y}\|^2
+  \] と書き直せることを、上記1の結果およびベクトルのノルムの定義
+  \(\left(\|\mathbf{v}\|^2 = \sum_{i=1}^n v_i^2\right)\)
+  を用いて確認せよ。
+\item
+  \textbf{【ノルムの展開（二次形式との対応）】}
+  さらに、\(\|\Phi\boldsymbol{\theta} - \mathbf{y}\|^2 = (\Phi\boldsymbol{\theta} - \mathbf{y})^\top (\Phi\boldsymbol{\theta} - \mathbf{y})\)
+  の右辺を展開し、以下のようになることを確認せよ。 \begin{align*}
+  (\Phi\boldsymbol{\theta} - \mathbf{y})^\top (\Phi\boldsymbol{\theta} - \mathbf{y}) &= (\Phi\boldsymbol{\theta} - \mathbf{y})^\top (\Phi\boldsymbol{\theta}) - (\Phi\boldsymbol{\theta} - \mathbf{y})^\top \mathbf{y} \\
+  &= (\Phi\boldsymbol{\theta})^\top (\Phi\boldsymbol{\theta}) - \mathbf{y}^\top (\Phi\boldsymbol{\theta}) - (\Phi\boldsymbol{\theta})^\top \mathbf{y} + \mathbf{y}^\top \mathbf{y} \\
+  &= \boldsymbol{\theta}^\top \Phi^\top \Phi \boldsymbol{\theta} - 2\mathbf{y}^\top \Phi \boldsymbol{\theta} + \mathbf{y}^\top \mathbf{y}
+  \end{align*} （ヒント：転置の公式
+  \((\mathbf{A}\mathbf{B})^\top = \mathbf{B}^\top \mathbf{A}^\top\)
+  と、スカラーの内積
+  \(\mathbf{a}^\top \mathbf{b} = \mathbf{b}^\top \mathbf{a}\)
+  を用いること）
+\end{enumerate}
+
+\hfill 
+
+\hyperref[a:3-matrix-empirical-risk]{（解答・解説へ）}
+
+\end{questionbox}
+
+\begin{tcolorbox}[enhanced, colback=blue!2!white, colframe=blue!60!black, fonttitle=\bfseries, drop shadow, title={【復習とヒント】ベクトルによる微分の公式}]
+
+\begin{itemize}
+\item
+  \textbf{内積の微分} \(\rightarrow\) 係数が残る（1次元でいう
+  \((ax)' = a\) の一般化） \[
+  \nabla_{\mathbf{x}} (\mathbf{a}^\top \mathbf{x}) = \nabla_{\mathbf{x}} (\mathbf{x}^\top \mathbf{a}) = \mathbf{a}
+  \]
+\item
+  \textbf{二次形式の微分} \(\rightarrow\) 一次の項が残る（1次元でいう
+  \((ax^2)' = 2ax\) の一般化） \[
+  \nabla_{\mathbf{x}} (\mathbf{x}^\top \mathbf{A} \mathbf{x}) = (\mathbf{A} + \mathbf{A}^\top)\mathbf{x}
+  \] 特に対称行列（\(\mathbf{A} = \mathbf{A}^\top\)）の場合は、
+  \[\nabla_{\mathbf{x}} (\mathbf{x}^\top \mathbf{A} \mathbf{x}) = 2\mathbf{A}\mathbf{x}\]
+  となる。
+\end{itemize}
+
+\end{tcolorbox}
+
+\begin{questionbox}[label=q:3-quadratic-form-completing-square]{行列・ベクトルでの二次形式の展開と平方完成 \hfill \normalfont \small 難易度：★2}
+
+一変数関数における平方完成 \((x - b)^2 = x^2 - 2bx + b^2\)
+の行列・ベクトル版を確認する。 対称行列 \(\mathbf{A}\)（すなわち
+\(\mathbf{A} = \mathbf{A}^\top\)）と、ベクトル
+\(\mathbf{x}, \mathbf{b}\) があるとする。
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{【展開】} 二次形式
+  \((\mathbf{x} - \mathbf{b})^\top \mathbf{A} (\mathbf{x} - \mathbf{b})\)
+  を展開し、\(\mathbf{x}^\top \mathbf{A} \mathbf{x} - 2\mathbf{b}^\top \mathbf{A} \mathbf{x} + \mathbf{b}^\top \mathbf{A} \mathbf{b}\)
+  となることを示せ。（ヒント：スカラー
+  \(\mathbf{b}^\top \mathbf{A} \mathbf{x}\)
+  は転置しても同じ値になること、および \(\mathbf{A}^\top = \mathbf{A}\)
+  を用いる）
+\item
+  \textbf{【平方完成】} 逆に、二次式
+  \(\mathbf{x}^\top \mathbf{A} \mathbf{x} - 2\mathbf{c}^\top \mathbf{x}\)
+  が与えられたとき、これを平方完成して
+  \((\mathbf{x} - \boldsymbol{\mu})^\top \mathbf{A} (\mathbf{x} - \boldsymbol{\mu}) + \text{定数}\)
+  の形にしたい。\(\mathbf{A}\) が正則（逆行列 \(\mathbf{A}^{-1}\)
+  を持つ）であると仮定し、\(\boldsymbol{\mu} = \mathbf{A}^{-1}\mathbf{c}\)
+  とおくことで平方完成を完了させよ。
+\end{enumerate}
+
+\hfill 
+
+\hyperref[a:3-quadratic-form-completing-square]{（解答・解説へ）}
+
+\end{questionbox}
+
+\begin{questionbox}[label=q:3-matrix-derivative-first-order]{一階の条件の行列導出 \hfill \normalfont \small 難易度：★1}
+
+目的関数
+\(L(\boldsymbol{\theta}) = \frac{1}{2}(\Phi\boldsymbol{\theta} - \mathbf{y})^\top (\Phi\boldsymbol{\theta} - \mathbf{y})\)
+の勾配 \(\nabla_{\boldsymbol{\theta}} L(\boldsymbol{\theta})\)
+を求め、一階の条件
+\(\nabla_{\boldsymbol{\theta}} L(\boldsymbol{\theta}) = \mathbf{0}\)
+から正規方程式 \[
+\Phi^\top \Phi \boldsymbol{\theta} = \Phi^\top \mathbf{y}
+\] を導出せよ。
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{ヒント：} \(\Phi^\top \Phi\)
+は対称行列である（転置に対して不変であることが
+\((\Phi^\top \Phi)^\top = \Phi^\top (\Phi^\top)^\top = \Phi^\top \Phi\)
+から確認できる）。
+
+\hfill 
+
+\hyperref[a:3-matrix-derivative-first-order]{（解答・解説へ）}
+
+\end{questionbox}
+
+\subsection{正則化（Regularization）}\label{ux6b63ux5247ux5316regularization}
+
+\begin{tcolorbox}[enhanced, colback=blue!2!white, colframe=blue!60!black, fonttitle=\bfseries, drop shadow, title={【復習とヒント】L2ノルムの性質と内積}]
+
+一般の \(d\) 次元ベクトル \(\mathbf{w} = (w_1, \dots, w_d)^\top\)
+について、L2ノルムの定義 \(\|\mathbf{w}\| = \sqrt{\sum_{i=1}^d w_i^2}\)
+と内積の定義より、以下の等式が成り立ちます。 \[
+\|\mathbf{w}\|^2 = \mathbf{w}^\top \mathbf{w}
+\]
+
+\end{tcolorbox}
+
+\begin{questionbox}[label=q:3-l2-regularization-objective]{L2正則化付き目的関数の書き下し \hfill \normalfont \small 難易度：★1}
+
+損失関数を二乗誤差、正則化項をL2ノルムの2乗とし、正則化係数を
+\(\lambda = 0.01\) とする。 \(n\)
+個のデータに対するL2正則化付き経験リスク最小化の目的関数
+\(L_{\text{reg}}(\boldsymbol{\theta})\) の式をシグマ表記で書き下せ。
+
+\hfill 
+
+\hyperref[a:3-l2-regularization-objective]{（解答・解説へ）}
+
+\end{questionbox}
+
+\begin{questionbox}[label=q:3-l2-regularization-gradient]{行列による書き直しと一階の条件 \hfill \normalfont \small 難易度：★1}
+
+目的関数を
+\(L_{\text{reg}}(\boldsymbol{\theta}) = \frac{1}{2}\|\Phi\boldsymbol{\theta} - \mathbf{y}\|^2 + \frac{\lambda}{2}\|\boldsymbol{\theta}\|^2\)
+とする。全体の勾配を \(\mathbf{0}\) と置く一階の条件から、最適解 \[
+\hat{\boldsymbol{\theta}} = (\Phi^\top \Phi + \lambda \mathbf{I})^{-1}\Phi^\top \mathbf{y}
+\] を導出せよ（ただし逆行列は存在すると仮定する）。
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{ヒント：}
+\(\frac{\lambda}{2}\|\boldsymbol{\theta}\|^2 = \boldsymbol{\theta}^\top (\frac{\lambda}{2}\mathbf{I}) \boldsymbol{\theta}\)
+である。
+
+\hfill 
+
+\hyperref[a:3-l2-regularization-gradient]{（解答・解説へ）}
+
+\end{questionbox}
+
+\subsection{モデル選択（交差検証）}\label{ux30e2ux30c7ux30ebux9078ux629eux4ea4ux5deeux691cux8a3c}
+
+\begin{questionbox}[label=q:3-cross-validation-indices]{K-foldとLOOCVのインデックス計算 \hfill \normalfont \small 難易度：★0}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \(n=6\) 個のデータを \(K=3\) 個のフォルダ \[
+       D_1 = \{1, 2\}, \quad D_2 = \{3, 4\}, \quad D_3 = \{5, 6\}
+       \] に分割する。第2イテレーション（\(D_2\)
+  が検証用）において、訓練に使用されるデータのインデックスをすべて答えよ。
+\item
+  サンプルサイズが \(n=100\)
+  のデータにLOOCV（一箇抜き交差検証）を行う場合、モデルの学習は合計で何回実行されるか。
+\end{enumerate}
+
+\hfill 
+
+\hyperref[a:3-cross-validation-indices]{（解答・解説へ）}
+
+\end{questionbox}
+
+\section{確率モデルと分位点回帰}\label{ux78baux7387ux30e2ux30c7ux30ebux3068ux5206ux4f4dux70b9ux56deux5e30}
+
+\subsection{同時分布・条件付き分布・条件付き期待値}\label{ux540cux6642ux5206ux5e03ux6761ux4ef6ux4ed8ux304dux5206ux5e03ux6761ux4ef6ux4ed8ux304dux671fux5f85ux5024}
+
+\begin{questionbox}[label=q:4-conditional-probability-table]{同時確率表からの条件付き分布と期待値 \hfill \normalfont \small 難易度：★1}
+
+離散確率変数 \(X \in \{0,1\}\) と \(Y \in \{1,2,3\}\) の同時確率
+\(P(X, Y)\) について、 \(X=0\) のとき、\(Y=1, 2, 3\)
+となる確率はそれぞれ \(0.1, 0.2, 0.1\) である。
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \(X=0\) となる周辺確率（正規化定数） \(P(X=0)\) を求めよ。
+\item
+  \(X=0\) という条件のもとでの \(Y\) の条件付き確率分布
+  \(P(Y=y \mid X=0)\) を求めよ。
+\item
+  上記の分布を用いて、条件付き期待値 \(\mathbb{E}[Y \mid X=0]\)
+  を計算せよ。
+\end{enumerate}
+
+\hfill 
+
+\hyperref[a:4-conditional-probability-table]{（解答・解説へ）}
+
+\end{questionbox}
+
+\subsection{分位点（Quantile）と外れ値の影響}\label{ux5206ux4f4dux70b9quantileux3068ux5916ux308cux5024ux306eux5f71ux97ff}
+
+\begin{questionbox}[label=q:4-absolute-loss-mae]{飛びのある分布の分位点とロバスト性 \hfill \normalfont \small 難易度：★1}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  データセット \(\{2, 3, 5, 7, 100\}\) の平均値と中央値を求めよ。
+\item
+  外れ値の \(100\) が \(1000\)
+  に化けたとする。このとき平均値と中央値はどう変化するか計算し、ピンボール損失（中央値の場合は絶対値損失）が外れ値に対して持つ優位性を説明せよ。
+\end{enumerate}
+
+\hfill 
+
+\hyperref[a:4-absolute-loss-mae]{（解答・解説へ）}
+
+\end{questionbox}
+
+\begin{questionbox}[label=q:4-pinball-loss-calculation]{ピンボール損失のグラフ描写の理解 \hfill \normalfont \small 難易度：★0}
+
+ピンボール損失関数 \[
+l_\alpha(y, y') =
+\begin{cases}
+(\alpha - 1)(y - y') & (y - y' < 0) \\
+\alpha(y - y') & (y - y' \ge 0)
+\end{cases}
+\] において、\(\alpha = 0.3\) とする。誤差 \(e = y - y'\) が \(e = -2\)
+のときと \(e = 4\)
+のときの損失の値をそれぞれ計算し、グラフの形状を説明せよ。
+
+\hfill 
+
+\hyperref[a:4-pinball-loss-calculation]{（解答・解説へ）}
+
+\end{questionbox}
+
+\section{確率論的二値分類と非線型最適化}\label{ux78baux7387ux8ad6ux7684ux4e8cux5024ux5206ux985eux3068ux975eux7ddaux578bux6700ux9069ux5316}
+
+\subsection{ロジスティック回帰の基礎と非線型目的関数の勾配}\label{ux30edux30b8ux30b9ux30c6ux30a3ux30c3ux30afux56deux5e30ux306eux57faux790eux3068ux975eux7ddaux578bux76eeux7684ux95a2ux6570ux306eux52feux914d}
+
+\begin{questionbox}[label=q:5-indicator-expectation]{指示関数の期待値と確率の関係 \hfill \normalfont \small 難易度：★1}
+
+事象（または条件） \(A\) について、指示関数の期待値
+\(\mathbb{E}[\ind\{X \in A\}]\) は、事象 \(\{X \in A\}\) が発生する確率
+\(\mathbb{P}(X \in A)\) と等しくなること、すなわち \[
+\mathbb{E}[\ind\{X \in A\}] = \mathbb{P}(X \in A)
+\] が常に成り立つことを示せ。
+
+\hfill 
+
+\hyperref[a:5-indicator-expectation]{（解答・解説へ）}
+
+\end{questionbox}
+
+\subsection{ロジスティック関数の微分と交差エントロピー}\label{ux30edux30b8ux30b9ux30c6ux30a3ux30c3ux30afux95a2ux6570ux306eux5faeux5206ux3068ux4ea4ux5deeux30a8ux30f3ux30c8ux30edux30d4ux30fc}
+
+\begin{questionbox}[label=q:5-sigmoid-derivative]{シグモイド関数の微分証明 \hfill \normalfont \small 難易度：★2}
+
+ロジスティック関数（シグモイド関数）
+\(\sigma(z) = \frac{1}{1 + e^{-z}}\) について、
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  商の微分公式を用いて \(\sigma'(z) = \sigma(z)(1 - \sigma(z))\)
+  になることを証明せよ。
+\item
+  合成関数の微分則を用いて
+  \(\frac{d}{dz} \log \sigma(z) = 1 - \sigma(z)\) が成り立つことを示せ。
+\end{enumerate}
+
+\hfill 
+
+\hyperref[a:5-sigmoid-derivative]{（解答・解説へ）}
+
+\end{questionbox}
+
+\begin{questionbox}[label=q:5-cross-entropy-gradient]{交差エントロピーとチェインルールによる勾配導出 \hfill \normalfont \small 難易度：★2}
+
+交差エントロピー損失 \[
+l = -y \log \sigma(z) - (1-y) \log(1 - \sigma(z)) \quad (\text{ただし } z = \boldsymbol{\theta}^\top \boldsymbol{\phi}(x))
+\] について、チェインルール
+\(\nabla_{\boldsymbol{\theta}} l = \frac{\partial l}{\partial z} \cdot \nabla_{\boldsymbol{\theta}} z\)
+を用いて、勾配が \[
+\nabla_{\boldsymbol{\theta}} l = (\sigma(z) - y)\boldsymbol{\phi}(x)
+\] となることを導出せよ。
+
+\hfill 
+
+\hyperref[a:5-cross-entropy-gradient]{（解答・解説へ）}
+
+\end{questionbox}
+
+\section{確率論的多値分類とソフトマックス回帰}\label{ux78baux7387ux8ad6ux7684ux591aux5024ux5206ux985eux3068ux30bdux30d5ux30c8ux30deux30c3ux30afux30b9ux56deux5e30}
+
+\subsection{ソフトマックス関数と多クラス交差エントロピー}\label{ux30bdux30d5ux30c8ux30deux30c3ux30afux30b9ux95a2ux6570ux3068ux591aux30afux30e9ux30b9ux4ea4ux5deeux30a8ux30f3ux30c8ux30edux30d4ux30fc}
+
+\begin{questionbox}[label=q:6-softmax-gradient-derivation]{ソフトマックス損失の勾配公式の導出 \hfill \normalfont \small 難易度：★1}
+
+多クラス分類問題において、入力 \(\mathbf{x}\) に対するスコアベクトルを
+\(s_{\boldsymbol{\theta}}(\mathbf{x}) \in \mathbb{R}^K\) とし、モデル
+\(g_{\boldsymbol{\theta}}(\mathbf{x}) = \text{Softmax}(s_{\boldsymbol{\theta}}(\mathbf{x}))\)
+を考える。ここで、モデルの出力ベクトルの第 \(k\) 成分
+\(g_{\boldsymbol{\theta}}(\mathbf{x})[k]\) は以下のように定義される。 \[
+g_{\boldsymbol{\theta}}(\mathbf{x})[k] = \frac{\exp(s_{\boldsymbol{\theta}}(\mathbf{x})[k])}{\sum_{j=1}^K \exp(s_{\boldsymbol{\theta}}(\mathbf{x})[j])}
+\] 正解クラスラベルを \(y \in \{1, \dots, K\}\)
+とするとき、損失関数（負の対数尤度損失）を \[
+\ell((\mathbf{x}, y), g_{\boldsymbol{\theta}}) = -\log g_{\boldsymbol{\theta}}(\mathbf{x})[y]
+\] と定義する。このとき、以下の問いに答えよ。
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  損失関数のパラメータ \(\boldsymbol{\theta}\)
+  に対する勾配が、以下のように表されることを示せ。 \[
+  \nabla_{\boldsymbol{\theta}} \ell((\mathbf{x}, y), g_{\boldsymbol{\theta}}) = -\nabla_{\boldsymbol{\theta}} s_{\boldsymbol{\theta}}(\mathbf{x})[y] + \sum_{k=1}^K g_{\boldsymbol{\theta}}(\mathbf{x})[k] \cdot \nabla_{\boldsymbol{\theta}} s_{\boldsymbol{\theta}}(\mathbf{x})[k]
+  \]
+\item
+  多クラスロジスティック回帰（ソフトマックス回帰）モデルにおいて、クラス
+  \(k\) のスコアが、クラス固有のパラメータベクトル
+  \(\boldsymbol{\theta}_k\) と特徴量 \(\boldsymbol{\phi}(\mathbf{x})\)
+  の内積 \[
+  s_{\boldsymbol{\theta}}(\mathbf{x})[k] = \boldsymbol{\theta}_k^\top \boldsymbol{\phi}(\mathbf{x})
+  \] で与えられるとする。このとき、損失関数のパラメータ
+  \(\boldsymbol{\theta}_k\) に対する勾配
+  \(\nabla_{\boldsymbol{\theta}_k} \ell((\mathbf{x}, y), g_{\boldsymbol{\theta}})\)
+  が \[
+  \nabla_{\boldsymbol{\theta}_k} \ell((\mathbf{x}, y), g_{\boldsymbol{\theta}}) = \left( g_{\boldsymbol{\theta}}(\mathbf{x})[k] - \mathbf{1}\{k = y\} \right) \boldsymbol{\phi}(\mathbf{x})
+  \] となることを示せ。ただし、\(\mathbf{1}\{\cdot\}\)
+  は指示関数であり、条件が真のとき \(1\)、偽のとき \(0\) をとる。
+\end{enumerate}
+
+\hfill 
+
+\hyperref[a:6-softmax-gradient-derivation]{（解答・解説へ）}
+
+\end{questionbox}
+
+\section{解答・解説}\label{ux89e3ux7b54ux89e3ux8aac}
+
+\subsection{確率の基礎とリスク関数・ERM}\label{ux78baux7387ux306eux57faux790eux3068ux30eaux30b9ux30afux95a2ux6570erm-1}
+
+\subsubsection{確率の基礎と期待値・分散の計算}\label{ux78baux7387ux306eux57faux790eux3068ux671fux5f85ux5024ux5206ux6563ux306eux8a08ux7b97-1}
+
+\textbf{【該当内容】} 第1回スライド34〜38「基本知識＞確率分布、期待値」
+\textbf{【ねらい】} 期待値 \(\mathbb{E}[\cdot]\) や分散
+\(\mathbb{V}[\cdot]\)
+の計算規則を、離散型・連続型の両面から手計算で確かめ、のちに登場する「リスク関数」の数学的実態を掴む。
+
+\begin{answerbox}[phantomlabel=a:1-discrete-expectation-variance]{q:1-discrete-expectation-variance}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \(\mathbb{E}[X] = 0 \times 0.2 + 1 \times 0.5 + 2 \times 0.3 = 0 + 0.5 + 0.6 = 1.1\)
+\item
+  \(\mathbb{E}[f(X)] = \mathbb{E}[X^2] = 0^2 \times 0.2 + 1^2 \times 0.5 + 2^2 \times 0.3 = 0 + 0.5 + 1.2 = 1.7\)
+\item
+  分散 \(\mathbb{V}[f(X)]\)
+  の計算方法には、定義から計算する方法と、公式を用いる方法の2通りがあります。
+
+  \textbf{方法1：定義から直接計算する方法} 分散の定義
+  \(\mathbb{V}[Y] = \mathbb{E}[(Y - \mathbb{E}[Y])^2]\)
+  において、\(Y = f(X)\) と置くと、 \[
+   \mathbb{V}[f(X)] = \mathbb{E}\left[ (f(X) - \mathbb{E}[f(X)])^2 \right]
+   \] となります。(2) より \(\mathbb{E}[f(X)] = 1.7\) であるため、各
+  \(X\) の値における \(f(X)\) の値から期待値 \(1.7\)
+  を引き、その2乗の期待値をとります。 \begin{align*}
+   \mathbb{V}[f(X)] &= (f(0) - 1.7)^2 \times 0.2 + (f(1) - 1.7)^2 \times 0.5 + (f(2) - 1.7)^2 \times 0.3 \\
+   &= (0^2 - 1.7)^2 \times 0.2 + (1^2 - 1.7)^2 \times 0.5 + (2^2 - 1.7)^2 \times 0.3 \\
+   &= (-1.7)^2 \times 0.2 + (-0.7)^2 \times 0.5 + (2.3)^2 \times 0.3 \\
+   &= 2.89 \times 0.2 + 0.49 \times 0.5 + 5.29 \times 0.3 \\
+   &= 0.578 + 0.245 + 1.587 \\
+   &= 2.41
+   \end{align*}
+
+  \textbf{方法2：公式
+  \(\mathbb{V}[f(X)] = \mathbb{E}[(f(X))^2] - (\mathbb{E}[f(X)])^2\)
+  を用いる方法} まず、\(\mathbb{E}[(f(X))^2] = \mathbb{E}[X^4]\)
+  を計算します。 \[
+   \mathbb{E}[X^4] = 0^4 \times 0.2 + 1^4 \times 0.5 + 2^4 \times 0.3 = 0 + 0.5 + 16 \times 0.3 = 5.3
+   \] これと (2) の結果 \(\mathbb{E}[f(X)] = 1.7\) を公式に代入します。
+  \[
+   \mathbb{V}[f(X)] = 5.3 - (1.7)^2 = 5.3 - 2.89 = 2.41
+   \]
+\end{enumerate}
+
+\hfill 
+
+\hyperref[q:1-discrete-expectation-variance]{（問題へ戻る）}
+
+\end{answerbox}
+
+\begin{answerbox}[phantomlabel=a:1-indicator-function]{q:1-indicator-function}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  指示関数の定義「条件が真なら \(1\)、偽なら
+  \(0\)」に基づいて計算します。
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \begin{enumerate}
+    \def\labelenumii{(\alph{enumii})}
+    \tightlist
+    \item
+      \(X = 0\) のとき：条件 \(X \ge 1\)
+      は偽（不成立）となるため、\(\ind\{0 \ge 1\} = 0\) です。
+    \end{enumerate}
+  \item
+    \begin{enumerate}
+    \def\labelenumii{(\alph{enumii})}
+    \setcounter{enumii}{1}
+    \tightlist
+    \item
+      \(X = 2\) のとき：条件 \(X \ge 1\)
+      は真（成立）となるため、\(\ind\{2 \ge 1\} = 1\) です。
+    \end{enumerate}
+  \end{itemize}
+\item
+  \(Y = \ind\{X \ge 1\}\) がとり得る値は、定義より \(0\) または \(1\)
+  です。
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(Y = 0\) となるのは、条件 \(X \ge 1\) が偽のとき、すなわち
+    \(X = 0\) のときです。
+    したがって、\(\mathbb{P}(Y = 0) = \mathbb{P}(X = 0) = 0.2\)
+    となります。
+  \item
+    \(Y = 1\) となるのは、条件 \(X \ge 1\) が真のとき、すなわち
+    \(X = 1\) または \(X = 2\) のときです。
+    したがって、\(\mathbb{P}(Y = 1) = \mathbb{P}(X = 1) + \mathbb{P}(X = 2) = 0.5 + 0.3 = 0.8\)
+    となります。
+  \end{itemize}
+
+  まとめると、確率分布の空欄に入る値は以下の通りです：
+
+  \begin{itemize}
+  \tightlist
+  \item
+    （ア） \(0\)
+  \item
+    （イ） \(1\)
+  \item
+    （ウ） \(0.2\)
+  \item
+    （エ） \(0.8\)
+  \end{itemize}
+\end{enumerate}
+
+\hfill 
+
+\hyperref[q:1-indicator-function]{（問題へ戻る）}
+
+\end{answerbox}
+
+\begin{answerbox}[phantomlabel=a:1-continuous-expectation-variance]{q:1-continuous-expectation-variance}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  指示関数の定義より、\(\ind\{0 \le x \le 1\}\) は \(0 \le x \le 1\)
+  のとき \(1\)、それ以外の範囲では \(0\)
+  となります。したがって、実数全体 \((-\infty, \infty)\) の積分を
+  \([0, 1]\) の範囲に絞ることができます。 \[
+   \int_{-\infty}^\infty p(x) dx = \int_{-\infty}^\infty 2x \cdot \ind\{0 \le x \le 1\} dx = \int_0^1 2x dx = \left[ x^2 \right]_0^1 = 1^2 - 0^2 = 1 \quad \text{（証明終）}
+   \]
+\item
+  期待値 \(\mathbb{E}[X]\)
+  も同様に指示関数を用いて積分範囲を絞って計算します。 \[
+   \mathbb{E}[X] = \int_{-\infty}^\infty x \cdot p(x) dx = \int_{-\infty}^\infty x \cdot 2x \cdot \ind\{0 \le x \le 1\} dx = \int_0^1 2x^2 dx = \left[ \frac{2}{3}x^3 \right]_0^1 = \frac{2}{3}
+   \]
+\item
+  \(\mathbb{E}[X^2]\) の計算： \[
+   \mathbb{E}[X^2] = \int_{-\infty}^\infty x^2 \cdot p(x) dx = \int_{-\infty}^\infty x^2 \cdot 2x \cdot \ind\{0 \le x \le 1\} dx = \int_0^1 2x^3 dx = \left[ \frac{1}{2}x^4 \right]_0^1 = \frac{1}{2}
+   \] よって分散 \(\mathbb{V}[X]\) は、 \[
+   \mathbb{V}[X] = \mathbb{E}[X^2] - (\mathbb{E}[X])^2 = \frac{1}{2} - \left(\frac{2}{3}\right)^2 = \frac{1}{2} - \frac{4}{9} = \frac{1}{18}
+   \]
+\end{enumerate}
+
+\hfill 
+
+\hyperref[q:1-continuous-expectation-variance]{（問題へ戻る）}
+
+\end{answerbox}
+
+\begin{answerbox}[phantomlabel=a:1-variance-formula-proof]{q:1-variance-formula-proof}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \[Cov(X, X+Y) = Cov(X,X) + Cov(X,Y) = \mathbb{V}[X] + Cov(X,Y)\]
+\item
+  \begin{align*}
+       \mathbb{V}[aX+bY] &= Cov(aX+bY, aX+bY) \\
+       &= a^2 Cov(X,X) + ab Cov(X,Y) + ba Cov(Y,X) + b^2 Cov(Y,Y) \\
+       &= a^2 \mathbb{V}[X] + 2ab Cov(X,Y) + b^2 \mathbb{V}[Y] \quad \text{（対称性より）}
+       \end{align*}
+  この展開の構造は、のちに行列やベクトルの内積（2次形式）を展開する際の論理構造と全く同じである。
+\end{enumerate}
+
+\hfill 
+
+\hyperref[q:1-variance-formula-proof]{（問題へ戻る）}
+
+\end{answerbox}
+
+\subsection{最適化と最小二乗法・偏微分}\label{ux6700ux9069ux5316ux3068ux6700ux5c0fux4e8cux4e57ux6cd5ux504fux5faeux5206-1}
+
+\subsubsection{経験リスクの数式化（シグマを用いた書き下し）}\label{ux7d4cux9a13ux30eaux30b9ux30afux306eux6570ux5f0fux5316ux30b7ux30b0ux30deux3092ux7528ux3044ux305fux66f8ux304dux4e0bux3057-1}
+
+\textbf{【該当内容】}
+第2回スライド27〜37「予測系タスクの具体例＞線型単回帰、最小二乗法」
+\textbf{【ねらい】} \(n\)
+個の一般的なデータ表記に対して、二乗損失を用いた経験リスクの正確な数式をシグマ
+\(\sum\) を用いて構築できるようにする。
+
+\begin{answerbox}[phantomlabel=a:2-empirical-risk-formulation]{q:2-empirical-risk-formulation}
+
+モデルの出力 \(\hat{y}_i = wx_i + b\)
+を損失関数に代入し、その標本平均をとる。 \[
+L(w,b) = \frac{1}{n} \sum_{i=1}^n (y_i - (wx_i + b))^2
+\]
+
+\hfill 
+
+\hyperref[q:2-empirical-risk-formulation]{（問題へ戻る）}
+
+\end{answerbox}
+
+\begin{answerbox}[phantomlabel=a:2-erm-parameter-function]{q:2-erm-parameter-function}
+
+与えられた数値を代入して整理する。 \begin{align*}
+\hat{R}(\theta) &= \frac{1}{2} \left[ (2 - \theta \cdot 1)^2 + (4 - \theta \cdot 3)^2 \right] \\
+&= \frac{1}{2} \left[ (4 - 4\theta + \theta^2) + (16 - 24\theta + 9\theta^2) \right] \\
+&= \frac{1}{2} (10\theta^2 - 28\theta + 20) \\
+&= 5\theta^2 - 14\theta + 10
+\end{align*}
+これによって、最適化（微分して最小値を求める）対象がパラメータ
+\(\theta\) だけの関数になったことが示される。
+
+\hfill 
+
+\hyperref[q:2-erm-parameter-function]{（問題へ戻る）}
+
+\end{answerbox}
+
+\begin{answerbox}[phantomlabel=a:2-optimization-formulation-blank]{q:2-optimization-formulation-blank}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{(ア)} \(\boldsymbol{\theta} \in \mathbb{R}^d\)
+\item
+  \textbf{(イ)} \(L(\boldsymbol{\theta})\) よって全体の式は
+  \(\mathop{\mathrm{Min}}_{\boldsymbol{\theta} \in \mathbb{R}^d} L(\boldsymbol{\theta})\)
+  となる。最適化を行う範囲（定義域）を \(\mathrm{Min}\) の下に記述する。
+\item
+  \textbf{(ウ)}
+  \(\boldsymbol{\theta} \in \{\boldsymbol{\theta} \in \mathbb{R}^d : \|\boldsymbol{\theta}\| \le C\}\)
+  （または
+  \(\boldsymbol{\theta} \in \mathbb{R}^d \text{ s.t. } \|\boldsymbol{\theta}\| \le C\)）
+\item
+  \textbf{(エ)} \(L(\boldsymbol{\theta})\) よって全体の式は
+  \(\mathop{\mathrm{Min}}_{\boldsymbol{\theta} \in \{\boldsymbol{\theta} \in \mathbb{R}^d : \|\boldsymbol{\theta}\| \le C\}} L(\boldsymbol{\theta})\)
+  となる。制約条件は変数が属する集合（定義域）として \(\mathrm{Min}\)
+  の下に記述することができる。
+\end{itemize}
+
+\hfill 
+
+\hyperref[q:2-optimization-formulation-blank]{（問題へ戻る）}
+
+\end{answerbox}
+
+\subsubsection{最小二乗法の真髄：偏微分から一階の条件へ}\label{ux6700ux5c0fux4e8cux4e57ux6cd5ux306eux771fux9ac4ux504fux5faeux5206ux304bux3089ux4e00ux968eux306eux6761ux4ef6ux3078-1}
+
+\textbf{【該当内容】} 第2回スライド38〜45「一階の条件、偏微分・勾配」
+\textbf{【ねらい】} スライドで省略されている目的関数 \(L(w,b)\)
+の偏微分から勾配の構築、一階の条件による正規方程式のスカラ版の導出を完全に追体験する。
+
+\begin{answerbox}[phantomlabel=a:3-multivariate-gradient]{q:3-multivariate-gradient}
+
+各変数 \(\mathit{w}_1, \mathit{w}_2, \mathit{w}_3\)
+について偏微分を行います。
+
+\begin{itemize}
+\tightlist
+\item
+  \(w_1\) についての偏微分： \[
+  \frac{\partial g}{\partial w_1} = 2w_1 - 4w_2
+  \]
+\item
+  \(w_2\) についての偏微分： \[
+  \frac{\partial g}{\partial w_2} = 4w_2 - 4w_1 - 6w_3
+  \]
+\item
+  \(w_3\) についての偏微分： \[
+  \frac{\partial g}{\partial w_3} = 6w_3 - 6w_2
+  \]
+\end{itemize}
+
+これらをベクトルとしてまとめると、求める勾配は以下のようになります： \[
+\nabla g(\mathbf{w}) = \begin{pmatrix} 2w_1 - 4w_2 \\ -4w_1 + 4w_2 - 6w_3 \\ -6w_2 + 6w_3 \end{pmatrix}
+\] （証明終）
+
+\hfill 
+
+\hyperref[q:3-multivariate-gradient]{（問題へ戻る）}
+
+\end{answerbox}
+
+\begin{answerbox}[phantomlabel=a:2-partial-derivative-gradient]{q:2-partial-derivative-gradient}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{偏微分と勾配の計算：}
+  合成関数の微分（チェインルール）を用いて、それぞれ \(w\) と \(b\)
+  について偏微分を行う。 \[
+       \frac{\partial L}{\partial w} = \frac{1}{n} \sum_{i=1}^n 2(y_i - wx_i - b) \cdot (-x_i) = -\frac{2}{n} \sum_{i=1}^n (y_i - wx_i - b)x_i
+       \] \[
+       \frac{\partial L}{\partial b} = \frac{1}{n} \sum_{i=1}^n 2(y_i - wx_i - b) \cdot (-1) = -\frac{2}{n} \sum_{i=1}^n (y_i - wx_i - b)
+       \] これらを縦に並べたものが勾配である。 \[
+       \nabla L(w,b) = \begin{pmatrix} -\frac{2}{n} \sum_{i=1}^n (y_i - wx_i - b)x_i \\ -\frac{2}{n} \sum_{i=1}^n (y_i - wx_i - b) \end{pmatrix}
+       \]
+\item
+  \textbf{一階の条件からの連立方程式の導出：} 一階の条件
+  \(\nabla L(w,b) = \mathbf{0}\) より、各成分が \(0\) となる。 \[
+       \begin{cases}
+       -\frac{2}{n} \sum_{i=1}^n (y_i - wx_i - b)x_i = 0 \\
+       -\frac{2}{n} \sum_{i=1}^n (y_i - wx_i - b) = 0
+       \end{cases}
+       \] 両辺に \(-\frac{n}{2}\) を掛けて整理し、\(w, b\)
+  を含む項を左辺に、含まない項を右辺にまとめる。 \[
+       \begin{cases}
+       w \sum_{i=1}^n x_i^2 + b \sum_{i=1}^n x_i = \sum_{i=1}^n x_i y_i \\
+       w \sum_{i=1}^n x_i + b \sum_{i=1}^n 1 = \sum_{i=1}^n y_i
+       \end{cases}
+       \] ここで \(\sum_{i=1}^n 1 = n\)
+  であることに注意し、これを行列とベクトルを用いた形に書き直すと以下のようになる。
+  \[
+       \begin{pmatrix} \sum_{i=1}^n x_i^2 & \sum_{i=1}^n x_i \\ \sum_{i=1}^n x_i & n \end{pmatrix} \begin{pmatrix} w \\ b \end{pmatrix} = \begin{pmatrix} \sum_{i=1}^n x_i y_i \\ \sum_{i=1}^n y_i \end{pmatrix}
+       \]
+\item
+  \textbf{最適なパラメータの導出：}
+  求めた行列方程式の両辺の左から、係数行列の逆行列を掛けることで、目的の式が導かれる。
+  \[
+       \begin{pmatrix} \hat{w} \\ \hat{b} \end{pmatrix} = \begin{pmatrix} \sum_{i=1}^n x_i^2 & \sum_{i=1}^n x_i \\ \sum_{i=1}^n x_i & n \end{pmatrix}^{-1} \begin{pmatrix} \sum_{i=1}^n x_i y_i \\ \sum_{i=1}^n y_i \end{pmatrix}
+       \] （証明終）
+\end{enumerate}
+
+\hfill 
+
+\hyperref[q:2-partial-derivative-gradient]{（問題へ戻る）}
+
+\end{answerbox}
+
+\subsection{線型モデルの行列表現と正則化・モデル選択}\label{ux7ddaux578bux30e2ux30c7ux30ebux306eux884cux5217ux8868ux73feux3068ux6b63ux5247ux5316ux30e2ux30c7ux30ebux9078ux629e-1}
+
+\subsubsection{ベクトルの内積と性質}\label{ux30d9ux30afux30c8ux30ebux306eux5185ux7a4dux3068ux6027ux8cea-1}
+
+\textbf{【該当内容】}
+第3回スライド22〜26「線型モデルの幾何学的解釈、内積の性質」
+\textbf{【ねらい】}
+機械学習における予測の基本演算である「内積」について、重み付き和、幾何的な向きの検出、射影という3つの側面を手計算を通じて習得する。
+
+\begin{answerbox}[phantomlabel=a:3-matrix-vector-multiplication-practice]{q:3-matrix-vector-multiplication-practice}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{【行列 \(\times\) 行列】} \[
+  \begin{pmatrix} 1 \cdot 2 + 2 \cdot 1 & 1 \cdot 0 + 2 \cdot 3 & 1 \cdot 1 + 2 \cdot (-1) \\ 3 \cdot 2 + 4 \cdot 1 & 3 \cdot 0 + 4 \cdot 3 & 3 \cdot 1 + 4 \cdot (-1) \end{pmatrix} = \begin{pmatrix} 4 & 6 & -1 \\ 10 & 12 & -1 \end{pmatrix}
+  \]
+\item
+  \textbf{【行列 \(\times\) 縦ベクトル】} \[
+  \begin{pmatrix} 1 \cdot 2 + (-1) \cdot 1 + 2 \cdot (-1) \\ 0 \cdot 2 + 3 \cdot 1 + 1 \cdot (-1) \end{pmatrix} = \begin{pmatrix} -1 \\ 2 \end{pmatrix}
+  \]
+\item
+  \textbf{【横ベクトル \(\times\) 行列 \(\times\)
+  縦ベクトル（二次形式）】} 先に後ろの「行列 \(\times\)
+  縦ベクトル」を計算すると、 \[
+  \begin{pmatrix} 2 & 0 \\ 0 & 3 \end{pmatrix} \begin{pmatrix} 1 \\ 2 \end{pmatrix} = \begin{pmatrix} 2 \\ 6 \end{pmatrix}
+  \] これに横ベクトルを掛けるとスカラーになる。 \[
+  \begin{pmatrix} 1 & 2 \end{pmatrix} \begin{pmatrix} 2 \\ 6 \end{pmatrix} = 1 \cdot 2 + 2 \cdot 6 = 14
+  \]
+\item
+  \textbf{【横ベクトル \(\times\) 縦ベクトル（内積）】} \[
+  1 \cdot 4 + 3 \cdot (-1) + (-2) \cdot 2 = 4 - 3 - 4 = -3
+  \]
+\item
+  \textbf{【縦ベクトル \(\times\) 横ベクトル】} \(3 \times 1\) 行列と
+  \(1 \times 2\) 行列の積となり、\(3 \times 2\) の行列が生成される。 \[
+  \begin{pmatrix} 2 \cdot 1 & 2 \cdot 4 \\ -1 \cdot 1 & -1 \cdot 4 \\ 3 \cdot 1 & 3 \cdot 4 \end{pmatrix} = \begin{pmatrix} 2 & 8 \\ -1 & -4 \\ 3 & 12 \end{pmatrix}
+  \]
+\end{enumerate}
+
+\hfill 
+
+\hyperref[q:3-matrix-vector-multiplication-practice]{（問題へ戻る）}
+
+\end{answerbox}
+
+\begin{answerbox}[phantomlabel=a:3-matrix-vector-patterns]{q:3-matrix-vector-patterns}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \(\mathbf{a}^\top = \begin{pmatrix} a_1 & \dots & a_d \end{pmatrix}\)
+  は \(1 \times d\) 行列、\(\mathbf{b}\) は \(d \times 1\)
+  行列である。行列の積の定義より、これらを掛けるとスカラー（\(1 \times 1\)
+  行列）となる。 \[
+  \mathbf{a}^\top \mathbf{b} = a_1 b_1 + a_2 b_2 + \dots + a_d b_d = \sum_{i=1}^d a_i b_i
+  \] これは内積 \(\langle \mathbf{a}, \mathbf{b} \rangle\)
+  の定義そのものである。また、同様に計算すると
+  \(\mathbf{b}^\top \mathbf{a} = \sum_{i=1}^d b_i a_i\)
+  であり、実数の積は順序を入れ替えても値が変わらない（\(a_i b_i = b_i a_i\)）ため、\(\mathbf{a}^\top \mathbf{b} = \mathbf{b}^\top \mathbf{a}\)
+  となる。
+\item
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{横ベクトルが縦に並んでいるとみなす場合：}
+    行列の積の定義より、各行 \(\mathbf{b}_i^\top\) と列ベクトル
+    \(\mathbf{v}\) を掛けたものが結果のベクトルの各成分になるため、 \[
+    B\mathbf{v} = \begin{pmatrix} \mathbf{b}_1^\top \mathbf{v} \\ \vdots \\ \mathbf{b}_m^\top \mathbf{v} \end{pmatrix}
+    \] となり、各成分が内積 \(\mathbf{b}_i^\top \mathbf{v}\)
+    として計算されることがわかる。
+  \item
+    \textbf{縦ベクトルが横に並んでいるとみなす場合：} 列ベクトル
+    \(\boldsymbol{\beta}_j\) の成分ごとの和として展開される。 \[
+    B\mathbf{v} = \begin{pmatrix} \boldsymbol{\beta}_1 & \dots & \boldsymbol{\beta}_d \end{pmatrix} \begin{pmatrix} v_1 \\ \vdots \\ v_d \end{pmatrix} = v_1 \boldsymbol{\beta}_1 + \dots + v_d \boldsymbol{\beta}_d = \sum_{j=1}^d v_j \boldsymbol{\beta}_j
+    \]
+  \end{itemize}
+\end{enumerate}
+
+\hfill 
+
+\hyperref[q:3-matrix-vector-patterns]{（問題へ戻る）}
+
+\end{answerbox}
+
+\begin{answerbox}[phantomlabel=a:3-inner-product-roles]{q:3-inner-product-roles}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{【重み付き和の計算】}
+  \(\mathbf{w}^\top \mathbf{x} = 3 \times 2 + 2 \times (-1) + 1 \times 4 = 6 - 2 + 4 = 8\)
+\item
+  \textbf{【ベクトルの揃い具合と直交性 (1)】}
+  \(\mathbf{a}^\top \mathbf{b} = \frac{2}{3} \times \frac{2}{3} + \frac{2}{3} \times \left(-\frac{1}{3}\right) + \frac{1}{3} \times \left(-\frac{2}{3}\right) = \frac{4}{9} - \frac{2}{9} - \frac{2}{9} = 0\)
+  内積が \(0\) であるため、2つのベクトルは\textbf{直交}している。
+\item
+  \textbf{【ベクトルの揃い具合と直交性 (2)】}
+  \(\mathbf{a}^\top \mathbf{c} = \frac{2}{3} \times \frac{1}{3} + \frac{2}{3} \times \frac{2}{3} + \frac{1}{3} \times \frac{2}{3} = \frac{2}{9} + \frac{4}{9} + \frac{2}{9} = \frac{8}{9}\)
+  内積が \(1, -1, 0\)
+  のいずれでもないため、位置関係は\textbf{それらのどれでもない}。
+\item
+  \textbf{【直交分解の係数】}
+  \(\mathbf{x} = \beta \mathbf{u} + \mathbf{v}\) の両辺について、右から
+  \(\mathbf{u}\) との内積をとる（\(\mathbf{u}\) を掛ける）と、
+  \[ \mathbf{x}^\top \mathbf{u} = (\beta \mathbf{u} + \mathbf{v})^\top \mathbf{u} = \beta \mathbf{u}^\top \mathbf{u} + \mathbf{v}^\top \mathbf{u} \]
+  \(\mathbf{v}\) は \(\mathbf{u}\)
+  と直交するため、\(\mathbf{v}^\top \mathbf{u} = 0\) となる。
+  したがって、\(\mathbf{x}^\top \mathbf{u} = \beta \|\mathbf{u}\|^2\)
+  となり、\(\beta = \frac{\mathbf{x}^\top \mathbf{u}}{\|\mathbf{u}\|^2}\)
+  となる。 各内積を計算すると、
+  \(\mathbf{x}^\top \mathbf{u} = 5 \times 1 + 2 \times (-1) + (-1) \times 2 = 5 - 2 - 2 = 1\)
+  \(\|\mathbf{u}\|^2 = \mathbf{u}^\top \mathbf{u} = 1^2 + (-1)^2 + 2^2 = 1 + 1 + 4 = 6\)
+  よって、\(\beta = \frac{1}{6}\) である。
+\end{enumerate}
+
+\hfill 
+
+\hyperref[q:3-inner-product-roles]{（問題へ戻る）}
+
+\end{answerbox}
+
+\subsubsection{パラメータ線型モデルの表現（特徴写像）}\label{ux30d1ux30e9ux30e1ux30fcux30bfux7ddaux578bux30e2ux30c7ux30ebux306eux8868ux73feux7279ux5fb4ux5199ux50cf-1}
 
 \textbf{【該当内容】} 第3回スライド27〜37「一般の線型モデル、特徴写像」
 \textbf{【ねらい】}
@@ -1389,109 +1761,7 @@ L(w,b) = \frac{1}{n} \sum_{i=1}^n (y_i - (wx_i + b))^2
 
 \end{answerbox}
 
-\subsection{多変数関数の経験リスクと勾配}\label{ux591aux5909ux6570ux95a2ux6570ux306eux7d4cux9a13ux30eaux30b9ux30afux3068ux52feux914d}
-
-\begin{questionbox}[label=q:3-multivariate-empirical-risk]{3変数パラメータの経験リスク \hfill \normalfont \small 難易度：★1}
-
-3つのデータポイント \((x_1, y_1) = (1, 2)\), \((x_2, y_2) = (2, 3)\),
-\((x_3, y_3) = (3, 5)\) が与えられている。予測モデルを3変数パラメータ
-\(\boldsymbol{\theta} = (\theta_1, \theta_2, \theta_3)^\top\)
-を用いたモデル
-\(f_{\boldsymbol{\theta}}(x) = \theta_1 + \theta_2 x + \theta_3 x^2\)
-とし、損失関数を二乗誤差とする。 このとき、経験リスク \[
-\hat{R}(f_{\boldsymbol{\theta}}) = \frac{1}{3} \sum_{i=1}^3 (y_i - f_{\boldsymbol{\theta}}(x_i))^2
-\] を \(\boldsymbol{\theta}\)
-の関数として具体的な数値を用いて展開・書き下せ。（整理・簡略化までする必要はない。）
-
-\hfill 
-
-\hyperref[a:3-multivariate-empirical-risk]{（解答・解説へ）}
-
-\end{questionbox}
-
-\subsection{最小二乗法の行列表記と一階の条件（最重要）}\label{ux6700ux5c0fux4e8cux4e57ux6cd5ux306eux884cux5217ux8868ux8a18ux3068ux4e00ux968eux306eux6761ux4ef6ux6700ux91cdux8981}
-
-\begin{questionbox}[label=q:3-matrix-empirical-risk]{行列とベクトルによる目的関数の書き直し \hfill \normalfont \small 難易度：★2}
-
-\(n\) 個のデータ \((x_1, y_1), \dots, (x_n, y_n)\)
-に対して、線型モデルを
-\(f_{\boldsymbol{\theta}}(x) = \boldsymbol{\theta}^\top \boldsymbol{\phi}(x)\)
-とする。また、計画行列 \(\Phi \in \mathbb{R}^{n \times d}\)
-とラベルベクトル \(\mathbf{y} \in \mathbb{R}^n\) を次のように定義する。
-\[
-\Phi = \begin{pmatrix} \quad \boldsymbol{\phi}(x_1)^\top \quad \\ \vdots \\ \quad \boldsymbol{\phi}(x_n)^\top \quad \end{pmatrix}, \quad \mathbf{y} = \begin{pmatrix} y_1 \\ \vdots \\ y_n \end{pmatrix}
-\]
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\item
-  \textbf{【予測値の行列表現】}
-  モデルの出力値を各データについて計算し、縦に並べた予測値ベクトル \[
-  \begin{pmatrix} f_{\boldsymbol{\theta}}(x_1) \\ \vdots \\ f_{\boldsymbol{\theta}}(x_n) \end{pmatrix}
-  \] が、 \(\Phi \boldsymbol{\theta}\) と表せることを確認せよ。
-\item
-  \textbf{【平均二乗誤差のノルム表現】} 平均二乗誤差 \[
-  \hat{R}(f_{\boldsymbol{\theta}}) = \frac{1}{n} \sum_{i=1}^n (f_{\boldsymbol{\theta}}(x_i) - y_i)^2
-  \] が、行列とベクトルの積およびノルムを用いて \[
-  \hat{R}(f_{\boldsymbol{\theta}}) = \frac{1}{n} \|\Phi \boldsymbol{\theta} - \mathbf{y}\|^2
-  \] と書き直せることを、上記1の結果およびベクトルのノルムの定義
-  \(\left(\|\mathbf{v}\|^2 = \sum_{i=1}^n v_i^2\right)\)
-  を用いて確認せよ。
-\end{enumerate}
-
-\hfill 
-
-\hyperref[a:3-matrix-empirical-risk]{（解答・解説へ）}
-
-\end{questionbox}
-
-\begin{tcolorbox}[enhanced, colback=blue!2!white, colframe=blue!60!black, fonttitle=\bfseries, drop shadow, title={【復習とヒント】行列・ベクトルの転置と微分公式}]
-
-\begin{itemize}
-\tightlist
-\item
-  \textbf{転置の積の法則}:
-  \((\mathbf{A}\mathbf{B})^\top = \mathbf{B}^\top \mathbf{A}^\top\)
-\item
-  \textbf{スカラーの転置}:
-  内積はスカラー（\(1 \times 1\)行列）なので、転置しても値は変わらない。
-  \textbackslash{}
-  \((\mathbf{x}^\top \mathbf{y})^\top = \mathbf{y}^\top \mathbf{x} = \mathbf{x}^\top \mathbf{y}\)
-\item
-  \textbf{L2ノルムの2乗}:
-  \(\|\mathbf{x}\|^2 = \mathbf{x}^\top \mathbf{x}\)
-\item
-  \textbf{線形項の勾配}:
-  \(\nabla_{\mathbf{x}} (\mathbf{a}^\top \mathbf{x}) = \nabla_{\mathbf{x}} (\mathbf{x}^\top \mathbf{a}) = \mathbf{a}\)
-\item
-  \textbf{2次形式の勾配}:
-  \(\nabla_{\mathbf{x}} (\mathbf{x}^\top \mathbf{A} \mathbf{x}) = 2\mathbf{A}\mathbf{x}\)
-  \quad （\(\mathbf{A}\) が対称行列のとき）
-\end{itemize}
-
-\end{tcolorbox}
-
-\begin{questionbox}[label=q:3-matrix-derivative-first-order]{一階の条件の行列導出 \hfill \normalfont \small 難易度：★1}
-
-行列微分の公式 \begin{align*}
-\nabla_{\boldsymbol{\theta}} (\mathbf{a}^\top \boldsymbol{\theta}) &= \mathbf{a} \\
-\nabla_{\boldsymbol{\theta}} (\boldsymbol{\theta}^\top \mathbf{A} \boldsymbol{\theta}) &= 2\mathbf{A}\boldsymbol{\theta} \quad \text{（$\mathbf{A}$は対称行列）}
-\end{align*} を用いて、目的関数
-\(L(\boldsymbol{\theta}) = \frac{1}{2}(\Phi\boldsymbol{\theta} - \mathbf{y})^\top (\Phi\boldsymbol{\theta} - \mathbf{y})\)
-の勾配 \(\nabla_{\boldsymbol{\theta}} L(\boldsymbol{\theta})\)
-を求め、一階の条件
-\(\nabla_{\boldsymbol{\theta}} L(\boldsymbol{\theta}) = \mathbf{0}\)
-から正規方程式 \[
-\Phi^\top \Phi \boldsymbol{\theta} = \Phi^\top \mathbf{y}
-\] を導出せよ。
-
-\hfill 
-
-\hyperref[a:3-matrix-derivative-first-order]{（解答・解説へ）}
-
-\end{questionbox}
-
-\subsubsection{解答・解説}\label{ux89e3ux7b54ux89e3ux8aac-5}
+\subsubsection{最小二乗法の行列表記と一階の条件（最重要）}\label{ux6700ux5c0fux4e8cux4e57ux6cd5ux306eux884cux5217ux8868ux8a18ux3068ux4e00ux968eux306eux6761ux4ef6ux6700ux91cdux8981-1}
 
 \textbf{【該当内容】}
 第3回スライド38〜44「線型モデルの最小二乗法、行列による表記」
@@ -1552,12 +1822,65 @@ L(w,b) = \frac{1}{n} \sum_{i=1}^n (y_i - (wx_i + b))^2
   \|\Phi\boldsymbol{\theta} - \mathbf{y}\|^2 = \sum_{i=1}^n (f_{\boldsymbol{\theta}}(x_i) - y_i)^2
   \] となる。両辺を \(n\) で割ることで、 \[
   \frac{1}{n}\|\Phi\boldsymbol{\theta} - \mathbf{y}\|^2 = \frac{1}{n} \sum_{i=1}^n (f_{\boldsymbol{\theta}}(x_i) - y_i)^2 = \hat{R}(f_{\boldsymbol{\theta}})
-  \] が導かれ、式が一致することが確認された。（証明終）
+  \] が導かれ、式が一致することが確認された。
+\item
+  展開の各ステップは以下の通りである。 \begin{align*}
+  (\Phi\boldsymbol{\theta} - \mathbf{y})^\top (\Phi\boldsymbol{\theta} - \mathbf{y})
+  &= (\Phi\boldsymbol{\theta} - \mathbf{y})^\top (\Phi\boldsymbol{\theta}) - (\Phi\boldsymbol{\theta} - \mathbf{y})^\top \mathbf{y} \\
+  &= (\Phi\boldsymbol{\theta})^\top (\Phi\boldsymbol{\theta}) - \mathbf{y}^\top (\Phi\boldsymbol{\theta}) - (\Phi\boldsymbol{\theta})^\top \mathbf{y} + \mathbf{y}^\top \mathbf{y}
+  \end{align*} ここで、第1項は
+  \((\Phi\boldsymbol{\theta})^\top (\Phi\boldsymbol{\theta}) = \boldsymbol{\theta}^\top \Phi^\top \Phi \boldsymbol{\theta}\)
+  となる。 また、第3項 \((\Phi\boldsymbol{\theta})^\top \mathbf{y}\)
+  はスカラー（内積）であるため、転置しても値が変わらない。よって
+  \(\mathbf{y}^\top (\Phi\boldsymbol{\theta})\) と等しくなる。
+  したがって、第2項と第3項がまとまり
+  \(-2\mathbf{y}^\top \Phi \boldsymbol{\theta}\) となる。 以上より、 \[
+  \boldsymbol{\theta}^\top \Phi^\top \Phi \boldsymbol{\theta} - 2\mathbf{y}^\top \Phi \boldsymbol{\theta} + \mathbf{y}^\top \mathbf{y}
+  \] となることが示された。（証明終）
 \end{enumerate}
 
 \hfill 
 
 \hyperref[q:3-matrix-empirical-risk]{（問題へ戻る）}
+
+\end{answerbox}
+
+\begin{answerbox}[phantomlabel=a:3-quadratic-form-completing-square]{q:3-quadratic-form-completing-square}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  前から順に展開する。 \begin{align*}
+  (\mathbf{x} - \mathbf{b})^\top \mathbf{A} (\mathbf{x} - \mathbf{b})
+  &= (\mathbf{x} - \mathbf{b})^\top (\mathbf{A}\mathbf{x} - \mathbf{A}\mathbf{b}) \\
+  &= \mathbf{x}^\top \mathbf{A}\mathbf{x} - \mathbf{x}^\top \mathbf{A}\mathbf{b} - \mathbf{b}^\top \mathbf{A}\mathbf{x} + \mathbf{b}^\top \mathbf{A}\mathbf{b}
+  \end{align*} ここで \(\mathbf{x}^\top \mathbf{A}\mathbf{b}\)
+  はスカラーであるため、転置しても値が変わらない。\(\mathbf{A}\)
+  が対称行列（\(\mathbf{A}^\top = \mathbf{A}\)）であることを用いると、
+  \[
+  (\mathbf{x}^\top \mathbf{A}\mathbf{b})^\top = \mathbf{b}^\top \mathbf{A}^\top \mathbf{x} = \mathbf{b}^\top \mathbf{A}\mathbf{x}
+  \] となる。したがって、第2項と第3項が等しくなり、 \[
+  \mathbf{x}^\top \mathbf{A} \mathbf{x} - 2\mathbf{b}^\top \mathbf{A} \mathbf{x} + \mathbf{b}^\top \mathbf{A} \mathbf{b}
+  \] となることが示された。（証明終）
+\item
+  \((\mathbf{x} - \boldsymbol{\mu})^\top \mathbf{A} (\mathbf{x} - \boldsymbol{\mu})\)
+  を(1)と同様に展開すると、 \[
+  \mathbf{x}^\top \mathbf{A} \mathbf{x} - 2\boldsymbol{\mu}^\top \mathbf{A} \mathbf{x} + \boldsymbol{\mu}^\top \mathbf{A} \boldsymbol{\mu}
+  \] となる。これと元の式
+  \(\mathbf{x}^\top \mathbf{A} \mathbf{x} - 2\mathbf{c}^\top \mathbf{x}\)
+  の \(\mathbf{x}\) の1次の項を比較すると、 \[
+  \boldsymbol{\mu}^\top \mathbf{A} = \mathbf{c}^\top \iff \mathbf{A}\boldsymbol{\mu} = \mathbf{c} \quad \text{（両辺の転置をとり、$\mathbf{A}^\top=\mathbf{A}$を用いた）}
+  \] となればよい。\(\mathbf{A}\)
+  が正則であるから、\(\boldsymbol{\mu} = \mathbf{A}^{-1}\mathbf{c}\)
+  とおく。 このとき、元の式は以下のように平方完成される。 \[
+  \mathbf{x}^\top \mathbf{A} \mathbf{x} - 2\mathbf{c}^\top \mathbf{x} = (\mathbf{x} - \mathbf{A}^{-1}\mathbf{c})^\top \mathbf{A} (\mathbf{x} - \mathbf{A}^{-1}\mathbf{c}) - \mathbf{c}^\top \mathbf{A}^{-1} \mathbf{c}
+  \]
+\end{enumerate}
+
+\hfill 
+
+\hyperref[q:3-quadratic-form-completing-square]{（問題へ戻る）}
 
 \end{answerbox}
 
@@ -1583,74 +1906,13 @@ L(\boldsymbol{\theta}) = \frac{1}{2} \left[ \boldsymbol{\theta}^\top \Phi^\top \
 
 \end{answerbox}
 
-\subsection{正則化（Regularization）}\label{ux6b63ux5247ux5316regularization}
-
-\begin{questionbox}[label=q:3-l2-norm-properties]{L2ノルムの性質と内積 \hfill \normalfont \small 難易度：★2}
-
-一般の \(d\) 次元ベクトル \(\mathbf{w} = (w_1, \dots, w_d)^\top\)
-について、L2ノルムの定義 \(\|\mathbf{w}\| = \sqrt{\sum_{i=1}^d w_i^2}\)
-と内積の定義を用いて、以下の等式が成り立つことを確認せよ。 \[
-\|\mathbf{w}\|^2 = \mathbf{w}^\top \mathbf{w}
-\]
-
-\hfill 
-
-\hyperref[a:3-l2-norm-properties]{（解答・解説へ）}
-
-\end{questionbox}
-
-\begin{questionbox}[label=q:3-l2-regularization-objective]{L2正則化付き目的関数の書き下し \hfill \normalfont \small 難易度：★1}
-
-損失関数を二乗誤差、正則化項をL2ノルムの2乗とし、正則化係数を
-\(\lambda = 0.01\) とする。 \(n\)
-個のデータに対するL2正則化付き経験リスク最小化の目的関数
-\(L_{\text{reg}}(\boldsymbol{\theta})\) の式をシグマ表記で書き下せ。
-
-\hfill 
-
-\hyperref[a:3-l2-regularization-objective]{（解答・解説へ）}
-
-\end{questionbox}
-
-\begin{questionbox}[label=q:3-l2-regularization-gradient]{行列による書き直しと一階の条件 \hfill \normalfont \small 難易度：★1}
-
-目的関数を
-\(L_{\text{reg}}(\boldsymbol{\theta}) = \frac{1}{2}\|\Phi\boldsymbol{\theta} - \mathbf{y}\|^2 + \frac{\lambda}{2}\|\boldsymbol{\theta}\|^2\)
-とする。全体の勾配を \(\mathbf{0}\) と置く一階の条件から、最適解 \[
-\hat{\boldsymbol{\theta}} = (\Phi^\top \Phi + \lambda \mathbf{I})^{-1}\Phi^\top \mathbf{y}
-\] を導出せよ。なぜ単位行列 \(\mathbf{I}\)
-が必要なのか説明せよ（ただし逆行列は存在すると仮定する）。
-
-\hfill 
-
-\hyperref[a:3-l2-regularization-gradient]{（解答・解説へ）}
-
-\end{questionbox}
-
-\subsubsection{解答・解説}\label{ux89e3ux7b54ux89e3ux8aac-6}
+\subsubsection{正則化（Regularization）}\label{ux6b63ux5247ux5316regularization-1}
 
 \textbf{【該当内容】}
 第3回スライド45〜50「過適合の対策＞正則化、L2正則化」
 \textbf{【ねらい】}
 過学習を防ぐL2正則化（Ridge）の目的関数について、代数表現と行列表現の一致を確かめ、単位行列
 \(I\) が出現する理由を数式変形で完全に理解する。
-
-\begin{answerbox}[phantomlabel=a:3-l2-norm-properties]{q:3-l2-norm-properties}
-
-L2ノルムの定義より、その2乗は各成分の2乗和となる。 \[
-\|\mathbf{w}\|^2 = \left( \sqrt{\sum_{i=1}^d w_i^2} \right)^2 = \sum_{i=1}^d w_i^2
-\] 一方、ベクトル \(\mathbf{w}\)
-とそれ自身との内積は、対応する成分の積の和であるから、 \[
-\mathbf{w}^\top \mathbf{w} = \sum_{i=1}^d w_i w_i = \sum_{i=1}^d w_i^2
-\] となる。
-両者の結果が一致するため、\(\|\mathbf{w}\|^2 = \mathbf{w}^\top \mathbf{w}\)
-が成り立つことが確認された。（証明終）
-
-\hfill 
-
-\hyperref[q:3-l2-norm-properties]{（問題へ戻る）}
-
-\end{answerbox}
 
 \begin{answerbox}[phantomlabel=a:3-l2-regularization-objective]{q:3-l2-regularization-objective}
 
@@ -1690,30 +1952,7 @@ L_{\text{reg}}(\boldsymbol{\theta}) = \frac{1}{n} \sum_{i=1}^n (y_i - \boldsymbo
 
 \end{answerbox}
 
-\subsection{モデル選択（交差検証）}\label{ux30e2ux30c7ux30ebux9078ux629eux4ea4ux5deeux691cux8a3c}
-
-\begin{questionbox}[label=q:3-cross-validation-indices]{K-foldとLOOCVのインデックス計算 \hfill \normalfont \small 難易度：★0}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  \(n=6\) 個のデータを \(K=3\) 個のフォルダ \[
-       D_1 = \{1, 2\}, \quad D_2 = \{3, 4\}, \quad D_3 = \{5, 6\}
-       \] に分割する。第2イテレーション（\(D_2\)
-  が検証用）において、訓練に使用されるデータのインデックスをすべて答えよ。
-\item
-  サンプルサイズが \(n=100\)
-  のデータにLOOCV（一箇抜き交差検証）を行う場合、モデルの学習は合計で何回実行されるか。
-\end{enumerate}
-
-\hfill 
-
-\hyperref[a:3-cross-validation-indices]{（解答・解説へ）}
-
-\end{questionbox}
-
-\subsubsection{解答・解説}\label{ux89e3ux7b54ux89e3ux8aac-7}
+\subsubsection{モデル選択（交差検証）}\label{ux30e2ux30c7ux30ebux9078ux629eux4ea4ux5deeux691cux8a3c-1}
 
 \textbf{【該当内容】} 第3回スライド51〜70「モデル選択、交差検証」
 \textbf{【ねらい】}
@@ -1738,36 +1977,9 @@ L_{\text{reg}}(\boldsymbol{\theta}) = \frac{1}{n} \sum_{i=1}^n (y_i - \boldsymbo
 
 \end{answerbox}
 
-\section{確率モデルと分位点回帰}\label{ux78baux7387ux30e2ux30c7ux30ebux3068ux5206ux4f4dux70b9ux56deux5e30}
+\subsection{確率モデルと分位点回帰}\label{ux78baux7387ux30e2ux30c7ux30ebux3068ux5206ux4f4dux70b9ux56deux5e30-1}
 
-\subsection{同時分布・条件付き分布・条件付き期待値}\label{ux540cux6642ux5206ux5e03ux6761ux4ef6ux4ed8ux304dux5206ux5e03ux6761ux4ef6ux4ed8ux304dux671fux5f85ux5024}
-
-\begin{questionbox}[label=q:4-conditional-probability-table]{同時確率表からの条件付き分布と期待値 \hfill \normalfont \small 難易度：★1}
-
-離散確率変数 \(X \in \{0,1\}\) と \(Y \in \{1,2,3\}\) の同時確率
-\(P(X, Y)\) について、 \(X=0\) のとき、\(Y=1, 2, 3\)
-となる確率はそれぞれ \(0.1, 0.2, 0.1\) である。
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  \(X=0\) となる周辺確率（正規化定数） \(P(X=0)\) を求めよ。
-\item
-  \(X=0\) という条件のもとでの \(Y\) の条件付き確率分布
-  \(P(Y=y \mid X=0)\) を求めよ。
-\item
-  上記の分布を用いて、条件付き期待値 \(\mathbb{E}[Y \mid X=0]\)
-  を計算せよ。
-\end{enumerate}
-
-\hfill 
-
-\hyperref[a:4-conditional-probability-table]{（解答・解説へ）}
-
-\end{questionbox}
-
-\subsubsection{解答・解説}\label{ux89e3ux7b54ux89e3ux8aac-8}
+\subsubsection{同時分布・条件付き分布・条件付き期待値}\label{ux540cux6642ux5206ux5e03ux6761ux4ef6ux4ed8ux304dux5206ux5e03ux6761ux4ef6ux4ed8ux304dux671fux5f85ux5024-1}
 
 \textbf{【該当内容】}
 第4回スライド5〜18「基本知識＞同時確率分布、条件付き確率」
@@ -1806,45 +2018,7 @@ L_{\text{reg}}(\boldsymbol{\theta}) = \frac{1}{n} \sum_{i=1}^n (y_i - \boldsymbo
 
 \end{answerbox}
 
-\subsection{分位点（Quantile）と外れ値の影響}\label{ux5206ux4f4dux70b9quantileux3068ux5916ux308cux5024ux306eux5f71ux97ff}
-
-\begin{questionbox}[label=q:4-absolute-loss-mae]{飛びのある分布の分位点とロバスト性 \hfill \normalfont \small 難易度：★1}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  データセット \(\{2, 3, 5, 7, 100\}\) の平均値と中央値を求めよ。
-\item
-  外れ値の \(100\) が \(1000\)
-  に化けたとする。このとき平均値と中央値はどう変化するか計算し、ピンボール損失（中央値の場合は絶対値損失）が外れ値に対して持つ優位性を説明せよ。
-\end{enumerate}
-
-\hfill 
-
-\hyperref[a:4-absolute-loss-mae]{（解答・解説へ）}
-
-\end{questionbox}
-
-\begin{questionbox}[label=q:4-pinball-loss-calculation]{ピンボール損失のグラフ描写の理解 \hfill \normalfont \small 難易度：★0}
-
-ピンボール損失関数 \[
-l_\alpha(y, y') =
-\begin{cases}
-(\alpha - 1)(y - y') & (y - y' < 0) \\
-\alpha(y - y') & (y - y' \ge 0)
-\end{cases}
-\] において、\(\alpha = 0.3\) とする。誤差 \(e = y - y'\) が \(e = -2\)
-のときと \(e = 4\)
-のときの損失の値をそれぞれ計算し、グラフの形状を説明せよ。
-
-\hfill 
-
-\hyperref[a:4-pinball-loss-calculation]{（解答・解説へ）}
-
-\end{questionbox}
-
-\subsubsection{解答・解説}\label{ux89e3ux7b54ux89e3ux8aac-9}
+\subsubsection{分位点（Quantile）と外れ値の影響}\label{ux5206ux4f4dux70b9quantileux3068ux5916ux308cux5024ux306eux5f71ux97ff-1}
 
 \textbf{【該当内容】} 第4回スライド19〜35「分位点回帰、ピンボール損失」
 \textbf{【ねらい】}
@@ -1900,65 +2074,9 @@ l_\alpha(y, y') =
 
 \end{answerbox}
 
-\section{確率論的二値分類と非線型最適化}\label{ux78baux7387ux8ad6ux7684ux4e8cux5024ux5206ux985eux3068ux975eux7ddaux578bux6700ux9069ux5316}
+\subsection{確率論的二値分類と非線型最適化}\label{ux78baux7387ux8ad6ux7684ux4e8cux5024ux5206ux985eux3068ux975eux7ddaux578bux6700ux9069ux5316-1}
 
-\subsection{ロジスティック回帰の基礎と非線型目的関数の勾配}\label{ux30edux30b8ux30b9ux30c6ux30a3ux30c3ux30afux56deux5e30ux306eux57faux790eux3068ux975eux7ddaux578bux76eeux7684ux95a2ux6570ux306eux52feux914d}
-
-\begin{questionbox}[label=q:5-indicator-expectation]{指示関数の期待値と確率の関係 \hfill \normalfont \small 難易度：★1}
-
-事象（または条件） \(A\) について、指示関数の期待値
-\(\mathbb{E}[\ind\{X \in A\}]\) は、事象 \(\{X \in A\}\) が発生する確率
-\(\mathbb{P}(X \in A)\) と等しくなること、すなわち \[
-\mathbb{E}[\ind\{X \in A\}] = \mathbb{P}(X \in A)
-\] が常に成り立つことを示せ。
-
-\hfill 
-
-\hyperref[a:5-indicator-expectation]{（解答・解説へ）}
-
-\end{questionbox}
-
-\subsection{ロジスティック関数の微分と交差エントロピー}\label{ux30edux30b8ux30b9ux30c6ux30a3ux30c3ux30afux95a2ux6570ux306eux5faeux5206ux3068ux4ea4ux5deeux30a8ux30f3ux30c8ux30edux30d4ux30fc}
-
-\begin{questionbox}[label=q:5-sigmoid-derivative]{シグモイド関数の微分証明 \hfill \normalfont \small 難易度：★2}
-
-ロジスティック関数（シグモイド関数）
-\(\sigma(z) = \frac{1}{1 + e^{-z}}\) について、
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  商の微分公式を用いて \(\sigma'(z) = \sigma(z)(1 - \sigma(z))\)
-  になることを証明せよ。
-\item
-  合成関数の微分則を用いて
-  \(\frac{d}{dz} \log \sigma(z) = 1 - \sigma(z)\) が成り立つことを示せ。
-\end{enumerate}
-
-\hfill 
-
-\hyperref[a:5-sigmoid-derivative]{（解答・解説へ）}
-
-\end{questionbox}
-
-\begin{questionbox}[label=q:5-cross-entropy-gradient]{交差エントロピーとチェインルールによる勾配導出 \hfill \normalfont \small 難易度：★2}
-
-交差エントロピー損失 \[
-l = -y \log \sigma(z) - (1-y) \log(1 - \sigma(z)) \quad (\text{ただし } z = \boldsymbol{\theta}^\top \boldsymbol{\phi}(x))
-\] について、チェインルール
-\(\nabla_{\boldsymbol{\theta}} l = \frac{\partial l}{\partial z} \cdot \nabla_{\boldsymbol{\theta}} z\)
-を用いて、勾配が \[
-\nabla_{\boldsymbol{\theta}} l = (\sigma(z) - y)\boldsymbol{\phi}(x)
-\] となることを導出せよ。
-
-\hfill 
-
-\hyperref[a:5-cross-entropy-gradient]{（解答・解説へ）}
-
-\end{questionbox}
-
-\subsubsection{解答・解説}\label{ux89e3ux7b54ux89e3ux8aac-10}
+\subsubsection{ロジスティック関数の微分と交差エントロピー}\label{ux30edux30b8ux30b9ux30c6ux30a3ux30c3ux30afux95a2ux6570ux306eux5faeux5206ux3068ux4ea4ux5deeux30a8ux30f3ux30c8ux30edux30d4ux30fc-1}
 
 \textbf{【該当内容】}
 第5回スライド50〜89「確率論的二値分類、交差エントロピー、勾配の導出」
@@ -2044,53 +2162,9 @@ l = -y \log \sigma(z) - (1-y) \log(1 - \sigma(z)) \quad (\text{ただし } z = \
 
 \end{answerbox}
 
-\section{確率論的多値分類とソフトマックス回帰}\label{ux78baux7387ux8ad6ux7684ux591aux5024ux5206ux985eux3068ux30bdux30d5ux30c8ux30deux30c3ux30afux30b9ux56deux5e30}
+\subsection{確率論的多値分類とソフトマックス回帰}\label{ux78baux7387ux8ad6ux7684ux591aux5024ux5206ux985eux3068ux30bdux30d5ux30c8ux30deux30c3ux30afux30b9ux56deux5e30-1}
 
-\subsection{ソフトマックス関数と多クラス交差エントロピー}\label{ux30bdux30d5ux30c8ux30deux30c3ux30afux30b9ux95a2ux6570ux3068ux591aux30afux30e9ux30b9ux4ea4ux5deeux30a8ux30f3ux30c8ux30edux30d4ux30fc}
-
-\begin{questionbox}[label=q:6-softmax-gradient-derivation]{ソフトマックス損失の勾配公式の導出 \hfill \normalfont \small 難易度：★1}
-
-多クラス分類問題において、入力 \(\mathbf{x}\) に対するスコアベクトルを
-\(s_{\boldsymbol{\theta}}(\mathbf{x}) \in \mathbb{R}^K\) とし、モデル
-\(g_{\boldsymbol{\theta}}(\mathbf{x}) = \text{Softmax}(s_{\boldsymbol{\theta}}(\mathbf{x}))\)
-を考える。ここで、モデルの出力ベクトルの第 \(k\) 成分
-\(g_{\boldsymbol{\theta}}(\mathbf{x})[k]\) は以下のように定義される。 \[
-g_{\boldsymbol{\theta}}(\mathbf{x})[k] = \frac{\exp(s_{\boldsymbol{\theta}}(\mathbf{x})[k])}{\sum_{j=1}^K \exp(s_{\boldsymbol{\theta}}(\mathbf{x})[j])}
-\] 正解クラスラベルを \(y \in \{1, \dots, K\}\)
-とするとき、損失関数（負の対数尤度損失）を \[
-\ell((\mathbf{x}, y), g_{\boldsymbol{\theta}}) = -\log g_{\boldsymbol{\theta}}(\mathbf{x})[y]
-\] と定義する。このとき、以下の問いに答えよ。
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  損失関数のパラメータ \(\boldsymbol{\theta}\)
-  に対する勾配が、以下のように表されることを示せ。 \[
-  \nabla_{\boldsymbol{\theta}} \ell((\mathbf{x}, y), g_{\boldsymbol{\theta}}) = -\nabla_{\boldsymbol{\theta}} s_{\boldsymbol{\theta}}(\mathbf{x})[y] + \sum_{k=1}^K g_{\boldsymbol{\theta}}(\mathbf{x})[k] \cdot \nabla_{\boldsymbol{\theta}} s_{\boldsymbol{\theta}}(\mathbf{x})[k]
-  \]
-\item
-  多クラスロジスティック回帰（ソフトマックス回帰）モデルにおいて、クラス
-  \(k\) のスコアが、クラス固有のパラメータベクトル
-  \(\boldsymbol{\theta}_k\) と特徴量 \(\boldsymbol{\phi}(\mathbf{x})\)
-  の内積 \[
-  s_{\boldsymbol{\theta}}(\mathbf{x})[k] = \boldsymbol{\theta}_k^\top \boldsymbol{\phi}(\mathbf{x})
-  \] で与えられるとする。このとき、損失関数のパラメータ
-  \(\boldsymbol{\theta}_k\) に対する勾配
-  \(\nabla_{\boldsymbol{\theta}_k} \ell((\mathbf{x}, y), g_{\boldsymbol{\theta}})\)
-  が \[
-  \nabla_{\boldsymbol{\theta}_k} \ell((\mathbf{x}, y), g_{\boldsymbol{\theta}}) = \left( g_{\boldsymbol{\theta}}(\mathbf{x})[k] - \mathbf{1}\{k = y\} \right) \boldsymbol{\phi}(\mathbf{x})
-  \] となることを示せ。ただし、\(\mathbf{1}\{\cdot\}\)
-  は指示関数であり、条件が真のとき \(1\)、偽のとき \(0\) をとる。
-\end{enumerate}
-
-\hfill 
-
-\hyperref[a:6-softmax-gradient-derivation]{（解答・解説へ）}
-
-\end{questionbox}
-
-\subsubsection{解答・解説}\label{ux89e3ux7b54ux89e3ux8aac-11}
+\subsubsection{ソフトマックス関数と多クラス交差エントロピー}\label{ux30bdux30d5ux30c8ux30deux30c3ux30afux30b9ux95a2ux6570ux3068ux591aux30afux30e9ux30b9ux4ea4ux5deeux30a8ux30f3ux30c8ux30edux30d4ux30fc-1}
 
 \textbf{【該当内容】}
 第6回スライド「確率論的多値分類＞ソフトマックスと最尤法＞勾配」
