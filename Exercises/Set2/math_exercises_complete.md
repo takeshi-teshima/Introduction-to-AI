@@ -898,25 +898,25 @@ $$L(\theta) = - \frac{1}{n} \sum_{i=1}^n \left\{ y_i \log \sigma(\theta x_i) + (
 
 ## ソフトマックス関数と多クラス交差エントロピー
 
-### ソフトマックス関数の微分 {#q:6-softmax-derivative .questionbox tags="確認\faCheck"}
+### Log-Softmax 関数の勾配 {#q:6-log-softmax-gradient .questionbox tags="確認\faCheck"}
 
-ベクトル $\mathbf{z}$ を入力とするソフトマックス関数 $\mathbf{p} = \text{Softmax}(\mathbf{z})$ について、その第 $i$ 成分 $\mathbf{p}[i]$ を
+ベクトル $\mathbf{z}$ を入力とするソフトマックス関数 $\mathbf{p} = \text{Softmax}(\mathbf{z})$ について、その第 $i$ 成分の対数 $\log \mathbf{p}[i]$ は、対数の性質から
 $$
-\mathbf{p}[i] = \frac{e^{\mathbf{z}[i]}}{\sum_{k=1}^K e^{\mathbf{z}[k]}} \quad (i = 1, \dots, K)
+\log \mathbf{p}[i] = \log \left( \frac{e^{\mathbf{z}[i]}}{\sum_{k=1}^K e^{\mathbf{z}[k]}} \right) = \mathbf{z}[i] - \log \sum_{k=1}^K e^{\mathbf{z}[k]} \quad (i = 1, \dots, K)
 $$
-として以下の問いに答えよ。
+と分解できる。このとき、合成関数の微分則を用いて $\log \mathbf{p}[i]$ の $\mathbf{z}[j]$ による偏微分 $\frac{\partial \log \mathbf{p}[i]}{\partial \mathbf{z}[j]}$ を計算し、以下が成り立つことを導出せよ。
 
-1. 商の微分公式を用いて、$i = j$ のとき $\frac{\partial \mathbf{p}[i]}{\partial \mathbf{z}[i]} = \mathbf{p}[i](1 - \mathbf{p}[i])$ になることを証明せよ。
-2. 商の微分公式を用いて、$i \neq j$ のとき $\frac{\partial \mathbf{p}[i]}{\partial \mathbf{z}[j]} = -\mathbf{p}[i] \mathbf{p}[j]$ になることを証明せよ。
-
-（参考）これらはクロネッカーのデルタ $\delta_{ij}$（$i=j$ のとき $1$、$i \neq j$ のとき $0$）を用いて、$\frac{\partial \mathbf{p}[i]}{\partial \mathbf{z}[j]} = \mathbf{p}[i](\delta_{ij} - \mathbf{p}[j])$ と一つの式でまとめることができる。
+$$
+\frac{\partial \log \mathbf{p}[i]}{\partial \mathbf{z}[j]} = \delta_{ij} - \mathbf{p}[j]
+$$
+（ただし $\delta_{ij}$ はクロネッカーのデルタであり、$i=j$ のとき $1$、$i \neq j$ のとき $0$ となる）
 
 ---
 
-**ヒント：** 分数関数の微分公式 $\left(\frac{f(x)}{g(x)}\right)' = \frac{f'(x)g(x) - f(x)g'(x)}{g(x)^2}$ を用いる。分母 $\sum_{k=1}^K e^{\mathbf{z}[k]}$ を $\mathbf{z}[j]$ で微分するとどうなるかに注意せよ。
+**ヒント：** 右辺第2項の偏微分には、対数関数の微分公式 $(\log f(x))' = \frac{f'(x)}{f(x)}$ を用いる。$\sum_{k=1}^K e^{\mathbf{z}[k]}$ を $\mathbf{z}[j]$ で微分するとどうなるかに注意せよ。
 
 ::: {.right}
-[（解答・解説へ）](#a:6-softmax-derivative)
+[（解答・解説へ）](#a:6-log-softmax-gradient)
 :::
 
 ### ソフトマックス損失の勾配公式の導出 {#q:6-softmax-gradient-derivation .questionbox tags="必須\faStar"}
@@ -1690,34 +1690,27 @@ $$
 **【該当内容】** 第6回スライド「確率論的多値分類＞ソフトマックスと最尤法＞勾配」
 **【ねらい】** 多値分類で標準的に用いられるソフトマックス関数と負の対数尤度の組み合わせにおいて、その勾配が「予測確率と正解の差（誤差）×特徴量」という非常に直感的かつシンプルな形式で導かれるプロセスを数学的に理解する。
 
-### 問6-softmax-derivative の解答・解説 {#a:6-softmax-derivative .answerbox ref="q:6-softmax-derivative"}
+### 問6-log-softmax-gradient の解答・解説 {#a:6-log-softmax-gradient .answerbox ref="q:6-log-softmax-gradient"}
 
-ソフトマックス関数 $\mathbf{p}[i] = \frac{e^{\mathbf{z}[i]}}{\sum_{k=1}^K e^{\mathbf{z}[k]}}$ の分母を $S = \sum_{k=1}^K e^{\mathbf{z}[k]}$ とおく。
-$S$ を $\mathbf{z}[j]$ で微分すると、$\frac{\partial S}{\partial \mathbf{z}[j]} = e^{\mathbf{z}[j]}$ となる。
-商の微分公式を用いて $\frac{\partial \mathbf{p}[i]}{\partial \mathbf{z}[j]}$ を計算する。
+$\log \mathbf{p}[i] = \mathbf{z}[i] - \log \sum_{k=1}^K e^{\mathbf{z}[k]}$ を $\mathbf{z}[j]$ で偏微分する。
+第1項の $\mathbf{z}[i]$ は、$\mathbf{z}[j]$ で微分すると $i=j$ のとき $1$、$i \neq j$ のとき $0$ となるため、クロネッカーのデルタ $\delta_{ij}$ となる。
 
-1. **$i = j$ の場合**：
-   分子は $e^{\mathbf{z}[i]}$ であり、$\mathbf{z}[i]$ で微分すると $e^{\mathbf{z}[i]}$ となる。したがって、
-   \begin{align*}
-   \frac{\partial \mathbf{p}[i]}{\partial \mathbf{z}[i]} &= \frac{(e^{\mathbf{z}[i]})' \cdot S - e^{\mathbf{z}[i]} \cdot (S)'}{S^2} \\
-   &= \frac{e^{\mathbf{z}[i]} S - e^{\mathbf{z}[i]} e^{\mathbf{z}[i]}}{S^2} \\
-   &= \frac{e^{\mathbf{z}[i]}}{S} \frac{S - e^{\mathbf{z}[i]}}{S} \\
-   &= \mathbf{p}[i] (1 - \mathbf{p}[i])
-   \end{align*}
-   となる。
+第2項は合成関数の微分則を用いて計算する。分母の和の項のうち、$\mathbf{z}[j]$ に依存するのは $e^{\mathbf{z}[j]}$ だけであることに注意すると、
+\begin{align*}
+\frac{\partial}{\partial \mathbf{z}[j]} \left( \log \sum_{k=1}^K e^{\mathbf{z}[k]} \right) &= \frac{\frac{\partial}{\partial \mathbf{z}[j]} \sum_{k=1}^K e^{\mathbf{z}[k]}}{\sum_{k=1}^K e^{\mathbf{z}[k]}} \\
+&= \frac{e^{\mathbf{z}[j]}}{\sum_{k=1}^K e^{\mathbf{z}[k]}} \\
+&= \mathbf{p}[j]
+\end{align*}
+となる。
 
-2. **$i \neq j$ の場合**：
-   分子は $e^{\mathbf{z}[i]}$ であり、$\mathbf{z}[j]$（$j \neq i$）で微分すると $0$ になる。したがって、
-   \begin{align*}
-   \frac{\partial \mathbf{p}[i]}{\partial \mathbf{z}[j]} &= \frac{0 \cdot S - e^{\mathbf{z}[i]} \cdot (S)'}{S^2} \\
-   &= \frac{-e^{\mathbf{z}[i]} e^{\mathbf{z}[j]}}{S^2} \\
-   &= -\frac{e^{\mathbf{z}[i]}}{S} \frac{e^{\mathbf{z}[j]}}{S} \\
-   &= -\mathbf{p}[i] \mathbf{p}[j]
-   \end{align*}
-   となる。（証明終）
+したがって、これらを合わせると
+$$
+\frac{\partial \log \mathbf{p}[i]}{\partial \mathbf{z}[j]} = \delta_{ij} - \mathbf{p}[j]
+$$
+となる。（証明終）
 
 ::: {.right}
-[（問題へ戻る）](#q:6-softmax-derivative)
+[（問題へ戻る）](#q:6-log-softmax-gradient)
 :::
 
 ### 問6-softmax-gradient-derivation の解答・解説 {#a:6-softmax-gradient-derivation .answerbox ref="q:6-softmax-gradient-derivation"}
