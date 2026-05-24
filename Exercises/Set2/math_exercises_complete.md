@@ -900,20 +900,20 @@ $$L(\theta) = - \frac{1}{n} \sum_{i=1}^n \left\{ y_i \log \sigma(\theta x_i) + (
 
 ### Log-Softmax 関数の勾配 {#q:6-log-softmax-gradient .questionbox tags="確認\faCheck"}
 
-ベクトル $\mathbf{z}$ を入力とするソフトマックス関数 $\mathbf{p} = \text{Softmax}(\mathbf{z})$ について、その第 $i$ 成分の対数 $\log \mathbf{p}[i]$ は、対数の性質から
+ベクトル $\mathbf{z} = (z_1, \dots, z_K)^\top$ を入力とするソフトマックス関数 $\mathbf{p} = \text{Softmax}(\mathbf{z})$ について、その第 $i$ 成分の対数 $\log \mathbf{p}[i]$ は、対数の性質から
 $$
-\log \mathbf{p}[i] = \log \left( \frac{e^{\mathbf{z}[i]}}{\sum_{k=1}^K e^{\mathbf{z}[k]}} \right) = \mathbf{z}[i] - \log \sum_{k=1}^K e^{\mathbf{z}[k]} \quad (i = 1, \dots, K)
+\log \mathbf{p}[i] = \log \left( \frac{e^{z_i}}{\sum_{k=1}^K e^{z_k}} \right) = z_i - \log \sum_{k=1}^K e^{z_k} \quad (i = 1, \dots, K)
 $$
-と分解できる。このとき、合成関数の微分則を用いて $\log \mathbf{p}[i]$ の $\mathbf{z}[j]$ による偏微分 $\frac{\partial \log \mathbf{p}[i]}{\partial \mathbf{z}[j]}$ を計算し、以下が成り立つことを導出せよ。
+と分解できる。このとき、合成関数の微分則を用いて $\log \mathbf{p}[i]$ の $z_j$ による偏微分 $\frac{\partial \log \mathbf{p}[i]}{\partial z_j}$ を計算し、以下が成り立つことを導出せよ。
 
 $$
-\frac{\partial \log \mathbf{p}[i]}{\partial \mathbf{z}[j]} = \delta_{ij} - \mathbf{p}[j]
+\frac{\partial \log \mathbf{p}[i]}{\partial z_j} = \mathbf{1}\{i=j\} - \mathbf{p}[j]
 $$
-（ただし $\delta_{ij}$ はクロネッカーのデルタであり、$i=j$ のとき $1$、$i \neq j$ のとき $0$ となる）
+（ただし $\mathbf{1}\{i=j\}$ は指示関数であり、$i=j$ のとき $1$、$i \neq j$ のとき $0$ となる）
 
 ---
 
-**ヒント：** 右辺第2項の偏微分には、対数関数の微分公式 $(\log f(x))' = \frac{f'(x)}{f(x)}$ を用いる。$\sum_{k=1}^K e^{\mathbf{z}[k]}$ を $\mathbf{z}[j]$ で微分するとどうなるかに注意せよ。
+**ヒント：** 右辺第2項の偏微分には、対数関数の微分公式 $(\log f(x))' = \frac{f'(x)}{f(x)}$ を用いる。$\sum_{k=1}^K e^{z_k}$ を $z_j$ で微分するとどうなるかに注意せよ。
 
 ::: {.right}
 [（解答・解説へ）](#a:6-log-softmax-gradient)
@@ -1692,20 +1692,20 @@ $$
 
 ### 問6-log-softmax-gradient の解答・解説 {#a:6-log-softmax-gradient .answerbox ref="q:6-log-softmax-gradient"}
 
-$\log \mathbf{p}[i] = \mathbf{z}[i] - \log \sum_{k=1}^K e^{\mathbf{z}[k]}$ を $\mathbf{z}[j]$ で偏微分する。
-第1項の $\mathbf{z}[i]$ は、$\mathbf{z}[j]$ で微分すると $i=j$ のとき $1$、$i \neq j$ のとき $0$ となるため、クロネッカーのデルタ $\delta_{ij}$ となる。
+$\log \mathbf{p}[i] = z_i - \log \sum_{k=1}^K e^{z_k}$ を $z_j$ で偏微分する。
+第1項の $z_i$ は、$z_j$ で微分すると $i=j$ のとき $1$、$i \neq j$ のとき $0$ となるため、指示関数を用いて $\mathbf{1}\{i=j\}$ となる。
 
-第2項は合成関数の微分則を用いて計算する。分母の和の項のうち、$\mathbf{z}[j]$ に依存するのは $e^{\mathbf{z}[j]}$ だけであることに注意すると、
+第2項は合成関数の微分則を用いて計算する。分母の和の項のうち、$z_j$ に依存するのは $e^{z_j}$ だけであることに注意すると、
 \begin{align*}
-\frac{\partial}{\partial \mathbf{z}[j]} \left( \log \sum_{k=1}^K e^{\mathbf{z}[k]} \right) &= \frac{\frac{\partial}{\partial \mathbf{z}[j]} \sum_{k=1}^K e^{\mathbf{z}[k]}}{\sum_{k=1}^K e^{\mathbf{z}[k]}} \\
-&= \frac{e^{\mathbf{z}[j]}}{\sum_{k=1}^K e^{\mathbf{z}[k]}} \\
+\frac{\partial}{\partial z_j} \left( \log \sum_{k=1}^K e^{z_k} \right) &= \frac{\frac{\partial}{\partial z_j} \sum_{k=1}^K e^{z_k}}{\sum_{k=1}^K e^{z_k}} \\
+&= \frac{e^{z_j}}{\sum_{k=1}^K e^{z_k}} \\
 &= \mathbf{p}[j]
 \end{align*}
 となる。
 
 したがって、これらを合わせると
 $$
-\frac{\partial \log \mathbf{p}[i]}{\partial \mathbf{z}[j]} = \delta_{ij} - \mathbf{p}[j]
+\frac{\partial \log \mathbf{p}[i]}{\partial z_j} = \mathbf{1}\{i=j\} - \mathbf{p}[j]
 $$
 となる。（証明終）
 
