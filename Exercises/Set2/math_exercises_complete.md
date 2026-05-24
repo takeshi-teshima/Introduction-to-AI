@@ -841,6 +841,7 @@ $$
 【数式・操作の語群】（空欄 $\fbox{\,イ\,}, \fbox{\,エ\,}, \fbox{\,カ\,}, \fbox{\,ク\,}$）
 
 ⑤ $\boldsymbol{\theta} \leftarrow \boldsymbol{\theta} - \eta \mathbf{g}$　⑥ `exit loop`　⑦ $\mathbf{g} \leftarrow \nabla L(\boldsymbol{\theta})$　⑧ $\boldsymbol{\theta} \leftarrow \text{ランダムな値}$
+（※ $\leftarrow$ は右辺の値を左辺の変数に代入・更新する操作を表す）
 
 【勾配降下法のアルゴリズム】
 
