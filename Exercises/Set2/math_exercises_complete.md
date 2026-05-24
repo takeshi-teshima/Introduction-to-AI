@@ -124,11 +124,12 @@ Cov(X,Y) &= Cov(Y,X)
 
 # 最適化と最小二乗法・偏微分
 
-## 経験リスクの数式化（シグマを用いた書き下し）
+## 経験リスクの数式化
 
 ### 経験リスクの立式 {#q:2-empirical-risk-formulation .questionbox tags="必須\faStar"}
 
 $n$ 個の訓練データ $\{(x_i, y_i)\}_{i=1}^n$ が与えられている。モデルクラスとして1次関数 $f_{(w,b)}(x) = wx + b$ を採用し、損失関数を二乗誤差 $l(y, \hat{y}) = (y - \hat{y})^2$ とするとき、経験リスク $\hat{R}(f_{(w,b)})$ を書き下せ。
+$$\hat{R}(f_{(w,b)}) = ?$$
 <!-- $\sum_{i=1}^n$ を用いて -->
 
 ::: {.right}
@@ -139,12 +140,12 @@ $n$ 個の訓練データ $\{(x_i, y_i)\}_{i=1}^n$ が与えられている。�
 
 以下の最適化問題の定式化について、空欄 (ア) 〜 (エ) に入る適切な数式や記号を答えよ。
 
-1. \textbf{【制約なし】} パラメータ $\boldsymbol{\theta}$ を調整して、目的関数 $L(\boldsymbol{\theta})$ を最小にする「最適なパラメータ $\hat{\boldsymbol{\theta}}$」を求める問題：
+1. パラメータ $\boldsymbol{\theta}$ を調整して、目的関数 $L(\boldsymbol{\theta})$ を最小にする「最適なパラメータ $\hat{\boldsymbol{\theta}}$」を求める制約なし最適化問題を立式せよ。
         $$
         \mathop{\mathrm{Min}}_{(ア)} (イ)
         $$
         ただし、$\boldsymbol{\theta}$ が値をとる範囲は $\mathbb{R}^d$ である。
-2. \textbf{【制約あり】} パラメータの大きさ（L2ノルム） $\|\boldsymbol{\theta}\|$ が定数 $C$ を超えないという制約のもとで、目的関数 $L(\boldsymbol{\theta})$ の最小値を求める問題：
+2. パラメータ $\boldsymbol{\theta} = (\theta_1, \dots, \theta_d)^\top$ の全成分が非負（$\theta_1 \ge 0, \dots, \theta_d \ge 0$）であるという制約のもとで、目的関数 $L(\boldsymbol{\theta})$ の最小値を求める制約あり最適化問題を立式せよ。
         $$
         \mathop{\mathrm{Min}}_{(ウ)} (エ)
         $$
@@ -1112,9 +1113,9 @@ $$
 * **(ア)** $\boldsymbol{\theta} \in \mathbb{R}^d$
 * **(イ)** $L(\boldsymbol{\theta})$
         よって全体の式は $\mathop{\mathrm{Min}}_{\boldsymbol{\theta} \in \mathbb{R}^d} L(\boldsymbol{\theta})$ となる。最適化を行う範囲（定義域）を $\mathrm{Min}$ の下に記述する。
-* **(ウ)** $\boldsymbol{\theta} \in \{\boldsymbol{\theta} \in \mathbb{R}^d : \|\boldsymbol{\theta}\| \le C\}$ （または $\boldsymbol{\theta} \in \mathbb{R}^d \text{ s.t. } \|\boldsymbol{\theta}\| \le C$）
+* **(ウ)** $\boldsymbol{\theta} \ge \mathbf{0}$ （または $\theta_1 \ge 0, \dots, \theta_d \ge 0$）
 * **(エ)** $L(\boldsymbol{\theta})$
-        よって全体の式は $\mathop{\mathrm{Min}}_{\boldsymbol{\theta} \in \{\boldsymbol{\theta} \in \mathbb{R}^d : \|\boldsymbol{\theta}\| \le C\}} L(\boldsymbol{\theta})$ となる。制約条件は変数が属する集合（定義域）として $\mathrm{Min}$ の下に記述することができる。
+        よって全体の式は $\mathop{\mathrm{Min}}_{\boldsymbol{\theta} \ge \mathbf{0}} L(\boldsymbol{\theta})$ となる。制約条件は $\mathrm{Min}$ の下に記述することができる。
 
 ::: {.right}
 [（問題へ戻る）](#q:2-optimization-formulation-blank)

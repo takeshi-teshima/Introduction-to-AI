@@ -252,7 +252,7 @@ Cov(X,Y) &= Cov(Y,X)
 
 \section{最適化と最小二乗法・偏微分}\label{ux6700ux9069ux5316ux3068ux6700ux5c0fux4e8cux4e57ux6cd5ux504fux5faeux5206}
 
-\subsection{経験リスクの数式化（シグマを用いた書き下し）}\label{ux7d4cux9a13ux30eaux30b9ux30afux306eux6570ux5f0fux5316ux30b7ux30b0ux30deux3092ux7528ux3044ux305fux66f8ux304dux4e0bux3057}
+\subsection{経験リスクの数式化}\label{ux7d4cux9a13ux30eaux30b9ux30afux306eux6570ux5f0fux5316}
 
 \begin{questionbox}[label=q:2-empirical-risk-formulation]{経験リスクの立式 \hfill \tikz[baseline=-0.8ex] \node[draw=white, rounded corners=2pt, inner sep=2.5pt, text=white, font=\small\bfseries, line width=0.5pt] {必須\faStar};\hspace{2pt}}
 
@@ -260,6 +260,7 @@ Cov(X,Y) &= Cov(Y,X)
 が与えられている。モデルクラスとして1次関数 \(f_{(w,b)}(x) = wx + b\)
 を採用し、損失関数を二乗誤差 \(l(y, \hat{y}) = (y - \hat{y})^2\)
 とするとき、経験リスク \(\hat{R}(f_{(w,b)})\) を書き下せ。
+\[\hat{R}(f_{(w,b)}) = ?\]
 
 \hfill 
 
@@ -276,18 +277,18 @@ Cov(X,Y) &= Cov(Y,X)
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  \textbf{【制約なし】} パラメータ \(\boldsymbol{\theta}\)
-  を調整して、目的関数 \(L(\boldsymbol{\theta})\)
-  を最小にする「最適なパラメータ
-  \(\hat{\boldsymbol{\theta}}\)」を求める問題： \[
+  パラメータ \(\boldsymbol{\theta}\) を調整して、目的関数
+  \(L(\boldsymbol{\theta})\) を最小にする「最適なパラメータ
+  \(\hat{\boldsymbol{\theta}}\)」を求める制約なし最適化問題を立式せよ。
+  \[
        \mathop{\mathrm{Min}}_{(ア)} (イ)
        \] ただし、\(\boldsymbol{\theta}\) が値をとる範囲は
   \(\mathbb{R}^d\) である。
 \item
-  \textbf{【制約あり】} パラメータの大きさ（L2ノルム）
-  \(\|\boldsymbol{\theta}\|\) が定数 \(C\)
-  を超えないという制約のもとで、目的関数 \(L(\boldsymbol{\theta})\)
-  の最小値を求める問題： \[
+  パラメータ \(\boldsymbol{\theta} = (\theta_1, \dots, \theta_d)^\top\)
+  の全成分が非負（\(\theta_1 \ge 0, \dots, \theta_d \ge 0\)）であるという制約のもとで、目的関数
+  \(L(\boldsymbol{\theta})\)
+  の最小値を求める制約あり最適化問題を立式せよ。 \[
        \mathop{\mathrm{Min}}_{(ウ)} (エ)
        \]
 \end{enumerate}
@@ -1059,7 +1060,7 @@ L(\boldsymbol{\theta}) = \frac{1}{2}\|\Phi\boldsymbol{\theta} - \mathbf{y}\|^2 +
 
 \subsection{同時分布・条件付き分布・条件付き期待値}\label{ux540cux6642ux5206ux5e03ux6761ux4ef6ux4ed8ux304dux5206ux5e03ux6761ux4ef6ux4ed8ux304dux671fux5f85ux5024}
 
-\begin{questionbox}[label=q:4-conditional-probability-table]{同時確率表からの条件付き分布と期待値 \hfill \tikz[baseline=-0.8ex] \node[draw=white, rounded corners=2pt, inner sep=2.5pt, text=white, font=\small\bfseries, line width=0.5pt] {確認\faCheck};\hspace{2pt}}
+\begin{questionbox}[label=q:4-conditional-probability-table]{同時確率表からの条件付き分布と期待値 \hfill \tikz[baseline=-0.8ex] \node[draw=white, rounded corners=2pt, inner sep=2.5pt, text=white, font=\small\bfseries, line width=0.5pt] {スキップ可};\hspace{2pt}}
 
 離散確率変数 \(X \in \{0,1\}\) と \(Y \in \{1,2,3\}\) の同時確率
 \(P(X, Y)\) について、 \(X=0\) のとき、\(Y=1, 2, 3\)
@@ -1085,24 +1086,6 @@ L(\boldsymbol{\theta}) = \frac{1}{2}\|\Phi\boldsymbol{\theta} - \mathbf{y}\|^2 +
 \end{questionbox}
 
 \subsection{分位点（Quantile）と外れ値の影響}\label{ux5206ux4f4dux70b9quantileux3068ux5916ux308cux5024ux306eux5f71ux97ff}
-
-\begin{questionbox}[label=q:4-absolute-loss-mae]{飛びのある分布の分位点とロバスト性 \hfill \tikz[baseline=-0.8ex] \node[draw=white, rounded corners=2pt, inner sep=2.5pt, text=white, font=\small\bfseries, line width=0.5pt] {確認\faCheck};\hspace{2pt}}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  データセット \(\{2, 3, 5, 7, 100\}\) の平均値と中央値を求めよ。
-\item
-  外れ値の \(100\) が \(1000\)
-  に化けたとする。このとき平均値と中央値はどう変化するか計算し、ピンボール損失（中央値の場合は絶対値損失）が外れ値に対して持つ優位性を説明せよ。
-\end{enumerate}
-
-\hfill 
-
-\hyperref[a:4-absolute-loss-mae]{（解答・解説へ）}
-
-\end{questionbox}
 
 \begin{questionbox}[label=q:4-pinball-loss-calculation]{ピンボール損失のグラフ描写の理解 \hfill \tikz[baseline=-0.8ex] \node[draw=white, rounded corners=2pt, inner sep=2.5pt, text=white, font=\small\bfseries, line width=0.5pt] {スキップ可};\hspace{2pt}}
 
@@ -1143,18 +1126,19 @@ l_\alpha(y, y') =
 \begin{questionbox}[label=q:5-sigmoid-derivative]{シグモイド関数の微分証明 \hfill \tikz[baseline=-0.8ex] \node[draw=white, rounded corners=2pt, inner sep=2.5pt, text=white, font=\small\bfseries, line width=0.5pt] {必須\faStar};\hspace{2pt}}
 
 ロジスティック関数（シグモイド関数）について、 \[
-\sigma(z) = \frac{1}{1 + e^{-z}}
+\sigma(z) = \frac{1}{1 + \exp(-z)}
 \] として以下の問いに答えよ。
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  商の微分公式を用いて \(\sigma'(z) = \sigma(z)(1 - \sigma(z))\)
-  になることを証明せよ。
+  \(\sigma(z) \exp(-z) = 1 - \sigma(z)\) が成り立つことを示せ。
 \item
-  合成関数の微分則を用いて
-  \(\frac{d}{dz} \log \sigma(z) = 1 - \sigma(z)\) が成り立つことを示せ。
+  \(\frac{d}{dz} \sigma(z) = \sigma(z)^2 \exp(-z)\) になることを示せ。
+\item
+  以上の結果から、\(\frac{d}{dz} \log \sigma(z) = 1 - \sigma(z)\)
+  を導出せよ。
 \end{enumerate}
 
 \hfill 
@@ -1215,9 +1199,10 @@ l_\alpha(y, y') =
 
 ⑤
 \(\boldsymbol{\theta} \leftarrow \boldsymbol{\theta} - \eta \mathbf{g}\)　⑥
-\texttt{break}　⑦
+\texttt{exit\ loop}　⑦
 \(\mathbf{g} \leftarrow \nabla L(\boldsymbol{\theta})\)　⑧
-\(\boldsymbol{\theta} \leftarrow \text{ランダムな値}\)
+\(\boldsymbol{\theta} \leftarrow \text{ランダムな値}\) （※
+\(\leftarrow\) は右辺の値を左辺の変数に代入・更新する操作を表す）
 
 【勾配降下法のアルゴリズム】
 
@@ -1321,42 +1306,35 @@ decay）とも呼ばれる。 目的関数が経験リスク
 
 \subsection{ソフトマックス関数と多クラス交差エントロピー}\label{ux30bdux30d5ux30c8ux30deux30c3ux30afux30b9ux95a2ux6570ux3068ux591aux30afux30e9ux30b9ux4ea4ux5deeux30a8ux30f3ux30c8ux30edux30d4ux30fc}
 
-\begin{questionbox}[label=q:6-softmax-derivative]{ソフトマックス関数の微分 \hfill \tikz[baseline=-0.8ex] \node[draw=white, rounded corners=2pt, inner sep=2.5pt, text=white, font=\small\bfseries, line width=0.5pt] {確認\faCheck};\hspace{2pt}}
+\begin{questionbox}[label=q:6-log-softmax-gradient]{Log-Softmax 関数の勾配 \hfill \tikz[baseline=-0.8ex] \node[draw=white, rounded corners=2pt, inner sep=2.5pt, text=white, font=\small\bfseries, line width=0.5pt] {必須\faStar};\hspace{2pt}}
 
-ベクトル \(\mathbf{z}\) を入力とするソフトマックス関数
-\(\mathbf{p} = \text{Softmax}(\mathbf{z})\) について、その第 \(i\) 成分
-\(\mathbf{p}[i]\) を \[
-\mathbf{p}[i] = \frac{e^{\mathbf{z}[i]}}{\sum_{k=1}^K e^{\mathbf{z}[k]}} \quad (i = 1, \dots, K)
-\] として以下の問いに答えよ。
+ベクトル \(\mathbf{z} = (z_1, \dots, z_K)^\top\)
+を入力とするソフトマックス関数 \(\text{Softmax}(\mathbf{z})\)
+について、以下が成り立つことを導出せよ。
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  商の微分公式を用いて、\(i = j\) のとき
-  \(\frac{\partial \mathbf{p}[i]}{\partial \mathbf{z}[i]} = \mathbf{p}[i](1 - \mathbf{p}[i])\)
-  になることを証明せよ。
-\item
-  商の微分公式を用いて、\(i \neq j\) のとき
-  \(\frac{\partial \mathbf{p}[i]}{\partial \mathbf{z}[j]} = -\mathbf{p}[i] \mathbf{p}[j]\)
-  になることを証明せよ。
-\end{enumerate}
-
-（参考）これらはクロネッカーのデルタ \(\delta_{ij}\)（\(i=j\) のとき
-\(1\)、\(i \neq j\) のとき
-\(0\)）を用いて、\(\frac{\partial \mathbf{p}[i]}{\partial \mathbf{z}[j]} = \mathbf{p}[i](\delta_{ij} - \mathbf{p}[j])\)
-と一つの式でまとめることができる。
+\[
+\nabla_{\mathbf{z}} \log \text{Softmax}(\mathbf{z})[k] =
+\begin{pmatrix}
+\mathbf{1}\{k=1\} - \text{Softmax}(\mathbf{z})[1] \\
+\vdots \\
+\mathbf{1}\{k=K\} - \text{Softmax}(\mathbf{z})[K]
+\end{pmatrix}
+\]
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\textbf{ヒント：} 分数関数の微分公式
-\(\left(\frac{f(x)}{g(x)}\right)' = \frac{f'(x)g(x) - f(x)g'(x)}{g(x)^2}\)
-を用いる。分母 \(\sum_{k=1}^K e^{\mathbf{z}[k]}\) を \(\mathbf{z}[j]\)
-で微分するとどうなるかに注意せよ。
+\textbf{ヒント：} その第 \(k\) 成分の対数
+\(\log \text{Softmax}(\mathbf{z})[k]\) は、対数の性質から \[
+\log \text{Softmax}(\mathbf{z})[k] = \log \left( \frac{\exp(z_k)}{\sum_{m=1}^K \exp(z_m)} \right) = z_k - \log \sum_{m=1}^K \exp(z_m) \quad (k = 1, \dots, K)
+\] と分解できる。合成関数の微分則を用いて
+\(\log \text{Softmax}(\mathbf{z})[k]\) の \(\mathbf{z}\)
+に対する勾配ベクトル
+\(\nabla_{\mathbf{z}} \log \text{Softmax}(\mathbf{z})[k]\)
+を計算してみよう。
 
 \hfill 
 
-\hyperref[a:6-softmax-derivative]{（解答・解説へ）}
+\hyperref[a:6-log-softmax-gradient]{（解答・解説へ）}
 
 \end{questionbox}
 
@@ -1615,7 +1593,7 @@ s_{\boldsymbol{\theta}}(\mathbf{x})[j] = \boldsymbol{\theta}_j^\top \boldsymbol{
 
 \subsection{最適化と最小二乗法・偏微分}\label{ux6700ux9069ux5316ux3068ux6700ux5c0fux4e8cux4e57ux6cd5ux504fux5faeux5206-1}
 
-\subsubsection{経験リスクの数式化（シグマを用いた書き下し）}\label{ux7d4cux9a13ux30eaux30b9ux30afux306eux6570ux5f0fux5316ux30b7ux30b0ux30deux3092ux7528ux3044ux305fux66f8ux304dux4e0bux3057-1}
+\subsubsection{経験リスクの数式化（シグマを用いた書き下し）}\label{ux7d4cux9a13ux30eaux30b9ux30afux306eux6570ux5f0fux5316ux30b7ux30b0ux30deux3092ux7528ux3044ux305fux66f8ux304dux4e0bux3057}
 
 \textbf{【該当内容】}
 第2回スライド27〜37「予測系タスクの具体例＞線型単回帰、最小二乗法」
@@ -1664,15 +1642,12 @@ L(w,b) = \frac{1}{n} \sum_{i=1}^n (y_i - (wx_i + b))^2
   \(\mathop{\mathrm{Min}}_{\boldsymbol{\theta} \in \mathbb{R}^d} L(\boldsymbol{\theta})\)
   となる。最適化を行う範囲（定義域）を \(\mathrm{Min}\) の下に記述する。
 \item
-  \textbf{(ウ)}
-  \(\boldsymbol{\theta} \in \{\boldsymbol{\theta} \in \mathbb{R}^d : \|\boldsymbol{\theta}\| \le C\}\)
-  （または
-  \(\boldsymbol{\theta} \in \mathbb{R}^d \text{ s.t. } \|\boldsymbol{\theta}\| \le C\)）
+  \textbf{(ウ)} \(\boldsymbol{\theta} \ge \mathbf{0}\) （または
+  \(\theta_1 \ge 0, \dots, \theta_d \ge 0\)）
 \item
   \textbf{(エ)} \(L(\boldsymbol{\theta})\) よって全体の式は
-  \(\mathop{\mathrm{Min}}_{\boldsymbol{\theta} \in \{\boldsymbol{\theta} \in \mathbb{R}^d : \|\boldsymbol{\theta}\| \le C\}} L(\boldsymbol{\theta})\)
-  となる。制約条件は変数が属する集合（定義域）として \(\mathrm{Min}\)
-  の下に記述することができる。
+  \(\mathop{\mathrm{Min}}_{\boldsymbol{\theta} \ge \mathbf{0}} L(\boldsymbol{\theta})\)
+  となる。制約条件は \(\mathrm{Min}\) の下に記述することができる。
 \end{itemize}
 
 \hfill 
@@ -2277,27 +2252,6 @@ L_{\text{reg}}(\boldsymbol{\theta}) = \frac{1}{n} \sum_{i=1}^n (y_i - \boldsymbo
 \textbf{【ねらい】}
 平均値が外れ値に引っ張られやすいのに対し、分位点（中央値など）が頑健（ロバスト）である理由を、実際のデータ操作を通じて数式ベースで理解する。
 
-\begin{answerbox}[phantomlabel=a:4-absolute-loss-mae]{q:4-absolute-loss-mae}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  平均値の計算： \[
-       \frac{2 + 3 + 5 + 7 + 100}{5} = \frac{117}{5} = 23.4
-       \] 中央値の計算：データを昇順に並べた中央の値なので、\textbf{5}。
-\item
-  外れ値が \(1000\) になった場合の計算： \[
-       \text{新平均値} = \frac{2 + 3 + 5 + 7 + 1000}{5} = \frac{1017}{5} = 203.4
-       \] 新中央値：順序関係は変わらないため、依然として\textbf{5}。
-\end{enumerate}
-
-\hfill 
-
-\hyperref[q:4-absolute-loss-mae]{（問題へ戻る）}
-
-\end{answerbox}
-
 \begin{answerbox}[phantomlabel=a:4-pinball-loss-calculation]{q:4-pinball-loss-calculation}
 
 誤差 \(e = y - y'\) を用いてそれぞれの場合を計算する。
@@ -2367,26 +2321,26 @@ L_{\text{reg}}(\boldsymbol{\theta}) = \frac{1}{n} \sum_{i=1}^n (y_i - \boldsymbo
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  商の微分公式
-  \(\left( \frac{1}{g(z)} \right)' = -\frac{g'(z)}{(g(z))^2}\)
-  を用いる。\(g(z) = 1 + e^{-z}\) とおくと、\(g'(z) = -e^{-z}\) である。
-  \[
-       \sigma'(z) = - \frac{-e^{-z}}{(1 + e^{-z})^2} = \frac{e^{-z}}{(1 + e^{-z})^2} = \left( \frac{1}{1 + e^{-z}} \right) \left( \frac{e^{-z}}{1 + e^{-z}} \right)
-       \] ここで、右側の項の分子に \(1 - 1\) を補う。 \[
-       \frac{e^{-z}}{1 + e^{-z}} = \frac{1 + e^{-z} - 1}{1 + e^{-z}} = \frac{1 + e^{-z}}{1 + e^{-z}} - \frac{1}{1 + e^{-z}} = 1 - \sigma(z)
-       \] よって、 \[
-       \sigma'(z) = \sigma(z)(1 - \sigma(z))
+  \(\sigma(z)\) の定義から計算する。 \[
+       \sigma(z) \exp(-z) = \frac{\exp(-z)}{1 + \exp(-z)} = \frac{1 + \exp(-z) - 1}{1 + \exp(-z)} = \frac{1 + \exp(-z)}{1 + \exp(-z)} - \frac{1}{1 + \exp(-z)} = 1 - \sigma(z)
        \] となる。（証明終）
 \item
-  合成関数の微分公式 \((\log f(z))' = \frac{f'(z)}{f(z)}\)
-  と、(1)の証明結果を用いる。 \[
-       \frac{d}{dz} \log \sigma(z) = \frac{\sigma'(z)}{\sigma(z)} = \frac{\sigma(z)(1 - \sigma(z))}{\sigma(z)} = 1 - \sigma(z)
-       \] となり、成立する。（証明終）
+  \(g(z) = 1 + \exp(-z)\) とおくと、\(g'(z) = -\exp(-z)\) であるから、
+  \[
+       \frac{d}{dz} \sigma(z) = - \frac{-\exp(-z)}{(1 + \exp(-z))^2} = \frac{\exp(-z)}{(1 + \exp(-z))^2} = \left( \frac{1}{1 + \exp(-z)} \right)^2 \exp(-z) = \sigma(z)^2 \exp(-z)
+       \] となる。（証明終）
+\item
+  \begin{enumerate}
+  \def\labelenumii{(\arabic{enumii})}
+  \setcounter{enumii}{1}
+  \tightlist
+  \item
+    および (1) の証明結果を順に用いる。 \[
+     \frac{d}{dz} \log \sigma(z) = (\sigma(z))^{-1} \cdot \left(\frac{d}{dz} \sigma(z)\right) = \frac{1}{\sigma(z)} \cdot \left(\sigma(z)^2 \exp(-z)\right) = \sigma(z) \exp(-z) = 1 - \sigma(z)
+     \] となり、導出できた。（証明終） ::: \{.right\}
+    \hyperref[q:5-sigmoid-derivative]{（問題へ戻る）} :::
+  \end{enumerate}
 \end{enumerate}
-
-\hfill 
-
-\hyperref[q:5-sigmoid-derivative]{（問題へ戻る）}
 
 \end{answerbox}
 
@@ -2430,41 +2384,41 @@ L_{\text{reg}}(\boldsymbol{\theta}) = \frac{1}{n} \sum_{i=1}^n (y_i - \boldsymbo
 \textbf{【ねらい】}
 多値分類で標準的に用いられるソフトマックス関数と負の対数尤度の組み合わせにおいて、その勾配が「予測確率と正解の差（誤差）×特徴量」という非常に直感的かつシンプルな形式で導かれるプロセスを数学的に理解する。
 
-\begin{answerbox}[phantomlabel=a:6-softmax-derivative]{q:6-softmax-derivative}
+\begin{answerbox}[phantomlabel=a:6-log-softmax-gradient]{q:6-log-softmax-gradient}
 
-ソフトマックス関数
-\(\mathbf{p}[i] = \frac{e^{\mathbf{z}[i]}}{\sum_{k=1}^K e^{\mathbf{z}[k]}}\)
-の分母を \(S = \sum_{k=1}^K e^{\mathbf{z}[k]}\) とおく。 \(S\) を
-\(\mathbf{z}[j]\)
-で微分すると、\(\frac{\partial S}{\partial \mathbf{z}[j]} = e^{\mathbf{z}[j]}\)
-となる。 商の微分公式を用いて
-\(\frac{\partial \mathbf{p}[i]}{\partial \mathbf{z}[j]}\) を計算する。
+まず、勾配ベクトルの第 \(j\) 成分である偏微分
+\(\frac{\partial \log \text{Softmax}(\mathbf{z})[k]}{\partial z_j}\)
+を計算する。右辺第2項の偏微分には、対数関数の微分公式
+\((\log f(x))' = \frac{f'(x)}{f(x)}\)
+を用いる。\(\sum_{m=1}^K \exp(z_m)\) を \(z_j\)
+で微分するとどうなるかに注意して計算を進める。
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\item
-  \textbf{\(i = j\) の場合}： 分子は \(e^{\mathbf{z}[i]}\)
-  であり、\(\mathbf{z}[i]\) で微分すると \(e^{\mathbf{z}[i]}\)
-  となる。したがって、 \begin{align*}
-  \frac{\partial \mathbf{p}[i]}{\partial \mathbf{z}[i]} &= \frac{(e^{\mathbf{z}[i]})' \cdot S - e^{\mathbf{z}[i]} \cdot (S)'}{S^2} \\
-  &= \frac{e^{\mathbf{z}[i]} S - e^{\mathbf{z}[i]} e^{\mathbf{z}[i]}}{S^2} \\
-  &= \frac{e^{\mathbf{z}[i]}}{S} \frac{S - e^{\mathbf{z}[i]}}{S} \\
-  &= \mathbf{p}[i] (1 - \mathbf{p}[i])
-  \end{align*} となる。
-\item
-  \textbf{\(i \neq j\) の場合}： 分子は \(e^{\mathbf{z}[i]}\)
-  であり、\(\mathbf{z}[j]\)（\(j \neq i\)）で微分すると \(0\)
-  になる。したがって、 \begin{align*}
-  \frac{\partial \mathbf{p}[i]}{\partial \mathbf{z}[j]} &= \frac{0 \cdot S - e^{\mathbf{z}[i]} \cdot (S)'}{S^2} \\
-  &= \frac{-e^{\mathbf{z}[i]} e^{\mathbf{z}[j]}}{S^2} \\
-  &= -\frac{e^{\mathbf{z}[i]}}{S} \frac{e^{\mathbf{z}[j]}}{S} \\
-  &= -\mathbf{p}[i] \mathbf{p}[j]
-  \end{align*} となる。（証明終）
-\end{enumerate}
+\(\log \text{Softmax}(\mathbf{z})[k] = z_k - \log \sum_{m=1}^K \exp(z_m)\)
+の第1項の \(z_k\) は、\(z_j\) で微分すると \(k=j\) のとき
+\(1\)、\(k \neq j\) のとき \(0\) となるため、指示関数を用いて
+\(\mathbf{1}\{k=j\}\) となる。
+
+第2項は合成関数の微分則を用いて計算する。分母の和の項のうち、\(z_j\)
+に依存するのは \(\exp(z_j)\) だけであることに注意すると、 \begin{align*}
+\frac{\partial}{\partial z_j} \left( \log \sum_{m=1}^K \exp(z_m) \right) &= \frac{\frac{\partial}{\partial z_j} \sum_{m=1}^K \exp(z_m)}{\sum_{m=1}^K \exp(z_m)} \\
+&= \frac{\exp(z_j)}{\sum_{m=1}^K \exp(z_m)} \\
+&= \text{Softmax}(\mathbf{z})[j]
+\end{align*} となる。
+
+したがって、これらを合わせると各成分は \[
+\frac{\partial \log \text{Softmax}(\mathbf{z})[k]}{\partial z_j} = \mathbf{1}\{k=j\} - \text{Softmax}(\mathbf{z})[j]
+\] となる。これらを縦ベクトルとして並べると、 \[
+\nabla_{\mathbf{z}} \log \text{Softmax}(\mathbf{z})[k] =
+\begin{pmatrix}
+\mathbf{1}\{k=1\} - \text{Softmax}(\mathbf{z})[1] \\
+\vdots \\
+\mathbf{1}\{k=K\} - \text{Softmax}(\mathbf{z})[K]
+\end{pmatrix}
+\] となる。（証明終）
 
 \hfill 
 
-\hyperref[q:6-softmax-derivative]{（問題へ戻る）}
+\hyperref[q:6-log-softmax-gradient]{（問題へ戻る）}
 
 \end{answerbox}
 
