@@ -840,7 +840,7 @@ $$
 
 【数式・操作の語群】（空欄 $\fbox{\,イ\,}, \fbox{\,エ\,}, \fbox{\,カ\,}, \fbox{\,ク\,}$）
 
-⑤ $\boldsymbol{\theta} \leftarrow \boldsymbol{\theta} - \eta \mathbf{g}$　⑥ `break`　⑦ $\mathbf{g} \leftarrow \nabla L(\boldsymbol{\theta})$　⑧ $\boldsymbol{\theta} \leftarrow \text{ランダムな値}$
+⑤ $\boldsymbol{\theta} \leftarrow \boldsymbol{\theta} - \eta \mathbf{g}$　⑥ `exit loop`　⑦ $\mathbf{g} \leftarrow \nabla L(\boldsymbol{\theta})$　⑧ $\boldsymbol{\theta} \leftarrow \text{ランダムな値}$
 
 【勾配降下法のアルゴリズム】
 
