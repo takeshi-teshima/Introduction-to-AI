@@ -900,11 +900,7 @@ $$L(\theta) = - \frac{1}{n} \sum_{i=1}^n \left\{ y_i \log \sigma(\theta x_i) + (
 
 ### Log-Softmax 関数の勾配 {#q:6-log-softmax-gradient .questionbox tags="必須\faStar"}
 
-ベクトル $\mathbf{z} = (z_1, \dots, z_K)^\top$ を入力とするソフトマックス関数 $\text{Softmax}(\mathbf{z})$ について、その第 $k$ 成分の対数 $\log \text{Softmax}(\mathbf{z})[k]$ は、対数の性質から
-$$
-\log \text{Softmax}(\mathbf{z})[k] = \log \left( \frac{\exp(z_k)}{\sum_{m=1}^K \exp(z_m)} \right) = z_k - \log \sum_{m=1}^K \exp(z_m) \quad (k = 1, \dots, K)
-$$
-と分解できる。このとき、合成関数の微分則を用いて $\log \text{Softmax}(\mathbf{z})[k]$ の $\mathbf{z}$ に対する勾配ベクトル $\nabla_{\mathbf{z}} \log \text{Softmax}(\mathbf{z})[k]$ を計算し、以下が成り立つことを導出せよ。
+ベクトル $\mathbf{z} = (z_1, \dots, z_K)^\top$ を入力とするソフトマックス関数 $\text{Softmax}(\mathbf{z})$ について、以下が成り立つことを導出せよ。
 
 $$
 \nabla_{\mathbf{z}} \log \text{Softmax}(\mathbf{z})[k] =
@@ -914,11 +910,14 @@ $$
 \mathbf{1}\{k=K\} - \text{Softmax}(\mathbf{z})[K]
 \end{pmatrix}
 $$
-（ただし $\mathbf{1}\{k=j\}$ は指示関数であり、$k=j$ のとき $1$、$k \neq j$ のとき $0$ となる）
 
 ---
 
-**ヒント：** 勾配ベクトルの第 $j$ 成分である偏微分 $\frac{\partial \log \text{Softmax}(\mathbf{z})[k]}{\partial z_j}$ を計算する。右辺第2項の偏微分には、対数関数の微分公式 $(\log f(x))' = \frac{f'(x)}{f(x)}$ を用いる。$\sum_{m=1}^K \exp(z_m)$ を $z_j$ で微分するとどうなるかに注意せよ。
+**ヒント：** その第 $k$ 成分の対数 $\log \text{Softmax}(\mathbf{z})[k]$ は、対数の性質から
+$$
+\log \text{Softmax}(\mathbf{z})[k] = \log \left( \frac{\exp(z_k)}{\sum_{m=1}^K \exp(z_m)} \right) = z_k - \log \sum_{m=1}^K \exp(z_m) \quad (k = 1, \dots, K)
+$$
+と分解できる。合成関数の微分則を用いて $\log \text{Softmax}(\mathbf{z})[k]$ の $\mathbf{z}$ に対する勾配ベクトル $\nabla_{\mathbf{z}} \log \text{Softmax}(\mathbf{z})[k]$ を計算してみよう。
 
 ::: {.right}
 [（解答・解説へ）](#a:6-log-softmax-gradient)
@@ -1697,7 +1696,8 @@ $$
 
 ### 問6-log-softmax-gradient の解答・解説 {#a:6-log-softmax-gradient .answerbox ref="q:6-log-softmax-gradient"}
 
-勾配ベクトル $\nabla_{\mathbf{z}} \log \text{Softmax}(\mathbf{z})[k]$ の第 $j$ 成分である $\frac{\partial \log \text{Softmax}(\mathbf{z})[k]}{\partial z_j}$ を計算する。
+まず、勾配ベクトルの第 $j$ 成分である偏微分 $\frac{\partial \log \text{Softmax}(\mathbf{z})[k]}{\partial z_j}$ を計算する。右辺第2項の偏微分には、対数関数の微分公式 $(\log f(x))' = \frac{f'(x)}{f(x)}$ を用いる。$\sum_{m=1}^K \exp(z_m)$ を $z_j$ で微分するとどうなるかに注意して計算を進める。
+
 $\log \text{Softmax}(\mathbf{z})[k] = z_k - \log \sum_{m=1}^K \exp(z_m)$ の第1項の $z_k$ は、$z_j$ で微分すると $k=j$ のとき $1$、$k \neq j$ のとき $0$ となるため、指示関数を用いて $\mathbf{1}\{k=j\}$ となる。
 
 第2項は合成関数の微分則を用いて計算する。分母の和の項のうち、$z_j$ に依存するのは $\exp(z_j)$ だけであることに注意すると、
