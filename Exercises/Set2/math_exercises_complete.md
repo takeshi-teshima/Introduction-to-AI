@@ -737,7 +737,7 @@ $$\hat{\boldsymbol{\theta}} = (\Phi^\top \Phi + \lambda \mathbf{I})^{-1}\Phi^\to
 
 ## 同時分布・条件付き分布・条件付き期待値
 
-### 同時確率表からの条件付き分布と期待値 {#q:4-conditional-probability-table .questionbox tags="確認\faCheck"}
+### 同時確率表からの条件付き分布と期待値 {#q:4-conditional-probability-table .questionbox tags="スキップ可"}
 
 離散確率変数 $X \in \{0,1\}$ と $Y \in \{1,2,3\}$ の同時確率 $P(X, Y)$ について、 $X=0$ のとき、$Y=1, 2, 3$ となる確率はそれぞれ $0.1, 0.2, 0.1$ である。
 
@@ -750,15 +750,6 @@ $$\hat{\boldsymbol{\theta}} = (\Phi^\top \Phi + \lambda \mathbf{I})^{-1}\Phi^\to
 :::
 
 ## 分位点（Quantile）と外れ値の影響
-
-### 飛びのある分布の分位点とロバスト性 {#q:4-absolute-loss-mae .questionbox tags="確認\faCheck"}
-
-1. データセット $\{2, 3, 5, 7, 100\}$ の平均値と中央値を求めよ。
-2. 外れ値の $100$ が $1000$ に化けたとする。このとき平均値と中央値はどう変化するか計算し、ピンボール損失（中央値の場合は絶対値損失）が外れ値に対して持つ優位性を説明せよ。
-
-::: {.right}
-[（解答・解説へ）](#a:4-absolute-loss-mae)
-:::
 
 ### ピンボール損失のグラフ描写の理解 {#q:4-pinball-loss-calculation .questionbox tags="スキップ可"}
 
@@ -800,12 +791,13 @@ $$
 
 ロジスティック関数（シグモイド関数）について、
 $$
-\sigma(z) = \frac{1}{1 + e^{-z}}
+\sigma(z) = \frac{1}{1 + \exp(-z)}
 $$
 として以下の問いに答えよ。
 
-1. 商の微分公式を用いて $\sigma'(z) = \sigma(z)(1 - \sigma(z))$ になることを証明せよ。
-2. 合成関数の微分則を用いて $\frac{d}{dz} \log \sigma(z) = 1 - \sigma(z)$ が成り立つことを示せ。
+1. $\sigma(z) \exp(-z) = 1 - \sigma(z)$ が成り立つことを示せ。
+2. $\frac{d}{dz} \sigma(z) = \sigma(z)^2 \exp(-z)$ になることを示せ。
+3. 以上の結果から、$\frac{d}{dz} \log \sigma(z) = 1 - \sigma(z)$ を導出せよ。
 
 ::: {.right}
 [（解答・解説へ）](#a:5-sigmoid-derivative)
@@ -1566,23 +1558,6 @@ $$
 **【該当内容】** 第4回スライド19〜35「分位点回帰、ピンボール損失」
 **【ねらい】** 平均値が外れ値に引っ張られやすいのに対し、分位点（中央値など）が頑健（ロバスト）である理由を、実際のデータ操作を通じて数式ベースで理解する。
 
-### 問4-absolute-loss-mae の解答・解説 {#a:4-absolute-loss-mae .answerbox ref="q:4-absolute-loss-mae"}
-
-1. 平均値の計算：
-        $$
-        \frac{2 + 3 + 5 + 7 + 100}{5} = \frac{117}{5} = 23.4
-        $$
-        中央値の計算：データを昇順に並べた中央の値なので、\textbf{5}。
-2. 外れ値が $1000$ になった場合の計算：
-        $$
-        \text{新平均値} = \frac{2 + 3 + 5 + 7 + 1000}{5} = \frac{1017}{5} = 203.4
-        $$
-        新中央値：順序関係は変わらないため、依然として\textbf{5}。
-
-::: {.right}
-[（問題へ戻る）](#q:4-absolute-loss-mae)
-:::
-
 ### 問4-pinball-loss-calculation の解答・解説 {#a:4-pinball-loss-calculation .answerbox ref="q:4-pinball-loss-calculation"}
 
 誤差 $e = y - y'$ を用いてそれぞれの場合を計算する。
@@ -1631,25 +1606,21 @@ $$
 
 ### 問5-sigmoid-derivative の解答・解説 {#a:5-sigmoid-derivative .answerbox ref="q:5-sigmoid-derivative"}
 
-1. 商の微分公式 $\left( \frac{1}{g(z)} \right)' = -\frac{g'(z)}{(g(z))^2}$ を用いる。$g(z) = 1 + e^{-z}$ とおくと、$g'(z) = -e^{-z}$ である。
+1. $\sigma(z)$ の定義から計算する。
         $$
-        \sigma'(z) = - \frac{-e^{-z}}{(1 + e^{-z})^2} = \frac{e^{-z}}{(1 + e^{-z})^2} = \left( \frac{1}{1 + e^{-z}} \right) \left( \frac{e^{-z}}{1 + e^{-z}} \right)
-        $$
-        ここで、右側の項の分子に $1 - 1$ を補う。
-        $$
-        \frac{e^{-z}}{1 + e^{-z}} = \frac{1 + e^{-z} - 1}{1 + e^{-z}} = \frac{1 + e^{-z}}{1 + e^{-z}} - \frac{1}{1 + e^{-z}} = 1 - \sigma(z)
-        $$
-        よって、
-        $$
-        \sigma'(z) = \sigma(z)(1 - \sigma(z))
+        \sigma(z) \exp(-z) = \frac{\exp(-z)}{1 + \exp(-z)} = \frac{1 + \exp(-z) - 1}{1 + \exp(-z)} = \frac{1 + \exp(-z)}{1 + \exp(-z)} - \frac{1}{1 + \exp(-z)} = 1 - \sigma(z)
         $$
         となる。（証明終）
-2. 合成関数の微分公式 $(\log f(z))' = \frac{f'(z)}{f(z)}$ と、(1)の証明結果を用いる。
+2. $g(z) = 1 + \exp(-z)$ とおくと、$g'(z) = -\exp(-z)$ であるから、
         $$
-        \frac{d}{dz} \log \sigma(z) = \frac{\sigma'(z)}{\sigma(z)} = \frac{\sigma(z)(1 - \sigma(z))}{\sigma(z)} = 1 - \sigma(z)
+        \frac{d}{dz} \sigma(z) = - \frac{-\exp(-z)}{(1 + \exp(-z))^2} = \frac{\exp(-z)}{(1 + \exp(-z))^2} = \left( \frac{1}{1 + \exp(-z)} \right)^2 \exp(-z) = \sigma(z)^2 \exp(-z)
         $$
-        となり、成立する。（証明終）
-
+        となる。（証明終）
+3. (2) および (1) の証明結果を順に用いる。
+        $$
+        \frac{d}{dz} \log \sigma(z) = (\sigma(z))^{-1} \cdot \left(\frac{d}{dz} \sigma(z)\right) = \frac{1}{\sigma(z)} \cdot \left(\sigma(z)^2 \exp(-z)\right) = \sigma(z) \exp(-z) = 1 - \sigma(z)
+        $$
+        となり、導出できた。（証明終）
 ::: {.right}
 [（問題へ戻る）](#q:5-sigmoid-derivative)
 :::
