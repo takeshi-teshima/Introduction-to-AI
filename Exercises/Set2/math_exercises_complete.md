@@ -902,7 +902,7 @@ $$L(\theta) = - \frac{1}{n} \sum_{i=1}^n \left\{ y_i \log \sigma(\theta x_i) + (
 
 ベクトル $\mathbf{z} = (z_1, \dots, z_K)^\top$ を入力とするソフトマックス関数 $\mathbf{p} = \text{Softmax}(\mathbf{z})$ について、その第 $k$ 成分の対数 $\log \mathbf{p}[k]$ は、対数の性質から
 $$
-\log \mathbf{p}[k] = \log \left( \frac{e^{z_k}}{\sum_{l=1}^K e^{z_l}} \right) = z_k - \log \sum_{l=1}^K e^{z_l} \quad (k = 1, \dots, K)
+\log \mathbf{p}[k] = \log \left( \frac{e^{z_k}}{\sum_{m=1}^K e^{z_m}} \right) = z_k - \log \sum_{m=1}^K e^{z_m} \quad (k = 1, \dots, K)
 $$
 と分解できる。このとき、合成関数の微分則を用いて $\log \mathbf{p}[k]$ の $z_j$ による偏微分 $\frac{\partial \log \mathbf{p}[k]}{\partial z_j}$ を計算し、以下が成り立つことを導出せよ。
 
@@ -913,7 +913,7 @@ $$
 
 ---
 
-**ヒント：** 右辺第2項の偏微分には、対数関数の微分公式 $(\log f(x))' = \frac{f'(x)}{f(x)}$ を用いる。$\sum_{l=1}^K e^{z_l}$ を $z_j$ で微分するとどうなるかに注意せよ。
+**ヒント：** 右辺第2項の偏微分には、対数関数の微分公式 $(\log f(x))' = \frac{f'(x)}{f(x)}$ を用いる。$\sum_{m=1}^K e^{z_m}$ を $z_j$ で微分するとどうなるかに注意せよ。
 
 ::: {.right}
 [（解答・解説へ）](#a:6-log-softmax-gradient)
@@ -1692,13 +1692,13 @@ $$
 
 ### 問6-log-softmax-gradient の解答・解説 {#a:6-log-softmax-gradient .answerbox ref="q:6-log-softmax-gradient"}
 
-$\log \mathbf{p}[k] = z_k - \log \sum_{l=1}^K e^{z_l}$ を $z_j$ で偏微分する。
+$\log \mathbf{p}[k] = z_k - \log \sum_{m=1}^K e^{z_m}$ を $z_j$ で偏微分する。
 第1項の $z_k$ は、$z_j$ で微分すると $k=j$ のとき $1$、$k \neq j$ のとき $0$ となるため、指示関数を用いて $\mathbf{1}\{k=j\}$ となる。
 
 第2項は合成関数の微分則を用いて計算する。分母の和の項のうち、$z_j$ に依存するのは $e^{z_j}$ だけであることに注意すると、
 \begin{align*}
-\frac{\partial}{\partial z_j} \left( \log \sum_{l=1}^K e^{z_l} \right) &= \frac{\frac{\partial}{\partial z_j} \sum_{l=1}^K e^{z_l}}{\sum_{l=1}^K e^{z_l}} \\
-&= \frac{e^{z_j}}{\sum_{l=1}^K e^{z_l}} \\
+\frac{\partial}{\partial z_j} \left( \log \sum_{m=1}^K e^{z_m} \right) &= \frac{\frac{\partial}{\partial z_j} \sum_{m=1}^K e^{z_m}}{\sum_{m=1}^K e^{z_m}} \\
+&= \frac{e^{z_j}}{\sum_{m=1}^K e^{z_m}} \\
 &= \mathbf{p}[j]
 \end{align*}
 となる。
