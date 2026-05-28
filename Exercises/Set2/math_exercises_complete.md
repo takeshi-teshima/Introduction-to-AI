@@ -155,6 +155,19 @@ $$\hat{R}(f_{(w,b)}) = ?$$
 :::
 
 
+### argmin と argmax の理解 {#q:2-argmin-argmax-understanding .questionbox tags="確認\faCheck"}
+
+最適化問題の記述において、$\mathop{\arg~\min}$ や $\mathop{\arg~\max}$ という記法が頻繁に用いられる。これらの記法の意味を確認するため、以下の値を求めよ。
+ただし、ベクトル $\boldsymbol{v}$ に対して、$v_k$ はその第 $k$ 成分を表すものとする。
+
+1. ベクトル $\boldsymbol{a} = (0.2, 0.7, 0.1)^\top$ に対して、$\mathop{\arg~\max}_{k \in \{1, 2, 3\}} a_k$
+2. ベクトル $\boldsymbol{b} = (1.5, 0.8, 2.1)^\top$ と $\boldsymbol{c} = (-0.5, 1.2, -0.6)^\top$ に対して、$\mathop{\arg~\min}_{k \in \{1, 2, 3\}} (b_k + c_k)$
+
+::: {.right}
+[（解答・解説へ）](#a:2-argmin-argmax-understanding)
+:::
+
+
 ### 目的関数のパラメータ関数化 {#q:2-erm-parameter-function .questionbox tags="スキップ可"}
 
 以下の2つのデータポイントが与えられている。
@@ -1041,7 +1054,7 @@ $$
 
 1. 指示関数の定義より、$\ind\{0 \le x \le 1\}$ は $0 \le x \le 1$ のとき $1$、それ以外の範囲では $0$ となります。したがって、実数全体 $(-\infty, \infty)$ の積分を $[0, 1]$ の範囲に絞ることができます。
     $$
-    \int_{-\infty}^\infty p(x) dx = \int_{-\infty}^\infty 2x \cdot \ind\{0 \le x \le 1\} dx = \int_0^1 2x dx = \left[ x^2 \right]_0^1 = 1^2 - 0^2 = 1 \quad \text{（証明終）}
+    \int_{-\infty}^\infty p(x) dx = \int_{-\infty}^\infty 2x \cdot \ind\{0 \le x \le 1\} dx = \int_0^1 2x dx = \left[ x^2 \right]_0^1 = 1^2 - 0^2 = 1
     $$
 2. 期待値 $\mathbb{E}[X]$ も同様に指示関数を用いて積分範囲を絞って計算します。
     $$
@@ -1102,7 +1115,8 @@ $$
 &= \frac{1}{2} (10\theta^2 - 28\theta + 20) \\
 &= 5\theta^2 - 14\theta + 10
 \end{align*}
-これによって、最適化（微分して最小値を求める）対象がパラメータ $\theta$ だけの関数になったことが示される。
+
+この例のように、学習における最適化の目的関数は、パラメータ $\theta$ の関数である。
 
 ::: {.right}
 [（問題へ戻る）](#q:2-erm-parameter-function)
@@ -1119,6 +1133,28 @@ $$
 
 ::: {.right}
 [（問題へ戻る）](#q:2-optimization-formulation-blank)
+:::
+
+
+### 問2-argmin-argmax-understanding の解答・解説 {#a:2-argmin-argmax-understanding .answerbox ref="q:2-argmin-argmax-understanding"}
+
+* **1.**
+  **$2$**
+  $a_k$ の値は $a_1 = 0.2, a_2 = 0.7, a_3 = 0.1$ であり、$k=2$ のとき最大となるため、求める値は 2 である。
+  $\mathop{\arg~\max}$ は「対象を最大化する**入力（ここではインデックス）**」を返す記号である。$\max_{k} a_k = 0.7$（最大値そのもの）とは異なることに注意せよ。
+
+* **2.**
+  **$1$**
+  各インデックスにおける $(b_k + c_k)$ の値は以下のようになる。
+  * $k=1$: $1.5 + (-0.5) = 1.0$
+  * $k=2$: $0.8 + 1.2 = 2.0$
+  * $k=3$: $2.1 + (-0.6) = 1.5$
+  
+  したがって、$k=1$ のとき値が最小となるため、求める値は 1 である。
+  $\mathop{\arg~\min}$ は「対象を最小化する**入力（ここではインデックス）**」を返す記号である。
+
+::: {.right}
+[（問題へ戻る）](#q:2-argmin-argmax-understanding)
 :::
 
 
@@ -1148,7 +1184,7 @@ $$
 $$
 \nabla g(\mathbf{w}) = \begin{pmatrix} 2w_1 - 4w_2 \\ -4w_1 + 4w_2 - 6w_3 \\ -6w_2 + 6w_3 \end{pmatrix}
 $$
-（証明終）
+
 
 ::: {.right}
 [（問題へ戻る）](#q:3-multivariate-gradient)
@@ -1194,7 +1230,7 @@ $$
         $$
         \begin{pmatrix} \hat{w} \\ \hat{b} \end{pmatrix} = \begin{pmatrix} \sum_{i=1}^n x_i^2 & \sum_{i=1}^n x_i \\ \sum_{i=1}^n x_i & n \end{pmatrix}^{-1} \begin{pmatrix} \sum_{i=1}^n x_i y_i \\ \sum_{i=1}^n y_i \end{pmatrix}
         $$
-   （証明終）
+
 
 ::: {.right}
 [（問題へ戻る）](#q:2-partial-derivative-gradient)
@@ -1427,7 +1463,7 @@ $$
    $$
    \mathbf{x}^\top \mathbf{A} \mathbf{x} - 2\mathbf{b}^\top \mathbf{A} \mathbf{x} + \mathbf{b}^\top \mathbf{A} \mathbf{b}
    $$
-   となることが示された。（証明終）
+   となることが示された。
 2. $(\mathbf{x} - \boldsymbol{\mu})^\top \mathbf{A} (\mathbf{x} - \boldsymbol{\mu})$ を(1)と同様に展開すると、
    $$
    \mathbf{x}^\top \mathbf{A} \mathbf{x} - 2\boldsymbol{\mu}^\top \mathbf{A} \mathbf{x} + \boldsymbol{\mu}^\top \mathbf{A} \boldsymbol{\mu}
@@ -1597,7 +1633,7 @@ $$
 &= 1 \times \mathbb{P}(X \in A) + 0 \times (1 - \mathbb{P}(X \in A)) \\
 &= \mathbb{P}(X \in A)
 \end{align*}
-よって、常に $\mathbb{E}[\ind\{X \in A\}] = \mathbb{P}(X \in A)$ が成り立つ。（証明終）
+よって、常に $\mathbb{E}[\ind\{X \in A\}] = \mathbb{P}(X \in A)$ が成り立つ。
 
 \smallskip
 \noindent\textit{（測度論的確率論を学んだことのある読者へ：測度論的確率論では，確率測度 $\mathbb{P}$ に関する積分として期待値が $\mathbb{E}[Y] = \int Y \, d\mathbb{P}$ と定義されるため，$\mathbb{E}[\mathbf{1}_A] = \int \mathbf{1}_A \, d\mathbb{P} = \mathbb{P}(A)$ は証明するまでもなく期待値の定義から直ちに従う．）}
@@ -1612,17 +1648,17 @@ $$
         $$
         \sigma(z) \exp(-z) = \frac{\exp(-z)}{1 + \exp(-z)} = \frac{1 + \exp(-z) - 1}{1 + \exp(-z)} = \frac{1 + \exp(-z)}{1 + \exp(-z)} - \frac{1}{1 + \exp(-z)} = 1 - \sigma(z)
         $$
-        となる。（証明終）
+        となる。
 2. $g(z) = 1 + \exp(-z)$ とおくと、$g'(z) = -\exp(-z)$ であるから、
         $$
         \frac{d}{dz} \sigma(z) = - \frac{-\exp(-z)}{(1 + \exp(-z))^2} = \frac{\exp(-z)}{(1 + \exp(-z))^2} = \left( \frac{1}{1 + \exp(-z)} \right)^2 \exp(-z) = \sigma(z)^2 \exp(-z)
         $$
-        となる。（証明終）
+        となる。
 3. (2) および (1) の証明結果を順に用いる。
         $$
         \frac{d}{dz} \log \sigma(z) = (\sigma(z))^{-1} \cdot \left(\frac{d}{dz} \sigma(z)\right) = \frac{1}{\sigma(z)} \cdot \left(\sigma(z)^2 \exp(-z)\right) = \sigma(z) \exp(-z) = 1 - \sigma(z)
         $$
-        となり、導出できた。（証明終）
+        となり、導出できた。
 ::: {.right}
 [（問題へ戻る）](#q:5-sigmoid-derivative)
 :::
@@ -1643,7 +1679,7 @@ $$
    &= -y + y\sigma(z) + \sigma(z) - y\sigma(z) \\
    &= \sigma(z) - y
    \end{align*}
-   となる。（証明終）
+   となる。
 
 2. 次に、勾配 $\nabla_{\boldsymbol{\theta}} z$ を計算する。$z = \boldsymbol{\theta}^\top \boldsymbol{\phi}(x)$ はパラメータ $\boldsymbol{\theta}$ について線型であるため、
    $$
@@ -1653,7 +1689,7 @@ $$
    $$
    \nabla_{\boldsymbol{\theta}} \ell(z) = \frac{\partial \ell(z)}{\partial z} \cdot \nabla_{\boldsymbol{\theta}} z = (\sigma(z) - y)\boldsymbol{\phi}(x)
    $$
-   となり、導出された。（証明終）
+   となり、導出された。
 
 ::: {.right}
 [（問題へ戻る）](#q:5-cross-entropy-gradient)
@@ -1694,7 +1730,7 @@ $$
 \mathbf{1}\{k=K\} - \text{Softmax}(\mathbf{z})[K]
 \end{pmatrix}
 $$
-となる。（証明終）
+となる。
 
 ::: {.right}
 [（問題へ戻る）](#q:6-log-softmax-gradient)
@@ -1721,7 +1757,7 @@ $$
 \end{align*}
 これを元の式に代入すると、求める勾配公式が得られる：
 $$
-\nabla_{\boldsymbol{\theta}} \ell((\mathbf{x}, y), g_{\boldsymbol{\theta}}) = -\nabla_{\boldsymbol{\theta}} s_{\boldsymbol{\theta}}(\mathbf{x})[y] + \sum_{k=1}^K g_{\boldsymbol{\theta}}(\mathbf{x})[k] \cdot \nabla_{\boldsymbol{\theta}} s_{\boldsymbol{\theta}}(\mathbf{x})[k] \quad \text{（証明終）}
+\nabla_{\boldsymbol{\theta}} \ell((\mathbf{x}, y), g_{\boldsymbol{\theta}}) = -\nabla_{\boldsymbol{\theta}} s_{\boldsymbol{\theta}}(\mathbf{x})[y] + \sum_{k=1}^K g_{\boldsymbol{\theta}}(\mathbf{x})[k] \cdot \nabla_{\boldsymbol{\theta}} s_{\boldsymbol{\theta}}(\mathbf{x})[k]
 $$
 
 ::: {.right}
@@ -1752,14 +1788,14 @@ $$
    \dots &= -\mathbf{1}\{k = y\} \boldsymbol{\phi}(\mathbf{x}) + g_{\boldsymbol{\theta}}[\mathbf{x}](k) \boldsymbol{\phi}(\mathbf{x}) \\
    &= \left( g_{\boldsymbol{\theta}}[\mathbf{x}](k) - \mathbf{1}\{k = y\} \right) \boldsymbol{\phi}(\mathbf{x})
    \end{align*}
-   となり、求める勾配が導出された。（証明終）
+   となり、求める勾配が導出された。
 
 3. 全体のパラメータ $\boldsymbol{\theta}$ に対する勾配 $\nabla_{\boldsymbol{\theta}} \ell((\mathbf{x}, y), g_{\boldsymbol{\theta}})$ は、各パラメータ成分ごとの偏微分を並べたベクトルである。パラメータ $\boldsymbol{\theta}$ が $\boldsymbol{\theta}_1, \dots, \boldsymbol{\theta}_K$ を縦に結合したベクトル（ブロックベクトル）であるため、その勾配も各 $\boldsymbol{\theta}_k$ に関する勾配 $\nabla_{\boldsymbol{\theta}_k} \ell((\mathbf{x}, y), g_{\boldsymbol{\theta}})$ を同じように縦に並べたブロックベクトルとなる。
    (2) の結果より、各ブロック $\nabla_{\boldsymbol{\theta}_k} \ell((\mathbf{x}, y), g_{\boldsymbol{\theta}})$ は $(g_{\boldsymbol{\theta}}(\mathbf{x})[k] - \mathbf{1}\{k = y\}) \boldsymbol{\phi}(\mathbf{x})$ で与えられるため、これを各行（各ブロック）に代入することで、
    $$
    \nabla_{\boldsymbol{\theta}} \ell((\mathbf{x}, y), g_{\boldsymbol{\theta}}) = \begin{pmatrix} (g_{\boldsymbol{\theta}}(\mathbf{x})[1] - \mathbf{1}\{1 = y\}) \boldsymbol{\phi}(\mathbf{x}) \\ \vdots \\ (g_{\boldsymbol{\theta}}(\mathbf{x})[K] - \mathbf{1}\{K = y\}) \boldsymbol{\phi}(\mathbf{x}) \end{pmatrix}
    $$
-   が得られる。（証明終）
+   が得られる。
 
 ::: {.right}
 [（問題へ戻る）](#q:6-multiclass-logistic-gradient)
@@ -1773,6 +1809,17 @@ $$
 - `Step 2-1`: ( 目的: ウ = **②** ) \quad ( 操作: エ = **⑦** )
 - `Step 2-2`: ( 目的: オ = **①** ) \quad ( 操作: カ = **⑤** )
 - `Step 2-3`: ( 目的: キ = **④** ) \quad ( 操作: ク = **⑥** )
+
+【完成したアルゴリズム】
+
+> **`Algorithm: Gradient Descent`**
+>
+> - `Step 1`: ( 目的: 初期化する )  ( 操作: $\boldsymbol{\theta} \leftarrow \text{ランダムな値}$ )
+> - `Step 2`: `Loop` （以下の処理を繰り返す）
+>     - `Step 2-1`: ( 目的: 勾配を計算する )  ( 操作: $\mathbf{g} \leftarrow \nabla L(\boldsymbol{\theta})$ )
+>     - `Step 2-2`: ( 目的: パラメーターを更新する )  ( 操作: $\boldsymbol{\theta} \leftarrow \boldsymbol{\theta} - \eta \mathbf{g}$ )
+>     - `Step 2-3`: もし 早期停止条件を満たしたら、( 目的: 反復を中断する )  ( 操作: `exit loop` )
+> - `Step 3`: 終了して $\boldsymbol{\theta}$ を出力 （最適化されたパラメーター）
 
 ::: {.right}
 [（問題へ戻る）](#q:6-gradient-descent-algorithm)

@@ -299,6 +299,32 @@ Cov(X,Y) &= Cov(Y,X)
 
 \end{questionbox}
 
+\begin{questionbox}[label=q:2-argmin-argmax-understanding]{argmin と argmax の理解 \hfill \tikz[baseline=-0.8ex] \node[draw=white, rounded corners=2pt, inner sep=2.5pt, text=white, font=\small\bfseries, line width=0.5pt] {確認\faCheck};\hspace{2pt}}
+
+最適化問題の記述において、\(\mathop{\arg~\min}\) や
+\(\mathop{\arg~\max}\)
+という記法が頻繁に用いられる。これらの記法の意味を確認するため、以下の値を求めよ。
+ただし、ベクトル \(\boldsymbol{v}\) に対して、\(v_k\) はその第 \(k\)
+成分を表すものとする。
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  ベクトル \(\boldsymbol{a} = (0.2, 0.7, 0.1)^\top\)
+  に対して、\(\mathop{\arg~\max}_{k \in \{1, 2, 3\}} a_k\)
+\item
+  ベクトル \(\boldsymbol{b} = (1.5, 0.8, 2.1)^\top\) と
+  \(\boldsymbol{c} = (-0.5, 1.2, -0.6)^\top\)
+  に対して、\(\mathop{\arg~\min}_{k \in \{1, 2, 3\}} (b_k + c_k)\)
+\end{enumerate}
+
+\hfill 
+
+\hyperref[a:2-argmin-argmax-understanding]{（解答・解説へ）}
+
+\end{questionbox}
+
 \begin{questionbox}[label=q:2-erm-parameter-function]{目的関数のパラメータ関数化 \hfill \tikz[baseline=-0.8ex] \node[draw=white, rounded corners=2pt, inner sep=2.5pt, text=white, font=\small\bfseries, line width=0.5pt] {スキップ可};\hspace{2pt}}
 
 以下の2つのデータポイントが与えられている。
@@ -1548,7 +1574,7 @@ s_{\boldsymbol{\theta}}(\mathbf{x})[j] = \boldsymbol{\theta}_j^\top \boldsymbol{
   のとき \(1\)、それ以外の範囲では \(0\)
   となります。したがって、実数全体 \((-\infty, \infty)\) の積分を
   \([0, 1]\) の範囲に絞ることができます。 \[
-   \int_{-\infty}^\infty p(x) dx = \int_{-\infty}^\infty 2x \cdot \ind\{0 \le x \le 1\} dx = \int_0^1 2x dx = \left[ x^2 \right]_0^1 = 1^2 - 0^2 = 1 \quad \text{（証明終）}
+   \int_{-\infty}^\infty p(x) dx = \int_{-\infty}^\infty 2x \cdot \ind\{0 \le x \le 1\} dx = \int_0^1 2x dx = \left[ x^2 \right]_0^1 = 1^2 - 0^2 = 1
    \]
 \item
   期待値 \(\mathbb{E}[X]\)
@@ -1622,8 +1648,9 @@ L(w,b) = \frac{1}{n} \sum_{i=1}^n (y_i - (wx_i + b))^2
 &= \frac{1}{2} (10\theta^2 - 28\theta + 20) \\
 &= 5\theta^2 - 14\theta + 10
 \end{align*}
-これによって、最適化（微分して最小値を求める）対象がパラメータ
-\(\theta\) だけの関数になったことが示される。
+
+この例のように、学習における最適化の目的関数は、パラメータ \(\theta\)
+の関数である。
 
 \hfill 
 
@@ -1656,6 +1683,39 @@ L(w,b) = \frac{1}{n} \sum_{i=1}^n (y_i - (wx_i + b))^2
 
 \end{answerbox}
 
+\begin{answerbox}[phantomlabel=a:2-argmin-argmax-understanding]{q:2-argmin-argmax-understanding}
+
+\begin{itemize}
+\item
+  \textbf{1.} \textbf{\(2\)} \(a_k\) の値は
+  \(a_1 = 0.2, a_2 = 0.7, a_3 = 0.1\) であり、\(k=2\)
+  のとき最大となるため、求める値は 2 である。 \(\mathop{\arg~\max}\)
+  は「対象を最大化する\textbf{入力（ここではインデックス）}」を返す記号である。\(\max_{k} a_k = 0.7\)（最大値そのもの）とは異なることに注意せよ。
+\item
+  \textbf{2.} \textbf{\(1\)} 各インデックスにおける \((b_k + c_k)\)
+  の値は以下のようになる。
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(k=1\): \(1.5 + (-0.5) = 1.0\)
+  \item
+    \(k=2\): \(0.8 + 1.2 = 2.0\)
+  \item
+    \(k=3\): \(2.1 + (-0.6) = 1.5\)
+  \end{itemize}
+
+  したがって、\(k=1\) のとき値が最小となるため、求める値は 1 である。
+  \(\mathop{\arg~\min}\)
+  は「対象を最小化する\textbf{入力（ここではインデックス）}」を返す記号である。
+\end{itemize}
+
+\hfill 
+
+\hyperref[q:2-argmin-argmax-understanding]{（問題へ戻る）}
+
+\end{answerbox}
+
 \subsubsection{最小二乗法の真髄：偏微分から一階の条件へ}\label{ux6700ux5c0fux4e8cux4e57ux6cd5ux306eux771fux9ac4ux504fux5faeux5206ux304bux3089ux4e00ux968eux306eux6761ux4ef6ux3078-1}
 
 \textbf{【該当内容】} 第2回スライド38〜45「一階の条件、偏微分・勾配」
@@ -1685,7 +1745,7 @@ L(w,b) = \frac{1}{n} \sum_{i=1}^n (y_i - (wx_i + b))^2
 
 これらをベクトルとしてまとめると、求める勾配は以下のようになります： \[
 \nabla g(\mathbf{w}) = \begin{pmatrix} 2w_1 - 4w_2 \\ -4w_1 + 4w_2 - 6w_3 \\ -6w_2 + 6w_3 \end{pmatrix}
-\] （証明終）
+\]
 
 \hfill 
 
@@ -1730,7 +1790,7 @@ L(w,b) = \frac{1}{n} \sum_{i=1}^n (y_i - (wx_i + b))^2
   求めた行列方程式の両辺の左から、係数行列の逆行列を掛けることで、目的の式が導かれる。
   \[
        \begin{pmatrix} \hat{w} \\ \hat{b} \end{pmatrix} = \begin{pmatrix} \sum_{i=1}^n x_i^2 & \sum_{i=1}^n x_i \\ \sum_{i=1}^n x_i & n \end{pmatrix}^{-1} \begin{pmatrix} \sum_{i=1}^n x_i y_i \\ \sum_{i=1}^n y_i \end{pmatrix}
-       \] （証明終）
+       \]
 \end{enumerate}
 
 \hfill 
@@ -2079,7 +2139,7 @@ L(w,b) = \frac{1}{n} \sum_{i=1}^n (y_i - (wx_i + b))^2
   (\mathbf{x}^\top \mathbf{A}\mathbf{b})^\top = \mathbf{b}^\top \mathbf{A}^\top \mathbf{x} = \mathbf{b}^\top \mathbf{A}\mathbf{x}
   \] となる。したがって、第2項と第3項が等しくなり、 \[
   \mathbf{x}^\top \mathbf{A} \mathbf{x} - 2\mathbf{b}^\top \mathbf{A} \mathbf{x} + \mathbf{b}^\top \mathbf{A} \mathbf{b}
-  \] となることが示された。（証明終）
+  \] となることが示された。
 \item
   \((\mathbf{x} - \boldsymbol{\mu})^\top \mathbf{A} (\mathbf{x} - \boldsymbol{\mu})\)
   を(1)と同様に展開すると、 \[
@@ -2302,8 +2362,7 @@ L_{\text{reg}}(\boldsymbol{\theta}) = \frac{1}{n} \sum_{i=1}^n (y_i - \boldsymbo
 &= 1 \times \mathbb{P}(X \in A) + 0 \times (1 - \mathbb{P}(X \in A)) \\
 &= \mathbb{P}(X \in A)
 \end{align*} よって、常に
-\(\mathbb{E}[\ind\{X \in A\}] = \mathbb{P}(X \in A)\)
-が成り立つ。（証明終）
+\(\mathbb{E}[\ind\{X \in A\}] = \mathbb{P}(X \in A)\) が成り立つ。
 
 \smallskip
 
@@ -2323,12 +2382,12 @@ L_{\text{reg}}(\boldsymbol{\theta}) = \frac{1}{n} \sum_{i=1}^n (y_i - \boldsymbo
 \item
   \(\sigma(z)\) の定義から計算する。 \[
        \sigma(z) \exp(-z) = \frac{\exp(-z)}{1 + \exp(-z)} = \frac{1 + \exp(-z) - 1}{1 + \exp(-z)} = \frac{1 + \exp(-z)}{1 + \exp(-z)} - \frac{1}{1 + \exp(-z)} = 1 - \sigma(z)
-       \] となる。（証明終）
+       \] となる。
 \item
   \(g(z) = 1 + \exp(-z)\) とおくと、\(g'(z) = -\exp(-z)\) であるから、
   \[
        \frac{d}{dz} \sigma(z) = - \frac{-\exp(-z)}{(1 + \exp(-z))^2} = \frac{\exp(-z)}{(1 + \exp(-z))^2} = \left( \frac{1}{1 + \exp(-z)} \right)^2 \exp(-z) = \sigma(z)^2 \exp(-z)
-       \] となる。（証明終）
+       \] となる。
 \item
   \begin{enumerate}
   \def\labelenumii{(\arabic{enumii})}
@@ -2337,7 +2396,7 @@ L_{\text{reg}}(\boldsymbol{\theta}) = \frac{1}{n} \sum_{i=1}^n (y_i - \boldsymbo
   \item
     および (1) の証明結果を順に用いる。 \[
      \frac{d}{dz} \log \sigma(z) = (\sigma(z))^{-1} \cdot \left(\frac{d}{dz} \sigma(z)\right) = \frac{1}{\sigma(z)} \cdot \left(\sigma(z)^2 \exp(-z)\right) = \sigma(z) \exp(-z) = 1 - \sigma(z)
-     \] となり、導出できた。（証明終） ::: \{.right\}
+     \] となり、導出できた。 ::: \{.right\}
     \hyperref[q:5-sigmoid-derivative]{（問題へ戻る）} :::
   \end{enumerate}
 \end{enumerate}
@@ -2358,7 +2417,7 @@ L_{\text{reg}}(\boldsymbol{\theta}) = \frac{1}{n} \sum_{i=1}^n (y_i - \boldsymbo
   \frac{\partial \ell(z)}{\partial z} &= -y(1 - \sigma(z)) - (1-y)(-\sigma(z)) \\
   &= -y + y\sigma(z) + \sigma(z) - y\sigma(z) \\
   &= \sigma(z) - y
-  \end{align*} となる。（証明終）
+  \end{align*} となる。
 \item
   次に、勾配 \(\nabla_{\boldsymbol{\theta}} z\)
   を計算する。\(z = \boldsymbol{\theta}^\top \boldsymbol{\phi}(x)\)
@@ -2366,7 +2425,7 @@ L_{\text{reg}}(\boldsymbol{\theta}) = \frac{1}{n} \sum_{i=1}^n (y_i - \boldsymbo
   \nabla_{\boldsymbol{\theta}} z = \boldsymbol{\phi}(x)
   \] チェインルールを適用して両者を掛け合わせる。 \[
   \nabla_{\boldsymbol{\theta}} \ell(z) = \frac{\partial \ell(z)}{\partial z} \cdot \nabla_{\boldsymbol{\theta}} z = (\sigma(z) - y)\boldsymbol{\phi}(x)
-  \] となり、導出された。（証明終）
+  \] となり、導出された。
 \end{enumerate}
 
 \hfill 
@@ -2414,7 +2473,7 @@ L_{\text{reg}}(\boldsymbol{\theta}) = \frac{1}{n} \sum_{i=1}^n (y_i - \boldsymbo
 \vdots \\
 \mathbf{1}\{k=K\} - \text{Softmax}(\mathbf{z})[K]
 \end{pmatrix}
-\] となる。（証明終）
+\] となる。
 
 \hfill 
 
@@ -2440,7 +2499,7 @@ L_{\text{reg}}(\boldsymbol{\theta}) = \frac{1}{n} \sum_{i=1}^n (y_i - \boldsymbo
 &= \sum_{k=1}^K \frac{\exp(s_{\boldsymbol{\theta}}[\mathbf{x}](k))}{\sum_{j=1}^K \exp(s_{\boldsymbol{\theta}}[\mathbf{x}](j))} \cdot \nabla_{\boldsymbol{\theta}} s_{\boldsymbol{\theta}}[\mathbf{x}](k) \\
 &= \sum_{k=1}^K g_{\boldsymbol{\theta}}[\mathbf{x}](k) \cdot \nabla_{\boldsymbol{\theta}} s_{\boldsymbol{\theta}}[\mathbf{x}](k)
 \end{align*} これを元の式に代入すると、求める勾配公式が得られる： \[
-\nabla_{\boldsymbol{\theta}} \ell((\mathbf{x}, y), g_{\boldsymbol{\theta}}) = -\nabla_{\boldsymbol{\theta}} s_{\boldsymbol{\theta}}(\mathbf{x})[y] + \sum_{k=1}^K g_{\boldsymbol{\theta}}(\mathbf{x})[k] \cdot \nabla_{\boldsymbol{\theta}} s_{\boldsymbol{\theta}}(\mathbf{x})[k] \quad \text{（証明終）}
+\nabla_{\boldsymbol{\theta}} \ell((\mathbf{x}, y), g_{\boldsymbol{\theta}}) = -\nabla_{\boldsymbol{\theta}} s_{\boldsymbol{\theta}}(\mathbf{x})[y] + \sum_{k=1}^K g_{\boldsymbol{\theta}}(\mathbf{x})[k] \cdot \nabla_{\boldsymbol{\theta}} s_{\boldsymbol{\theta}}(\mathbf{x})[k]
 \]
 
 \hfill 
@@ -2474,7 +2533,7 @@ L_{\text{reg}}(\boldsymbol{\theta}) = \frac{1}{n} \sum_{i=1}^n (y_i - \boldsymbo
   の項だけが残る。 \begin{align*}
   \dots &= -\mathbf{1}\{k = y\} \boldsymbol{\phi}(\mathbf{x}) + g_{\boldsymbol{\theta}}[\mathbf{x}](k) \boldsymbol{\phi}(\mathbf{x}) \\
   &= \left( g_{\boldsymbol{\theta}}[\mathbf{x}](k) - \mathbf{1}\{k = y\} \right) \boldsymbol{\phi}(\mathbf{x})
-  \end{align*} となり、求める勾配が導出された。（証明終）
+  \end{align*} となり、求める勾配が導出された。
 \item
   全体のパラメータ \(\boldsymbol{\theta}\) に対する勾配
   \(\nabla_{\boldsymbol{\theta}} \ell((\mathbf{x}, y), g_{\boldsymbol{\theta}})\)
@@ -2497,7 +2556,7 @@ L_{\text{reg}}(\boldsymbol{\theta}) = \frac{1}{n} \sum_{i=1}^n (y_i - \boldsymbo
     \((g_{\boldsymbol{\theta}}(\mathbf{x})[k] - \mathbf{1}\{k = y\}) \boldsymbol{\phi}(\mathbf{x})\)
     で与えられるため、これを各行（各ブロック）に代入することで、 \[
     \nabla_{\boldsymbol{\theta}} \ell((\mathbf{x}, y), g_{\boldsymbol{\theta}}) = \begin{pmatrix} (g_{\boldsymbol{\theta}}(\mathbf{x})[1] - \mathbf{1}\{1 = y\}) \boldsymbol{\phi}(\mathbf{x}) \\ \vdots \\ (g_{\boldsymbol{\theta}}(\mathbf{x})[K] - \mathbf{1}\{K = y\}) \boldsymbol{\phi}(\mathbf{x}) \end{pmatrix}
-    \] が得られる。（証明終）
+    \] が得られる。
   \end{enumerate}
 \end{enumerate}
 
@@ -2526,6 +2585,38 @@ L_{\text{reg}}(\boldsymbol{\theta}) = \frac{1}{n} \sum_{i=1}^n (y_i - \boldsymbo
   \texttt{Step\ 2-3}: ( 目的: キ = \textbf{④} ) \quad ( 操作: ク =
   \textbf{⑥} )
 \end{itemize}
+
+【完成したアルゴリズム】
+
+\begin{quote}
+\textbf{\texttt{Algorithm:\ Gradient\ Descent}}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{Step\ 1}: ( 目的: 初期化する ) ( 操作:
+  \(\boldsymbol{\theta} \leftarrow \text{ランダムな値}\) )
+\item
+  \texttt{Step\ 2}: \texttt{Loop} （以下の処理を繰り返す）
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{Step\ 2-1}: ( 目的: 勾配を計算する ) ( 操作:
+    \(\mathbf{g} \leftarrow \nabla L(\boldsymbol{\theta})\) )
+  \item
+    \texttt{Step\ 2-2}: ( 目的: パラメーターを更新する ) ( 操作:
+    \(\boldsymbol{\theta} \leftarrow \boldsymbol{\theta} - \eta \mathbf{g}\)
+    )
+  \item
+    \texttt{Step\ 2-3}: もし 早期停止条件を満たしたら、( 目的:
+    反復を中断する ) ( 操作: \texttt{exit\ loop} )
+  \end{itemize}
+\item
+  \texttt{Step\ 3}: 終了して \(\boldsymbol{\theta}\) を出力
+  （最適化されたパラメーター）
+\end{itemize}
+\end{quote}
 
 \hfill 
 
