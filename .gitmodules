@@ -1,0 +1,3 @@
+[submodule "Textbook/textbook-01-intro-to-AI"]
+	path = Textbook/textbook-01-intro-to-AI
+	url = git@github-takeshi-teshima:takeshi-teshima/textbook-01-intro-to-AI.git
